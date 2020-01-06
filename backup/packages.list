@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# processor: intel, amd radeon
+# display server: xorg
+# wm: dwm
+# terminal: urxvt
+# shell: zsh
+# fonts: dejavu, hack, awesome
+# browser: qutebrowser
+# etc
+
+base="amd-ucode intel-ucode linux-headers efibootmgr grub pulseaudio
+libinput"
+xorg="xf86-video-amdgpu xf86-video-intel xorg-server xorg-xinit xterm
+xsel xorg-xbacklight xcompmgr sxhkd"
+cli="sudo neovim tree dialog htop ctags git cvs clang translate-shell
+python-pynvim"
+net="qutebrowser pdfjs networkmanager wpa_supplicant"
+wm="slock dmenu clipmenu feh numlockx pamixer scrot"
+dwmdeps="libx11 libxinerama libxft freetype2 xorg-xrandr xorg-xsetroot"
+stdeps="libxft"
+#statusbar="upower lm_sensors grep sed awk net-tools gcc"
+statusbar="pamixer upower grep sed awk"
+zsh="zsh zsh-completions bash-completion zsh-syntax-highlighting"
+fs="dosfstools btrfs-progs"
+arch="arch-wiki-docs arch-wiki-lite pkgfile reflector"
+fonts="ttf-dejavu ttf-hack ttf-font-awesome otf-font-awesome"
+media="imagemagick ffmpeg mupdf-gl cmus"
+docs="man-db man-pages texinfo"
+
+packages="$base $xorg $cli $net $wm $dwmdeps $stdeps $statusbar $zsh $fs
+$arch $fonts $media $docs"
+
+pacman -S $packages --needed

@@ -1,0 +1,26 @@
+Print
+	scrot -q 100
+
+@shift + Print
+	scrot -q 100 -s
+
+@ctrl + Print
+	scrot -q 100 -u
+
+XF86Audio{RaiseVolume,LowerVolume,Mute,MicMute}
+	pamixer {-i 5,-d 5,-t,-t} && dwmstatus
+
+XF86Audio{Next,Prev,Play,Stop}
+	cmus-remote {-n,-r,-u,-s}
+
+XF86MonBrightness{Up,Down}
+	xbacklight {-inc 10,-dec 10}
+
+super + p
+	conf
+
+super + n
+	todo
+
+super + semicolon
+	fbrowse

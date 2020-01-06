@@ -1,0 +1,51 @@
+#!/bin/zsh
+
+file="$(readlink -f $1)"
+inp=''
+scale=100
+posH=50
+posV=50
+
+clear
+echo "\033[?25l"
+while :
+do
+	echo "\033]20;""$file"";""$scale""x""$scale""+""$posH""+""$posV"":op=keep-aspect\a"
+	read -k1 -s inp
+	
+	if [[ $inp == 'q' ]] ; then
+		break
+	elif [[ $inp == '+' ]] ; then
+		[[ $scale == 0 ]] && scale=100 || ((scale+=10))
+	elif [[ $inp == '-' ]] ; then
+		if [[ $scale == 0 ]] ; then
+			scale=100
+		else
+			[[ $scale -ge 20 ]] && ((scale-=10))
+		fi
+	elif [[ $inp == 'h' ]] ; then
+		[[ $posH -ge 10 ]] && ((posH-=10))
+	elif [[ $inp == 'j' ]] ; then
+		[[ $posV -le 90 ]] && ((posV+=10))
+	elif [[ $inp == 'k' ]] ; then
+		[[ $posV -ge 10 ]] && ((posV-=10))
+	elif [[ $inp == 'l' ]] ; then
+		[[ $posH -le 90 ]] && ((posH+=10))	
+	elif [[ $inp == '0' ]] ; then
+		scale=100
+	elif [[ $inp == '=' ]] ; then
+		scale=0
+	elif [[ $inp == 'c' ]] ; then
+		posH=50
+		posV=50
+	elif [[ $inp == 'r' ]] ; then
+		scale=100
+		posH=50
+		posV=50
+	fi
+done
+echo "\033]20;;100x100+1000+1000\a"
+echo "\033[?25h"
+clear
+
+true
