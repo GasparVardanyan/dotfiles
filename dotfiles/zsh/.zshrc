@@ -19,8 +19,6 @@
 #POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
 #source /usr/share/zsh-theme-powerlevel9k/powerlevel9k.zsh-theme
 
-
-
 setopt interactive_comments
 
 setopt COMPLETE_ALIASES
@@ -35,6 +33,7 @@ zle -N edit-command-line
 bindkey '^e' edit-command-line
 
 PS1="%{$fg[red]%}[%{$fg[blue]%}%m %{$fg[yellow]%}%1d%{$fg[red]%}]%}%{$fg[white]%}$ %{$reset_color%}"
+#PS1="%{$fg[red]%}[%{$fg[yellow]%} r34p3r %{$fg[red]%}]%}%{$fg[white]%}$ %{$reset_color%}"
 unset HISTFILE
 
 zstyle ':completion:*' menu select
@@ -130,13 +129,10 @@ export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
 export LESS_TERMCAP_us=$'\E[4;32m'     # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 
-# manual setups
-export MY_GCC_OPTIONS="-std=c18 -pedantic-errors -Werror=pedantic -Wall -Wextra" # also used in .vimrc
-export MY_ASTYLE_OPTIONS="--style=allman --indent=tab --attach-extern-c --attach-closing-while --indent-switches --indent-after-parens --indent-preproc-block --min-conditional-indent=0 --break-blocks --pad-oper --pad-comma --pad-first-paren-out --align-pointer=middle --align-reference=type --remove-braces --keep-one-line-blocks --keep-one-line-statements --close-templates" # not perfect, but comfortable
-
 # command modifications
-alias cc="gcc $MY_GCC_OPTIONS"
-alias astyle="astyle $MY_ASTYLE_OPTIONS"
+alias cc="gcc -std=c18 -pedantic-errors -Werror=pedantic -Wall -Wextra"
+#alias cc=tcc
+alias astyle="astyle --style=allman --indent=tab --attach-extern-c --attach-closing-while --indent-switches --indent-after-parens --indent-preproc-block --min-conditional-indent=0 --break-blocks --pad-oper --pad-comma --pad-first-paren-out --align-pointer=middle --align-reference=type --remove-braces --keep-one-line-blocks --keep-one-line-statements --close-templates"
 alias df="df -Th -x tmpfs -x devtmpfs"
 alias dd="dd status=progress"
 alias rm="rm -I"
@@ -173,6 +169,7 @@ alias xip="xsel -ip"
 alias xop="xsel -p"
 alias www="python3 -m http.server"
 alias srv="www --directory ~/.local/srv"
+alias srvcln="wget -r -m -np -nH -R index.html 2> /dev/null"
 alias man2pdf="man -Tpdf"
 alias myip="curl https://ipecho.net/plain ; echo"
 alias off="systemctl poweroff -i"
@@ -184,7 +181,6 @@ alias mkpatch="diff -uraN"
 alias wallpaper="feh --no-fehbg --bg-fill"
 alias updatemirrors="yes | sudo pacman -Scc && sudo reflector --verbose --latest 10 --protocol https --sort rate --save /etc/pacman.d/mirrorlist && sudo pacman -Syy"
 alias vimupdate="vim +PluginUpdate"
-alias dwmman="man .local/share/dwm/dwm.1"
 iv () { urxvt -e sh -c "imview $1" }
 alias suckless="curl https://git.suckless.org/ 2> /dev/null | grep '<a href=\"' | sed 's/^.*<a href=\".*\/log.html\">\(.*\)<\/a><\/td><td>\(.*$\)/\1|\2/' | column -t -s \|"
 alias colorscheme="echo -n '\x1b[48;5;0m  \x1b[48;5;1m  \x1b[48;5;2m  \x1b[48;5;3m  \x1b[48;5;4m  \x1b[48;5;5m  \x1b[48;5;6m  \x1b[48;5;7m  \x\n\x1b[48;5;8m  \x1b[48;5;9m  \x1b[48;5;10m  \x1b[48;5;11m  \x1b[48;5;12m  \x1b[48;5;13m  \x1b[48;5;14m  \x1b[48;5;15m  \x1b[0m\n'"
@@ -196,8 +192,8 @@ alias nfetch="neofetch | lolcat"
 alias f="fortune | cowsay | lolcat"
 
 # window title
-chpwd () { chtitle "$USER [$PWD]" }
-chpwd
+#chpwd () { chtitle "$USER [$PWD]" }
+#chpwd
 
 #https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/extract/extract.plugin.zsh
 alias x=extract
@@ -269,3 +265,5 @@ extract() {
 		shift
 	done
 }
+
+# [[ $TERM =~ dvtm* ]] || dvtm

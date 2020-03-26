@@ -8,23 +8,32 @@ filetype off
 if has ('vim_starting')
 	set rtp+=~/.vim/bundle/Vundle.vim
 endif
+
 call vundle#begin()
+
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/nerdtree'
-"Plugin 'terryma/vim-multiple-cursors'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'kien/ctrlp.vim'
+"Plugin 'ycm-core/YouCompleteMe'
 Plugin 'vim-syntastic/syntastic'
-Plugin 'vim-airline/vim-airline'
-"Plugin 'vim-airline/vim-airline-themes'
-"Plugin 'PotatoesMaster/i3-vim-syntax'
-Plugin 'lilydjwg/colorizer'
-"Plugin 'scrooloose/nerdcommenter'
-"Plugin 'edkolev/tmuxline.vim'			" Theme for tmux
-Plugin 'makerj/vim-pdf'
-"Plugin 'vim-scripts/Tabmerge'
-Plugin 'baskerville/vim-sxhkdrc'
-"Plugin 'FredKSchott/CoVim'
 Plugin 'davidhalter/jedi-vim'
+Plugin 'vim-airline/vim-airline'
+"Plugin 'powerline/powerline'
+Plugin 'chrisbra/Colorizer'
+"Plugin 'lilydjwg/colorizer'
+Plugin 'baskerville/vim-sxhkdrc'
+"Plugin 'makerj/vim-pdf'
+"Plugin 'FredKSchott/CoVim'
+"Plugin 'airblade/vim-gitgutter'
+"Plugin 'morhetz/gruvbox'
+"Plugin 'dracula/vim'
+"Plugin 'altercation/vim-colors-solarized'
+"Plugin 'jnurmine/Zenburn'
+Plugin 'tomasiser/vim-code-dark'
+
 call vundle#end()
 
 
@@ -41,9 +50,25 @@ color leet2
 
 
 
-" tabs in visual mode
-vmap <Tab> :s/^/\t/ <Bar> nohls <Bar> norm gv <cr>
-vmap <S-Tab> :s/^\t\?// <Bar> nohls <Bar> norm gv <cr>
+" specific settings
+set tabstop=4
+set shiftwidth=4
+set nu
+"set mouse=a
+set updatetime=250
+"set t_Co=256
+set splitbelow
+set splitright
+set foldmethod=indent
+set foldlevel=99
+
+
+
+"split navigations
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
 
 
@@ -51,18 +76,6 @@ vmap <S-Tab> :s/^\t\?// <Bar> nohls <Bar> norm gv <cr>
 noremap <F1> :mksession! .vim.session <cr>
 noremap <F2> :source .vim.session <cr>
 noremap <F3> :! rm .vim.session <cr>
-
-
-
-" specific settings
-set tabstop=4
-set shiftwidth=4
-set nu
-set mouse=a
-set updatetime=250
-set t_Co=256
-set splitbelow
-set splitright
 
 
 
@@ -87,18 +100,22 @@ augroup END
 
 
 
+" PEP8 for python
+au BufNewFile,BufRead *.py
+    \ set tabstop=4     |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4  |
+    \ set textwidth=79  |
+    \ set expandtab     |
+    \ set autoindent    |
+    \ set fileformat=unix
+
+
+
 " cursorline
 au WinLeave * set nocursorline
 au WinEnter * set cursorline
 set cursorline
-
-
-
-" colorize i3 config file
-"aug i3config_ft_detection
-"  au!
-"  au BufNewFile,BufRead ~/.i3/config set filetype=i3
-"aug end
 
 
 
@@ -107,14 +124,6 @@ aug urxvt_config_ft_detection
   au!
   au BufNewFile,BufRead ~/.urxvt/config set filetype=xdefaults
 aug end
-
-
-
-" colorize wm's statusbar script
-"aug statusbar_ft_detection
-"  au!
-"  au BufNewFile,BufRead ~/.local/share/statusbar set filetype=sh
-"aug end
 
 
 
@@ -130,6 +139,15 @@ com! DiffSaved call s:DiffWithSaved()
 
 
 
+" nerdcommenter
+let g:NERDSpaceDelims = 1
+let g:NERDDefaultAlign = 'left'
+let g:NERDAltDelims_python = 1
+let g:NERDCommentEmptyLines = 1
+let g:NERDTrimTrailingWhitespace = 1
+
+
+
 " syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -139,7 +157,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_c_compiler = "gcc"
-let g:syntastic_c_compiler_options = $MY_GCC_OPTIONS
+let g:syntastic_c_compiler_options = "-std=c18 -pedantic-errors -Werror=pedantic -Wall -Wextra"
 
 
 

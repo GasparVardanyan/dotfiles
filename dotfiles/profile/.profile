@@ -1,7 +1,9 @@
+export WM=dwm
 export TERMINAL=st
-export EDITOR=vi
+export SHELL=zsh
+export EDITOR=nvim
 export BROWSER=qutebrowser
-export PLAN9="/usr/lib/plan9"
+export PLAN9="/opt/plan9"
 #export PATH="$PLAN9/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export CPATH="$HOME/.local/include:$CPATH"

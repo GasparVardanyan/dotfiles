@@ -1,3 +1,0 @@
-#!/bin/bash
-p=\"`dbrowse`\"
-[[ $p != '' ]] && $TERMINAL -e $SHELL -c "`echo -n | dmenu -p command: | sed \"s|\\\\$|$p|g\"` ; read"

@@ -1,24 +1,11 @@
-! __  __  ____
-! \ \/ / |  _ \ ___  ___  ___  _   _ ____ ___ ___  ___
-!  \  /  | |_) / _ \/ __|/ _ \| | | |  __/ __/ _ \/ __|
-!  /  \  |  _ <  __/\__ \ (_) | |_| | | | (_|  __/\__ \
-! /_/\_\ |_| \_\___||___/\___/ \__,_|_|  \___\___||___/
-!
-
-
-
-! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-! !!!!!!!!!! ColorScheme setup !!!!!!!!!!
-! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 *foreground:                  #d0d0d0
-!*background:                  #000000
-*background:                  #222222
+*background:                  #000000
+!*background:                  #222222
 *cursorColor:                 #ffffff
-!*color0:                      #010008
-*color0:                      #1E1E1E
-!*color8:                      #1C1C1C
-*color8:                      #373737
+*color0:                      #010008
+!*color0:                      #1E1E1E
+*color8:                      #1C1C1C
+!*color8:                      #373737
 *color1:                      #A71B1A
 *color9:                      #BF3130
 *color2:                      #3B8526
@@ -34,19 +21,13 @@
 *color7:                      #B5AD64
 *color15:                     #CEC67D
 
+# include ".urxvt/config"
 
-
-! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-! !!!!!!!!!! URxvt setup !!!!!!!!!!
-! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-!# include ".urxvt/config"
-
-
-
-! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-! !!!!!!!!!! XTerm setup !!!!!!!!!!
-! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+dmenu.font:                   monospace:size=10
+dmenu.background:             #000000
+dmenu.foreground:             #ffffff
+dmenu.selbackground:          #ff0000
+dmenu.selforeground:          #000000
 
 xterm*termName:               xterm-256color
 xterm*decTerminalID:          vt340

@@ -1,34 +1,62 @@
 #!/bin/bash
 
 # processor: intel, amd radeon
+# boot-loader: grub
 # display server: xorg
 # wm: dwm
-# terminal: urxvt
+# terminal: st
 # shell: zsh
 # fonts: dejavu, hack, awesome
 # browser: qutebrowser
 # etc
 
-base="amd-ucode intel-ucode linux-headers efibootmgr grub pulseaudio
-libinput"
+base="amd-ucode intel-ucode linux-headers efibootmgr grub pulseaudio"
 xorg="xf86-video-amdgpu xf86-video-intel xorg-server xorg-xinit xterm
-xsel xorg-xbacklight xcompmgr sxhkd"
-cli="sudo neovim tree dialog htop ctags git cvs clang translate-shell
-python-pynvim"
-net="qutebrowser pdfjs networkmanager wpa_supplicant"
+xsel xorg-xbacklight xcompmgr sxhkd libinput"
+cli="sudo vi tree dialog htop git translate-shell abduco dvtm"
+net="qutebrowser pdfjs net-tools wpa_supplicant dhclient"
 wm="slock dmenu clipmenu feh numlockx pamixer scrot"
 dwmdeps="libx11 libxinerama libxft freetype2 xorg-xrandr xorg-xsetroot"
-stdeps="libxft"
-#statusbar="upower lm_sensors grep sed awk net-tools gcc"
+urxvtdeps="cvs"
 statusbar="pamixer upower grep sed awk"
 zsh="zsh zsh-completions bash-completion zsh-syntax-highlighting"
 fs="dosfstools btrfs-progs"
 arch="arch-wiki-docs arch-wiki-lite pkgfile reflector"
 fonts="ttf-dejavu ttf-hack ttf-font-awesome otf-font-awesome"
-media="imagemagick ffmpeg mupdf-gl cmus"
-docs="man-db man-pages texinfo"
+media="imagemagick ffmpeg mupdf-gl cmus youtube-dl"
+docs="man-db man-pages"
+dev="musl"
 
-packages="$base $xorg $cli $net $wm $dwmdeps $stdeps $statusbar $zsh $fs
-$arch $fonts $media $docs"
+nvim="neovim ctags python-pynvim"
+
+other="boost gdb valgrind radare2 radare2-cutter cppcheck mupdf-tools
+texinfo"
+
+# URXVT
+#   manual build (urxvt/rxvt-unicode-cvs)
+# DWM
+#   manual build (https://github.com/GasparVardanyan/dwm)
+# ST
+#   manual build (https://github.com/GasparVardanyan/st)
+# TCC
+#   manual build (git://repo.or.cz/tinycc.git)
+#   configure --prefix=$HOME/.local --config-musl --cc=musl-gcc
+# MANDOC
+#   manual build (anoncvs@mandoc.bsd.lv:/cvs)
+#   sed -i 's/\/usr\//\$HOME\/\./g' Makefile.local
+# LIBULZ
+#   manual build (https://github.com/rofl0r/libulz)
+# LIBMOWGLI2
+#   manual build (https://github.com/atheme/libmowgli-2)
+#   configure --prefix=$HOME/.local
+# LIBGD
+#   manual build (https://github.com/libgd/libgd)
+#   configure --prefix=$HOME/.local
+# LIBSIXEL
+#   manual build (https://github.com/saitoha/libsixel)
+#   configure --prefix=$HOME/.local
+
+packages="$base $xorg $cli $net $wm $dwmdeps $urxvtdeps $statusbar $zsh
+$fs $arch $fonts $media $docs $dev $nvim"
 
 pacman -S $packages --needed

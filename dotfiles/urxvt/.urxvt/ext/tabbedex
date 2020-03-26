@@ -177,7 +177,8 @@ or I</bin/sh> if that's empty.  This means that I<%E> is always a valid command.
 For example, here's how the sequence can be used to set TABBEDEX_NUM environment
 variables when running a command:
 
-    URxvt.tabbedex.tab-arguments: -e /usr/bin/env TABBEDEX_NUM=%n %E
+    URxvt.tabbedex.tab-arguments: \
+        -e /usr/bin/env TABBEDEX_NUM=%n %E
 
 =item I<%n>
 
@@ -254,11 +255,17 @@ since last time there was any activity in the tab.
 
 This resource allows for this to be customised.  It's format is
 
-    ( <timeout> ":" <character> ":" )* <timeout> ":" <character> ":"
+    ( <timeout> ":" <char> <char>? ":" )* <timeout> ":" <char> <char>? ":"
 
-where <timeout> is timeout in seconds and <character> is a single activity
-character.  If activity character is (, [, { or < it will be used as left
-activity mark and matching character will be used on the right side.
+where <timeout> is timeout in seconds and <char> is an activity character.  If
+two characters are given, they specify left and right activity marks.  If one
+character is given, it specifies both.  For example:
+
+    URxvt.tabbedex.tabbar-timeouts: 0:|:3:():6:[]:9:{}:12:<>
+
+As a deprecated feature, if a single character is given and it's (, [, { or <,
+matching closing brace will be used for right activity mark.  This is feature
+will be removed in the future.
 
 =item B<tabbed.tabbedex-rs-prefix>: I<string>
 
@@ -527,10 +534,8 @@ use Encode qw(decode);
 
 
 sub warn {
-	my ($root, $msg) = @_;
-	$root = shift;
-	my $extname = $root->{_name} // 'tabbedex';
-	urxvt::warn($extname . ': ' . join('', @_) . "\n");
+	my $root = shift;
+	urxvt::warn(join '', $root->{_name} // 'tabbedex', ': ', @_, "\n");
 }
 
 
@@ -543,14 +548,11 @@ sub tab_activity_marks {
 	my $prev;
 	for my $spec (@{ $root->{timeouts} }) {
 		my ($time, $left, $right) = @$spec;
-		if ($diff < $time) {
-			$prev = $time;
-		} elsif (wantarray) {
+		if ($diff >= $time) {
 			my $next = defined $prev ? $prev - $diff : undef;
 			return ($left, $right, $next);
-		} else {
-			return $left . $right;
 		}
+		$prev = $time;
 	}
 	('!', '!')  # we should never be here
 }
@@ -904,12 +906,19 @@ sub copy_properties {
 sub make_current {
 	my ($root, $tab, $bell_ends) = @_;
 
+	if (!ref $tab) {
+		$tab = $root->{tabs}[$tab];
+	}
+
 	my $cur = $root->{cur};
 	if ($cur == $tab) {
 		return;
 	}
 
 	if ($cur) {
+		if ($cur->is_being_renamed) {
+			return;
+		}
 		delete $cur->{last_activity};
 		$cur->{bell_ends} = 0;
 		$cur->XUnmapWindow ($cur->parent) if $cur->mapped;
@@ -983,7 +992,7 @@ _on button_release => sub {
 	my ($root, $event) = @_;
 
 	if ($root->{cur}->is_being_renamed || $event->{row} != 0 ||
-	   $event->{button} != 1) {
+	    $event->{button} != 1) {
 		return ();
 	}
 
@@ -996,7 +1005,7 @@ _on button_release => sub {
 		} elsif ($button->[2] == -1) {
 			$root->new_tab($root->{cur});
 		} else {
-			$root->make_current($root->{tabs}[$button->[2]]);
+			$root->make_current($button->[2]);
 		}
 	}
 	1;
@@ -1005,17 +1014,19 @@ _on button_release => sub {
 
 {
 
+# TODO: Add a warning in late 2020 or thereabouts if this is used and then
+# remove completely a year later or such.
 my %matching_marks = ('[' => ']', '{' => '}', '(' => ')', '<' => '>');
 
 sub parse_timeouts {
-	my $root = shift;
-	my $timeouts = shift // '';
-	my $re = qr/(?:\d+)?\.\d+|\d+/;
-	$re = eval { qr/\G($re):(\X)(?::|$)/ } // qr/\G($re):(.)(?::|$)/;
+	my ($root, $timeouts) = @_;
+	my $char = eval { qr/\X/ } // qr/./;
 	my @timeouts;
-	while ($timeouts =~ /$re/g) {
+	while ($timeouts =~ /\G(\d*\.\d+|\d+):($char)($char)?(?::|$)/g) {
 		my $left = $root->special_encode($2);
-		push @timeouts, [$1 + 0, $left, $matching_marks{$2} // $left];
+		my $right = $root->special_encode(
+			$3 // $matching_marks{$2} // $2);
+		push @timeouts, [$1 + 0, $left, $right];
 	}
 	@timeouts = sort { $b->[0] <=> $a->[0] } @timeouts;
 	if (!@timeouts || $timeouts[$#timeouts][0] > 0) {
@@ -1140,11 +1151,6 @@ sub tab_start {
 sub tab_destroy {
 	my ($root, $tab) = @_;
 
-	# If the tab is being renamed, stop renaming first.
-	if ($tab->is_being_renamed) {
-		$tab->finish_rename_tab(0);
-	}
-
 	my $idx = $tab->index;
 	splice @{ $root->{tabs} }, $idx, 1;
 
@@ -1162,8 +1168,7 @@ sub tab_destroy {
 
 	if ($root->{cur} == $tab) {
 		delete $root->{cur};
-		$idx = $idx < @{ $root->{tabs} } ? $idx : -1;
-		$root->make_current($root->{tabs}[$idx]);
+		$root->make_current($idx < @{ $root->{tabs} } ? $idx : -1);
 	} else {
 		$root->refresh;
 	}
@@ -1213,9 +1218,10 @@ sub tab_add_lines {
 	my ($root, $tab) = @_;
 	if ($tab != $root->{cur}) {
 		my $now = urxvt::NOW;
-		my $mark = $root->tab_activity_marks($tab, $now);
+		my @pre = $root->tab_activity_marks($tab, $now);
 		$tab->{last_activity} = $now;
-		if ($mark ne $root->tab_activity_marks($tab, $now)) {
+		my @post = $root->tab_activity_marks($tab, $now);
+		if ($pre[0] ne $post[0] || $pre[1] ne $post[1]) {
 			$root->refresh($now);
 		}
 	}
@@ -1234,19 +1240,16 @@ sub tab_action {
 			$root->new_tab($tab, $2, $index);
 		}
 	} elsif ($cmd eq 'next_tab') {
-		$root->change_tab($tab, 1);
+		$root->make_current(($tab->index + 1) % @{ $root->{tabs} });
 	} elsif ($cmd eq 'prev_tab') {
-		$root->change_tab($tab, -1);
+		$root->make_current($tab->index - 1);
 	} elsif ($cmd eq 'move_tab_left') {
 		$root->move_tab($tab, -1);
 	} elsif ($cmd eq 'move_tab_right') {
 		$root->move_tab($tab, 1);
-	} elsif ($cmd =~ /^goto_tab[_:](-?\d+)$/) {
-		if ($1 != 0 && !$root->{cur}->is_being_renamed && @{ $root->{tabs} } > 1) {
-			my $idx = $1 > 0 ? ($1 - 1) : (@{ $root->{tabs} } + $1);
-			if ($idx >= 0 && $idx < @{ $root->{tabs} }) {
-				$root->make_current ($root->{tabs}[$idx]);
-			}
+	} elsif ($cmd =~ /^goto_tab[_:](-?)(0*[1-9]\d*)$/) {
+		if ($2 <= @{ $root->{tabs} }) {
+			$root->make_current($1 eq '' ? $2 - 1 : -$2);
 		}
 	} elsif ($cmd eq 'rename_tab') {
 		if ($tab == $root->{cur} && $tab->start_rename_tab) {
@@ -1258,17 +1261,6 @@ sub tab_action {
 		$root->warn('unrecognised action: ‘', $cmd, '’; ignoring');
 	}
 	()
-}
-
-sub change_tab {
-    my ($root, $tab, $direction) = @_;
-
-    if (!$root->{cur}->is_being_renamed && @{ $root->{tabs} } > 1) {
-        my $idx = $tab->index + $direction;
-        $root->make_current ($root->{tabs}[$idx % @{ $root->{tabs}}]);
-    }
-
-    ();
 }
 
 sub move_tab {
@@ -1374,8 +1366,6 @@ sub finish_rename_tab {
 	}
 	delete $tab->{old_name};
 	$tab->disable('key_press');
-
-	$tab->{root}->refresh;
 }
 
 sub set_name {
@@ -1452,14 +1442,14 @@ sub text {
 	my ($rs, $name, $default) = @_;
 	my ($root, $extname, $prefix) = @$rs;
 	my $value = $root->x_resource("%.$name");
-	if (defined $value || !defined $prefix ||
-	    !defined($value = $root->x_resource("$prefix.$name"))) {
-		return $value // $default;
+	if (!defined $value && defined $prefix) {
+		$value = $root->x_resource("$prefix.$name");
+		if (defined $value) {
+			$root->warn("‘$prefix.$name’ resource uses deprecated " .
+			            "prefix. Use ‘$extname.$name’ instead.");
+		}
 	}
-
-	$root->warn("‘$prefix.$name’ resource uses deprecated prefix.  " .
-	            "Use ‘$extname.$name’ instead.");
-	return $value;
+	defined $value ? $root->locale_decode($value) : $default
 }
 
 sub bool {
@@ -1564,19 +1554,12 @@ sub add_button {
 
 sub add_title {
 	my ($bar, $text) = @_;
-
-	my $available = $bar->space_left;
-	if ($available <= 0) {
-		return;
-	}
-
 	$bar->_append_pending_pipe_maybe;
+	my $available = $bar->space_left;
 	if (length $text < $available) {
 		$text = ' ' . $text;
-	} elsif ($available == 1) {
-		$text = substr $text, 0, 1;
-	} else {
-		$text = (substr $text, 0, $available - 1) . '…';
+	} elsif (length $text > $available && $available > 1) {
+		substr($text, $available - 1) = '…';
 	}
 	$bar->_append($text, 4);
 	$bar->{pad_colour} = 4;
