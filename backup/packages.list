@@ -25,19 +25,18 @@ arch="arch-wiki-docs arch-wiki-lite pkgfile reflector"
 fonts="ttf-dejavu ttf-hack ttf-font-awesome otf-font-awesome"
 media="imagemagick ffmpeg mupdf-gl cmus youtube-dl"
 docs="man-db man-pages"
-dev="musl"
-
 nvim="neovim ctags python-pynvim"
 
-other="boost gdb valgrind radare2 radare2-cutter cppcheck mupdf-tools
-texinfo"
+other="musl boost gdb valgrind radare2 radare2-cutter cppcheck
+mupdf-tools texinfo"
 
-# URXVT
-#   manual build (urxvt/rxvt-unicode-cvs)
 # DWM
 #   manual build (https://github.com/GasparVardanyan/dwm)
 # ST
 #   manual build (https://github.com/GasparVardanyan/st)
+# TABBED
+#   manual build (~/.local/src/tabbed)
+
 # TCC
 #   manual build (git://repo.or.cz/tinycc.git)
 #   configure --prefix=$HOME/.local --config-musl --cc=musl-gcc
@@ -56,7 +55,7 @@ texinfo"
 #   manual build (https://github.com/saitoha/libsixel)
 #   configure --prefix=$HOME/.local
 
-packages="$base $xorg $cli $net $wm $dwmdeps $urxvtdeps $statusbar $zsh
-$fs $arch $fonts $media $docs $dev $nvim"
+packages="$base $xorg $cli $net $wm $dwmdeps $statusbar $zsh $fs
+$arch $fonts $media $docs $nvim"
 
 pacman -S $packages --needed
