@@ -2,12 +2,18 @@
 
 /* appearance */
 static const char font[]        = "monospace:size=9";
-static const char* normbgcolor  = "#222222";
-static const char* normfgcolor  = "#cccccc";
-static const char* selbgcolor   = "#555555";
-static const char* selfgcolor   = "#ffffff";
-static const char* urgbgcolor   = "#111111";
-static const char* urgfgcolor   = "#cc0000";
+// static const char* normbgcolor  = "#222222";
+// static const char* normfgcolor  = "#cccccc";
+// static const char* selbgcolor   = "#555555";
+// static const char* selfgcolor   = "#ffffff";
+// static const char* urgbgcolor   = "#111111";
+// static const char* urgfgcolor   = "#cc0000";
+static const char* normbgcolor  = "#000000";
+static const char* normfgcolor  = "#ffffff";
+static const char* selbgcolor   = "#ff0000";
+static const char* selfgcolor   = "#000000";
+static const char* urgbgcolor   = "#ffffff";
+static const char* urgfgcolor   = "#ff0000";
 static const char before[]      = "<";
 static const char after[]       = ">";
 static const char titletrim[]   = "...";
