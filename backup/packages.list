@@ -13,11 +13,13 @@
 base="amd-ucode intel-ucode linux-headers efibootmgr grub pulseaudio"
 xorg="xf86-video-amdgpu xf86-video-intel xorg-server xorg-xinit xterm
 xsel xorg-xbacklight xcompmgr sxhkd libinput"
-cli="sudo vi tree dialog htop git translate-shell abduco dvtm"
+cli="sudo tree dialog htop git translate-shell"
 net="qutebrowser pdfjs net-tools wpa_supplicant dhclient"
-wm="slock dmenu clipmenu feh numlockx pamixer scrot"
+wm="slock clipmenu feh numlockx pamixer scrot"
 dwmdeps="libx11 libxinerama libxft freetype2 xorg-xrandr xorg-xsetroot"
-urxvtdeps="cvs"
+stdeps="libxft libxext ncurses"
+dmenudeps="freetype2 libxft libxinerama sh"
+tabbeddeps="libx11"
 statusbar="pamixer upower grep sed awk"
 zsh="zsh zsh-completions bash-completion zsh-syntax-highlighting"
 fs="dosfstools btrfs-progs"
@@ -34,8 +36,10 @@ mupdf-tools texinfo"
 #   manual build (https://github.com/GasparVardanyan/dwm)
 # ST
 #   manual build (https://github.com/GasparVardanyan/st)
+# DMENU
+#   manual build (https://github.com/GasparVardanyan/dmenu)
 # TABBED
-#   manual build (~/.local/src/tabbed)
+#   manual build (https://github.com/GasparVardanyan/tabbed)
 
 # TCC
 #   manual build (git://repo.or.cz/tinycc.git)
@@ -55,7 +59,7 @@ mupdf-tools texinfo"
 #   manual build (https://github.com/saitoha/libsixel)
 #   configure --prefix=$HOME/.local
 
-packages="$base $xorg $cli $net $wm $dwmdeps $statusbar $zsh $fs
-$arch $fonts $media $docs $nvim"
+packages="$base $xorg $cli $net $wm $dwmdeps $stdeps $dmenudeps
+$tabbeddeps $statusbar $zsh $fs $arch $fonts $media $docs $nvim"
 
 pacman -S $packages --needed
