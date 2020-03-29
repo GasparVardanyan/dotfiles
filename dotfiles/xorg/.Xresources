@@ -21,7 +21,7 @@
 *color7:                      #B5AD64
 *color15:                     #CEC67D
 
-# include ".urxvt/config"
+! # include ".urxvt/config"
 
 dmenu.font:                   monospace:size=10
 dmenu.background:             #000000
