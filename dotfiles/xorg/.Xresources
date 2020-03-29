@@ -23,12 +23,6 @@
 
 ! # include ".urxvt/config"
 
-dmenu.font:                   monospace:size=10
-dmenu.background:             #000000
-dmenu.foreground:             #ffffff
-dmenu.selbackground:          #ff0000
-dmenu.selforeground:          #000000
-
 xterm*termName:               xterm-256color
 xterm*decTerminalID:          vt340
 xterm*VT340*geometry:         80x24
