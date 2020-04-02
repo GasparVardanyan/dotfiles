@@ -17,6 +17,8 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'kien/ctrlp.vim'
+"Plugin 'vifm/vifm.vim'
+"Plugin 'vimwiki/vimwiki'
 "Plugin 'ycm-core/YouCompleteMe'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'davidhalter/jedi-vim'
@@ -32,7 +34,7 @@ Plugin 'baskerville/vim-sxhkdrc'
 "Plugin 'dracula/vim'
 "Plugin 'altercation/vim-colors-solarized'
 "Plugin 'jnurmine/Zenburn'
-Plugin 'tomasiser/vim-code-dark'
+"Plugin 'tomasiser/vim-code-dark'
 
 call vundle#end()
 

@@ -1,5 +1,5 @@
 #!/bin/zsh
-c=`echo 'conf\ndwm\ndwmstatus\nst\nprofile\nzshrc\nvimrc\nfehbg\nsxhkd\nxinitrc\nxresources' | dmenu -p configure: -i -l 10 $@`
+c=`echo 'conf\ndwm\ndwmstatus\nst\nprofile\nzshrc\nvimrc\nfehbg\nsxhkd\nxinitrc\nxresources\ndmenu\ntabbed' | dmenu -p configure: -i -l 10 $@`
 
 if [[ $c == conf ]] ; then
 	e="$EDITOR ~/.local/bin/conf"
@@ -27,6 +27,10 @@ elif [[ $c == xresources ]] ; then
 	e="$EDITOR ~/.Xresources && xrdb ~/.Xresources ; read"
 elif [[ $c == vimrc ]] ; then
 	e="$EDITOR ~/.vimrc"
+elif [[ $c == dmenu ]] ; then
+	e="$EDITOR ~/.local/src/dmenu/config.h && (cd ~/.local/src/dmenu && make clean PREFIX=$HOME/.local install) ; read"
+elif [[ $c == tabbed ]] ; then
+	e="$EDITOR ~/.local/src/tabbed/config.h && (cd ~/.local/src/tabbed && make clean PREFIX=$HOME/.local install) ; read"
 else
 	exit 0
 fi
