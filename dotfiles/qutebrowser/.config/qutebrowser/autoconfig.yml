@@ -22,7 +22,9 @@ settings:
   url.searchengines:
     global:
       DEFAULT: https://duckduckgo.com/?q={}
+      duck: https://duckduckgo.com/?q={}
       wa: https://wiki.archlinux.org/?search={}
       wg: https://wiki.gentoo.org/?search={}
+      yt: https://www.youtube.com/results?search_query={}
   url.start_pages:
     global: https://duckduckgo.com/

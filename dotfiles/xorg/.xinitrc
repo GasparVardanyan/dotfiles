@@ -16,6 +16,10 @@ clipmenud &
 sxhkd &
 setxkbmap -layout "us,am(phonetic-alt)" -option grp:alt_shift_toggle &
 
+# caching
+find -L ~ -type f -not -path '*/\.*' >/dev/null &
+dmenu_path >/dev/null &
+
 # (echo -e '# define CONF_WM WM_DWM\n# define CONF_COLORS\n# define CONF_COLORFUL\n# define CONF_NOTES' ; cat .local/share/statusbar) | cpp | bash &
 
 while true; do
