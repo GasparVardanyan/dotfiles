@@ -1,2 +1,2 @@
 #!/bin/sh
-feh --no-fehbg --bg-fill '/home/gaspar/.local/share/wallpapers/red-tree.jpg'
+feh --no-fehbg --bg-fill $HOME/.local/share/wallpapers/sun.jpg

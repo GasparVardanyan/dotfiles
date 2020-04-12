@@ -32,8 +32,7 @@ colors
 zle -N edit-command-line
 bindkey '^e' edit-command-line
 
-PS1="%{$fg[red]%}[%{$fg[blue]%}%m %{$fg[yellow]%}%1d%{$fg[red]%}]%}%{$fg[white]%}$ %{$reset_color%}"
-#PS1="%{$fg[red]%}[%{$fg[yellow]%} r34p3r %{$fg[red]%}]%}%{$fg[white]%}$ %{$reset_color%}"
+PROMPT="%{$fg[red]%}[%{$fg[blue]%}%n %{$fg[yellow]%}%1~%{$fg[red]%}]%}%{$fg[white]%}$ %{$reset_color%}"
 unset HISTFILE
 
 zstyle ':completion:*' menu select
