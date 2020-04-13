@@ -36,3 +36,6 @@ super + ctrl + t
 
 super + ctrl + p
 	$TERMINAL -e $SHELL -c python
+
+super + ctrl + n
+	$TERMINAL -e $SHELL -c newsboat
