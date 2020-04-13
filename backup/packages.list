@@ -13,7 +13,7 @@
 base="amd-ucode intel-ucode linux-headers efibootmgr grub pulseaudio"
 xorg="xf86-video-amdgpu xf86-video-intel xorg-server xorg-xinit xterm
 xsel xorg-xbacklight xcompmgr sxhkd libinput"
-cli="sudo tree dialog htop git translate-shell"
+cli="sudo tree dialog htop git translate-shell newsboat"
 net="qutebrowser pdfjs net-tools wpa_supplicant dhclient"
 wm="slock clipmenu feh numlockx pamixer scrot"
 dwmdeps="libx11 libxinerama libxft freetype2 xorg-xrandr xorg-xsetroot"
