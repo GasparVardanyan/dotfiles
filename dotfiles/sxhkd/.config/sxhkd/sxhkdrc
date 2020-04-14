@@ -38,4 +38,4 @@ super + ctrl + p
 	$TERMINAL -e $SHELL -c python
 
 super + ctrl + n
-	$TERMINAL -e $SHELL -c newsboat
+	$TERMINAL -e $SHELL -c newsboat\ -r
