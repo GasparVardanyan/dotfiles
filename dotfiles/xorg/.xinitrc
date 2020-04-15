@@ -9,6 +9,7 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
+# autostart
 numlockx &
 ~/.fehbg 2>/dev/null &
 xcompmgr &
@@ -20,12 +21,15 @@ setxkbmap -layout "us,am(phonetic-alt)" -option grp:alt_shift_toggle &
 find -L ~ -type f -not -path '*/\.*' >/dev/null &
 dmenu_path >/dev/null &
 
+# portable statusbar
 # (echo -e '# define CONF_WM WM_DWM\n# define CONF_COLORS\n# define CONF_COLORFUL\n# define CONF_NOTES' ; cat .local/share/statusbar) | cpp | bash &
 
+# statusbar
 while true; do
 #	xsetroot -name "| $(date) | $(cat ~/.todo | wc -l) |"
 	dwmstatus
 	sleep 1
 done &
 
+# dwm
 exec dwm
