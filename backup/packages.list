@@ -29,7 +29,7 @@ media="imagemagick ffmpeg mupdf-gl cmus youtube-dl"
 docs="man-db man-pages"
 nvim="neovim ctags python-pynvim"
 
-other="musl boost gdb valgrind radare2 radare2-cutter cppcheck
+other="nasm musl boost gdb valgrind radare2 radare2-cutter cppcheck
 mupdf-tools texinfo"
 
 # DWM

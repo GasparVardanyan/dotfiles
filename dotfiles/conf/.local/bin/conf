@@ -1,12 +1,10 @@
 #!/bin/zsh
-c=`echo 'conf\ndwm\ndwmstatus\nst\nprofile\nzshrc\nvimrc\nfehbg\nsxhkdrc\nxinitrc\nxresources\ndmenu\ntabbed' | dmenu -p configure: -i -l 10 $@`
+c=`echo 'conf\ndwm\nst\nprofile\nzshrc\nvimrc\nfehbg\nsxhkdrc\nxinitrc\nxresources\ndmenu\ntabbed' | dmenu -p configure: -i -l 10 $@`
 
 if [[ $c == conf ]] ; then
 	e="$EDITOR ~/.local/bin/conf"
 elif [[ $c == dwm ]] ; then
-	e="$EDITOR ~/.local/src/dwm/config.h && (cd ~/.local/src/dwm && make clean PREFIX=~/.local install) ; read"
-elif [[ $c == dwmstatus ]] ; then
-	e="$EDITOR ~/.local/bin/dwmstatus"
+	e="$EDITOR ~/.local/src/dwm/ && (cd ~/.local/src/dwm && make clean PREFIX=~/.local install) ; read"
 elif [[ $c == kshrc ]] ; then
 	e="$EDITOR ~/.kshrc"
 elif [[ $c == fehbg ]] ; then
@@ -16,7 +14,7 @@ elif [[ $c == sxhkdrc ]] ; then
 elif [[ $c == urxvt ]] ; then
 	e="$EDITOR ~/.urxvt/config && xrdb ~/.Xresources ; read"
 elif [[ $c == st ]] ; then
-	e="$EDITOR ~/.local/src/st/config.h && (cd .local/src/st && (make clean PREFIX=~/.local TERMINFO=~/.terminfo install ; tic -sx st.info)) ; read"
+	e="$EDITOR ~/.local/src/st/ && (cd .local/src/st && make clean PREFIX=~/.local TERMINFO=~/.terminfo install) ; read"
 elif [[ $c == profile ]] ; then
 	e="$EDITOR ~/.profile"
 elif [[ $c == zshrc ]] ; then
@@ -28,9 +26,9 @@ elif [[ $c == xresources ]] ; then
 elif [[ $c == vimrc ]] ; then
 	e="$EDITOR ~/.vimrc"
 elif [[ $c == dmenu ]] ; then
-	e="$EDITOR ~/.local/src/dmenu/config.h && (cd ~/.local/src/dmenu && make clean PREFIX=$HOME/.local install) ; read"
+	e="$EDITOR ~/.local/src/dmenu/ && (cd ~/.local/src/dmenu && make clean PREFIX=$HOME/.local install) ; read"
 elif [[ $c == tabbed ]] ; then
-	e="$EDITOR ~/.local/src/tabbed/config.h && (cd ~/.local/src/tabbed && make clean PREFIX=$HOME/.local install) ; read"
+	e="$EDITOR ~/.local/src/tabbed/ && (cd ~/.local/src/tabbed && make clean PREFIX=$HOME/.local install) ; read"
 else
 	exit 0
 fi

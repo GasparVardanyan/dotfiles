@@ -34,6 +34,7 @@ bindkey '^e' edit-command-line
 
 PROMPT="%{$fg[red]%}[%{$fg[blue]%}%n %{$fg[yellow]%}%1~%{$fg[red]%}]%}%{$fg[white]%}$ %{$reset_color%}"
 unset HISTFILE
+HISTSIZE=2000
 
 zstyle ':completion:*' menu select
 zstyle ':completion::complete:*' gain-privileges 1
@@ -186,7 +187,7 @@ iv () { urxvt -e sh -c "imview $1" }
 alias suckless="curl https://git.suckless.org/ 2> /dev/null | grep '<a href=\"' | sed 's/^.*<a href=\".*\/log.html\">\(.*\)<\/a><\/td><td>\(.*$\)/\1|\2/' | column -t -s \|"
 alias colorscheme="echo -n '\x1b[48;5;0m  \x1b[48;5;1m  \x1b[48;5;2m  \x1b[48;5;3m  \x1b[48;5;4m  \x1b[48;5;5m  \x1b[48;5;6m  \x1b[48;5;7m  \x\n\x1b[48;5;8m  \x1b[48;5;9m  \x1b[48;5;10m  \x1b[48;5;11m  \x1b[48;5;12m  \x1b[48;5;13m  \x1b[48;5;14m  \x1b[48;5;15m  \x1b[0m\n'"
 gpush () { git add . ; git commit -m $1 ; git push -u origin master }
-alias gpushd="(cd ~/documents/dotfiles; gpush update)"
+alias gpushd="(cd ~/media/dotfiles; gpush update)"
 wttr () { curl "wttr.in/$1?AF" }
 chtitle () { printf '\33]2;%s\007' $1 }
 alias nfetch="neofetch | lolcat"
