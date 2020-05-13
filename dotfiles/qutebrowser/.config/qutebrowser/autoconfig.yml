@@ -6,10 +6,6 @@
 
 config_version: 2
 settings:
-  bindings.commands:
-    global: null
-  content.notifications:
-    https://web.skype.com: true
   content.pdfjs:
     global: true
   downloads.location.directory:
@@ -25,6 +21,9 @@ settings:
       duck: https://duckduckgo.com/?q={}
       wa: https://wiki.archlinux.org/?search={}
       wg: https://wiki.gentoo.org/?search={}
+      man: https://man.openbsd.org/?query={}
+      pdf: https://www.pdfdrive.com/search?q={}
       yt: https://www.youtube.com/results?search_query={}
+      ub: https://www.urbandictionary.com/define.php?term={}
   url.start_pages:
     global: https://duckduckgo.com/

@@ -9,7 +9,9 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
-# autostart
+
+
+### autostart ###
 numlockx &
 ~/.fehbg 2>/dev/null &
 xcompmgr &
@@ -17,19 +19,30 @@ clipmenud &
 sxhkd &
 setxkbmap -layout "us,am(phonetic-alt)" -option grp:alt_shift_toggle &
 
-# caching
+
+
+### caching ###
 find -L ~ -type f -not -path '*/\.*' >/dev/null &
 dmenu_path >/dev/null &
+$SHELL -c '' >/dev/null &
+[[ $EDITOR = *vim ]] && $EDITOR +q &
 
-# portable statusbar
+
+
+# ### portable statusbar ###
 # (echo -e '# define CONF_WM WM_DWM\n# define CONF_COLORS\n# define CONF_COLORFUL\n# define CONF_NOTES' ; cat .local/share/statusbar) | cpp | bash &
 
-# statusbar
+
+
+### dwm ###
 while true; do
 #	xsetroot -name "| $(date) | $(cat ~/.todo | wc -l) |"
 	dwmstatus
 	sleep 1
 done &
-
-# dwm
 exec dwm
+
+
+
+# ### spectrwm ###
+# exec spectrwm
