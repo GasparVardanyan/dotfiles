@@ -1,5 +1,5 @@
 #!/bin/zsh
-c=`echo 'conf\ndwm\nst\nprofile\nzshrc\nvimrc\nfehbg\nsxhkdrc\nxinitrc\nxresources\ndmenu\ntabbed' | dmenu -p configure: -i -l 10 $@`
+c=`echo 'conf\ndwm\nst\nprofile\nzshrc\nvimrc\nwallpaper\nqutebrowser\nfehbg\nsxhkdrc\nxinitrc\nxresources\ndmenu\ntabbed' | dmenu -p configure: -i -l 10 $@`
 
 if [[ $c == conf ]] ; then
 	e="$EDITOR ~/.local/bin/conf"
@@ -8,7 +8,7 @@ elif [[ $c == dwm ]] ; then
 elif [[ $c == kshrc ]] ; then
 	e="$EDITOR ~/.kshrc"
 elif [[ $c == fehbg ]] ; then
-	e="$EDITOR ~/.fehbg"
+	e="$EDITOR ~/.fehbg && ~/.fehbg"
 elif [[ $c == sxhkdrc ]] ; then
 	e="$EDITOR ~/.config/sxhkd/sxhkdrc"
 elif [[ $c == urxvt ]] ; then
@@ -25,11 +25,17 @@ elif [[ $c == xresources ]] ; then
 	e="$EDITOR ~/.Xresources && xrdb ~/.Xresources ; read"
 elif [[ $c == vimrc ]] ; then
 	e="$EDITOR ~/.vimrc"
+elif [[ $c == wallpaper ]] ; then
+	w="$(dbrowse ~/.local/share/wallpapers wallpaper:)" ; [ "$w" != "" ] && feh --bg-fill $w
+	exit
 elif [[ $c == dmenu ]] ; then
 	e="$EDITOR ~/.local/src/dmenu/ && (cd ~/.local/src/dmenu && make clean PREFIX=$HOME/.local install) ; read"
 elif [[ $c == tabbed ]] ; then
 	e="$EDITOR ~/.local/src/tabbed/ && (cd ~/.local/src/tabbed && make clean PREFIX=$HOME/.local install) ; read"
+elif [[ $c == qutebrowser ]] ; then
+	e="$EDITOR ~/.config/qutebrowser"
 else
 	exit 0
 fi
-$TERMINAL -e $SHELL -c $e
+
+$TERMINAL -e $SHELL -c "$e || read"
