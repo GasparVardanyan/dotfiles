@@ -22,8 +22,11 @@ super + p
 super + c
 	clipmenu
 
+super + w
+	w="$(dbrowse ~/.local/share/wallpapers wallpaper:)" ; [ "$w" != "" ] && feh --bg-fill $w
+
 super + ctrl + l
-	slock
+	slock & sleep .5; xset dpms force off
 
 super + ctrl + b
 	$BROWSER
