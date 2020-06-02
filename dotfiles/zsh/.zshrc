@@ -1,23 +1,4 @@
 #!/usr/bin/env zsh
-#   _________  _   _ ____   ____
-#  |__  / ___|| | | |  _ \ / ___|
-#    / /\___ \| |_| | |_) | |
-# _ / /_ ___) |  _  |  _ <| |___
-#(_)____|____/|_| |_|_| \_\\____|
-#
-#
-###############################
-
-# ohmyzsh
-#export ZSH=$HOME/.oh-my-zsh
-#plugins=(extract)
-#DISABLE_AUTO_TITLE="true"
-#source $ZSH/oh-my-zsh.sh
-
-# powerlevel9k
-#POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(status user dir vcs)
-#POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
-#source /usr/share/zsh-theme-powerlevel9k/powerlevel9k.zsh-theme
 
 setopt interactive_comments
 
@@ -32,7 +13,8 @@ colors
 zle -N edit-command-line
 bindkey '^e' edit-command-line
 
-PROMPT="%{$fg[red]%}[%{$fg[blue]%}%n %{$fg[yellow]%}%1~%{$fg[red]%}]%}%{$fg[white]%}$ %{$reset_color%}"
+# PROMPT="%{$fg[red]%}[%{$fg[blue]%}%n %{$fg[yellow]%}%1~%{$fg[red]%}]%}%{$fg[white]%}$ %{$reset_color%}"
+PROMPT="%{$fg[red]%}[ %{$fg[blue]%}%1~%{$fg[red]%} ]%}%{$fg[yellow]%} :: %{$reset_color%}"
 unset HISTFILE
 HISTSIZE=2000
 
@@ -183,7 +165,6 @@ alias mkpatch="diff -uraN"
 alias wallpaper="feh --no-fehbg --bg-fill"
 alias updatemirrors="yes | sudo pacman -Scc && sudo reflector --verbose --latest 10 --protocol https --sort rate --save /etc/pacman.d/mirrorlist && sudo pacman -Syy"
 alias vimupdate="vim +PluginUpdate"
-iv () { urxvt -e sh -c "imview $1" }
 alias suckless="curl https://git.suckless.org/ 2> /dev/null | grep '<a href=\"' | sed 's/^.*<a href=\".*\/log.html\">\(.*\)<\/a><\/td><td>\(.*$\)/\1|\2/' | column -t -s \|"
 alias colorscheme="echo -n '\x1b[48;5;0m  \x1b[48;5;1m  \x1b[48;5;2m  \x1b[48;5;3m  \x1b[48;5;4m  \x1b[48;5;5m  \x1b[48;5;6m  \x1b[48;5;7m  \x\n\x1b[48;5;8m  \x1b[48;5;9m  \x1b[48;5;10m  \x1b[48;5;11m  \x1b[48;5;12m  \x1b[48;5;13m  \x1b[48;5;14m  \x1b[48;5;15m  \x1b[0m\n'"
 gpush () { git add . ; git commit -m $1 ; git push -u origin master }
@@ -192,6 +173,8 @@ wttr () { curl "wttr.in/$1?AF" }
 chtitle () { printf '\33]2;%s\007' $1 }
 alias nfetch="neofetch | lolcat"
 alias f="fortune | cowsay | lolcat"
+alias yt="youtube-dl"
+alias yta="youtube-dl -x -f bestaudio/best"
 
 # window title
 #chpwd () { chtitle "$USER [$PWD]" }
