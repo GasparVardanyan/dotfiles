@@ -41,6 +41,9 @@ nvim="neovim ctags python-pynvim"
 # TABBED
 #   manual build (https://github.com/GasparVardanyan/tabbed)
 
+# OH-MY-ZSH
+#	manual (https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)
+
 # TCC
 #   manual build (git://repo.or.cz/tinycc.git)
 #   configure --prefix=$HOME/.local --config-musl --cc=musl-gcc
