@@ -19,16 +19,17 @@ settings:
     global:
       DEFAULT: https://duckduckgo.com/?q={}
       duck: https://duckduckgo.com/?q={}
+      man: https://man.openbsd.org/?query={}
+      meet: https://meet.jit.si/{}
+      pdf: https://www.pdfdrive.com/search?q={}
+      solve: https://www.symbolab.com/solver/step-by-step/{}
+      ub: https://www.urbandictionary.com/define.php?term={}
       wa: https://wiki.archlinux.org/?search={}
       wg: https://wiki.gentoo.org/?search={}
-      man: https://man.openbsd.org/?query={}
-      pdf: https://www.pdfdrive.com/search?q={}
-      yt: https://www.youtube.com/results?search_query={}
-      ub: https://www.urbandictionary.com/define.php?term={}
-      yi: https://yandex.com/images/search?text={}
       wiki: https://en.wikipedia.org/w/index.php?search={}
-      meet: https://meet.jit.si/{}
-      solve: https://www.symbolab.com/solver/step-by-step/{}
       wp: https://wallhaven.cc/search?q={}
+      yi: https://yandex.com/images/search?text={}
+      yt: https://www.youtube.com/results?search_query={}
+      r: https://www.reddit.com/r/{}
   url.start_pages:
     global: https://duckduckgo.com/
