@@ -1,11 +1,11 @@
 #!/bin/sh
 
-c=`echo -e 'conf\ndwm\nst\nprofile\nzshrc\nvimrc\nwallpaper\nqutebrowser\nsxhkdrc\nxinitrc\nxresources\ndmenu\ntabbed' | dmenu -p configure: -i -l 10 $@`
+c=`echo -e 'conf\ndwm\nst\nprofile\nzshrc\nomzshrc\nvimrc\nwallpaper\nqutebrowser\nsxhkdrc\nxinitrc\nxresources\ndmenu\ntabbed' | dmenu -p configure: -i -l 10 $@`
 
 if [[ $c == conf ]] ; then
 	e="$EDITOR ~/.local/bin/conf"
 elif [[ $c == dwm ]] ; then
-	e="$EDITOR ~/.local/src/dwm/ && (cd ~/.local/src/dwm && make clean PREFIX=~/.local install) ; read -n 1 -s"
+	e="(cd ~/.local/src/dwm && $EDITOR . && make PREFIX=~/.local install) ; read -n 1 -s"
 elif [[ $c == kshrc ]] ; then
 	e="$EDITOR ~/.kshrc"
 elif [[ $c == sxhkdrc ]] ; then
@@ -13,11 +13,13 @@ elif [[ $c == sxhkdrc ]] ; then
 elif [[ $c == urxvt ]] ; then
 	e="$EDITOR ~/.urxvt/config && xrdb ~/.Xresources ; read -n 1 -s"
 elif [[ $c == st ]] ; then
-	e="$EDITOR ~/.local/src/st/ && (cd .local/src/st && make clean PREFIX=~/.local TERMINFO=~/.terminfo install) ; read -n 1 -s"
+	e="(cd .local/src/st && $EDITOR . && make PREFIX=~/.local TERMINFO=~/.terminfo install) ; read -n 1 -s"
 elif [[ $c == profile ]] ; then
 	e="$EDITOR ~/.profile"
 elif [[ $c == zshrc ]] ; then
 	e="$EDITOR ~/.zshrc"
+elif [[ $c == omzshrc ]] ; then
+	e="$EDITOR ~/.omzshrc"
 elif [[ $c == xinitrc ]] ; then
 	e="$EDITOR ~/.xinitrc"
 elif [[ $c == xresources ]] ; then
@@ -28,13 +30,13 @@ elif [[ $c == wallpaper ]] ; then
 	w="$(dbrowse ~/.local/share/wallpapers wallpaper:)" ; [ "$w" != "" ] && feh --bg-fill $w
 	exit
 elif [[ $c == dmenu ]] ; then
-	e="$EDITOR ~/.local/src/dmenu/ && (cd ~/.local/src/dmenu && make clean PREFIX=$HOME/.local install) ; read -n 1 -s"
+	e="(cd ~/.local/src/dmenu && $EDITOR . && make PREFIX=$HOME/.local install) ; read -n 1 -s"
 elif [[ $c == tabbed ]] ; then
-	e="$EDITOR ~/.local/src/tabbed/ && (cd ~/.local/src/tabbed && make clean PREFIX=$HOME/.local install) ; read -n 1 -s"
+	e="(cd ~/.local/src/tabbed && $EDITOR . && make PREFIX=$HOME/.local install) ; read -n 1 -s"
 elif [[ $c == qutebrowser ]] ; then
 	e="$EDITOR ~/.config/qutebrowser"
 else
-	exit 0
+	exit
 fi
 
 $TERMINAL -e $SHELL -c "$e || read -n 1 -s"

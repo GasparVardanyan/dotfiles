@@ -12,26 +12,27 @@ endif
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'terryma/vim-multiple-cursors'
 Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'airblade/vim-gitgutter'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'terryma/vim-multiple-cursors'
 Plugin 'kien/ctrlp.vim'
+Plugin 'chrisbra/Colorizer'
+Plugin 'vim-syntastic/syntastic'
+Plugin 'ycm-core/YouCompleteMe'
+Plugin 'davidhalter/jedi-vim'
+Plugin 'baskerville/vim-sxhkdrc'
+"Plugin 'vim-airline/vim-airline'
+"Plugin 'powerline/powerline'
 "Plugin 'vifm/vifm.vim'
 "Plugin 'vimwiki/vimwiki'
-"Plugin 'ycm-core/YouCompleteMe'
-Plugin 'vim-syntastic/syntastic'
-Plugin 'davidhalter/jedi-vim'
-Plugin 'vim-airline/vim-airline'
-"Plugin 'powerline/powerline'
-Plugin 'chrisbra/Colorizer'
 "Plugin 'lilydjwg/colorizer'
-Plugin 'baskerville/vim-sxhkdrc'
 "Plugin 'makerj/vim-pdf'
 "Plugin 'FredKSchott/CoVim'
-"Plugin 'airblade/vim-gitgutter'
 "Plugin 'morhetz/gruvbox'
-"Plugin 'dracula/vim'
+"Plugin 'dracula/vim', { 'name': 'dracula' }
 "Plugin 'altercation/vim-colors-solarized'
 "Plugin 'jnurmine/Zenburn'
 "Plugin 'tomasiser/vim-code-dark'
@@ -55,7 +56,7 @@ color leet2
 " specific settings
 set tabstop=4
 set shiftwidth=4
-set nu
+set nu rnu
 "set mouse=a
 set updatetime=250
 "set t_Co=256
@@ -107,10 +108,10 @@ au BufNewFile,BufRead *.py
     \ set tabstop=4     |
     \ set softtabstop=4 |
     \ set shiftwidth=4  |
-    \ set textwidth=79  |
     \ set expandtab     |
     \ set autoindent    |
     \ set fileformat=unix
+    " \ set textwidth=79  |
 
 
 
