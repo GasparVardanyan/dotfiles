@@ -35,12 +35,12 @@ $SHELL -c '' >/dev/null &
 
 
 ### dwm ###
-while true; do
+[ "$WM" == "dwm" ] && while true; do
 #	xsetroot -name "| $(date) | $(cat ~/.todo | wc -l) |"
 	dwmstatus
 	sleep 1
 done &
-exec dwm
+exec $WM
 
 
 

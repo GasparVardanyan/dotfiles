@@ -21,21 +21,23 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'kien/ctrlp.vim'
 Plugin 'chrisbra/Colorizer'
 Plugin 'vim-syntastic/syntastic'
-Plugin 'ycm-core/YouCompleteMe'
-Plugin 'davidhalter/jedi-vim'
+" Plugin 'ycm-core/YouCompleteMe'
+" Plugin 'davidhalter/jedi-vim'
 Plugin 'baskerville/vim-sxhkdrc'
-"Plugin 'vim-airline/vim-airline'
-"Plugin 'powerline/powerline'
-"Plugin 'vifm/vifm.vim'
-"Plugin 'vimwiki/vimwiki'
-"Plugin 'lilydjwg/colorizer'
-"Plugin 'makerj/vim-pdf'
-"Plugin 'FredKSchott/CoVim'
-"Plugin 'morhetz/gruvbox'
-"Plugin 'dracula/vim', { 'name': 'dracula' }
-"Plugin 'altercation/vim-colors-solarized'
-"Plugin 'jnurmine/Zenburn'
-"Plugin 'tomasiser/vim-code-dark'
+" Plugin 'jceb/vim-orgmode'
+" Plugin 'plasticboy/vim-markdown'
+" Plugin 'vimwiki/vimwiki'
+" Plugin 'vim-airline/vim-airline'
+" Plugin 'powerline/powerline'
+" Plugin 'vifm/vifm.vim'
+" Plugin 'lilydjwg/colorizer'
+" Plugin 'makerj/vim-pdf'
+" Plugin 'FredKSchott/CoVim'
+" Plugin 'morhetz/gruvbox'
+" Plugin 'dracula/vim', { 'name': 'dracula' }
+" Plugin 'altercation/vim-colors-solarized'
+" Plugin 'jnurmine/Zenburn'
+" Plugin 'tomasiser/vim-code-dark'
 
 call vundle#end()
 
@@ -57,9 +59,9 @@ color leet2
 set tabstop=4
 set shiftwidth=4
 set nu rnu
-"set mouse=a
+" set mouse=a
 set updatetime=250
-"set t_Co=256
+" set t_Co=256
 set splitbelow
 set splitright
 set foldmethod=indent
