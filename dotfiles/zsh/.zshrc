@@ -1,28 +1,30 @@
 #!/usr/bin/env zsh
 
-source .omzshrc
+# source .omzshrc
 
-setopt interactive_comments
+autoload -Uz compinit && compinit
+autoload -Uz bashcompinit && bashcompinit
+autoload -Uz colors edit-command-line
 
-setopt COMPLETE_ALIASES
-
-autoload -Uz compinit bashcompinit colors edit-command-line
-compinit
-bashcompinit
 [ -r /usr/share/bash-completion/completions ] &&
   . /usr/share/bash-completion/completions/*
+
+setopt COMPLETE_ALIASES
+setopt interactive_comments
+
+zstyle ':completion:*' menu select
+zstyle ':completion:*' rehash true
+zstyle ':completion:*' list-suffixes
+zstyle ':completion:*' expand prefix suffix
+
 colors
 zle -N edit-command-line
 bindkey '^e' edit-command-line
 
 # PROMPT="%{$fg[red]%}[%{$fg[blue]%}%n %{$fg[yellow]%}%1~%{$fg[red]%}]%}%{$fg[white]%}$ %{$reset_color%}"
-PROMPT="%{$fg[magenta]%}%m%{$fg[yellow]%} -> %{$fg[red]%}[ %{$fg[blue]%}%1~%{$fg[red]%} ]%}%{$fg[yellow]%} :: %{$reset_color%}"
+PROMPT="%{$fg[magenta]%}%n%{$fg[yellow]%} -> %{$fg[red]%}[ %{$fg[blue]%}%1~%{$fg[red]%} ]%}%{$fg[yellow]%} :: %{$reset_color%}"
 unset HISTFILE
 HISTSIZE=2000
-
-zstyle ':completion:*' menu select
-zstyle ':completion::complete:*' gain-privileges 1
-zstyle ':completion:*' rehash true
 
 # create a zkbd compatible hash;
 # to add other keys to this hash, see: man 5 terminfo
@@ -143,6 +145,7 @@ alias _="sudo"
 alias ..="cd .."
 alias ccat="pygmentize -g"
 alias svim="sudo nvim"
+alias spaste="curl -F 'sprunge=<-' http://sprunge.us"
 alias c="echo -ne '\033c'"
 alias wiki="wiki-search-html"
 alias cplusplus.com="cppman --source=cplusplus.com && cppman"

@@ -25,12 +25,7 @@ setxkbmap -layout "us,am(phonetic-alt)" -option grp:alt_shift_toggle &
 find -L ~ -type f -not -path '*/\.*' >/dev/null &
 dmenu_path >/dev/null &
 $SHELL -c '' >/dev/null &
-[[ $EDITOR = *vim ]] && $EDITOR +q >/dev/null &
-
-
-
-# ### portable statusbar ###
-# (echo -e '# define CONF_WM WM_DWM\n# define CONF_COLORS\n# define CONF_COLORFUL\n# define CONF_NOTES' ; cat .local/share/statusbar) | cpp | bash &
+[[ $EDITOR = *vim* ]] && $EDITOR +q >/dev/null &
 
 
 
@@ -40,9 +35,7 @@ $SHELL -c '' >/dev/null &
 	dwmstatus
 	sleep 1
 done &
+
+
+
 exec $WM
-
-
-
-# ### spectrwm ###
-# exec spectrwm

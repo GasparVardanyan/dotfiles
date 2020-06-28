@@ -31,5 +31,6 @@ settings:
       yi: https://yandex.com/images/search?text={}
       yt: https://www.youtube.com/results?search_query={}
       r: https://www.reddit.com/r/{}
+      su: https://{}.suckless.org/
   url.start_pages:
     global: https://duckduckgo.com/
