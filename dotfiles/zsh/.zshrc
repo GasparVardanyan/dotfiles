@@ -2,6 +2,8 @@
 
 # source .omzshrc
 
+[ -f ~/.zshp ] && source ~/.zshp
+
 autoload -Uz compinit && compinit
 autoload -Uz bashcompinit && bashcompinit
 autoload -Uz colors edit-command-line
@@ -168,7 +170,7 @@ enfix () { trans -brief ru:en "`trans -brief en:ru $@`" }
 alias xup="xrdb ~/.Xresources"
 alias mkpatch="diff -uraN"
 alias wallpaper="feh --no-fehbg --bg-fill"
-alias updatemirrors="yes | sudo pacman -Scc && sudo reflector --verbose --latest 10 --protocol https --sort rate --save /etc/pacman.d/mirrorlist && sudo pacman -Syy"
+alias sysupgrade="yes | sudo pacman -Scc && (echo -e '\033[1;34m::\033[0;1m Look for the best server\033[0m' ; sudo reflector --verbose --latest 10 --protocol https --sort rate --save /etc/pacman.d/mirrorlist && sudo pacman -Syyu && sudo pkgfile -u)"
 alias vimupdate="vim +PluginUpdate"
 alias suckless="curl https://git.suckless.org/ 2> /dev/null | grep '<a href=\"' | sed 's/^.*<a href=\".*\/log.html\">\(.*\)<\/a><\/td><td>\(.*$\)/\1|\2/' | column -t -s \|"
 alias colorscheme="echo -n '\x1b[48;5;0m  \x1b[48;5;1m  \x1b[48;5;2m  \x1b[48;5;3m  \x1b[48;5;4m  \x1b[48;5;5m  \x1b[48;5;6m  \x1b[48;5;7m  \x\n\x1b[48;5;8m  \x1b[48;5;9m  \x1b[48;5;10m  \x1b[48;5;11m  \x1b[48;5;12m  \x1b[48;5;13m  \x1b[48;5;14m  \x1b[48;5;15m  \x1b[0m\n'"
