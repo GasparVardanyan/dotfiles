@@ -11,7 +11,7 @@ autoload -Uz colors edit-command-line
 [ -r /usr/share/bash-completion/completions ] &&
   . /usr/share/bash-completion/completions/*
 
-setopt COMPLETE_ALIASES
+setopt complete_aliases
 setopt interactive_comments
 
 zstyle ':completion:*' menu select
@@ -82,7 +82,7 @@ zle -N down-line-or-beginning-search
 [[ -n "${key[Up]}"   ]] && bindkey -- "${key[Up]}"   up-line-or-beginning-search
 [[ -n "${key[Down]}" ]] && bindkey -- "${key[Down]}" down-line-or-beginning-search
 
-source /usr/share/doc/pkgfile/command-not-found.zsh
+# source /usr/share/doc/pkgfile/command-not-found.zsh
 
 ttyctl -f
 
@@ -128,8 +128,8 @@ alias vim="nvim"
 alias tree="tree -fNpugshFviC"
 alias htop="htop -t"
 alias mkdir="mkdir -p"
-alias ls="ls -X --color=auto --classify --group-directories-first --human-readable"
-#alias ls="lsd -hF"
+# alias ls="ls -X --color=auto --classify --group-directories-first --human-readable"
+alias ls="lsd -hF"
 alias feh="feh --no-fehbg"
 alias mc="mc -S yadt256"
 alias lynx="lynx -display_charset=UTF-8"
@@ -144,11 +144,11 @@ alias cmatrix="cmatrix -b -C red"
 
 # utility
 alias _="sudo"
+compdef _sudo _
 alias ..="cd .."
 alias ccat="pygmentize -g"
 alias svim="sudo nvim"
 alias spaste="curl -F 'sprunge=<-' http://sprunge.us"
-alias c="echo -ne '\033c'"
 alias wiki="wiki-search-html"
 alias cplusplus.com="cppman --source=cplusplus.com && cppman"
 alias cppreference.com="cppman --source=cppreference.com && cppman"
@@ -163,14 +163,13 @@ alias srv="www --directory ~/.local/srv"
 alias srvcln="wget -r -m -np -nH -R index.html 2> /dev/null"
 alias man2pdf="man -Tpdf"
 alias myip="curl https://ipecho.net/plain ; echo"
-alias off="systemctl poweroff -i"
 alias t="trans en:hy"
 alias tb="t -brief"
 enfix () { trans -brief ru:en "`trans -brief en:ru $@`" }
 alias xup="xrdb ~/.Xresources"
 alias mkpatch="diff -uraN"
 alias wallpaper="feh --no-fehbg --bg-fill"
-alias sysupgrade="yes | sudo pacman -Scc && (echo -e '\033[1;34m::\033[0;1m Look for the best server\033[0m' ; sudo reflector --verbose --latest 10 --protocol https --sort rate --save /etc/pacman.d/mirrorlist && sudo pacman -Syyu && sudo pkgfile -u)"
+alias sysupgrade="yes | sudo pacman -Scc && (echo -e '\033[1;34m::\033[0;1m Look for the best server...\033[0m' ; sudo reflector --verbose --latest 10 --protocol https --sort rate --save /etc/pacman.d/mirrorlist && sudo pacman -Syu && sudo pkgfile -u && vim +PluginUpdate)"
 alias vimupdate="vim +PluginUpdate"
 alias suckless="curl https://git.suckless.org/ 2> /dev/null | grep '<a href=\"' | sed 's/^.*<a href=\".*\/log.html\">\(.*\)<\/a><\/td><td>\(.*$\)/\1|\2/' | column -t -s \|"
 alias colorscheme="echo -n '\x1b[48;5;0m  \x1b[48;5;1m  \x1b[48;5;2m  \x1b[48;5;3m  \x1b[48;5;4m  \x1b[48;5;5m  \x1b[48;5;6m  \x1b[48;5;7m  \x\n\x1b[48;5;8m  \x1b[48;5;9m  \x1b[48;5;10m  \x1b[48;5;11m  \x1b[48;5;12m  \x1b[48;5;13m  \x1b[48;5;14m  \x1b[48;5;15m  \x1b[0m\n'"
