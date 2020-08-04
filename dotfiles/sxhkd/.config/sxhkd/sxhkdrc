@@ -1,11 +1,11 @@
 Print
-	scrot -q 100
+	scrot -q 100 -e "convert \$f \$f"
 
 @shift + Print
-	scrot -q 100 -s
+	scrot -q 100 -s -e "convert \$f \$f"
 
 @ctrl + Print
-	scrot -q 100 -u
+	scrot -q 100 -u -e "convert \$f \$f"
 
 XF86Audio{RaiseVolume,LowerVolume,Mute,MicMute}
 	pamixer {-i 5,-d 5,-t,-t} && dwmstatus
@@ -31,11 +31,11 @@ super + ctrl + b
 super + ctrl + e
 	$TERMINAL -e $SHELL -c $EDITOR
 
-super + ctrl + t
-	$TERMINAL
+# super + ctrl + t
+#	$TERMINAL
 
 super + ctrl + p
-	$TERMINAL -e $SHELL -c python
+	$TERMINAL -e $SHELL -c python\ -q
 
 super + ctrl + n
 	$TERMINAL -e $SHELL -c newsboat\ -r
