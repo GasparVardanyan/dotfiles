@@ -32,10 +32,16 @@ super + ctrl + e
 	$TERMINAL -e $SHELL -c $EDITOR
 
 super + ctrl + bracketleft
-	st -n pop-up -g 90x25 -f monospace:size=16 -e $SHELL -c "trans :hy \"$(xsel -op)\" ; read -k1"
+	selaction translate selection
+
+super + bracketleft
+	selaction translate dmenu
 
 super + ctrl + bracketright
-	st -n pop-up -g 90x25 -f monospace:size=16 -e $SHELL -c "cht.sh \"$(xsel -op)\" ; read -k1"
+	selaction chtsh selection
+
+super + bracketright
+	selaction chtsh dmenu
 
 super + ctrl + p
 	$TERMINAL -e $SHELL -c python\ -q
