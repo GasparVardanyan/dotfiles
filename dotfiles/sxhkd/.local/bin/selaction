@@ -1,6 +1,7 @@
 #!/bin/sh
 
 cmd=''
+inp=''
 
 if [[ $2 = 'dmenu' ]]
 then
