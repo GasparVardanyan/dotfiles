@@ -24,7 +24,8 @@ zle -N edit-command-line
 bindkey '^e' edit-command-line
 
 # PROMPT="%{$fg[red]%}[%{$fg[blue]%}%n %{$fg[yellow]%}%1~%{$fg[red]%}]%}%{$fg[white]%}$ %{$reset_color%}"
-PROMPT="%{$fg[magenta]%}%n%{$fg[yellow]%} -> %{$fg[red]%}[ %{$fg[blue]%}%1~%{$fg[red]%} ]%}%{$fg[yellow]%} :: %{$reset_color%}"
+#PROMPT="%{$fg[magenta]%}%n%{$fg[yellow]%} -> %{$fg[red]%}[ %{$fg[blue]%}%1~%{$fg[red]%} ]%}%{$fg[yellow]%} :: %{$reset_color%}"
+PROMPT="%{$fg[yellow]%}-> %{$fg[red]%}[ %{$fg[blue]%}%1~%{$fg[red]%} ]%}%{$fg[yellow]%} :: %{$reset_color%}"
 unset HISTFILE
 HISTSIZE=2000
 
@@ -143,6 +144,7 @@ alias hexdump="hexdump -x -c"
 alias cmatrix="cmatrix -b -C red"
 
 # utility
+alias chess="telnet freechess.org"
 alias _="sudo"
 compdef _sudo _
 alias ..="cd .."
