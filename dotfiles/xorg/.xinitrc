@@ -22,7 +22,7 @@ setxkbmap -layout "us,am(phonetic-alt)" -option grp:alt_shift_toggle &
 
 
 ### caching ###
-find -L ~ -type f -not -path '*/\.*' >/dev/null &
+find -L ~/media -type f -not -path '*/\.*' >/dev/null &
 dmenu_path >/dev/null &
 $SHELL -c '' >/dev/null &
 [[ $EDITOR = *vim* ]] && $EDITOR +q >/dev/null &

@@ -88,6 +88,7 @@ zle -N down-line-or-beginning-search
 ttyctl -f
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.zsh.d/bash.command-not-found
 
 
 
@@ -181,10 +182,13 @@ wttr () { curl "wttr.in/$1?AF" }
 chtitle () { printf '\33]2;%s\007' $1 }
 alias nfetch="neofetch | lolcat"
 alias f="fortune | cowsay | lolcat"
-alias yt="youtube-dl"
-alias yta="youtube-dl -x -f bestaudio/best"
+alias yt="youtube-dl -f best"
+alias yta="youtube-dl -f bestaudio/best -x"
 imfixsize () { convert $1 $1 }
+dotdiff () { find $1 -type f | sed "s#$1/\(.[^/]*/\(.*\)\)#cmp $1/\1 ~/\2#" | sh
+ }
+alias mki="make PREFIX=$HOME/.local install"
 
 # window title
-# chpwd () { chtitle "$HOST [$PWD]" }
-# chpwd
+chpwd () { chtitle "$TERMINAL [$PWD]" }
+chpwd
