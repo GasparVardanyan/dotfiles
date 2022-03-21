@@ -1,0 +1,60 @@
+#sfeedpath="$HOME/.sfeed/feeds"
+
+# list of feeds to fetch:
+feeds() {
+	# feed <name> <feedurl> [basesiteurl] [encoding]
+
+	feed "Barcamp Yerevan - Youtube" "https://yewtu.be/feed/channel/UCz4Gaw-vexemY-WtB2NJu6w"
+	feed "SWL Armenia - Youtube" "https://yewtu.be/feed/channel/UCRuW04PI8gIw1Wi7ryH3MWg"
+	feed "SWL Armenia" "https://swl.am/index.xml"
+	feed "ambug telegram" "https://rsshub.app/telegram/channel/BSD_Armenia_News"
+	feed "ambug" "https://github.com/ambug/website/commits.atom"
+	feed "antranigv #en" "https://antranigv.am/weblog_en/index.xml"
+	feed "antranigv #hy" "https://antranigv.am/weblog/index.xml"
+	feed "խօսենք" "https://խօսենք.ցանցառներ.հայ/rss"
+	feed "ցանցառներ ռադիօ - Youtube" "https://yewtu.be/feed/channel/UCLjhnWg0f3BeJATvFiLnrJw"
+	feed "ցանցառներ ռադիօ" "https://ռադիօ.ցանցառներ.հայ/index.xml"
+
+	feed "օրագիր" "https://օրագիր.հայ/read/feed/"
+
+	feed "BlackArch Linux" "https://blackarch.org/rss.xml"
+	feed "Codemadness" "https://www.codemadness.nl/atom.xml"
+	feed "SkullSecurity" "https://blog.skullsecurity.org/feed"
+	feed "Solarized" "https://github.com/altercation/solarized/commits.atom"
+	feed "Suckless" "https://suckless.org/atom.xml"
+
+	feed "Luke Smith - LandChad" "https://landchad.net/rss.xml"
+	feed "Luke Smith - Not Related!" "https://notrelated.xyz/rss"
+	feed "Luke Smith - Odysee" "https://odysee.com/$/rss/@Luke/70"
+	feed "Luke Smith - Peertube" "https://videos.lukesmith.xyz/feeds/videos.xml?sort=-publishedAt"
+	feed "Luke Smith - Youtube" "https://yewtu.be/feed/channel/UC2eYFnH61tmytImy1mTYvhA"
+	feed "Luke Smith" "https://lukesmith.xyz/rss.xml"
+
+	feed "Brodie Robertson" "https://yewtu.be/feed/channel/UCld68syR8Wi-GY_n4CaoJGA"
+	feed "DistroTube" "https://yewtu.be/feed/channel/UCVls1GmFKf6WlTraIb_IaJg"
+	feed "Mental Outlaw" "https://yewtu.be/feed/channel/UC7YOGHUfC1Tb6E4pudI9STA"
+	feed "The Linux Experiment" "https://yewtu.be/feed/channel/UC5UAwBUum7CPN5buc-_N1Fw"
+	feed "Wolfgang's Channel" "https://yewtu.be/feed/channel/UCsnGwSIHyoYN0kiINAGUKxg"
+
+	feed "Planet 9" "http://planet9.cat-v.org/atom.xml"
+	feed "Software Tools" "https://swtools.wordpress.com/feed/"
+	feed "command center" "https://commandcenter.blogspot.com/rss.xml"
+	feed "thenewsh" "http://thenewsh.blogspot.com/rss.xml"
+
+	feed "qutebrowser" "https://github.com/qutebrowser/qutebrowser/releases.atom"
+	feed "THC-Archive" "https://github.com/hackerschoice/THC-Archive/commits.atom"
+	feed "nullsecurity" "https://github.com/nullsecuritynet/site/commits.atom"
+	feed "tmp.0ut" "https://github.com/tmpout/tmpout.github.io/commits.atom"
+
+	[ -f ~/.sfeed/sfeedrcp ] && source ~/.sfeed/sfeedrcp
+
+	# feed "explosm" "http://feeds.feedburner.com/Explosm"
+	# feed "golang github releases" "https://github.com/golang/go/releases.atom"
+	# feed "linux kernel" "https://www.kernel.org/feeds/kdist.xml" "https://www.kernel.org"
+	# feed "reddit openbsd" "https://old.reddit.com/r/openbsd/.rss"
+	# feed "slashdot" "http://rss.slashdot.org/Slashdot/slashdot" "http://slashdot.org"
+	# feed "tweakers" "http://feeds.feedburner.com/tweakers/mixed" "http://tweakers.net" "iso-8859-1"
+	# get youtube Atom feed: curl -s -L 'https://www.youtube.com/user/gocoding/videos' | sfeed_web | cut -f 1
+	# feed "youtube golang" "https://www.youtube.com/feeds/videos.xml?channel_id=UCO3LEtymiLrgvpb59cNsb8A"
+	# feed "xkcd" "https://xkcd.com/atom.xml" "https://xkcd.com"
+}

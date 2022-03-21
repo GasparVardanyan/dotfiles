@@ -1,0 +1,8 @@
+[global]
+	frame_color = DUNST_FOREGROUND
+	font = Monospace 16
+
+[urgency_normal]
+    foreground = DUNST_FOREGROUND
+    background = DUNST_BACKGROUND
+	timeout = 0

@@ -1,0 +1,4 @@
+#!/bin/sh
+
+systemctl enable wpa_supplicant@wlp3s0.service
+systemctl enable dhclient@wlp3s0.service

@@ -1,0 +1,239 @@
+// #!/bin/bash
+
+// # DEPENDENCIES: ttf-font-awesome, otf-font-awesome, upower, lm_sensors, grep, sed, awk, net-tools, networkmanager, xorg-xsetroot
+
+# define WM_I3 1
+# define WM_DWM 2
+//# define CONF_CMUS
+//# define CONF_NOTES
+//# define CONF_COLORS
+//# define CONF_COLORFUL
+
+SLEEP_SEC=1
+
+# if defined CONF_WM && CONF_WM == WM_I3
+	# define CONF_COLORS
+	echo '{ "version": 1 }'
+	echo '['
+	echo '[]'
+# endif // CONF_WM && CONF_WM == WM_I3
+
+# ifdef CONF_COLORS
+	# if 0
+	COLOR0="#010008"
+	COLOR8="#1C1C1C"
+	COLOR1="#A71B1A"
+	COLOR9="#BF3130"
+	COLOR2="#3B8526"
+	COLOR10="#58A642"
+	COLOR3="#E49202"
+	COLOR11="#FFB026"
+	COLOR4="#1D576D"
+	COLOR12="#31788E"
+	COLOR5="#97219C"
+	COLOR13="#A7248C"
+	COLOR6="#24866F"
+	COLOR14="#37A48D"
+	COLOR7="#B5AD64"
+	COLOR15="#CEC67D"
+	# endif // 0
+
+	eval "`xrdb -query | sed -n '/^\**\.*color/p' | sed 's/\*color\([[:digit:]]\+\):[[:space:]]\+\(.*$\)/COLOR\1=\"\2\"/'`"
+
+	COLORS=(BLACK RED GREEN YELLOW BLUE MAGENTA CYAN WHITE)
+	i=0
+	for c in "${COLORS[@]}"
+	do
+		eval "COLOR_DARK_$c=\$COLOR$((i))"
+		eval "COLOR_LIGHT_$c=\$COLOR$((i+++8))"
+	done
+
+	# ifdef CONF_COLORFUL
+//		#COLOR_LEVELS=(LIGHT_BLACK LIGHT_RED LIGHT_MAGENTA DARK_BLUE LIGHT_YELLOW LIGHT_GREEN DARK_RED DARK_MAGENTA LIGHT_BLUE DARK_YELLOW DARK_GREEN DARK_WHITE)
+		COLOR_LEVELS=(DARK_RED LIGHT_RED DARK_MAGENTA LIGHT_MAGENTA DARK_BLUE LIGHT_BLUE DARK_YELLOW LIGHT_YELLOW DARK_GREEN LIGHT_GREEN DARK_WHITE LIGHT_WHITE)
+	# else // CONF_COLORFUL
+		COLOR_LEVELS=(DARK_RED DARK_MAGENTA LIGHT_BLUE DARK_YELLOW DARK_GREEN DARK_WHITE)
+	# endif // CONF_COLORFUL
+
+	COLOR_LEVEL_COUNT="${#COLOR_LEVELS[@]}"
+	COLOR_LEVEL_MAX="$((COLOR_LEVEL_COUNT-1))"
+	i=0
+	for c in "${COLOR_LEVELS[@]}"
+	do
+		eval "COLOR_LEVEL$((i++))=\$COLOR_$c"
+	done
+	eval "COLOR_LEVEL999=\$COLOR_LEVEL$COLOR_LEVEL_MAX"
+	COLOR_TEXT1=$COLOR_LIGHT_CYAN
+	COLOR_TEXT2=$COLOR_DARK_CYAN
+
+	COLP="$((100/COLOR_LEVEL_MAX))"
+
+	COLMEMP=`free -m | awk '/^Mem:/ {print $2}'`
+	COLMEMP="$((COLMEMP/COLOR_LEVEL_MAX))"
+# endif // CONF_COLORS
+
+# ifdef CONF_CMUS
+	CMUS_P=0
+	CMUS_MUSIC=""
+	CMUS_MUSICPREV=""
+# endif // CONF_CMUS
+
+CPU_USAGE=0
+
+while :; do
+	BAT_PERCENTAGE=`upower -i /org/freedesktop/UPower/devices/battery_BAT1 | grep percentage | sed 's/[[:space:]]\+.*[[:space:]]\+//;s/%//'`
+	BAT_STATE=`upower -i /org/freedesktop/UPower/devices/battery_BAT1 | grep state | sed 's/[[:space:]]\+.*[[:space:]]\+//'`
+	DATE=`date +'%d.%m.%Y'`
+	TIME=`date +'%T'`
+	MEM_USAGE=`free -m | awk '/^Mem:/ {print $3}'`
+	TEMP=`sensors | grep 'Core ' | sed 's/^.*:[[:space:]]\++//;s/ .*//' | sed -z 's/\n/ /g' | sed 's/[[:space:]]\+$//'`
+	VOL=`pamixer --get-volume`
+	VOL_STATE=`pamixer --get-mute`
+	NET_DATA=`nmcli connection show | sed '1d;/ --[[:space:]]\+$/d'`
+	WIFI_INTERFACE=`echo $NET_DATA | grep wifi | awk '{print $4}'`
+	# ifdef CONF_CMUS
+		CMUS_STATUS=`cmus-remote -Q 2> /dev/null | awk '/^status/ {print $2}'`
+		CMUS_MUSIC=`cmus-remote -Q 2> /dev/null | grep file | sed 's/^.*\///;s/\.[[:alnum:]]\+//'`
+		[[ $CMUS_MUSICPREV != $CMUS_MUSIC ]] && CMUS_P=0
+		CMUS_MUSICPREV=$CMUS_MUSIC
+		CMUS_MUSLEN=${#CMUS_MUSIC}
+	# endif // CONF_CMUS
+
+	if [[ $WIFI_INTERFACE != '' ]] ; then
+		WIFI_INET=`ifconfig | awk "/$WIFI_INTERFACE/{getline;print}" | sed 's/^[[:space:]]\+inet[[:space:]]//;s/[[:space:]]\+.*$//'`
+		WIFI_COLOR=$COLOR_LEVEL999
+	else
+		WIFI_INET=''
+		WIFI_COLOR=$COLOR_LEVEL0
+	fi
+
+	# ifdef CONF_COLORS
+		eval "CPU_COLOR=\$COLOR_LEVEL$((COLOR_LEVEL_MAX-CPU_USAGE/COLP))"
+		eval "BAT_COLOR=\$COLOR_LEVEL$((BAT_PERCENTAGE/COLP))"
+		eval "MEM_COLOR=\$COLOR_LEVEL$((COLOR_LEVEL_MAX-MEM_USAGE/COLMEMP))"
+
+		TEMP_COLOR=$COLOR_TEXT1
+
+		if [ $VOL_STATE == "true" ] ; then
+			VOL_COLOR=$COLOR_LEVEL0
+		else
+			eval "VOL_COLOR=\$COLOR_LEVEL$((VOL/COLP))"
+		fi
+
+		TIME_COLOR=$COLOR_TEXT2
+		DATE_COLOR=$COLOR_TEXT2
+
+		CMUS_COLOR=$COLOR_LEVEL999
+	# endif // CONF_COLORS
+
+	if [ $BAT_STATE == 'charging' ] ; then
+	   BAT=''
+	elif [ $BAT_STATE == 'fully-charged' ] ; then
+		BAT=''
+	else
+		if [ $BAT_PERCENTAGE -le 20 ] ; then
+			BAT=''
+		elif [ $BAT_PERCENTAGE -le 40 ] ; then
+			BAT=''
+		elif [ $BAT_PERCENTAGE -le 60 ] ; then
+			BAT=''
+		elif [ $BAT_PERCENTAGE -le 80 ] ; then
+			BAT=''
+		else
+			BAT=''
+		fi
+	fi
+
+	if [ $VOL_STATE == "true" ] ; then
+		VOL_STATE=""
+	else
+		VOL_STATE=""
+	fi
+
+	VOL="$VOL_STATE $VOL%"
+	CPU=" $CPU_USAGE%"
+	TEMP=" $TEMP"
+	MEM=" $MEM_USAGE""M"
+	WIFI=" $WIFI_INET"
+	BAT="$BAT $BAT_PERCENTAGE%"
+	DATE=" $DATE"
+	TIME=" $TIME"
+
+	# ifdef CONF_CMUS
+		CMUS="${CMUS_MUSIC:$CMUS_P:25}"
+		if [[ $CMUS_STATUS == playing ]] ; then
+			CMUS=" $CMUS"
+			if [ $CMUS_P -le $((${#CMUS_MUSIC}-25-1)) ] ; then
+				((CMUS_P++))
+			else
+				CMUS_P=0
+			fi
+		elif [[ $CMUS_STATUS == paused ]] ; then
+			CMUS=" $CMUS"
+		else
+			CMUS=''
+		fi
+	# endif // CONF_CMUS
+
+	# ifdef CONF_NOTES
+//		WARNINGS=`cat ~/.notes 2>/dev/null | grep '^#[^#]' | wc -l`
+		WARNINGS=`cat ~/.todo 2>/dev/null | wc -l`
+	# endif // CONF_NOTES
+
+	# if defined CONF_WM && CONF_WM == WM_I3
+		echo ",["
+		echo "{\"full_text\":\"$CMUS\",\"color\":\"$CMUS_COLOR\"},"
+		echo "{\"full_text\":\"$VOL\",\"color\":\"$VOL_COLOR\"},"
+		echo "{\"full_text\":\"$CPU\",\"color\":\"$CPU_COLOR\"},"
+		echo "{\"full_text\":\"$TEMP\",\"color\":\"$TEMP_COLOR\"},"
+		echo "{\"full_text\":\"$MEM\",\"color\":\"$MEM_COLOR\"},"
+		echo "{\"full_text\":\"$WIFI\",\"color\":\"$WIFI_COLOR\"},"
+		echo "{\"full_text\":\"$BAT\",\"color\":\"$BAT_COLOR\"},"
+		echo "{\"full_text\":\"$DATE\",\"color\":\"$DATE_COLOR\"},"
+		echo "{\"full_text\":\"$TIME\",\"color\":\"$TIME_COLOR\"},"
+		# ifdef CONF_NOTES
+			echo "{\"full_text\":\"$WARNINGS\",\"color\":\"$COLOR_DARK_RED\",\"background\":\"$COLOR_LIGHT_YELLOW\",\"border\":\"$COLOR_LIGHT_RED\",\"border_top\":3,\"border_right\":3,\"border_bottom\":3,\"border_left\":3,\"min_width\":20,\"align\":\"center\"},"
+		# endif // CONF_NOTES
+		echo "{\"full_text\":\"\"}"
+		echo "]"
+	# elif defined CONF_WM && CONF_WM == WM_DWM && defined CONF_COLORS // CONF_WM && CONF_WM == WM_I3
+#		OUTPUT="  ^c$VOL_COLOR^$VOL^d^   ^c$CPU_COLOR^$CPU^d^   ^c$TEMP_COLOR^$TEMP^d^   ^c$MEM_COLOR^$MEM^d^   ^c$WIFI_COLOR^$WIFI^d^   ^c$BAT_COLOR^$BAT^d^   ^c$DATE_COLOR^$DATE^d^   ^c$TIME_COLOR^$TIME^d^    "
+		OUTPUT="| ^c$VOL_COLOR^$VOL^d^ | ^c$CPU_COLOR^$CPU^d^ | ^c$TEMP_COLOR^$TEMP^d^ | ^c$MEM_COLOR^$MEM^d^ | ^c$WIFI_COLOR^$WIFI^d^ | ^c$BAT_COLOR^$BAT^d^ | ^c$DATE_COLOR^$DATE^d^ | ^c$TIME_COLOR^$TIME^d^ |"
+		# ifdef CONF_CMUS
+			OUTPUT="| ^c$CMUS_COLOR^$CMUS^d^ $OUTPUT"
+		# endif // CONF_CMUS
+		# ifdef CONF_NOTES
+			if [[ $WARNINGS != 0 ]] ; then
+				OUTPUT="$OUTPUT ^c$COLOR_DARK_RED^$WARNINGS^d^ |"
+			fi
+		# endif // CONF_NOTES
+		xsetroot -name "$OUTPUT"
+	# else // CONF_WM && CONF_WM == WM_DWM && CONF_COLORS
+		OUTPUT="  $VOL   $CPU   $TEMP   $MEM   $WIFI   $BAT   $DATE   $TIME    "
+
+		# ifdef CONF_CMUS
+			OUTPUT="  $CMUS  $OUTPUT"
+		# endif // CONF_CMUS
+
+		# ifdef CONF_NOTES
+			if [[ $WARNINGS != 0 ]] ; then
+				OUTPUT=$OUTPUT"|$WARNINGS|    "
+			fi
+		# endif // CONF_NOTES
+
+		# if defined CONF_WM && CONF_WM == WM_DWM
+			xsetroot -name "$OUTPUT"
+		# else // CONF_WM && CONF_WM == WM_DWM
+			echo "$OUTPUT"
+		# endif // CONF_WM && CONF_WM == WM_DWM
+	# endif // CONF_WM && CONF_WM == WM_I3
+
+	read CPU_USAGE a b c previdle rest < /proc/stat
+	prevtotal=$((a+b+c+previdle))
+
+	sleep $SLEEP_SEC
+
+	read CPU_USAGE a b c idle rest < /proc/stat
+	total=$((a+b+c+idle))
+	CPU_USAGE=$((100*( (total-prevtotal) - (idle-previdle) ) / (total-prevtotal) ))
+done

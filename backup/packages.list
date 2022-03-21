@@ -1,0 +1,70 @@
+#!/bin/sh
+
+# wm: dwm
+# terminal: st
+# shell: zsh
+# fonts: dejavu, hack, awesome, nerd symbols, noto emojis, joypixels
+# browser: qutebrowser
+# etc
+
+base="base base-devel amd-ucode intel-ucode linux-headers efibootmgr grub
+pulseaudio"
+xorg="xorg-server xorg-drivers xorg-xinit xterm xsel sclip xorg-xbacklight
+xcompmgr sxhkd libinput"
+cli="sudo tmux tree dialog htop git translate-shell, exa, delta mediainfo"
+net="qutebrowser pdfjs net-tools wpa_supplicant dhclient"
+wm="slock clipmenu feh numlockx pamixer scrot dunst libnotify"
+dwmdeps="libx11 libxinerama libxft freetype2 xorg-xrandr xorg-xsetroot"
+stdeps="libxft perl"
+dmenudeps="freetype2 libxft libxinerama sh"
+tabbeddeps="libx11"
+statusbar="pamixer grep sed awk upower"
+zsh="zsh zsh-completions bash-completion zsh-syntax-highlighting"
+fs="dosfstools btrfs-progs"
+arch="arch-wiki-docs arch-wiki-lite pkgfile reflector"
+fonts="ttf-dejavu ttf-font-awesome otf-font-awesome ttf-hack
+ttf-nerd-fonts-symbols noto-fonts-emoji ttf-joypixels awesome-terminal-fonts"
+media="imagemagick ffmpeg sxiv mupdf-gl cmus youtube-dl"
+docs="man-db man-pages"
+nvim="neovim ctags python-pynvim"
+
+# Qutebrowser DRM extension:
+#     widevine https://aur.archlinux.org/qt5-webengine-widevine.git
+
+# other="nasm musl boost gdb valgrind radare2 radare2-cutter cppcheck
+# mupdf-tools texinfo"
+
+# DWM
+#   manual build (https://bitbucket.org/GasparVardanyan/dwm)
+# ST
+#   manual build (https://bitbucket.org/GasparVardanyan/st)
+# DMENU
+#   manual build (https://bitbucket.org/GasparVardanyan/dmenu)
+# TABBED
+#   manual build (https://bitbucket.org/GasparVardanyan/tabbed)
+
+# OH-MY-ZSH
+#	manual (https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)
+
+# TCC
+#   manual build (git://repo.or.cz/tinycc.git)
+#   configure --prefix=$HOME/.local --config-musl --cc=musl-gcc
+# MANDOC
+#   manual build (anoncvs@mandoc.bsd.lv:/cvs)
+#   sed -i 's/\/usr\//\$HOME\/\./g' Makefile.local
+# LIBULZ
+#   manual build (https://github.com/rofl0r/libulz)
+# LIBMOWGLI2
+#   manual build (https://github.com/atheme/libmowgli-2)
+#   configure --prefix=$HOME/.local
+# LIBGD
+#   manual build (https://github.com/libgd/libgd)
+#   configure --prefix=$HOME/.local
+# LIBSIXEL
+#   manual build (https://github.com/saitoha/libsixel)
+#   configure --prefix=$HOME/.local
+
+packages="$base $xorg $cli $net $wm $dwmdeps $stdeps $dmenudeps
+$tabbeddeps $statusbar $zsh $fs $arch $fonts $media $docs $nvim"
+
+pacman -S $packages --needed

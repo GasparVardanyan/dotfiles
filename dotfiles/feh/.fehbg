@@ -1,0 +1,2 @@
+#!/bin/sh
+feh --no-fehbg --bg-fill '/home/gaspar/.local/share/wallpapers/solarized-dark/city-buildings.png' 

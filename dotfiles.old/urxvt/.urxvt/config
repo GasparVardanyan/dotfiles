@@ -1,0 +1,94 @@
+URxvt.perl-ext-common:\
+eval,\
+background,\
+clipboard,\
+resize-font,\
+readline,\
+tabbedex,\
+keyboard-select,\
+matcher,\
+url-picker,\
+searchable-scrollback,\
+confirm-paste,\
+autocomplete
+
+!https://github.com/muennich/urxvt-perls
+!https://github.com/mina86/urxvt-tabbedex
+!https://github.com/Vifon/autocomplete-ALL-the-things
+!https://github.com/simmel/urxvt-resize-font
+
+URxvt.keysym.M-Up:                 eval:scroll_up 1
+URxvt.keysym.M-Down:               eval:scroll_down 1
+URxvt.keysym.M-C-Up:               eval:scroll_up_pages 1
+URxvt.keysym.M-C-Down:             eval:scroll_down_pages 1
+URxvt.keysym.M-Left:               eval:scroll_to_top
+URxvt.keysym.M-Right:              eval:scroll_to_bottom
+URxvt.keysym.M-y:                  perl:url-picker
+URxvt.keysym.M-u:                  matcher:select
+URxvt.keysym.M-i:                  matcher:list
+URxvt.keysym.M-o:                  matcher:last
+URxvt.keysym.M-C-s:                searchable-scrollback:start
+URxvt.keysym.M-s:                  keyboard-select:search
+URxvt.keysym.M-Escape:             keyboard-select:activate
+URxvt.keysym.M-C-slash:            autocomplete:word-complete
+URxvt.keysym.M-C-period:           autocomplete:fuzzy-word-complete
+URxvt.keysym.M-C-comma:            autocomplete:fuzzy-complete
+URxvt.keysym.M-C-apostrophe:       autocomplete:suffix-complete
+URxvt.keysym.M-C-semicolon:        autocomplete:surround-complete
+URxvt.keysym.M-C-bracketright:     autocomplete:WORD-complete
+URxvt.keysym.M-C-bracketleft:      autocomplete:fuzzy-WORD-complete
+URxvt.keysym.M-C-equal:            autocomplete:undo
+URxvt.keysym.M-c:                  eval:selection_to_clipboard
+URxvt.keysym.M-v:                  eval:paste_clipboard
+URxvt.keysym.M-C-v:                eval:paste_primary
+URxvt.keysym.C-V:                  clipboard:paste_escaped
+URxvt.keysym.C-Down:               resize-font:smaller
+URxvt.keysym.C-Up:                 resize-font:bigger
+URxvt.keysym.C-equal:              resize-font:reset
+URxvt.keysym.C-question:           resize-font:show
+
+URxvt.keyboard-select.clipboard:   true
+URxvt.url-launcher:                /usr/bin/xdg-open
+URxvt.matcher.button:              2
+URxvt.matcher.rend.0:              Uline Bold fg3
+URxvt.matcher.pattern.0:           \\b([a-zA-Z]+:\/\/\\w[\\w-.@:]*|www\\.\\w[\\w-]*\\.\\w[\\w-.]*)(\/[^"' ()]*)?
+!                                  PORT:      (:[0-9]{1,5})?
+
+URxvt.tabbedex.tabbar-fg:          2
+URxvt.tabbedex.tabbar-bg:          0
+URxvt.tabbedex.tab-fg:             3
+URxvt.tabbedex.tab-bg:             0
+URxvt.tabbedex.title:              false
+
+URxvt.print-pipe:                  cat > ~/urxvt-`date +%d.%m.%y-%T`.screendump
+URxvt.saveLines:                   10000
+
+URxvt.scrollBar:                   false
+URxvt.secondaryScroll:             false
+URxvt.scrollTtyKeypress:           false
+URxvt.scrollTtyOutput:             false
+URxvt.scrollWithBuffer:            true
+
+URxvt.internalBorder:              10
+URxvt.font:                        xft:monospace:size=12, xft:Hack:size=12
+URxvt.boldFont:                    xft:monospace:size=12:bold, xft:Hack:size=12:bold
+URxvt.italicFont:                  xft:monospace:size=12:italic, xft:Hack:size=12:italic
+URxvt.boldItalicFont:              xft:monospace:size=12:bold:italic, xft:Hack:size=12:bold:italic
+URxvt.imFont:                      xft:monospace:size=14, xft:Hack:size=14
+URxvt.letterSpace:                 -1
+URxvt.color12:                     RoyalBlue
+URxvt.colorIT:                     #87af5f
+URxvt.colorBD:                     #d7d7d7
+URxvt.colorUL:                     #87afd7
+URxvt.depth:                       32
+URxvt.foreground:                  Red
+URxvt.background:                  [90]Black
+!URxvt.background:                  [95]#222222
+URxvt.cursorBlink:                 false
+URxvt.cursorColor:                 #d40000
+URxvt.underlineColor:              #0000ee
+URxvt.mapAlert:                    true
+URxvt.intensityStyles:             true
+URxvt.urgentOnBell:                true
+URxvt.iso14755:                    false
+URxvt.iso14755_52:                 false

@@ -1,0 +1,98 @@
+Print
+	scrot -q 100 -e "xclip -sel clip -t image/png \$f; mkdir -p ~/screenshots ; magick \$f \$f ; mv \$f ~/screenshots"
+
+@shift + Print
+	scrot -q 100 -s -e "xclip -sel clip -t image/png \$f; mkdir -p ~/screenshots ; magick \$f \$f ; mv \$f ~/screenshots"
+
+@ctrl + Print
+	scrot -q 100 -u -e "xclip -sel clip -t image/png \$f; mkdir -p ~/screenshots ; magick \$f \$f ; mv \$f ~/screenshots"
+
+XF86Audio{RaiseVolume,LowerVolume,Mute,MicMute}
+	pamixer {-i 5,-d 5,-t,-t} && dwmstatus
+
+XF86Audio{Next,Prev,Play,Stop}
+	cmus-remote {-n,-r,-u,-s}
+
+XF86MonBrightness{Up,Down}
+	xbacklight {-inc 10,-dec 10}
+
+super + backslash
+	passmenu --type
+
+super + shift + backslash
+	passmenu --type; xdotool key KP_Enter
+
+super + ctrl + backslash
+	xfill ~/.local/share/logins.list
+
+super + ctrl + shift + backslash
+	xlogin ~/.local/share/logins.list
+
+super + space
+	kbd toggle && dwmstatus
+
+super + p
+	conf
+
+super + c
+	clipmenu
+
+super + n
+	todo
+
+super + semicolon
+	sfl d
+
+super + shift + semicolon
+	sfl f
+
+super + ctrl + l
+	setxkbmap -layout us; slock & sleep .5; xset dpms force off
+
+super + ctrl + b
+	$BROWSER
+
+super + bracketleft
+	selaction translate dmenu
+
+super + bracketright
+	selaction urban dmenu
+
+super + shift + bracketleft
+	selaction chtsh dmenu
+
+super + shift + bracketright
+	selaction tldr dmenu
+
+super + ctrl + bracketleft
+	selaction translate selection
+
+super + ctrl + bracketright
+	selaction urban selection
+
+super + ctrl + shift + bracketleft
+	selaction chtsh selection
+
+super + ctrl + shift + bracketright
+	selaction tldr selection
+
+super + ctrl + d
+	dunstctl close-all
+
+super + ctrl + e
+	$TERMINAL -n pop-up -g 95x25 -e $SHELL -c $EDITOR
+
+super + ctrl + p
+	$TERMINAL -n pop-up -g 95x25 -e $SHELL -c python\ -q
+
+super + ctrl + n
+	$TERMINAL -n pop-up -g 95x25 -e $SHELL -c 'sfeed_curses ~/.sfeed/feeds/*'
+
+super + ctrl + m
+	manbrowse | xargs $TERMINAL -n pop-up -g 95x25 man
+
+super + ctrl + t
+	$TERMINAL -n pop-up -g 95x25 -e $SHELL -c nvim\ ~/.todo.org
+
+super + e
+	emo

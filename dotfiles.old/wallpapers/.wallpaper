@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+while :
+do
+	feh --bg-fill "$HOME/.local/share/wallpapers/`ls .local/share/wallpapers/ | shuf -n 1`"
+	sleep 60
+done

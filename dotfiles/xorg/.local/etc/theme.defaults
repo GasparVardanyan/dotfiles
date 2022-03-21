@@ -1,0 +1,10 @@
+# define EMOJI_FONTS JoyPixels:size=16:antialias=true:autohint=true, Symbols Nerd Font:style=2048-em:size=16:antialias=true:autohint=true, Noto Color Emoji:size=16:style=Regular
+
+# define SYSTEM_FONT monospace
+
+*font:				SYSTEM_FONT
+dmenu*fonts:		SYSTEM_FONT, EMOJI_FONTS
+dwm*font:			SYSTEM_FONT, EMOJI_FONTS
+tabbed*font:		SYSTEM_FONT
+st*font:			SYSTEM_FONT:size=16
+st*font2:			EMOJI_FONTS

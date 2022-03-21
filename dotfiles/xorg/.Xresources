@@ -1,0 +1,24 @@
+Xcursor.theme: Maya-Red24
+
+# include ".local/etc/theme.defaults"
+# include ".local/etc/theme"
+
+# include ".urxvt/config"
+
+xterm*termName:               xterm-256color
+xterm*decTerminalID:          vt340
+XTerm*numColorRegisters:      256
+xterm*VT340*geometry:         80x24
+xterm*faceName:               xft:Hack:size=12
+xterm*faceSize:               10
+xterm*renderFont:             true
+xterm*utf8:                   always
+xterm*utf8Title:              true
+xterm*locale:                 true
+xterm*cursorColor:            #d40000
+xterm*cursorBlink:            false
+xterm*selectToClipboard:      true
+xterm*SaveLines:              10000
+xterm*transparent:            true
+xterm*background:             black
+xterm*foreground:             red

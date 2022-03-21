@@ -1,0 +1,38 @@
+#!/bin/sh
+
+prefix=dunst
+resfile=xresources.list
+themeout=theme.h
+themedefault=xresources.default
+
+rm -f $themeout
+
+cat "$resfile" | while read r s
+do
+	m=DUNST_$(echo $r | tr '[:lower:]' '[:upper:]')
+
+	echo -e "$prefix\n" |
+	{
+		l=''
+
+		while read p
+		do
+			l="$(																\
+				xrdb -query														\
+					| grep -P "^$p\*?\.?$r:\s*\S*$" -m 1						\
+					| sed "s/^$p\*\?\.\?$r:\s*\(\S*\)$/# define $m $s\1$s/"		\
+			)"
+
+			if [[ "$l" != '' ]]
+			then
+				echo "$l" >> $themeout
+				break
+			fi
+		done
+
+		if [[ "$l" == '' ]]
+		then
+			cat "$themedefault" | grep -P "^# define $m " >> $themeout
+		fi
+	}
+done
