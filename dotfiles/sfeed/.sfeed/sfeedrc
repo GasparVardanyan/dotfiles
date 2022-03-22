@@ -16,6 +16,7 @@ feeds() {
 	feed "ցանցառներ ռադիօ" "https://ռադիօ.ցանցառներ.հայ/index.xml"
 
 	feed "օրագիր" "https://օրագիր.հայ/read/feed/"
+	feed "Լուսնի հակառակ կողմը․․․" "https://www.syuneci.am/rss.xml"
 
 	feed "BlackArch Linux" "https://blackarch.org/rss.xml"
 	feed "Codemadness" "https://www.codemadness.nl/atom.xml"
