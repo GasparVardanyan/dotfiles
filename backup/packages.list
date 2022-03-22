@@ -13,7 +13,7 @@ xorg="xorg-server xorg-drivers xorg-xinit xterm xsel sclip xorg-xbacklight
 xcompmgr sxhkd libinput"
 cli="sudo tmux tree dialog htop git translate-shell, exa, delta mediainfo"
 net="qutebrowser pdfjs net-tools wpa_supplicant dhclient"
-wm="slock clipmenu feh numlockx pamixer scrot dunst libnotify"
+wm="slock clipmenu feh numlockx pamixer scrot dunst libnotify qt5ct"
 dwmdeps="libx11 libxinerama libxft freetype2 xorg-xrandr xorg-xsetroot"
 stdeps="libxft perl"
 dmenudeps="freetype2 libxft libxinerama sh"
