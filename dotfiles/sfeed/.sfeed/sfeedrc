@@ -15,8 +15,9 @@ feeds() {
 	feed "ցանցառներ ռադիօ - Youtube" "https://yewtu.be/feed/channel/UCLjhnWg0f3BeJATvFiLnrJw"
 	feed "ցանցառներ ռադիօ" "https://ռադիօ.ցանցառներ.հայ/index.xml"
 
-	feed "օրագիր" "https://օրագիր.հայ/read/feed/"
+	feed ":Բուն TV" "https://yewtu.be/feed/channel/UCRrEtoEV1qKbmhL3JHabWSQ"
 	feed "Լուսնի հակառակ կողմը․․․" "https://www.syuneci.am/rss.xml"
+	feed "օրագիր" "https://օրագիր.հայ/read/feed/"
 
 	feed "BlackArch Linux" "https://blackarch.org/rss.xml"
 	feed "Codemadness" "https://www.codemadness.nl/atom.xml"
