@@ -32,7 +32,7 @@ export SFEED_URL_FILE="$HOME/.sfeed/urls"
 
 export QT_QPA_PLATFORMTHEME="qt5ct"
 
-[ $SHELL = 'zsh' ] && source ~/.zshp
+[[ $SHELL = 'zsh' && -f ~/.zshp ]] && source ~/.zshp
 
 
 if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
