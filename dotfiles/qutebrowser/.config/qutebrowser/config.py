@@ -84,6 +84,7 @@ c.url.searchengines	 = {
 	'solve'				:		'https://www.symbolab.com/solver/step-by-step/{}'				,
 	'st'				:		'https://userstyles.org/styles/browse?search_terms={}'			,
 	'su'				:		'https://{}.suckless.org/'										,
+	'sug'				:		'https://git.suckless.org/{}/log.html'							,
 	'ub'				:		'https://www.urbandictionary.com/define.php?term={}'			,
 	'us'				:		'https://userstyles.world/search?q={}'							,
 	'wa'				:		'https://wiki.archlinux.org/?search={}'							,
