@@ -102,7 +102,20 @@ c.url.searchengines	 = {
 # config.source ("gruvbox.py")
 # config.source ("selenized.py")
 
-config.source ("qutebrowser-solarized-dark.config.py")
+import os
+themefile = os.getenv ('HOME') + '/.local/share/themes/theme-qutebrowser.py'
+
+if os.path.exists (themefile) :
+	config.source (themefile)
+else :
+	import dracula.draw
+
+	dracula.draw.blood (c, {
+		'spacing' : {
+			'vertical'			:		6		,
+			'horizontal'		:		8		,
+		}
+	})
 
 padding = {
 	'top'			:		6		,
@@ -115,12 +128,3 @@ c.statusbar.padding			=		padding
 c.tabs.padding				=		padding
 c.tabs.indicator.width		=		1
 c.tabs.favicons.scale		=		1
-
-# import dracula.draw
-#
-# dracula.draw.blood (c, {
-#     'spacing' : {
-#         'vertical'			:		6		,
-#         'horizontal'		:		8		,
-#     }
-# })
