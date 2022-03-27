@@ -11,6 +11,7 @@ feeds() {
 	feed "ambug" "https://github.com/ambug/website/commits.atom"
 	feed "antranigv #en" "https://antranigv.am/weblog_en/index.xml"
 	feed "antranigv #hy" "https://antranigv.am/weblog/index.xml"
+	feed "Sippin' && 'Hackin'" "https://en.syuneci.am/rss.xml"
 	feed "խօսենք" "https://խօսենք.ցանցառներ.հայ/rss"
 	feed "ցանցառներ ռադիօ - Youtube" "https://yewtu.be/feed/channel/UCLjhnWg0f3BeJATvFiLnrJw"
 	feed "ցանցառներ ռադիօ" "https://ռադիօ.ցանցառներ.հայ/index.xml"
