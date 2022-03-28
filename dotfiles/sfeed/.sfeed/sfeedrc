@@ -49,6 +49,9 @@ feeds() {
 	feed "nullsecurity" "https://github.com/nullsecuritynet/site/commits.atom"
 	feed "tmp.0ut" "https://github.com/tmpout/tmpout.github.io/commits.atom"
 
+	feed "frame.work" "https://frame.work/blog.rss"
+	feed "pine64" "https://pine64.com/feed/"
+
 	[ -f ~/.sfeed/sfeedrcp ] && source ~/.sfeed/sfeedrcp
 
 	# feed "explosm" "http://feeds.feedburner.com/Explosm"
