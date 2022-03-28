@@ -4,6 +4,7 @@
 // @description	  solarized-everything-css dark theme for specific websites
 // @include       https://*suckless.org/*
 // @include       https://yewtu.be/*
+// @include       https://tmpout.sh/*
 // @run-at        document-start
 // ==/UserScript==
 (function() {var css = [
