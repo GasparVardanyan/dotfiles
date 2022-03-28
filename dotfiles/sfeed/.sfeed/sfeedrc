@@ -26,12 +26,12 @@ feeds() {
 	feed "Solarized" "https://github.com/altercation/solarized/commits.atom"
 	feed "Suckless" "https://suckless.org/atom.xml"
 
+	feed "Luke Smith - Blog" "https://lukesmith.xyz/rss.xml"
 	feed "Luke Smith - LandChad" "https://landchad.net/rss.xml"
 	feed "Luke Smith - Not Related!" "https://notrelated.xyz/rss"
 	feed "Luke Smith - Odysee" "https://odysee.com/$/rss/@Luke/70"
 	feed "Luke Smith - Peertube" "https://videos.lukesmith.xyz/feeds/videos.xml?sort=-publishedAt"
 	feed "Luke Smith - Youtube" "https://yewtu.be/feed/channel/UC2eYFnH61tmytImy1mTYvhA"
-	feed "Luke Smith" "https://lukesmith.xyz/rss.xml"
 
 	feed "Brodie Robertson" "https://yewtu.be/feed/channel/UCld68syR8Wi-GY_n4CaoJGA"
 	feed "DistroTube" "https://yewtu.be/feed/channel/UCVls1GmFKf6WlTraIb_IaJg"
