@@ -25,6 +25,7 @@ feeds() {
 	feed "SkullSecurity" "https://blog.skullsecurity.org/feed"
 	feed "Solarized" "https://github.com/altercation/solarized/commits.atom"
 	feed "Suckless" "https://suckless.org/atom.xml"
+	feed "Math Scholar" "https://mathscholar.org/feed/"
 
 	feed "Luke Smith - Blog" "https://lukesmith.xyz/rss.xml"
 	feed "Luke Smith - LandChad" "https://landchad.net/rss.xml"
