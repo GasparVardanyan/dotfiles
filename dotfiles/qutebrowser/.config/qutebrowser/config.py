@@ -9,7 +9,6 @@ c.content.pdfjs						=		True
 
 
 
-config.bind (		'ab'		,		'set statusbar.show never;; set tabs.show never;; open -t about:blank;; fullscreen --enter'		)
 config.bind (		'wb'		,		'open -- http://web.archive.org/web/{url:pretty}'												)
 config.bind (		'xx'		,		'config-cycle statusbar.show always never;; config-cycle tabs.show always never'				)
 config.bind (		'yiu'		,		'open -t -- https://yandex.com/images/search?rpt=imageview&url={url:pretty}'					)

@@ -96,3 +96,6 @@ super + ctrl + t
 
 super + e
 	emo
+
+super + a
+	magick -size 1x1 canvas:white .local/tmp/lightscreen.png; feh --zoom fill -F .local/tmp/lightscreen.png
