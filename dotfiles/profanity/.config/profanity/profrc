@@ -1,2 +1,11 @@
 [ui]
 theme=solarized-dark
+beep=true
+history=true
+
+[logging]
+chlog=true
+
+[connection]
+carbons=true
+mam=true
