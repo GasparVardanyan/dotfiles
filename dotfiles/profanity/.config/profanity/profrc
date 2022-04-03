@@ -3,9 +3,13 @@ theme=solarized-dark
 beep=true
 history=true
 
+color.nick=true
+color.roster.nick=true
+wintitle.show=true
+
 [logging]
 chlog=true
 
 [connection]
 carbons=true
-mam=true
+mam=false
