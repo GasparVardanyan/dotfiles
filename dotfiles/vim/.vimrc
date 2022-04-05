@@ -96,6 +96,11 @@ else
 	color solarized
 endif
 
+" set background=dark
+" set termguicolors
+" let g:solarized_extra_hi_groups=1
+" colorscheme solarized8
+
 call togglebg#map("<F5>")
 " }}}
 

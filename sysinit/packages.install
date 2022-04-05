@@ -1,12 +1,5 @@
 #!/bin/sh
 
-# wm: dwm
-# terminal: st
-# shell: zsh
-# fonts: dejavu, hack, awesome, nerd symbols, noto emojis, joypixels
-# browser: qutebrowser
-# etc
-
 base="base base-devel amd-ucode intel-ucode linux-headers efibootmgr grub
 pulseaudio"
 xorg="xorg-server xorg-drivers xorg-xinit xterm xsel sclip xorg-xbacklight
@@ -33,15 +26,6 @@ nvim="neovim ctags python-pynvim"
 
 # other="nasm musl boost gdb valgrind radare2 radare2-cutter cppcheck
 # mupdf-tools texinfo"
-
-# DWM
-#   manual build (https://bitbucket.org/GasparVardanyan/dwm)
-# ST
-#   manual build (https://bitbucket.org/GasparVardanyan/st)
-# DMENU
-#   manual build (https://bitbucket.org/GasparVardanyan/dmenu)
-# TABBED
-#   manual build (https://bitbucket.org/GasparVardanyan/tabbed)
 
 # OH-MY-ZSH
 #	manual (https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)
