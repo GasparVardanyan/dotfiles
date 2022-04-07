@@ -2,8 +2,6 @@
 
 bindkey -v
 
-# source .omzshrc
-
 [ -f ~/.zshp ] && source ~/.zshp
 
 autoload -Uz compinit && compinit

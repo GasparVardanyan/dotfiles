@@ -41,7 +41,7 @@ elif [[ $c == urxvt ]] ; then
 elif [[ $c == vimrc ]] ; then
 	e="$EDITOR ~/.vimrc"
 elif [[ $c == wallpaper ]] ; then
-	sxiv -N pop-up -btr -g 1500x900 ~/.local/share/wallpapers; exit
+	sxiv -r -N pop-up -btr -g 1500x900 ~/.local/share/{themes,wallpapers}; exit
 elif [[ $c == xinitrc ]] ; then
 	e="$EDITOR ~/.xinitrc"
 elif [[ $c == xresources ]] ; then
