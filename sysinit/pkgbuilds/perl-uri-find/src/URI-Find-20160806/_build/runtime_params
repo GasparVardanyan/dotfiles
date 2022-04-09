@@ -1,5 +1,0 @@
-do{ my $x = {
-       'destdir' => '/home/gaspar/media/dotfiles/backup/pkgbuilds/perl-uri-find/pkg/perl-uri-find',
-       'installdirs' => 'vendor'
-     };
-$x; }
