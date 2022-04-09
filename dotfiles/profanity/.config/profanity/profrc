@@ -14,3 +14,9 @@ chlog=true
 carbons=true
 mam=false
 account=gaspar@jabber.am
+
+[notifications]
+message=true
+message.text=false
+invite=true
+room.mention=true
