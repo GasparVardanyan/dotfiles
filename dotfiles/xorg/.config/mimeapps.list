@@ -1,5 +1,5 @@
 [Default Applications]
-application/pdf=mupdf-gl.desktop
+application/pdf=mupdf.desktop
 image/jpeg=sxiv.desktop
 image/jpg=sxiv.desktop
 image/png=sxiv.desktop
