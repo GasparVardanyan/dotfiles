@@ -4,16 +4,16 @@
 feeds() {
 	# feed <name> <feedurl> [basesiteurl] [encoding]
 
-	feed "Barcamp Yerevan - Youtube" "https://yewtu.be/feed/channel/UCz4Gaw-vexemY-WtB2NJu6w"
-	feed "SWL Armenia - Youtube" "https://yewtu.be/feed/channel/UCRuW04PI8gIw1Wi7ryH3MWg"
+	feed "Barcamp Yerevan - Invidious" "https://yewtu.be/feed/channel/UCz4Gaw-vexemY-WtB2NJu6w"
+	feed "SWL Armenia - Invidious" "https://yewtu.be/feed/channel/UCRuW04PI8gIw1Wi7ryH3MWg"
 	feed "SWL Armenia" "https://swl.am/index.xml"
+	feed "Sippin' && 'Hackin'" "https://en.syuneci.am/rss.xml"
 	feed "ambug telegram" "https://rsshub.app/telegram/channel/BSD_Armenia_News"
 	feed "ambug" "https://github.com/ambug/website/commits.atom"
 	feed "antranigv #en" "https://antranigv.am/weblog_en/index.xml"
 	feed "antranigv #hy" "https://antranigv.am/weblog/index.xml"
-	feed "Sippin' && 'Hackin'" "https://en.syuneci.am/rss.xml"
 	feed "խօսենք" "https://խօսենք.ցանցառներ.հայ/rss"
-	feed "ցանցառներ ռադիօ - Youtube" "https://yewtu.be/feed/channel/UCLjhnWg0f3BeJATvFiLnrJw"
+	feed "ցանցառներ ռադիօ - Invidious" "https://yewtu.be/feed/channel/UCLjhnWg0f3BeJATvFiLnrJw"
 	feed "ցանցառներ ռադիօ" "https://ռադիօ.ցանցառներ.հայ/index.xml"
 
 	feed ":Բուն TV" "https://yewtu.be/feed/channel/UCRrEtoEV1qKbmhL3JHabWSQ"
@@ -22,27 +22,28 @@ feeds() {
 
 	feed "BlackArch Linux" "https://blackarch.org/rss.xml"
 	feed "Codemadness" "https://www.codemadness.nl/atom.xml"
+	feed "Math Scholar" "https://mathscholar.org/feed/"
 	feed "SkullSecurity" "https://blog.skullsecurity.org/feed"
 	feed "Solarized" "https://github.com/altercation/solarized/commits.atom"
 	feed "Suckless" "https://suckless.org/atom.xml"
-	feed "Math Scholar" "https://mathscholar.org/feed/"
 
 	feed "Luke Smith - Blog" "https://lukesmith.xyz/rss.xml"
+	feed "Luke Smith - Invidious" "https://yewtu.be/feed/channel/UC2eYFnH61tmytImy1mTYvhA"
 	feed "Luke Smith - LandChad" "https://landchad.net/rss.xml"
 	feed "Luke Smith - Not Related!" "https://notrelated.xyz/rss"
 	feed "Luke Smith - Odysee" "https://odysee.com/$/rss/@Luke/70"
 	feed "Luke Smith - Peertube" "https://videos.lukesmith.xyz/feeds/videos.xml?sort=-publishedAt"
-	feed "Luke Smith - Youtube" "https://yewtu.be/feed/channel/UC2eYFnH61tmytImy1mTYvhA"
 
+	feed "Brodie Robertson - Invidious" "https://yewtu.be/feed/channel/UCld68syR8Wi-GY_n4CaoJGA"
 	feed "Brodie Robertson - Odysee" "https://odysee.com/$/rss/@BrodieRobertson/5"
-	feed "Brodie Robertson - Youtube" "https://yewtu.be/feed/channel/UCld68syR8Wi-GY_n4CaoJGA"
+	feed "DistroTube - Invidious" "https://yewtu.be/feed/channel/UCVls1GmFKf6WlTraIb_IaJg"
 	feed "DistroTube - Odysee" "https://odysee.com/$/rss/@DistroTube/2"
-	feed "DistroTube - Youtube" "https://yewtu.be/feed/channel/UCVls1GmFKf6WlTraIb_IaJg"
+	feed "LiveOverflow - Invidious" "https://yewtu.be/feed/channel/UClcE-kVhqyiHCcjYwcpfj9w"
+	feed "Mental Outlaw - Invidious" "https://yewtu.be/feed/channel/UC7YOGHUfC1Tb6E4pudI9STA"
 	feed "Mental Outlaw - Odysee" "https://odysee.com/$/rss/@AlphaNerd/8"
-	feed "Mental Outlaw - Youtube" "https://yewtu.be/feed/channel/UC7YOGHUfC1Tb6E4pudI9STA"
 	feed "NetworkChuck" "https://yewtu.be/feed/channel/UC9x0AN7BWHpCDHSm9NiJFJQ"
+	feed "The Linux Experiment - Invidious" "https://yewtu.be/feed/channel/UC5UAwBUum7CPN5buc-_N1Fw"
 	feed "The Linux Experiment - Odysee" "https://odysee.com/$/rss/@TheLinuxExperiment/e"
-	feed "The Linux Experiment - Youtube" "https://yewtu.be/feed/channel/UC5UAwBUum7CPN5buc-_N1Fw"
 	feed "Wolfgang's Channel" "https://yewtu.be/feed/channel/UCsnGwSIHyoYN0kiINAGUKxg"
 
 	feed "Planet 9" "http://planet9.cat-v.org/atom.xml"
@@ -50,9 +51,9 @@ feeds() {
 	feed "command center" "https://commandcenter.blogspot.com/rss.xml"
 	feed "thenewsh" "http://thenewsh.blogspot.com/rss.xml"
 
-	feed "qutebrowser" "https://github.com/qutebrowser/qutebrowser/releases.atom"
 	feed "THC-Archive" "https://github.com/hackerschoice/THC-Archive/commits.atom"
 	feed "nullsecurity" "https://github.com/nullsecuritynet/site/commits.atom"
+	feed "qutebrowser" "https://github.com/qutebrowser/qutebrowser/releases.atom"
 	feed "tmp.0ut" "https://github.com/tmpout/tmpout.github.io/commits.atom"
 
 	feed "frame.work" "https://frame.work/blog.rss"
