@@ -2,8 +2,6 @@
 
 bindkey -v
 
-[ -f ~/.zshp ] && source ~/.zshp
-
 autoload -Uz compinit && compinit
 autoload -Uz bashcompinit && bashcompinit
 autoload -Uz colors edit-command-line
@@ -22,6 +20,8 @@ zstyle ':completion:*' expand prefix suffix
 colors
 zle -N edit-command-line
 bindkey '^e' edit-command-line
+
+[ -f ~/.zshp ] && source ~/.zshp
 
 # PROMPT="%{$fg[red]%}[%{$fg[blue]%}%n %{$fg[yellow]%}%1~%{$fg[red]%}]%}%{$fg[white]%}$ %{$reset_color%}"
 #PROMPT="%{$fg[magenta]%}%n%{$fg[yellow]%} -> %{$fg[red]%}[ %{$fg[blue]%}%1~%{$fg[red]%} ]%}%{$fg[yellow]%} :: %{$reset_color%}"
