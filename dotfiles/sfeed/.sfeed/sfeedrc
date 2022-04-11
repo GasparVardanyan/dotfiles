@@ -42,6 +42,7 @@ feeds() {
 	feed "Mental Outlaw - Invidious" "https://yewtu.be/feed/channel/UC7YOGHUfC1Tb6E4pudI9STA"
 	feed "Mental Outlaw - Odysee" "https://odysee.com/$/rss/@AlphaNerd/8"
 	feed "NetworkChuck" "https://yewtu.be/feed/channel/UC9x0AN7BWHpCDHSm9NiJFJQ"
+	feed "PwnFunction" "https://yewtu.be/feed/channel/UCW6MNdOsqv2E9AjQkv9we7A"
 	feed "The Linux Experiment - Invidious" "https://yewtu.be/feed/channel/UC5UAwBUum7CPN5buc-_N1Fw"
 	feed "The Linux Experiment - Odysee" "https://odysee.com/$/rss/@TheLinuxExperiment/e"
 	feed "Wolfgang's Channel" "https://yewtu.be/feed/channel/UCsnGwSIHyoYN0kiINAGUKxg"
