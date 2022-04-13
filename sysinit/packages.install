@@ -15,7 +15,7 @@ statusbar="pamixer grep sed awk upower"
 zsh="zsh zsh-completions bash-completion zsh-syntax-highlighting"
 fs="dosfstools btrfs-progs"
 arch="arch-wiki-docs arch-wiki-lite pkgfile reflector"
-fonts="ttf-dejavu ttf-font-awesome otf-font-awesome ttf-hack
+fonts="ttf-ibm-plex ttf-dejavu ttf-font-awesome otf-font-awesome ttf-hack
 ttf-nerd-fonts-symbols noto-fonts-emoji ttf-joypixels awesome-terminal-fonts"
 media="imagemagick ffmpeg sxiv cmus youtube-dl"
 docs="man-db man-pages"
