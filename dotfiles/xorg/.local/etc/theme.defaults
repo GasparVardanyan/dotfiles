@@ -1,4 +1,4 @@
-# define EMOJI_FONTS DejaVu Sans Mono, monospace,JoyPixels:size=16:antialias=true:autohint=true, Symbols Nerd Font:style=2048-em:size=16:antialias=true:autohint=true, Noto Color Emoji:size=16:style=Regular
+# define EMOJI_FONTS DejaVu Sans Mono, monospace, JoyPixels:size=16:antialias=true:autohint=true, Symbols Nerd Font:style=2048-em:size=16:antialias=true:autohint=true, Noto Color Emoji:size=16:style=Regular
 
 # define SYSTEM_FONT IBM Plex Mono
 
