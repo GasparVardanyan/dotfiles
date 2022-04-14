@@ -1,9 +1,18 @@
+# define TEST_ENV
+
+
+
 Xcursor.theme: Maya-Red24
 
 # include ".local/etc/theme.defaults"
 # include ".local/etc/theme"
 
-# include ".urxvt/config"
+# ifdef TEST_ENV
+	st*alpha:			0.8541019662496846F
+	wallpaper:			mountains
+#	include ".urxvt/config"
+# endif // TEST_ENV
+
 
 xterm*termName:               xterm-256color
 xterm*decTerminalID:          vt340

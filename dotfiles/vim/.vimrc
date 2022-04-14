@@ -86,22 +86,30 @@ let g:python_recommended_style = 0
 
 
 " colorscheme {{{
-set background=dark
 
-let themefile = '~/.local/share/themes/theme.vim'
-
-if filereadable (expand (themefile))
-	execute 'source' themefile
-else
-	color solarized
-endif
+" # ifndef TEST_ENV
 
 " set background=dark
-" set termguicolors
-" let g:solarized_extra_hi_groups=1
-" colorscheme solarized8
+"
+" let themefile = '~/.local/share/themes/theme.vim'
+"
+" if filereadable (expand (themefile))
+"     execute 'source' themefile
+" else
+"     color solarized
+" endif
+" call togglebg#map("<F5>")
 
-call togglebg#map("<F5>")
+" # else
+
+set background=dark
+set termguicolors
+let g:solarized_extra_hi_groups=1
+let g:solarized_termtrans=1
+colorscheme solarized8
+
+" # endif
+
 " }}}
 
 
@@ -166,7 +174,7 @@ augroup END
 
 
 " colorize custom xdefaults and palettes {{{
-au BufNewFile,BufRead *.xdefaults,*.palette set syntax=xdefaults
+au BufNewFile,BufRead *.xdefaults,*.palette,~/.local/etc/theme* set syntax=xdefaults
 " }}}
 
 
