@@ -76,6 +76,12 @@ super + ctrl + shift + bracketleft
 super + ctrl + shift + bracketright
 	selaction tldr selection
 
+super + w
+	selaction wiki dmenu
+
+super + ctrl + w
+	selaction wiki selection
+
 super + ctrl + d
 	dunstctl close-all
 
