@@ -6,6 +6,7 @@ feeds() {
 
 	feed "Awesome ArmDevs" "https://github.com/bugron/awesome-armdevs/commits.atom"
 	feed "Barcamp Yerevan - Invidious" "https://yewtu.be/feed/channel/UCz4Gaw-vexemY-WtB2NJu6w"
+	feed "Lobsters" "https://lobste.rs/rss"
 	feed "SWL Armenia - Invidious" "https://yewtu.be/feed/channel/UCRuW04PI8gIw1Wi7ryH3MWg"
 	feed "SWL Armenia" "https://swl.am/index.xml"
 	feed "Sippin' && 'Hackin'" "https://en.syuneci.am/rss.xml"
@@ -52,10 +53,12 @@ feeds() {
 	feed "The Linux Experiment - Odysee" "https://odysee.com/$/rss/@TheLinuxExperiment/e"
 	feed "Wolfgang's Channel" "https://yewtu.be/feed/channel/UCsnGwSIHyoYN0kiINAGUKxg"
 
+	feed "C04tl3" "https://yewtu.be/feed/channel/UCZ073r7qPBpFZlslLtmt70w"
 	feed "Planet 9" "http://planet9.cat-v.org/atom.xml"
 	feed "Software Tools" "https://swtools.wordpress.com/feed/"
 	feed "command center" "https://commandcenter.blogspot.com/rss.xml"
 	feed "thenewsh" "http://thenewsh.blogspot.com/rss.xml"
+	feed "werc" "https://code.9front.org/hg/werc/rss-log"
 
 	feed "THC-Archive" "https://github.com/hackerschoice/THC-Archive/commits.atom"
 	feed "nullsecurity" "https://github.com/nullsecuritynet/site/commits.atom"

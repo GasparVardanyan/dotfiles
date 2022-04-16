@@ -26,6 +26,7 @@ export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 
 rm -rf ~/.local/tmp
 mkdir ~/.local/tmp
+TMPDIR=$HOME/.local/tmp
 
 export SFEED_URL_FILE="$HOME/.sfeed/urls"
 [ -f "$SFEED_URL_FILE" ] || touch "$SFEED_URL_FILE"
