@@ -8,7 +8,7 @@ Xcursor.theme: Maya-Red24
 # include ".local/etc/theme"
 
 # ifdef TEST_ENV
-	st*alpha:			0.8541019662496846F
+	st*alpha:			0.95
 	wallpaper:			judy
 #	include ".urxvt/config"
 # endif // TEST_ENV

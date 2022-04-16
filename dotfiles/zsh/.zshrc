@@ -151,6 +151,7 @@ alias cppreference.com="cppman --source=cppreference.com && cppman"
 alias d="dotdiff ~/media/dotfiles/dotfiles"
 alias f="fortune | cowsay | lolcat"
 alias filestream="tail -f -n +0"
+alias getfeeds='curl "$(xsel -op)" | sfeed_web | cut -f 1'
 alias gfup="git fetch upstream master:upstream"
 alias ginit="git init --initial-branch=master"
 alias glog="git log --oneline"
