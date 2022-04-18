@@ -48,22 +48,13 @@ Plugin 'romainl/flattened'
 
 call vundle#end()
 " }}}
-
-
-
 " file type and syntax highliting on {{{
 filetype plugin indent on
 syntax on
 " }}}
-
-
-
 " vim foldings {{{
 autocmd FileType vim setlocal foldmethod=marker | norm zM
 " }}}
-
-
-
 " specific settings {{{
 set colorcolumn=80
 set cursorline
@@ -82,9 +73,6 @@ set tabstop=4
 set updatetime=250
 let g:python_recommended_style = 0
 " }}}
-
-
-
 " colorscheme {{{
 
 " # ifndef TEST_ENV
@@ -111,45 +99,27 @@ colorscheme solarized8
 " # endif
 
 " }}}
-
-
-
 " gcrypt {{{
 command -range=% Encrypt execute "'<,'>!gcrypt -S -e \"$(pass pdata)\" | base64"
 command -range=% Decrypt execute "'<,'>!base64 -d | gcrypt -S -d \"$(pass pdata)\""
 " }}}
-
-
-
 " gitgutter {{{
 nmap <Leader>hv <Plug>(GitGutterPreviewHunk)
 " }}}
-
-
-
 " rainbow {{{
 " let g:rainbow_active = 1
 " }}}
-
-
-
 " split navigations {{{
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 " }}}
-
-
-
 " sessions {{{
 noremap <F1> :mksession! .vim.session <cr>
 noremap <F2> :source .vim.session <cr>
 noremap <F3> :! rm .vim.session <cr>
 " }}}
-
-
-
 " whitespaces {{{
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 highlight ExtraWhitespace ctermbg=cyan guibg=cyan
@@ -157,9 +127,6 @@ autocmd InsertLeave * redraw!
 match ExtraWhitespace /\s\+$\| \+\ze\t/
 autocmd BufWritePre * :%s/\s\+$//e
 " }}}
-
-
-
 " make sure Vim returns to the same line when you reopen a file {{{
 " thanks, Amit
 augroup line_return
@@ -170,21 +137,12 @@ augroup line_return
         \ endif
 augroup END
 " }}}
-
-
-
 " colorize custom xdefaults and palettes {{{
 au BufNewFile,BufRead *.xdefaults,*.palette,~/.local/etc/theme* set syntax=xdefaults
 " }}}
-
-
-
 " colorize urxvt config file {{{
 au BufNewFile,BufRead ~/.urxvt/config set filetype=xdefaults
 " }}}
-
-
-
 " Diff current buffer and the original file {{{
 function! s:DiffWithSaved()
   let filetype=&ft
@@ -195,9 +153,6 @@ function! s:DiffWithSaved()
 endfunction
 com! DiffSaved call s:DiffWithSaved()
 " }}}
-
-
-
 " nerdcommenter {{{
 let g:NERDSpaceDelims = 1
 let g:NERDDefaultAlign = 'left'
@@ -205,9 +160,6 @@ let g:NERDAltDelims_python = 1
 let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
 " }}}
-
-
-
 " syntastic {{{
 au BufNewFile,BufRead * SyntasticToggleMode
 set statusline+=%#warningmsg#
@@ -220,9 +172,6 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_c_compiler = "gcc"
 let g:syntastic_c_compiler_options = "-std=c18 -pedantic-errors -Werror=pedantic -Wall -Wextra"
 " }}}
-
-
-
 " airline {{{
 " let g:airline#extensions#tabline#enabled = 1
 " let g:airline#extensions#tabline#formatter = 'default'
@@ -253,18 +202,12 @@ let g:syntastic_c_compiler_options = "-std=c18 -pedantic-errors -Werror=pedantic
 " let g:airline_symbols.readonly = ''
 " let g:airline_symbols.linenr = ''
 " }}}
-
-
-
 " backups {{{
 set backup
 set undodir=~/.vim/tmp/undo//
 set backupdir=~/.vim/tmp/backup//
 set directory=~/.vim/tmp/swap//
 " }}}
-
-
-
 " Make those folders automatically if they don't already exist. {{{
 if !isdirectory(expand(&undodir))
     call mkdir(expand(&undodir), "p")

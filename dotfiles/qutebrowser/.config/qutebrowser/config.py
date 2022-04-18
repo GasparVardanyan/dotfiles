@@ -85,6 +85,7 @@ c.url.searchengines	 = {
 	'st'				:		'https://userstyles.org/styles/browse?search_terms={}'			,
 	'su'				:		'https://{}.suckless.org/'										,
 	'sug'				:		'https://git.suckless.org/{}/log.html'							,
+	'sx'				:		'https://paulgo.io/search?q={}'									,
 	'ub'				:		'https://www.urbandictionary.com/define.php?term={}'			,
 	'us'				:		'https://userstyles.world/search?q={}'							,
 	'wa'				:		'https://wiki.archlinux.org/?search={}'							,
