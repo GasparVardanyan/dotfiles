@@ -100,8 +100,8 @@ colorscheme solarized8
 
 " }}}
 " gcrypt {{{
-command -range=% Encrypt execute "'<,'>!gcrypt -S -e \"$(pass pdata)\" | base64"
-command -range=% Decrypt execute "'<,'>!base64 -d | gcrypt -S -d \"$(pass pdata)\""
+command -range=% Encrypt execute "'<,'>!gcrypt -S -e \"$(pass show pdata)\" | base64"
+command -range=% Decrypt execute "'<,'>!base64 -d | gcrypt -S -d \"$(pass show pdata)\""
 " }}}
 " gitgutter {{{
 nmap <Leader>hv <Plug>(GitGutterPreviewHunk)
