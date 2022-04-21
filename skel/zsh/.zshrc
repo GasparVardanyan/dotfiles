@@ -148,7 +148,7 @@ alias chess="telnet freechess.org"
 alias colorscheme="echo -n '\x1b[48;5;0m  \x1b[48;5;1m  \x1b[48;5;2m  \x1b[48;5;3m  \x1b[48;5;4m  \x1b[48;5;5m  \x1b[48;5;6m  \x1b[48;5;7m  \n\x1b[48;5;8m  \x1b[48;5;9m  \x1b[48;5;10m  \x1b[48;5;11m  \x1b[48;5;12m  \x1b[48;5;13m  \x1b[48;5;14m  \x1b[48;5;15m  \x1b[0m\n'"
 alias cplusplus.com="cppman --source=cplusplus.com && cppman"
 alias cppreference.com="cppman --source=cppreference.com && cppman"
-alias d="dotdiff ~/media/dotfiles/dotfiles"
+alias d="dotdiff ~/media/dotfiles/skel"
 alias f="fortune | cowsay | lolcat"
 alias filestream="tail -f -n +0"
 alias getfeeds='curl "$(xsel -op)" | sfeed_web | cut -f 1'
