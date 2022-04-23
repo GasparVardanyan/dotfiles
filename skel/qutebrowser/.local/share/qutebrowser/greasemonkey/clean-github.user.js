@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          Clean Github
 // @namespace     http://userstyles.org
-// @description	  clear bs from github homepage
+// @description	  clear garbage from the github homepage
 // @include       https://github.com/
 // @run-at        document-start
 // ==/UserScript==
