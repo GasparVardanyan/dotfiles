@@ -21,6 +21,7 @@ feeds() {
 	feed ":Բուն TV - Invidious" "https://yewtu.be/feed/channel/UCRrEtoEV1qKbmhL3JHabWSQ"
 	feed "Լուսնի հակառակ կողմը․․․" "https://www.syuneci.am/rss.xml"
 	feed "օրագիր" "https://օրագիր.հայ/read/feed/"
+	feed "David Rousset" "https://www.davrous.com/feed/"
 
 	feed "BlackArch Linux" "https://blackarch.org/rss.xml"
 	feed "Codemadness" "https://www.codemadness.nl/atom.xml"
