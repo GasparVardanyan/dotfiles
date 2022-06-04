@@ -14,6 +14,7 @@ Plugin 'chrisbra/Colorizer'
 Plugin 'majutsushi/tagbar'
 " Plugin 'scrooloose/nerdtree'
 Plugin 'junegunn/fzf.vim'
+Plugin 'airblade/vim-rooter'
 Plugin 'terryma/vim-multiple-cursors'
 " Plugin 'frazrepo/vim-rainbow'
 " Plugin 'lilydjwg/colorizer'
@@ -100,9 +101,13 @@ colorscheme solarized8
 command -range=% Encrypt execute "'<,'>!gcrypt -S -e \"$(pass show pdata)\" | base64"
 command -range=% Decrypt execute "'<,'>!base64 -d | gcrypt -S -d \"$(pass show pdata)\""
 " }}}
+" rooter {{{
+let g:rooter_patterns = ['.git', '_darcs', '.hg', '.bzr', '.svn', 'Makefile', 'package.json', 'src']
+" }}}
 " fzf {{{
+let $FZF_DEFAULT_COMMAND = 'fd --type f'
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9, 'relative': v:true } }
-let g:fzf_preview_window = ['right:50%:hidden', 'ctrl-/']
+let g:fzf_preview_window = ['right:50%', 'ctrl-/']
 noremap <C-O> :Files<cr>
 inoremap <C-O> <Esc>:Files<cr>
 noremap <C-P> :Ag<cr>
@@ -167,15 +172,15 @@ let g:NERDTrimTrailingWhitespace = 1
 " }}}
 " syntastic {{{
 " au BufNewFile,BufRead * SyntasticToggleMode
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_c_compiler = "gcc"
-let g:syntastic_c_compiler_options = "-std=c18 -pedantic-errors -Werror=pedantic -Wall -Wextra"
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+" let g:syntastic_c_compiler = "gcc"
+" let g:syntastic_c_compiler_options = "-std=c18 -pedantic-errors -Werror=pedantic -Wall -Wextra"
 " }}}
 " airline {{{
 " let g:airline#extensions#tabline#enabled = 1
