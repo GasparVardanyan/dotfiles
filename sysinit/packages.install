@@ -2,7 +2,7 @@
 
 base="base base-devel linux linux-firmware amd-ucode intel-ucode linux-headers
 efibootmgr grub pulseaudio"
-xorg="xorg-server xorg-drivers xorg-xinit xterm xsel sclip xorg-xbacklight
+xorg="xorg-server xorg-drivers xorg-xinit xterm xsel xclip xorg-xbacklight
 xcompmgr sxhkd libinput"
 cli="sudo tmux tree dialog htop git translate-shell exa git-delta mediainfo"
 net="qutebrowser pdfjs net-tools wpa_supplicant dhclient"

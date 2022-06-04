@@ -1,8 +1,4 @@
-# ifdef TEST_ENV
-#	define EMOJI_FONTS DejaVu Sans Mono, monospace, JoyPixels:size=10:antialias=true:autohint=true, Symbols Nerd Font:style=2048-em:size=10:antialias=true:autohint=true, Noto Color Emoji:size=10:style=Regular
-# else
-#	define EMOJI_FONTS DejaVu Sans Mono, monospace, JoyPixels:size=16:antialias=true:autohint=true, Symbols Nerd Font:style=2048-em:size=16:antialias=true:autohint=true, Noto Color Emoji:size=16:style=Regular
-# endif // TEST_ENV
+# define EMOJI_FONTS DejaVu Sans Mono, monospace, JoyPixels:size=10:antialias=true:autohint=true, Symbols Nerd Font:style=2048-em:size=10:antialias=true:autohint=true, Noto Color Emoji:size=10:style=Regular
 
 # define SYSTEM_FONT IBM Plex Mono
 
@@ -10,9 +6,6 @@
 dmenu*fonts:		SYSTEM_FONT, EMOJI_FONTS
 dwm*font:			SYSTEM_FONT, EMOJI_FONTS
 tabbed*font:		SYSTEM_FONT
-# ifdef TEST_ENV
-	st*font:			SYSTEM_FONT:size=14
-# else
-	st*font:			SYSTEM_FONT:size=16
-# endif // TEST_ENV
+st*font:			SYSTEM_FONT:size=12
 st*font2:			EMOJI_FONTS
+st*alpha:			0.95

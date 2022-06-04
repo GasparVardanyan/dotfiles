@@ -20,7 +20,7 @@ Plugin 'terryma/vim-multiple-cursors'
 " Plugin 'vifm/vifm.vim'
 " Plugin 'vim-airline/vim-airline'
 
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdcommenter'
 " Plugin 'FredKSchott/CoVim'
 
@@ -31,7 +31,7 @@ Plugin 'jceb/vim-orgmode'
 " Plugin 'vim-scripts/c.vim'
 " Plugin 'vimwiki/vimwiki'
 
-Plugin 'vim-syntastic/syntastic'
+" Plugin 'vim-syntastic/syntastic'
 " Plugin 'davidhalter/jedi-vim'
 " Plugin 'xavierd/clang_complete'
 " Plugin 'ycm-core/YouCompleteMe'
@@ -58,6 +58,7 @@ autocmd FileType vim setlocal foldmethod=marker | norm zM
 " specific settings {{{
 set colorcolumn=80
 set cursorline
+set exrc
 set foldlevel=99
 set foldmethod=indent
 set laststatus=0
@@ -71,11 +72,10 @@ set tabstop=4
 " set t_Co=256
 " set termguicolors
 set updatetime=250
+set wildignore+=*.o,*.out,.git
 let g:python_recommended_style = 0
 " }}}
 " colorscheme {{{
-
-" # ifndef TEST_ENV
 
 " set background=dark
 "
@@ -88,15 +88,11 @@ let g:python_recommended_style = 0
 " endif
 " call togglebg#map("<F5>")
 
-" # else
-
 set background=dark
 set termguicolors
 let g:solarized_extra_hi_groups=1
 let g:solarized_termtrans=1
 colorscheme solarized8
-
-" # endif
 
 " }}}
 " gcrypt {{{
@@ -161,7 +157,7 @@ let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
 " }}}
 " syntastic {{{
-au BufNewFile,BufRead * SyntasticToggleMode
+" au BufNewFile,BufRead * SyntasticToggleMode
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*

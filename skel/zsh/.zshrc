@@ -187,7 +187,7 @@ alias xos="xsel -os"
 alias xup="xrdb ~/.Xresources"
 alias yta="youtube-dl -f bestaudio/best -x"
 alias yt="youtube-dl -f best"
-chpwd () { chtitle "$TERMINAL [$PWD]" }
+chpwd () { chtitle "$TERMINAL -> $PWD" }
 chtitle () { printf '\33]2;%s\007' $1 }
 dotdiff () {
 	if [[ $2 == 's' ]]
