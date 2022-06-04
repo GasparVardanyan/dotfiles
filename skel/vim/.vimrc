@@ -12,7 +12,8 @@ Plugin 'Yggdroot/indentLine'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'chrisbra/Colorizer'
 Plugin 'majutsushi/tagbar'
-Plugin 'scrooloose/nerdtree'
+" Plugin 'scrooloose/nerdtree'
+Plugin 'junegunn/fzf.vim'
 Plugin 'terryma/vim-multiple-cursors'
 " Plugin 'frazrepo/vim-rainbow'
 " Plugin 'lilydjwg/colorizer'
@@ -20,7 +21,7 @@ Plugin 'terryma/vim-multiple-cursors'
 " Plugin 'vifm/vifm.vim'
 " Plugin 'vim-airline/vim-airline'
 
-Plugin 'ctrlpvim/ctrlp.vim'
+" Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdcommenter'
 " Plugin 'FredKSchott/CoVim'
 
@@ -98,6 +99,14 @@ colorscheme solarized8
 " gcrypt {{{
 command -range=% Encrypt execute "'<,'>!gcrypt -S -e \"$(pass show pdata)\" | base64"
 command -range=% Decrypt execute "'<,'>!base64 -d | gcrypt -S -d \"$(pass show pdata)\""
+" }}}
+" fzf {{{
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9, 'relative': v:true } }
+let g:fzf_preview_window = ['right:50%:hidden', 'ctrl-/']
+noremap <C-O> :Files<cr>
+inoremap <C-O> <Esc>:Files<cr>
+noremap <C-P> :Ag<cr>
+inoremap <C-P> <Esc>:Ag<cr>
 " }}}
 " gitgutter {{{
 nmap <Leader>hv <Plug>(GitGutterPreviewHunk)

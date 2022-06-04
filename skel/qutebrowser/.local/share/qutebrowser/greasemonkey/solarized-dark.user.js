@@ -5,6 +5,7 @@
 // @include       https://*suckless.org/*
 // @include       https://yewtu.be/*
 // @include       https://tmpout.sh/*
+// @include       https://shapeshed.com/*
 // @run-at        document-start
 // ==/UserScript==
 (function() {var css = [
