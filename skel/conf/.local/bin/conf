@@ -52,4 +52,4 @@ else
 	exit
 fi
 
-$TERMINAL -n pop-up -g 90x25 -e "$SHELL" -c "$e || read -n 1 -s"
+$TERMINAL -n pop-up -g 120x30 -e "$SHELL" -c "$e || read -n 1 -s"

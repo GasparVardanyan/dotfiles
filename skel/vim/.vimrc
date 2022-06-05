@@ -110,6 +110,8 @@ noremap <C-O> :Files<cr>
 inoremap <C-O> <Esc>:Files<cr>
 noremap <C-P> :Ag<cr>
 inoremap <C-P> <Esc>:Ag<cr>
+" noremap <C-B> :Buffers<cr>
+" inoremap <C-B> <Esc>:Buffers<cr>
 " }}}
 " gitgutter {{{
 nmap <Leader>hv <Plug>(GitGutterPreviewHunk)
