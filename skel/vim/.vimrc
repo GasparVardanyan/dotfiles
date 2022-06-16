@@ -106,12 +106,16 @@ let $FZF_DEFAULT_OPTS = '--layout=reverse'
 let $FZF_DEFAULT_COMMAND = 'fd --type f'
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9, 'relative': v:true } }
 let g:fzf_preview_window = ['right:50%', 'ctrl-/']
-noremap <C-O> :Files<cr>
-inoremap <C-O> <Esc>:Files<cr>
-noremap <C-P> :Ag<cr>
-inoremap <C-P> <Esc>:Ag<cr>
+noremap <leader>ff :Files<cr>
+noremap <leader>fm :Ag<cr>
+noremap <leader>fb :Buffers<cr>
 " noremap <C-B> :Buffers<cr>
 " inoremap <C-B> <Esc>:Buffers<cr>
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit',
+  \ 'ctrl-n': 'tab split' }
 " }}}
 " gitgutter {{{
 nmap <Leader>hv <Plug>(GitGutterPreviewHunk)

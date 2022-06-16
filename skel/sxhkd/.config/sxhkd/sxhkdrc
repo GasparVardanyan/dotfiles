@@ -11,7 +11,7 @@ XF86Audio{RaiseVolume,LowerVolume,Mute,MicMute}
 	pamixer {-i 5,-d 5,-t,-t} && dwmstatus
 
 XF86Audio{Next,Prev,Play,Stop}
-	cmus-remote {-n,-r,-u,-s}
+	cmus-remote {-n,-r,-u,-s} && dwmstatus
 
 XF86MonBrightness{Up,Down}
 	xbacklight {-inc 10,-dec 10}
@@ -86,19 +86,19 @@ super + ctrl + d
 	dunstctl close-all
 
 super + ctrl + e
-	$TERMINAL -n pop-up -g 95x25 -e $SHELL -c $EDITOR
+	$TERMINAL -n pop-up -g 120x30 -e $SHELL -c $EDITOR
 
 super + ctrl + p
-	$TERMINAL -n pop-up -g 95x25 -e $SHELL -c python\ -q
+	$TERMINAL -n pop-up -g 120x30 -e $SHELL -c python\ -q
 
 super + ctrl + n
-	$TERMINAL -n pop-up -g 95x25 -e $SHELL -c 'sfeed_curses ~/.sfeed/feeds/*'
+	$TERMINAL -n pop-up -g 120x30 -e $SHELL -c 'sfeed_curses ~/.sfeed/feeds/*'
 
 super + ctrl + m
-	manbrowse | xargs $TERMINAL -n pop-up -g 95x25 man
+	manbrowse | xargs $TERMINAL -n pop-up -g 120x30 man
 
 super + ctrl + t
-	$TERMINAL -n pop-up -g 95x25 -e $SHELL -c nvim\ ~/.todo.org
+	$TERMINAL -n pop-up -g 120x30 -e $SHELL -c nvim\ ~/.todo.org
 
 super + e
 	emo

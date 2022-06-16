@@ -103,6 +103,8 @@ c.url.searchengines	 = {
 # config.source ("gruvbox.py")
 # config.source ("selenized.py")
 
+c.colors.webpage.darkmode.enabled = True
+
 import os
 themefile = os.getenv ('HOME') + '/.local/share/themes/theme-qutebrowser.py'
 
