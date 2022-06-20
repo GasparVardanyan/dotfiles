@@ -37,11 +37,11 @@ export QT_QPA_PLATFORMTHEME="qt5ct"
 
 
 if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
-#	if [ $((($(date +%s) - $(date +%s -r .startx_log.old))/3600)) -ge 6 ]
-#	then
-#		echo "$(cat ~/.local/etc/issue)"
-#		sleep 3
-#	fi
+	if [ $((($(date +%s) - $(date +%s -r .startx_log.old))/3600)) -ge 6 ]
+	then
+		echo "$(cat ~/.local/etc/issue)"
+		sleep 3
+	fi
 
 	cp .startx_log .startx_log.old > /dev/null
 	startx > ~/.startx_log 2>&1

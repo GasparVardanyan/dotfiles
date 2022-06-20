@@ -13,6 +13,7 @@
 # keysym as listed in /usr/include/X11/keysymdef.h without the "XK_" prefix.
 
 case "$1" in
+"C-o")	while IFS= read -r -d $'\0' file; do vid=$(echo "$file" | sed 's#^/tmp/tmp\.\w\+/\(.*\)\.jpg$#\1#'); [ "$vid" != '' ] && xdg-open "$vid"; done ;;
 "C-g")  tr '\n' '\0' | xargs -0 gimp & ;;
 "C-d")	while read file ; do rm "$file" ; done ;;
 "C-w")	while read file ; do feh --bg-fill "$file" ; done ;;

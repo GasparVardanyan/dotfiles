@@ -221,6 +221,7 @@ dotdiff () {
 enfix () { trans -brief ru:en "$(trans -brief en:ru $@)" }
 gpush () { git add . ; git commit -m "$@" ; git push }
 imfixsize () { magick $1 $1 }
+m () { mega-$1 ${@:2} }
 w1 () { wttr $@ m }
 w2 () { wttr2 $@ m }
 

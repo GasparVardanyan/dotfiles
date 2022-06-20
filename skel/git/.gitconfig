@@ -3,3 +3,5 @@
 	name = GasparVardanyan
 [init]
 	defaultBranch = master
+[delta]
+	syntax-theme = Solarized (dark)
