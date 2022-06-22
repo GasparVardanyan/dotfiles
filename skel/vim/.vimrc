@@ -107,7 +107,7 @@ let $FZF_DEFAULT_COMMAND = 'fd --type f'
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9, 'relative': v:true } }
 let g:fzf_preview_window = ['right:50%', 'ctrl-/']
 noremap <leader>ff :Files<cr>
-noremap <leader>fm :Ag<cr>
+noremap <leader>fm :RG<cr>
 noremap <leader>fb :Buffers<cr>
 " noremap <C-B> :Buffers<cr>
 " inoremap <C-B> <Esc>:Buffers<cr>
@@ -116,6 +116,16 @@ let g:fzf_action = {
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit',
   \ 'ctrl-n': 'tab split' }
+
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+
+command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 " }}}
 " gitgutter {{{
 nmap <Leader>hv <Plug>(GitGutterPreviewHunk)

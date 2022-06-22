@@ -109,7 +109,14 @@ export ZLS_COLORS=$LS_COLORS
 
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
-export GREP_COLOR=31
+# export GREP_COLOR=31
+
+
+
+# alias grep="rg --engine pcre2"
+# alias sed="perl -pe"
+
+
 
 # command modifications
 alias astyle="astyle --style=allman --indent=tab --attach-extern-c --attach-closing-while --indent-switches --indent-after-parens --indent-preproc-block --min-conditional-indent=0 --break-blocks --pad-oper --pad-comma --pad-first-paren-out --align-pointer=middle --align-reference=type --remove-braces --keep-one-line-blocks --keep-one-line-statements --close-templates"
@@ -121,10 +128,10 @@ alias dd="dd status=progress"
 alias df="df -Th -x tmpfs -x devtmpfs"
 alias diff="diff --color=auto"
 alias dir="dir --color=auto"
-alias egrep="egrep --color=auto"
+# alias egrep="egrep --color=auto"
 alias feh="feh --no-fehbg --zoom fill"
-alias fgrep="fgrep --color=auto"
-alias grep="grep --color=auto"
+# alias fgrep="fgrep --color=auto"
+# alias grep="grep --color=auto"
 alias hexdump="hexdump -x -c"
 alias htop="htop -t"
 # alias ls="ls -X --color=auto --classify --group-directories-first --human-readable"
@@ -190,6 +197,9 @@ alias yt="youtube-dl -f best"
 chpwd () { chtitle "$TERMINAL -> $PWD" }
 chtitle () { printf '\33]2;%s\007' $1 }
 dotdiff () {
+	alias grep="grep --color=auto"
+	alias sed="sed"
+
 	if [[ $2 == 's' ]]
 	then
 		(cd $1/.. ; git status ; cd -)
@@ -204,16 +214,16 @@ dotdiff () {
 		p
 	elif [[ $2 == '' ]]
 	then
-			find $1 -type f | sed "s#$1/\(.[^/]*/\(.*\)\)#cmp -s $1/\1 ~/\2 || echo \1#" | zsh | cat -n
+			find $1 -type f | \sed "s#$1/\(.[^/]*/\(.*\)\)#cmp -s $1/\1 ~/\2 || echo \1#" | zsh | cat -n
 	elif [[ $3 == '' ]]
 	then
-			find $1 -type f | sed "s#$1/\(.[^/]*/\(.*\)\)#cmp -s $1/\1 ~/\2 || echo diff --color=auto $1/\1 ~/\2#" | zsh | sed "$2!d" | zsh
+			find $1 -type f | \sed "s#$1/\(.[^/]*/\(.*\)\)#cmp -s $1/\1 ~/\2 || echo diff --color=auto $1/\1 ~/\2#" | zsh | \sed "$2!d" | zsh
 	elif [[ $3 == 'u' ]]
 	then
-		find $1 -type f | sed "s#$1/\(.[^/]*/\(.*\)\)#cmp -s $1/\1 ~/\2 || echo cp ~/\2 $1/\1 2\\\\>/dev/null \\\\|\\\\| rm $1/\1#" | zsh | sed "$2!d" | zsh
+		find $1 -type f | \sed "s#$1/\(.[^/]*/\(.*\)\)#cmp -s $1/\1 ~/\2 || echo cp ~/\2 $1/\1 2\\\\>/dev/null \\\\|\\\\| rm $1/\1#" | zsh | \sed "$2!d" | zsh
 	elif [[ $3 == 'r' ]]
 	then
-		find $1 -type f | sed "s#$1/\(.[^/]*/\(.*\)\)#cmp -s $1/\1 ~/\2 || echo cp $1/\1 ~/\2#" | zsh | sed "$2!d" | zsh
+		find $1 -type f | \sed "s#$1/\(.[^/]*/\(.*\)\)#cmp -s $1/\1 ~/\2 || echo cp $1/\1 ~/\2#" | zsh | \sed "$2!d" | zsh
 	fi
 
 	[[ $2 != '' ]] && (echo '=============================='; dotdiff $1)

@@ -48,6 +48,8 @@ feeds() {
 	feed "Null Byte - Invidious" "https://yewtu.be/feed/channel/UCgTNupxATBfWmfehv21ym-g"
 	feed "Null Byte" "https://null-byte.wonderhowto.com/rss.xml"
 	feed "PwnFunction - Invidious" "https://yewtu.be/feed/channel/UCW6MNdOsqv2E9AjQkv9we7A"
+	feed "Root BSD - Invidious" "https://yewtu.be/feed/channel/UCbpe1SYzZKG4RswEnxxSRZQ"
+	feed "Root BSD - Odysee" "https://lbryfeed.melroy.org/channel/rootbsd"
 	feed "SecurityFWD - Invidious" "https://yewtu.be/feed/channel/UCaXV-r0zzGOsVg3V2U164wA"
 	feed "The Hated One - Invidious" "https://yewtu.be/feed/channel/UCjr2bPAyPV7t35MvcgT3W8Q"
 	feed "The Hated One - Odysee" "https://odysee.com/$/rss/@TheHatedOne/1"
@@ -69,6 +71,8 @@ feeds() {
 
 	feed "frame.work" "https://frame.work/blog.rss"
 	feed "pine64" "https://pine64.com/feed/"
+	feed "Joshua Stein" "https://jcs.org/rss"
+	feed "OpenBSD - Reddit" "https://old.reddit.com/r/openbsd/.rss"
 
 	[ -f ~/.sfeed/sfeedrcp ] && source ~/.sfeed/sfeedrcp
 

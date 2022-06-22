@@ -3,6 +3,7 @@
 // @namespace     http://userstyles.org
 // @description	  solarized-everything-css dark theme for specific websites
 // @include       https://*suckless.org/*
+// @include       https://*openbsd.org/*
 // @include       https://yewtu.be/*
 // @include       https://tmpout.sh/*
 // @include       https://shapeshed.com/*
