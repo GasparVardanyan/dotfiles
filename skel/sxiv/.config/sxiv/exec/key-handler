@@ -30,6 +30,6 @@ case "$1" in
 "C-s")  scrot -q 100 -e "mkdir -p ~/.local/share/wallpapers/sxiv/; magick \$f \$f ; mv \$f ~/.local/share/wallpapers/sxiv/ ; feh --bg-fill ~/.local/share/wallpapers/sxiv/\$f" ;;
 "C-r")	d=$(dirname "$file") ; mkdir -p "$d/remove" ; while read file ; do mv "$file" "$d/remove" ; done ;;
 "C-y")	list="" ; while read file ; do list="$list \"$file\"" ; done ; echo "${list:1}" | xsel -ib ;;
-"C-i")	list="" ; while read file ; do list="$list \"$file\"" ; done ; ($TERMINAL -n pop-up -g 90x25 -e $SHELL -c "file ${list:1} ; mediainfo ${list:1} | less -rum~ +Gg") & ;;
+"C-i")	list="" ; while read file ; do list="$list \"$file\"" ; done ; ($TERMINAL -n pop-up -g 120x30 -e $SHELL -c "file ${list:1} ; mediainfo ${list:1} | less -rum~ +Gg") & ;;
 "C-f")	while read file ; do xdg-open https://yandex.com/images/search\?rpt=imageview\&url=https%3A%2F%2Fi.redd.it%2F${file##*/} & done ;;
 esac
