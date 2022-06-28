@@ -7,23 +7,26 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 
-Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'Yggdroot/indentLine'
-Plugin 'airblade/vim-gitgutter'
 Plugin 'chrisbra/Colorizer'
-Plugin 'majutsushi/tagbar'
-" Plugin 'scrooloose/nerdtree'
-Plugin 'junegunn/fzf.vim'
-Plugin 'airblade/vim-rooter'
-Plugin 'terryma/vim-multiple-cursors'
+
 " Plugin 'frazrepo/vim-rainbow'
 " Plugin 'lilydjwg/colorizer'
 " Plugin 'powerline/powerline'
 " Plugin 'vifm/vifm.vim'
 " Plugin 'vim-airline/vim-airline'
 
-" Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'majutsushi/tagbar'
+Plugin 'junegunn/fzf.vim'
+Plugin 'airblade/vim-rooter'
+Plugin 'terryma/vim-multiple-cursors'
 Plugin 'scrooloose/nerdcommenter'
+
+" Plugin 'scrooloose/nerdtree'
+" Plugin 'Xuyuanp/nerdtree-git-plugin'
+
+" Plugin 'ctrlpvim/ctrlp.vim'
 " Plugin 'FredKSchott/CoVim'
 
 Plugin 'baskerville/vim-sxhkdrc'

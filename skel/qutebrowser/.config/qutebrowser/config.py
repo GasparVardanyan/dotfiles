@@ -51,6 +51,13 @@ config.set (
 	'https://mail.protonmail.com#mailto=%25s'		,
 )
 
+config.set (
+	'content.headers.user_agent'									,
+	'Mozilla/5.0 (Linux; Android 10) AppleWebKit/537.36 (KHTML,'
+		'like Gecko) Chrome/103.0.5060.53 Mobile Safari/537.36'		,
+	'*://www.udrop.com/*'
+)
+
 
 
 c.input.insert_mode.auto_enter						=		True

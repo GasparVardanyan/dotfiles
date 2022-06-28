@@ -120,6 +120,7 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 # command modifications
 alias astyle="astyle --style=allman --indent=tab --attach-extern-c --attach-closing-while --indent-switches --indent-after-parens --indent-preproc-block --min-conditional-indent=0 --break-blocks --pad-oper --pad-comma --pad-first-paren-out --align-pointer=middle --align-reference=type --remove-braces --keep-one-line-blocks --keep-one-line-statements --close-templates"
+alias cat="bat"
 alias cc="gcc -std=c18 -pedantic-errors -Werror=pedantic -Wall -Wextra"
 #alias cc=tcc
 alias cmatrix="cmatrix -b -C red"
