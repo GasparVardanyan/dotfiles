@@ -3,6 +3,7 @@ export TERMINAL=st
 export SHELL=zsh
 export EDITOR=nvim
 export BROWSER=qutebrowser
+export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 export SUDO_ASKPASS="$HOME/.local/bin/dmenupass"
 
 export PATH="$HOME/.local/share/themes/bin:$HOME/.local/bin:$PATH"

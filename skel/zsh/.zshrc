@@ -113,8 +113,8 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 
 
-# alias grep="rg --engine pcre2"
-# alias sed="perl -pe"
+alias grep="rg --engine pcre2"
+alias sed="perl -pe"
 
 
 
