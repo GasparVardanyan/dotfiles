@@ -12,8 +12,8 @@ feeds() {
 	feed "Sippin' && 'Hackin'" "https://en.syuneci.am/rss.xml"
 	feed "ambug telegram" "https://rsshub.app/telegram/channel/BSD_Armenia_News"
 	feed "ambug" "https://github.com/ambug/website/commits.atom"
-	feed "antranigv #en" "https://antranigv.am/weblog_en/index.xml"
-	feed "antranigv #hy" "https://antranigv.am/weblog/index.xml"
+	feed "antranigv #en" "https://weblog.antranigv.am/feed/"
+	feed "antranigv #hy" "https://անդրանիկ.հայ/feed/"
 	feed "խօսենք" "https://խօսենք.ցանցառներ.հայ/rss"
 	feed "ցանցառներ ռադիօ - Invidious" "https://yewtu.be/feed/channel/UCLjhnWg0f3BeJATvFiLnrJw"
 	feed "ցանցառներ ռադիօ" "https://ռադիօ.ցանցառներ.հայ/index.xml"
@@ -85,4 +85,21 @@ feeds() {
 	# get youtube Atom feed: curl -s -L 'https://www.youtube.com/user/gocoding/videos' | sfeed_web | cut -f 1
 	# feed "youtube golang" "https://www.youtube.com/feeds/videos.xml?channel_id=UCO3LEtymiLrgvpb59cNsb8A"
 	# feed "xkcd" "https://xkcd.com/atom.xml" "https://xkcd.com"
+}
+
+filter() {
+	case "$1" in
+		"GitLab")
+			awk -F '\t' 'BEGIN { OFS = "\t"; }
+				$2 ~ /^Gaspar Vardanyan pushed to project branch master at Gaspar Vardanyan/ {
+					next;
+				}
+				{
+					print $0
+				}'
+		;;
+		*)
+			cat
+		;;
+	esac
 }

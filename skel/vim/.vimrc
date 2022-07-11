@@ -32,7 +32,7 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'baskerville/vim-sxhkdrc'
 Plugin 'jceb/vim-orgmode'
 " Plugin 'makerj/vim-pdf'
-" Plugin 'plasticboy/vim-markdown'
+Plugin 'plasticboy/vim-markdown'
 " Plugin 'vim-scripts/c.vim'
 " Plugin 'vimwiki/vimwiki'
 
@@ -50,6 +50,12 @@ Plugin 'romainl/flattened'
 " Plugin 'jnurmine/Zenburn'
 " Plugin 'morhetz/gruvbox'
 " Plugin 'tomasiser/vim-code-dark'
+
+" GODMODE ON !!!
+Plugin 'othree/eregex.vim'
+let g:eregex_force_case = 1
+nnoremap <leader>/ :call eregex#toggle()<CR>
+noremap <leader>: :perldo<space>
 
 call vundle#end()
 " }}}
@@ -79,6 +85,14 @@ set tabstop=4
 set updatetime=250
 set wildignore+=*.o,*.out,.git
 let g:python_recommended_style = 0
+" }}}
+" {{{ enable highlighting all the matches only in incsearch mode
+set nohlsearch
+augroup vimrc-incsearch-highlight
+  autocmd!
+  autocmd CmdlineEnter [/\?] :set hlsearch
+  autocmd CmdlineLeave [/\?] :set nohlsearch
+augroup END
 " }}}
 " colorscheme {{{
 
