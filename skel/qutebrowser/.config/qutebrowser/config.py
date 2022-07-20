@@ -14,6 +14,7 @@ config.bind (			'xx'		,	'config-cycle statusbar.show always never;; config-cycle
 config.bind (			'yiu'		,	'open -t -- https://yandex.com/images/search?rpt=imageview&url={url:pretty}'		)
 config.bind (			';D'		,	'hint images download'																)
 config.bind (	'<Ctrl+Shift+d>'	,	'scroll-page 0 -0.5'																)
+config.bind (			'M'			,	'hint links spawn mpv {hint-url}'													)
 
 
 
@@ -67,11 +68,11 @@ c.tabs.show											=		'always'
 
 
 
-c.url.start_pages		=		['https://duckduckgo.com/']
-c.url.default_page		=		'https://duckduckgo.com/'
+c.url.start_pages		=		['https://searx.org/']
+c.url.default_page		=		'https://searx.org/'
 
 c.url.searchengines	 = {
-	'DEFAULT'			:		'https://duckduckgo.com/?q={}'									,
+	'DEFAULT'			:		'https://searx.org/?q={}'									,
 	'ai'				:		'https://www.appimagehub.com/find?search={}'					,
 	'aur'				:		'https://aur.archlinux.org/packages/?O=0&K={}'					,
 	'duck'				:		'https://duckduckgo.com/?q={}'									,
@@ -111,6 +112,17 @@ c.url.searchengines	 = {
 # config.source ("selenized.py")
 
 c.colors.webpage.darkmode.enabled = True
+
+
+
+# for site in ['https://*suckless.org/*', 'https://*openbsd.org/*', 'https://yewtu.be/*', 'https://tmpout.sh/*', 'https://shapeshed.com/*' ] :
+#     config.set (
+#         'content.user_stylesheets'																				,
+#         '~/.config/qutebrowser/solarized-everything-css/css/solarized-light/solarized-light-all-sites.css'		,
+#         site
+#     )
+
+
 
 import os
 themefile = os.getenv ('HOME') + '/.local/share/themes/theme-qutebrowser.py'

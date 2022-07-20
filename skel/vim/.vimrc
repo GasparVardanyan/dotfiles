@@ -53,6 +53,7 @@ Plugin 'romainl/flattened'
 
 " GODMODE ON !!!
 Plugin 'othree/eregex.vim'
+Plugin 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlight-all-pragmas moose test-more try-tiny' }
 let g:eregex_force_case = 1
 nnoremap <leader>/ :call eregex#toggle()<CR>
 noremap <leader>: :perldo<space>

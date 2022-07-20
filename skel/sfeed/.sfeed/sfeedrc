@@ -51,6 +51,7 @@ feeds() {
 	feed "Root BSD - Invidious" "https://yewtu.be/feed/channel/UCbpe1SYzZKG4RswEnxxSRZQ"
 	feed "Root BSD - Odysee" "https://lbryfeed.melroy.org/channel/rootbsd"
 	feed "SecurityFWD - Invidious" "https://yewtu.be/feed/channel/UCaXV-r0zzGOsVg3V2U164wA"
+	feed "TED-Ed - Invidious" "https://yewtu.be/feed/channel/UCsooa4yRKGN_zEE8iknghZA"
 	feed "The Hated One - Invidious" "https://yewtu.be/feed/channel/UCjr2bPAyPV7t35MvcgT3W8Q"
 	feed "The Hated One - Odysee" "https://odysee.com/$/rss/@TheHatedOne/1"
 	feed "The Linux Experiment - Invidious" "https://yewtu.be/feed/channel/UC5UAwBUum7CPN5buc-_N1Fw"
@@ -64,6 +65,7 @@ feeds() {
 	feed "thenewsh" "http://thenewsh.blogspot.com/rss.xml"
 	feed "werc" "https://code.9front.org/hg/werc/rss-log"
 
+	feed "Hugo" "https://gohugo.io/index.xml"
 	feed "THC-Archive" "https://github.com/hackerschoice/THC-Archive/commits.atom"
 	feed "nullsecurity" "https://github.com/nullsecuritynet/site/commits.atom"
 	feed "qutebrowser" "https://github.com/qutebrowser/qutebrowser/releases.atom"
