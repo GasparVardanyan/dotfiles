@@ -1,0 +1,77 @@
+#!/bin/sh
+
+choose()
+{
+	if [[ $(echo "$@" | wc -l) -eq 1 ]]
+	then
+		echo $@
+	else
+		echo "$@" | dmenu -p choose: -l 5
+	fi
+}
+
+lu()
+{
+	iface=$(choose "$(ifconfig -a | grep '^enp' | sed 's/:.*//')")
+
+	[ -z "$iface"] && exit
+
+	sudo ifconfig $iface up
+	sudo dhclient $iface
+}
+
+li()
+{
+	iface=$(choose "$(ifconfig -a | grep '^enp' | sed 's/:.*//')")
+
+	[ -z "$iface" ] && exit
+
+	sudo dhclient $iface
+}
+
+ld()
+{
+	iface=$(choose "$(ifconfig -a | grep '^enp' | sed 's/:.*//')")
+
+	[ -z "$iface" ] && exit
+
+	sudo ifconfig $iface down
+}
+
+wu()
+{
+	sudo rfkill unblock wlan
+	sudo ifconfig wlp3s0 up
+}
+
+wi()
+{
+	sudo dhclient wlp3s0
+}
+
+wd()
+{
+	sudo ifconfig wlp3s0 down
+	sudo rfkill block wlan
+}
+
+du()
+{
+	mon=$(choose "$(xrandr | grep '^\w' | sed '1d;/eDP1/d;/disconnected/d' | cut -d ' ' -f1)")
+
+	[ -z "$mon" ] && exit
+
+	xrandr --output $mon --off
+	xrandr --output $mon --mode 1366x768 --right-of eDP1
+}
+
+dd()
+{
+	mon=$(choose "$(xrandr | grep '^\w' | sed '1d;/eDP1/d;/disconnected/d' | cut -d ' ' -f1)")
+
+	[ -z "$mon" ] && exit
+
+	xrandr --output $mon --off
+}
+
+$1
