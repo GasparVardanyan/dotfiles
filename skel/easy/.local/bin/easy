@@ -1,0 +1,47 @@
+#!/bin/sh
+
+lu()
+{
+	sudo ifconfig enp0s20f0u4 up
+	sudo dhclient enp0s20f0u4
+}
+
+li()
+{
+	sudo dhclient enp0s20f0u4
+}
+
+ld()
+{
+	sudo ifconfig enp0s20f0u4 down
+}
+
+wu()
+{
+	sudo rfkill unblock wlan
+	sudo ifconfig wlp3s0 up
+}
+
+wi()
+{
+	sudo dhclient wlp3s0
+}
+
+wd()
+{
+	sudo ifconfig wlp3s0 down
+	sudo rfkill block wlan
+}
+
+du()
+{
+	xrandr --output DP1 --off
+	xrandr --output DP1 --mode 1366x768 --right-of eDP1
+}
+
+dd()
+{
+	xrandr --output DP1 --off
+}
+
+$1
