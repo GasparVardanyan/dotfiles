@@ -14,7 +14,7 @@ lu()
 {
 	iface=$(choose "$(ifconfig -a | grep '^enp' | sed 's/:.*//')")
 
-	[ -z "$iface"] && exit
+	[ -z "$iface" ] && exit
 
 	sudo ifconfig $iface up
 	sudo dhclient $iface

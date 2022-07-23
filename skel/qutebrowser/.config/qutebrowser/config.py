@@ -14,7 +14,7 @@ config.bind (			'xx'		,	'config-cycle statusbar.show always never;; config-cycle
 config.bind (			'yiu'		,	'open -t -- https://yandex.com/images/search?rpt=imageview&url={url:pretty}'		)
 config.bind (			';D'		,	'hint images download'																)
 config.bind (	'<Ctrl+Shift+d>'	,	'scroll-page 0 -0.5'																)
-config.bind (			'M'			,	'hint links spawn mpv {hint-url}'													)
+# config.bind (			'M'			,	'hint links spawn mpv {hint-url}'													)
 
 
 
@@ -72,38 +72,40 @@ c.url.start_pages		=		['https://searx.org/']
 c.url.default_page		=		'https://searx.org/'
 
 c.url.searchengines	 = {
-	'DEFAULT'			:		'https://searx.org/?q={}'									,
-	'ai'				:		'https://www.appimagehub.com/find?search={}'					,
-	'aur'				:		'https://aur.archlinux.org/packages/?O=0&K={}'					,
-	'duck'				:		'https://duckduckgo.com/?q={}'									,
-	'fh'				:		'https://flathub.org/apps/search/{}'							,
-	'gen'				:		'http://libgen.is/search.php?req={}'							,
-	'gi'				:		'https://github.com/search?q={}'								,
-	'gp'				:		'https://github.com/{}'											,
-	'gr'				:		'https://greasyfork.org/en/scripts?q={}'						,
-	'imdb'				:		'https://www.imdb.com/find?q={}'								,
-	'ly'				:		'https://genius.com/search?q={}'								,
-	'man'				:		'https://man.openbsd.org/?query={}'								,
-	'meet'				:		'https://meet.jit.si/{}'										,
-	'mov'				:		'https://rezka.ag/search/?do=search&subaction=search&q={}'		,
-	'pacman'			:		'https://archlinux.org/packages/?q={}'							,
-	'pdf'				:		'https://www.pdfdrive.com/search?q={}'							,
-	'r'					:		'https://www.reddit.com/r/{}'									,
-	'solve'				:		'https://www.symbolab.com/solver/step-by-step/{}'				,
-	'st'				:		'https://userstyles.org/styles/browse?search_terms={}'			,
-	'su'				:		'https://{}.suckless.org/'										,
-	'sug'				:		'https://git.suckless.org/{}/log.html'							,
-	'sx'				:		'https://paulgo.io/search?q={}'									,
-	'ub'				:		'https://www.urbandictionary.com/define.php?term={}'			,
-	'us'				:		'https://userstyles.world/search?q={}'							,
-	'wa'				:		'https://wiki.archlinux.org/?search={}'							,
-	'wb'				:		'http://web.archive.org/web/{}'									,
-	'wg'				:		'https://wiki.gentoo.org/?search={}'							,
-	'wiki'				:		'https://en.wikipedia.org/w/index.php?search={}'				,
-	'wp'				:		'https://wallhaven.cc/search?q={}'								,
-	'yi'				:		'https://yandex.com/images/search?text={}'						,
-	'yiu'				:		'https://yandex.com/images/search?rpt=imageview&url={}'			,
-	'yt'				:		'https://www.youtube.com/results?search_query={}'				,
+	'DEFAULT'			:		'https://searx.org/?q={}'										,
+	'/ai'				:		'https://www.appimagehub.com/find?search={}'					,
+	'/aur'				:		'https://aur.archlinux.org/packages/?O=0&K={}'					,
+	'/duck'				:		'https://duckduckgo.com/?q={}'									,
+	'/fh'				:		'https://flathub.org/apps/search/{}'							,
+	'/gen'				:		'http://libgen.is/search.php?req={}'							,
+	'/gi'				:		'https://github.com/search?q={}'								,
+	'/gp'				:		'https://github.com/{}'											,
+	'/gr'				:		'https://greasyfork.org/en/scripts?q={}'						,
+	'/imdb'				:		'https://www.imdb.com/find?q={}'								,
+	'/ly'				:		'https://genius.com/search?q={}'								,
+	'/man'				:		'https://man.openbsd.org/?query={}'								,
+	'/meet'				:		'https://meet.jit.si/{}'										,
+	'/mov'				:		'https://rezka.ag/search/?do=search&subaction=search&q={}'		,
+	'/pacman'			:		'https://archlinux.org/packages/?q={}'							,
+	'/pdf'				:		'https://www.pdfdrive.com/search?q={}'							,
+	'/r'				:		'https://www.reddit.com/r/{}'									,
+	'/solve'			:		'https://www.symbolab.com/solver/step-by-step/{}'				,
+	'/st'				:		'https://userstyles.org/styles/browse?search_terms={}'			,
+	'/su'				:		'https://{}.suckless.org/'										,
+	'/sug'				:		'https://git.suckless.org/{}/log.html'							,
+	'/sx'				:		'https://paulgo.io/search?q={}'									,
+	'/tp'				:		'https://thepiratebay.org/search.php?q={}'						,
+	'/ub'				:		'https://www.urbandictionary.com/define.php?term={}'			,
+	'/us'				:		'https://userstyles.world/search?q={}'							,
+	'/wa'				:		'https://wiki.archlinux.org/?search={}'							,
+	'/wb'				:		'http://web.archive.org/web/{}'									,
+	'/wg'				:		'https://wiki.gentoo.org/?search={}'							,
+	'/wiki'				:		'https://en.wikipedia.org/w/index.php?search={}'				,
+	'/wp'				:		'https://wallhaven.cc/search?q={}'								,
+	'/x'				:		'https://1337x.wtf/search/{}/1/'								,
+	'/yi'				:		'https://yandex.com/images/search?text={}'						,
+	'/yiu'				:		'https://yandex.com/images/search?rpt=imageview&url={}'			,
+	'/yt'				:		'https://www.youtube.com/results?search_query={}'				,
 }
 
 
@@ -121,6 +123,11 @@ c.colors.webpage.darkmode.enabled = True
 #         '~/.config/qutebrowser/solarized-everything-css/css/solarized-light/solarized-light-all-sites.css'		,
 #         site
 #     )
+# config.set (
+#     'content.user_stylesheets'																				,
+#     '~/.config/qutebrowser/searx-solarized.user.css'		,
+#     'https://searx.org/'
+# )
 
 
 
