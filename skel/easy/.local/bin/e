@@ -74,4 +74,16 @@ dd()
 	xrandr --output $mon --off
 }
 
+au()
+{
+	ad 2>/dev/null
+	mkdir -p ~/mnt
+	simple-mtpfs --device 1 ~/mnt
+}
+
+ad()
+{
+	fusermount -u ~/mnt
+}
+
 $1
