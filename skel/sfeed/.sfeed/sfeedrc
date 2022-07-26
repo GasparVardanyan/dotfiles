@@ -22,6 +22,7 @@ feeds() {
 	feed "Լուսնի հակառակ կողմը․․․" "https://www.syuneci.am/rss.xml"
 	feed "օրագիր" "https://օրագիր.հայ/read/feed/"
 	feed "David Rousset" "https://www.davrous.com/feed/"
+	feed "Gaspar Vardanyan" "https://gasparvardanyan.github.io/index.xml"
 
 	feed "BlackArch Linux" "https://blackarch.org/rss.xml"
 	feed "Codemadness" "https://www.codemadness.nl/atom.xml"

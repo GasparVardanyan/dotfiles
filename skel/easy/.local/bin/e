@@ -12,7 +12,7 @@ choose()
 
 lu()
 {
-	iface=$(choose "$(ifconfig -a | grep '^enp' | sed 's/:.*//')")
+	iface=$(choose "$(ifconfig -a | grep '^enp' | sed '/^enp2s0:/d;s/:.*//')")
 
 	[ -z "$iface" ] && exit
 
@@ -22,7 +22,7 @@ lu()
 
 li()
 {
-	iface=$(choose "$(ifconfig -a | grep '^enp' | sed 's/:.*//')")
+	iface=$(choose "$(ifconfig -a | grep '^enp' | sed '/^enp2s0:/d;s/:.*//')")
 
 	[ -z "$iface" ] && exit
 
@@ -31,7 +31,7 @@ li()
 
 ld()
 {
-	iface=$(choose "$(ifconfig -a | grep '^enp' | sed 's/:.*//')")
+	iface=$(choose "$(ifconfig -a | grep '^enp' | sed '/^enp2s0:/d;s/:.*//')")
 
 	[ -z "$iface" ] && exit
 
@@ -47,6 +47,23 @@ wu()
 wi()
 {
 	sudo dhclient wlp3s0
+}
+
+wc()
+{
+	sudo wpa_cli -i wlp3s0
+}
+
+wsu()
+{
+	sudo systemctl start wpa_supplicant@wlp3s0.service
+	sudo systemctl start dhclient@wlp3s0.service
+}
+
+wsd()
+{
+	sudo systemctl stop wpa_supplicant@wlp3s0.service
+	sudo systemctl stop dhclient@wlp3s0.service
 }
 
 wd()

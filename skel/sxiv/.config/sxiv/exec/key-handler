@@ -13,11 +13,16 @@
 # keysym as listed in /usr/include/X11/keysymdef.h without the "XK_" prefix.
 
 case "$1" in
-"C-o")	while IFS= read -r -d $'\0' file; do vid=$(echo "$file" | sed 's#^/tmp/tmp\.\w\+/\(.*\)\.jpg$#\1#'); [ "$vid" != '' ] && xdg-open "$vid"; done ;;
-"C-g")  tr '\n' '\0' | xargs -0 gimp & ;;
-"C-d")	while read file ; do rm "$file" ; done ;;
-"C-t")	mkdir -p tags; d=tags/$(ls tags | dmenu -p Tag: -l 20) && (mkdir -p "$d"; while read file ; do ln -s ../../"$file" "$d" ; done) ;;
-"C-w")	while read file ; do feh --bg-fill "$file" ; done ;;
+"C-o")	while IFS= read -r -d $'\0' file; do vid=$(echo "$file" | sed 's#^/tmp/tmp\.\w\+/\(.*\)\.jpg$#\1#'); [ "$vid" != '' ] && xdg-open "$vid"; done
+	;;
+"C-g")  tr '\n' '\0' | xargs -0 gimp &
+	;;
+"C-d")	while read file ; do rm "$file" ; done
+	;;
+"C-t")	mkdir -p tags; d=tags/$(ls tags | dmenu -p Tag: -l 20) && (mkdir -p "$d"; while read file ; do ln -s ../../"$file" "$d" ; done)
+	;;
+"C-w")	while read file ; do feh --bg-fill "$file" ; done
+	;;
 "c")
 		[ -z "$destdir" ] && destdir="$(sed "s/\s.*#.*$//;/^\s*$/d" ${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-dirs | awk '{print $2}' | dmenu -l 20 -i -p "Copy file(s) to where?" | sed "s|~|$HOME|g")"
 		[ ! -d "$destdir" ] && notify-send "$destdir is not a directory, cancelled." && exit
@@ -28,9 +33,14 @@ case "$1" in
 		[ ! -d "$destdir" ] && notify-send "$destdir is not a directory, cancelled." && exit
 		mv "$file" "$destdir" && notify-send -i "$(readlink -f "$file")" "$file moved to $destdir." &
 		;;
-"C-s")  scrot -q 100 -e "mkdir -p ~/.local/share/wallpapers/sxiv/; magick \$f \$f ; mv \$f ~/.local/share/wallpapers/sxiv/ ; feh --bg-fill ~/.local/share/wallpapers/sxiv/\$f" ;;
-"C-r")	d=$(dirname "$file") ; mkdir -p "$d/remove" ; while read file ; do mv "$file" "$d/remove" ; done ;;
-"C-y")	list="" ; while read file ; do list="$list \"$file\"" ; done ; echo "${list:1}" | xsel -ib ;;
-"C-i")	list="" ; while read file ; do list="$list \"$file\"" ; done ; ($TERMINAL -n pop-up -g 120x30 -e $SHELL -c "file ${list:1} ; mediainfo ${list:1} | less -rum~ +Gg") & ;;
-"C-f")	while read file ; do xdg-open https://yandex.com/images/search\?rpt=imageview\&url=https%3A%2F%2Fi.redd.it%2F${file##*/} & done ;;
+"C-s")  scrot -q 100 -e "mkdir -p ~/.local/share/wallpapers/sxiv/; magick \$f \$f ; mv \$f ~/.local/share/wallpapers/sxiv/ ; feh --bg-fill ~/.local/share/wallpapers/sxiv/\$f"
+	;;
+"C-r")	d=$(dirname "$file") ; mkdir -p "$d/remove" ; while read file ; do mv "$file" "$d/remove" ; done
+	;;
+"C-y")	list="" ; while read file ; do list="$list \"$file\"" ; done ; echo "${list:1}" | xsel -ib
+	;;
+"C-i")	list="" ; while read file ; do list="$list \"$file\"" ; done ; ($TERMINAL -n pop-up -g 120x30 -e $SHELL -c "file ${list:1} ; mediainfo ${list:1} | less -rum~ +Gg") &
+	;;
+"C-f")	while read file ; do xdg-open https://yandex.com/images/search\?rpt=imageview\&url=https%3A%2F%2Fi.redd.it%2F${file##*/} & done
+	;;
 esac
