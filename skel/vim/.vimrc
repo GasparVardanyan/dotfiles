@@ -7,7 +7,7 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 
-Plugin 'Yggdroot/indentLine'
+" Plugin 'Yggdroot/indentLine'
 Plugin 'chrisbra/Colorizer'
 
 " Plugin 'frazrepo/vim-rainbow'
@@ -36,7 +36,7 @@ Plugin 'plasticboy/vim-markdown'
 " Plugin 'vim-scripts/c.vim'
 " Plugin 'vimwiki/vimwiki'
 
-" Plugin 'vim-syntastic/syntastic'
+Plugin 'vim-syntastic/syntastic'
 " Plugin 'davidhalter/jedi-vim'
 " Plugin 'xavierd/clang_complete'
 " Plugin 'ycm-core/YouCompleteMe'
@@ -48,7 +48,7 @@ Plugin 'romainl/flattened'
 " Plugin 'bluz71/vim-moonfly-colors'
 " Plugin 'dracula/vim', { 'name': 'dracula' }
 " Plugin 'jnurmine/Zenburn'
-" Plugin 'morhetz/gruvbox'
+Plugin 'morhetz/gruvbox'
 " Plugin 'tomasiser/vim-code-dark'
 
 " GODMODE ON !!!
@@ -88,12 +88,12 @@ set wildignore+=*.o,*.out,.git
 let g:python_recommended_style = 0
 " }}}
 " {{{ enable highlighting all the matches only in incsearch mode
-set nohlsearch
-augroup vimrc-incsearch-highlight
-  autocmd!
-  autocmd CmdlineEnter [/\?] :set hlsearch
-  autocmd CmdlineLeave [/\?] :set nohlsearch
-augroup END
+" set nohlsearch
+" augroup vimrc-incsearch-highlight
+"   autocmd!
+"   autocmd CmdlineEnter [/\?] :set hlsearch
+"   autocmd CmdlineLeave [/\?] :set nohlsearch
+" augroup END
 " }}}
 " colorscheme {{{
 
@@ -105,8 +105,8 @@ augroup END
 "     execute 'source' themefile
 " else
 "     color solarized
+"     call togglebg#map("<F5>")
 " endif
-" call togglebg#map("<F5>")
 
 set background=dark
 set termguicolors

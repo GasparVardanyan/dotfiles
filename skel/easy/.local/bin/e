@@ -72,6 +72,15 @@ wd()
 	sudo rfkill block wlan
 }
 
+wr()
+{
+	wsd
+	wd
+	wu
+	wsu
+	wi
+}
+
 du()
 {
 	mon=$(choose "$(xrandr | grep '^\w' | sed '1d;/eDP1/d;/disconnected/d' | cut -d ' ' -f1)")
@@ -93,8 +102,9 @@ dd()
 
 au()
 {
-	ad 2>/dev/null
+	rm -rf ~/mnt
 	mkdir -p ~/mnt
+	ad 2>/dev/null
 	simple-mtpfs --device 1 ~/mnt
 }
 

@@ -7,6 +7,7 @@
 // @include       https://yewtu.be/*
 // @include       https://tmpout.sh/*
 // @include       https://shapeshed.com/*
+// @include       https://xn--y9aey5fdz.xn--y9a3aq/*
 // @run-at        document-start
 // ==/UserScript==
 (function() {var css = [
