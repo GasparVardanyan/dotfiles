@@ -26,7 +26,6 @@ feeds() {
 
 	feed "BlackArch Linux" "https://blackarch.org/rss.xml"
 	feed "Codemadness" "https://www.codemadness.nl/atom.xml"
-	feed "Math Scholar" "https://mathscholar.org/feed/"
 	feed "SkullSecurity" "https://blog.skullsecurity.org/feed"
 	feed "Solarized" "https://github.com/altercation/solarized/commits.atom"
 	feed "Suckless" "https://suckless.org/atom.xml"
@@ -68,6 +67,7 @@ feeds() {
 
 	feed "Hugo" "https://gohugo.io/index.xml"
 	feed "THC-Archive" "https://github.com/hackerschoice/THC-Archive/commits.atom"
+	feed "VTK" "https://vtk.org/feed/"
 	feed "nullsecurity" "https://github.com/nullsecuritynet/site/commits.atom"
 	feed "qutebrowser" "https://github.com/qutebrowser/qutebrowser/releases.atom"
 	feed "tmp.0ut" "https://github.com/tmpout/tmpout.github.io/commits.atom"

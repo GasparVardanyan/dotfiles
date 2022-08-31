@@ -2,7 +2,7 @@
 
 choose()
 {
-	if [[ $(echo "$@" | wc -l) -eq 1 ]]
+	if [[ $(echo "$@" | command wc -l) -eq 1 ]]
 	then
 		echo $@
 	else
@@ -111,6 +111,11 @@ au()
 ad()
 {
 	fusermount -u ~/mnt
+}
+
+il()
+{
+	ifconfig -a
 }
 
 $1

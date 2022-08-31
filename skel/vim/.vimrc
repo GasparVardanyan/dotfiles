@@ -36,7 +36,7 @@ Plugin 'plasticboy/vim-markdown'
 " Plugin 'vim-scripts/c.vim'
 " Plugin 'vimwiki/vimwiki'
 
-Plugin 'vim-syntastic/syntastic'
+" Plugin 'vim-syntastic/syntastic'
 " Plugin 'davidhalter/jedi-vim'
 " Plugin 'xavierd/clang_complete'
 " Plugin 'ycm-core/YouCompleteMe'

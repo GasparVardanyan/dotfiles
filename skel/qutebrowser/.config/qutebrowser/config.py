@@ -42,8 +42,6 @@ for prop in [
 
 for site in [
 	'https://app.element.io'				,
-	'https://web.skype.com'					,
-	'https://web.telegram.org'				,
 	'https://xn--69aa8bzb.xn--y9a3aq'		,		# թութ.հայ
 ] :
 	config.set ('content.notifications.enabled', True, site)
@@ -70,16 +68,17 @@ c.tabs.show											=		'always'
 
 
 
-c.url.start_pages		=		['https://searx.org/']
-c.url.default_page		=		'https://searx.org/'
+c.url.start_pages		=		['https://duckduckgo.com/']
+c.url.default_page		=		'https://duckduckgo.com/'
 
 c.url.searchengines	 = {
-	'DEFAULT'			:		'https://searx.org/?q={}'										,
+	# 'DEFAULT'			:		'https://searx.org/?q={}'										,
+	'DEFAULT'			:		'https://duckduckgo.com/?q={}'									,
 	'/ai'				:		'https://www.appimagehub.com/find?search={}'					,
 	'/aur'				:		'https://aur.archlinux.org/packages/?O=0&K={}'					,
 	'/duck'				:		'https://duckduckgo.com/?q={}'									,
 	'/fh'				:		'https://flathub.org/apps/search/{}'							,
-	'/gen'				:		'http://libgen.is/search.php?req={}'							,
+	'/gen'				:		'https://libgen.is/search.php?req={}'							,
 	'/gi'				:		'https://github.com/search?q={}'								,
 	'/gp'				:		'https://github.com/{}'											,
 	'/gr'				:		'https://greasyfork.org/en/scripts?q={}'						,
@@ -100,7 +99,7 @@ c.url.searchengines	 = {
 	'/ub'				:		'https://www.urbandictionary.com/define.php?term={}'			,
 	'/us'				:		'https://userstyles.world/search?q={}'							,
 	'/wa'				:		'https://wiki.archlinux.org/?search={}'							,
-	'/wb'				:		'http://web.archive.org/web/{}'									,
+	'/wb'				:		'https://web.archive.org/web/{}'								,
 	'/wg'				:		'https://wiki.gentoo.org/?search={}'							,
 	'/wiki'				:		'https://en.wikipedia.org/w/index.php?search={}'				,
 	'/wp'				:		'https://wallhaven.cc/search?q={}'								,

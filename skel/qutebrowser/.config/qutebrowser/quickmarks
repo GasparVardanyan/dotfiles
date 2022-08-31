@@ -8,16 +8,13 @@
 /di https://discord.com/channels/@me
 /dig https://git.disroot.org/
 /dis https://apps.disroot.org/
-/dr https://drive.google.com/drive/u/0/my-drive
 /dx https://www.dropbox.com/home
 /el https://app.element.io/
 /fh https://flathub.org/
 /gi https://github.com/
 /gl https://gitlab.com/
-/gm https://mail.google.com/mail/u/0/
 /gr https://greasyfork.org/en/scripts
 /ic https://mail.google.com/chat/u/0/#chat/welcome
-/in https://www.instagram.com/
 /jb https://mov.im/?chat
 /kh https://խօսենք.ցանցառներ.հայ/
 /luke https://lukesmith.xyz/
@@ -33,12 +30,10 @@
 /r https://www.reddit.com/
 /regex https://www.regular-expressions.info/quickstart.html
 /rs https://www.reddit.com/user/GasparVardanyan/saved/
-/sk https://web.skype.com/
 /skp https://sketch.io/sketchpad/
 /solve https://www.symbolab.com/solver
 /su https://suckless.org/
 /sx https://sxmo.org/
-/te https://web.telegram.org/#/im
 /ts http://terminal.sexy/
 /ud https://www.udrop.com/account
 /us https://userstyles.world/
@@ -47,3 +42,4 @@
 /yi https://yandex.com/images/
 /yt https://yewtu.be/
 /pb https://thepiratebay.org/index.html
+cf https://codeforces.com/profile/gaspar_cf
