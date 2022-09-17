@@ -43,6 +43,7 @@ Plugin 'plasticboy/vim-markdown'
 
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'lifepillar/vim-solarized8'
+Plugin 'overcache/NeoSolarized'
 Plugin 'romainl/flattened'
 
 " Plugin 'bluz71/vim-moonfly-colors'
@@ -110,9 +111,18 @@ let g:python_recommended_style = 0
 
 set background=dark
 set termguicolors
-let g:solarized_extra_hi_groups=1
-let g:solarized_termtrans=1
-colorscheme solarized8
+" let g:solarized_extra_hi_groups=1
+" let g:solarized_termtrans=1
+" colorscheme solarized8
+
+let g:neosolarized_contrast = "normal"
+let g:neosolarized_visibility = "normal"
+let g:neosolarized_vertSplitBgTrans = 1
+let g:neosolarized_bold = 1
+let g:neosolarized_underline = 1
+let g:neosolarized_italic = 1
+let g:neosolarized_termBoldAsBright = 1
+colorscheme NeoSolarized
 
 " }}}
 " gcrypt {{{

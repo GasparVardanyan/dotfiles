@@ -24,11 +24,13 @@ fi
 
 ### autostart ###
 numlockx &
-~/.fehbg 2>/dev/null &
 xcompmgr &
 clipmenud &
 sxhkd &
 kbd &
+# (sleep 2; xrandr --output DP1 --off; xrandr --output DP1 --mode 1366x768 --right-of eDP1; ~/.fehbg 2>/dev/null) &
+~/.fehbg 2>/dev/null &
+
 
 
 ### caching ###

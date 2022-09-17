@@ -39,6 +39,7 @@ feeds() {
 
 	feed "Brodie Robertson - Invidious" "https://yewtu.be/feed/channel/UCld68syR8Wi-GY_n4CaoJGA"
 	feed "Brodie Robertson - Odysee" "https://odysee.com/$/rss/@BrodieRobertson/5"
+	feed "Chris Titus Tech" "https://christitus.com/index.xml"
 	feed "DistroTube - Invidious" "https://yewtu.be/feed/channel/UCVls1GmFKf6WlTraIb_IaJg"
 	feed "DistroTube - Odysee" "https://odysee.com/$/rss/@DistroTube/2"
 	feed "LiveOverflow - Invidious" "https://yewtu.be/feed/channel/UClcE-kVhqyiHCcjYwcpfj9w"
