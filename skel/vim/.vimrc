@@ -115,13 +115,14 @@ set termguicolors
 " let g:solarized_termtrans=1
 " colorscheme solarized8
 
-let g:neosolarized_contrast = "normal"
-let g:neosolarized_visibility = "normal"
-let g:neosolarized_vertSplitBgTrans = 1
 let g:neosolarized_bold = 1
-let g:neosolarized_underline = 1
+let g:neosolarized_contrast = "normal"
 let g:neosolarized_italic = 1
 let g:neosolarized_termBoldAsBright = 1
+let g:neosolarized_termtrans = 1
+let g:neosolarized_underline = 1
+let g:neosolarized_vertSplitBgTrans = 1
+let g:neosolarized_visibility = "normal"
 colorscheme NeoSolarized
 
 " }}}
