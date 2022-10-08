@@ -88,7 +88,7 @@ du()
 	[ -z "$mon" ] && exit
 
 	xrandr --output $mon --off
-	xrandr --output $mon --mode 1366x768 --right-of eDP1
+	xrandr --output $mon --mode 1920x1080 --left-of eDP1
 }
 
 dd()

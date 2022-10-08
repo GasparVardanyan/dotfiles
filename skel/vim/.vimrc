@@ -133,7 +133,7 @@ command -range=% Decrypt execute "'<,'>!base64 -d | gcrypt -S -d \"$(pass show p
 " fzf {{{
 let $FZF_DEFAULT_OPTS = '--layout=reverse'
 let $FZF_DEFAULT_COMMAND = 'fd --type f'
-let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9, 'relative': v:true } }
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9, 'relative': v:false } }
 let g:fzf_preview_window = ['right:50%', 'ctrl-/']
 noremap <leader>ff :Files<cr>
 noremap <leader>fm :RG<cr>
