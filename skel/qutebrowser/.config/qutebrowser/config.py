@@ -89,6 +89,7 @@ c.url.searchengines	 = {
 	'/mov'				:		'https://rezka.ag/search/?do=search&subaction=search&q={}'		,
 	'/pacman'			:		'https://archlinux.org/packages/?q={}'							,
 	'/pdf'				:		'https://www.pdfdrive.com/search?q={}'							,
+	'/pip'				:		'https://pypi.org/search/?q={}'									,
 	'/r'				:		'https://www.reddit.com/r/{}'									,
 	'/solve'			:		'https://www.symbolab.com/solver/step-by-step/{}'				,
 	'/st'				:		'https://userstyles.org/styles/browse?search_terms={}'			,
@@ -106,7 +107,7 @@ c.url.searchengines	 = {
 	'/x'				:		'https://1337x.wtf/search/{}/1/'								,
 	'/yi'				:		'https://yandex.com/images/search?text={}'						,
 	'/yiu'				:		'https://yandex.com/images/search?rpt=imageview&url={}'			,
-	'/yt'				:		'https://yewtu.be/search?q={}'									,
+	'/yt'				:		'https://y.com.sb/search?q={}'									,
 }
 
 

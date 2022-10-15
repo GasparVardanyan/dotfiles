@@ -2,12 +2,13 @@
 // @name          Solarized Dark
 // @namespace     http://userstyles.org
 // @description	  solarized-everything-css dark theme for specific websites
-// @include       https://*suckless.org/*
 // @include       https://*openbsd.org/*
-// @include       https://yewtu.be/*
-// @include       https://tmpout.sh/*
+// @include       https://*suckless.org/*
 // @include       https://shapeshed.com/*
+// @include       https://tmpout.sh/*
 // @include       https://xn--y9aey5fdz.xn--y9a3aq/*
+// @include       https://y.com.sb/*
+// @include       https://yewtu.be/*
 // @run-at        document-start
 // ==/UserScript==
 (function() {var css = [

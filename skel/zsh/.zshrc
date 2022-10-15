@@ -147,6 +147,7 @@ alias rm="rm -i"
 alias sxiv="sxiv -b"
 alias tree="tree -fNpugshFviC"
 alias vdir="vdir --color=auto"
+alias space="command vim"
 alias vim="nvim"
 
 # utility

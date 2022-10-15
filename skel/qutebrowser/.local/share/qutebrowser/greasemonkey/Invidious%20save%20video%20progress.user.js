@@ -7,6 +7,7 @@
 // @match        https://invidio.us/*
 // @match        https://invidious.snopyta.org/*
 // @match        https://invidiou.sh/*
+// @match        https://y.com.sb/*
 // @match        https://yewtu.be/*
 // @match        https://invidious.toot.koeln/*
 // @grant        none

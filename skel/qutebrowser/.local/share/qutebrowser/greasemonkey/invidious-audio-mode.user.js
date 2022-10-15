@@ -3,6 +3,7 @@
 // @namespace   r-a-y/invidious/audio
 // @description Adds a headphone icon next to all video links
 // @match       https://yewtu.be/*
+// @match       https://y.com.sb/*
 // @author      r-a-y
 // @version     0.2
 // @license     GPL v3
