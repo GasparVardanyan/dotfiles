@@ -4,7 +4,7 @@ config.load_autoconfig (True)
 
 c.fonts.default_family				=		['monospace']
 c.downloads.location.directory		=		'~'
-c.content.pdfjs						=		True
+c.content.pdfjs						=		False
 # c.content.user_stylesheets			=		'solarized-dark-all-sites.css'
 
 
