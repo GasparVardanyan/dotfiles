@@ -160,7 +160,11 @@ endfunction
 command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 " }}}
 " gitgutter {{{
-nmap <Leader>hv <Plug>(GitGutterPreviewHunk)
+nmap <Leader>gd <Plug>(GitGutterPreviewHunk)
+" nmap <Leader>gf <Plug>(GitGutterFold) " why doesn't work?
+nmap <Leader>gf :GitGutterFold<cr>
+nmap ]h <Plug>(GitGutterNextHunk)
+nmap [h <Plug>(GitGutterPrevHunk)
 " }}}
 " highline {{{
 nmap <Leader>h <Plug>(HighlineToggle)
