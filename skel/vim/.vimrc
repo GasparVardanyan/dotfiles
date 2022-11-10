@@ -20,6 +20,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'majutsushi/tagbar'
 Plugin 'junegunn/fzf.vim'
 Plugin 'airblade/vim-rooter'
+Plugin 'airblade/vim-highline'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'scrooloose/nerdcommenter'
 
@@ -33,6 +34,7 @@ Plugin 'baskerville/vim-sxhkdrc'
 Plugin 'jceb/vim-orgmode'
 " Plugin 'makerj/vim-pdf'
 Plugin 'plasticboy/vim-markdown'
+Plugin 'peterhoeg/vim-qml'
 " Plugin 'vim-scripts/c.vim'
 " Plugin 'vimwiki/vimwiki'
 
@@ -84,6 +86,7 @@ set splitright
 set tabstop=4
 " set t_Co=256
 " set termguicolors
+set mouse=
 set updatetime=250
 set wildignore+=*.o,*.out,.git
 let g:python_recommended_style = 0
@@ -158,6 +161,11 @@ command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 " }}}
 " gitgutter {{{
 nmap <Leader>hv <Plug>(GitGutterPreviewHunk)
+" }}}
+" highline {{{
+nmap <Leader>h <Plug>(HighlineToggle)
+xmap <Leader>h <Plug>(HighlineToggle)
+nmap <Leader>c <Plug>(HighlineClear)
 " }}}
 " rainbow {{{
 " let g:rainbow_active = 1

@@ -99,6 +99,7 @@ c.url.searchengines	 = {
 	'/tp'				:		'https://thepiratebay.org/search.php?q={}'						,
 	'/ub'				:		'https://www.urbandictionary.com/define.php?term={}'			,
 	'/us'				:		'https://userstyles.world/search?q={}'							,
+	'/va'				:		'https://vimawesome.com/?q={}'									,
 	'/wa'				:		'https://wiki.archlinux.org/?search={}'							,
 	'/wb'				:		'https://web.archive.org/web/{}'								,
 	'/wg'				:		'https://wiki.gentoo.org/?search={}'							,
