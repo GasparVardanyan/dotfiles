@@ -90,6 +90,8 @@ set mouse=
 set updatetime=250
 set wildignore+=*.o,*.out,.git
 let g:python_recommended_style = 0
+
+nmap <Leader>hs :nohlsearch<cr>
 " }}}
 " {{{ enable highlighting all the matches only in incsearch mode
 " set nohlsearch
@@ -168,9 +170,9 @@ nmap ]h <Plug>(GitGutterNextHunk)
 nmap [h <Plug>(GitGutterPrevHunk)
 " }}}
 " highline {{{
-nmap <Leader>h <Plug>(HighlineToggle)
-xmap <Leader>h <Plug>(HighlineToggle)
-nmap <Leader>c <Plug>(HighlineClear)
+nmap <Leader>hh <Plug>(HighlineToggle)
+xmap <Leader>hh <Plug>(HighlineToggle)
+nmap <Leader>hc <Plug>(HighlineClear)
 " }}}
 " rainbow {{{
 " let g:rainbow_active = 1
