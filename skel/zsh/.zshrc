@@ -118,6 +118,7 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 # alias grep="grep -E"
 alias grep="pcre2grep --color=auto"
 alias sed="sed -E"
+alias pe="perl -e 'while (<stdin>) { eval join (\";\", @ARGV); }'"
 
 
 
