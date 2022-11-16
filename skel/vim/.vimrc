@@ -7,6 +7,8 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 
+" Plugin 'Shougo/deol.nvim'
+
 " Plugin 'Yggdroot/indentLine'
 Plugin 'chrisbra/Colorizer'
 
@@ -24,10 +26,10 @@ Plugin 'airblade/vim-highline'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'scrooloose/nerdcommenter'
 
-" Plugin 'scrooloose/nerdtree'
-" Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 
-" Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 " Plugin 'FredKSchott/CoVim'
 
 Plugin 'baskerville/vim-sxhkdrc'
@@ -147,7 +149,7 @@ noremap <leader>fb :Buffers<cr>
 " inoremap <C-B> <Esc>:Buffers<cr>
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
+  \ 'ctrl-h': 'split',
   \ 'ctrl-v': 'vsplit',
   \ 'ctrl-n': 'tab split' }
 

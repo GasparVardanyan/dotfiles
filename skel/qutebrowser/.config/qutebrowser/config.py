@@ -95,6 +95,7 @@ c.url.searchengines	 = {
 	'/st'				:		'https://userstyles.org/styles/browse?search_terms={}'			,
 	'/su'				:		'https://{}.suckless.org/'										,
 	'/sug'				:		'https://git.suckless.org/{}/log.html'							,
+	'/svg'				:		'https://www.svgrepo.com/vectors/{}/'							,
 	'/sx'				:		'https://paulgo.io/search?q={}'									,
 	'/tp'				:		'https://thepiratebay.org/search.php?q={}'						,
 	'/ub'				:		'https://www.urbandictionary.com/define.php?term={}'			,

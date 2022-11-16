@@ -18,7 +18,7 @@ feeds() {
 	feed "ցանցառներ ռադիօ - Invidious" "https://y.com.sb/feed/channel/UCLjhnWg0f3BeJATvFiLnrJw"
 	feed "ցանցառներ ռադիօ" "https://ռադիօ.ցանցառներ.հայ/index.xml"
 
-	feed ":Բուն TV - Invidious" "https://y.com.sb/feed/channel/UCRrEtoEV1qKbmhL3JHabWSQ"
+	# feed ":Բուն TV - Invidious" "https://y.com.sb/feed/channel/UCRrEtoEV1qKbmhL3JHabWSQ"
 	feed "Լուսնի հակառակ կողմը․․․" "https://www.syuneci.am/rss.xml"
 	feed "օրագիր" "https://օրագիր.հայ/read/feed/"
 	feed "David Rousset" "https://www.davrous.com/feed/"
