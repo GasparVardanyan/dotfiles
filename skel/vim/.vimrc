@@ -9,6 +9,8 @@ Plugin 'VundleVim/Vundle.vim'
 
 " Plugin 'Shougo/deol.nvim'
 
+Plugin 'mbbill/undotree'
+
 " Plugin 'Yggdroot/indentLine'
 Plugin 'chrisbra/Colorizer'
 
