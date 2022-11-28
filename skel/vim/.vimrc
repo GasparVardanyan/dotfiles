@@ -11,6 +11,18 @@ Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'mbbill/undotree'
 
+" Plugin 'WolfgangMehner/awk-support'
+Plugin 'WolfgangMehner/bash-support'
+Plugin 'WolfgangMehner/c-support'
+" Plugin 'WolfgangMehner/git-support'
+" Plugin 'WolfgangMehner/latex-support'
+" Plugin 'WolfgangMehner/lua-support'
+" Plugin 'WolfgangMehner/matlab-support'
+Plugin 'WolfgangMehner/perl-support'
+" Plugin 'WolfgangMehner/python-support'
+" Plugin 'WolfgangMehner/verilog-support'
+Plugin 'WolfgangMehner/vim-support'
+
 " Plugin 'Yggdroot/indentLine'
 Plugin 'chrisbra/Colorizer'
 

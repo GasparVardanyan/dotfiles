@@ -68,7 +68,7 @@ c.tabs.show											=		'always'
 
 
 
-c.url.start_pages		=		['https://duckduckgo.com/']
+c.url.start_pages		=		['https://regexcrossword.com/']
 c.url.default_page		=		'https://duckduckgo.com/'
 
 c.url.searchengines	 = {

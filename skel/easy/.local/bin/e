@@ -89,6 +89,8 @@ du()
 
 	xrandr --output $mon --off
 	xrandr --output $mon --mode 1920x1080 --left-of eDP1
+
+	~/.fehbg
 }
 
 dd()
