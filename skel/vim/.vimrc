@@ -12,16 +12,16 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'mbbill/undotree'
 
 " Plugin 'WolfgangMehner/awk-support'
-Plugin 'WolfgangMehner/bash-support'
+" Plugin 'WolfgangMehner/bash-support'
 Plugin 'WolfgangMehner/c-support'
 " Plugin 'WolfgangMehner/git-support'
 " Plugin 'WolfgangMehner/latex-support'
 " Plugin 'WolfgangMehner/lua-support'
 " Plugin 'WolfgangMehner/matlab-support'
-Plugin 'WolfgangMehner/perl-support'
+" Plugin 'WolfgangMehner/perl-support'
 " Plugin 'WolfgangMehner/python-support'
 " Plugin 'WolfgangMehner/verilog-support'
-Plugin 'WolfgangMehner/vim-support'
+" Plugin 'WolfgangMehner/vim-support'
 
 " Plugin 'Yggdroot/indentLine'
 Plugin 'chrisbra/Colorizer'
@@ -133,6 +133,7 @@ nmap <Leader>hs :nohlsearch<cr>
 
 set background=dark
 set termguicolors
+
 " let g:solarized_extra_hi_groups=1
 " let g:solarized_termtrans=1
 " colorscheme solarized8
