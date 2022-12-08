@@ -15,6 +15,4 @@
 	[].forEach.call(elems, function(el) {
 		el.classList.remove("anim-snow");
 	});
-
-	console.log ('hello!!!');
 })();
