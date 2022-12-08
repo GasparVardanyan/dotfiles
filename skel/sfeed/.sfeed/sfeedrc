@@ -55,7 +55,6 @@ feeds() {
 	feed "Root BSD - Odysee" "https://lbryfeed.melroy.org/channel/rootbsd"
 	feed "SecurityFWD - Invidious" "https://y.com.sb/feed/channel/UCaXV-r0zzGOsVg3V2U164wA"
 	feed "Sir Sudo - Invidious" "https://y.com.sb/feed/channel/UCZEvYxVEr0MMUG2ZCpG8bRA"
-	feed "TED-Ed - Invidious" "https://y.com.sb/feed/channel/UCsooa4yRKGN_zEE8iknghZA"
 	feed "The Hated One - Invidious" "https://y.com.sb/feed/channel/UCjr2bPAyPV7t35MvcgT3W8Q"
 	feed "The Hated One - Odysee" "https://odysee.com/$/rss/@TheHatedOne/1"
 	feed "The Linux Experiment - Invidious" "https://y.com.sb/feed/channel/UC5UAwBUum7CPN5buc-_N1Fw"
@@ -80,6 +79,8 @@ feeds() {
 	feed "pine64" "https://pine64.com/feed/"
 	feed "Joshua Stein" "https://jcs.org/rss"
 	# feed "OpenBSD - Reddit" "https://old.reddit.com/r/openbsd/.rss"
+
+	feed "TED-Ed - Invidious" "https://y.com.sb/feed/channel/UCsooa4yRKGN_zEE8iknghZA"
 
 	[ -f ~/.sfeed/sfeedrcp ] && source ~/.sfeed/sfeedrcp
 

@@ -50,7 +50,7 @@ Plugin 'baskerville/vim-sxhkdrc'
 Plugin 'jceb/vim-orgmode'
 " Plugin 'makerj/vim-pdf'
 Plugin 'plasticboy/vim-markdown'
-Plugin 'peterhoeg/vim-qml'
+" Plugin 'peterhoeg/vim-qml'
 " Plugin 'vim-scripts/c.vim'
 " Plugin 'vimwiki/vimwiki'
 
