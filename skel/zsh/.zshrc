@@ -90,6 +90,7 @@ ttyctl -f
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.zsh.d/bash.command-not-found
+fpath=(~/.zsh.d/ $fpath)
 
 
 
@@ -200,8 +201,8 @@ alias xob="xsel -b"
 alias xop="xsel -p"
 alias xos="xsel -os"
 alias xup="xrdb ~/.Xresources"
-alias yta="youtube-dl -f bestaudio/best -x"
-alias yt="youtube-dl -f 'bestvideo+bestaudio/best'"
+alias yta="yt-dlp -f bestaudio/best -x"
+alias yt="yt-dlp -f 'bestvideo+bestaudio/best'"
 chpwd () { chtitle "$TERMINAL -> $PWD" }
 chtitle () { printf '\33]2;%s\007' $1 }
 dotdiff () {

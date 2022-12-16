@@ -24,7 +24,7 @@ feeds() {
 	feed "David Rousset" "https://www.davrous.com/feed/"
 	feed "Gaspar Vardanyan" "https://gasparvardanyan.github.io/index.xml"
 
-	feed "Bruce Lee - Podcast" 'https://brucelee.com/podcast-blog?format=rss'
+	# feed "Bruce Lee - Podcast" 'https://brucelee.com/podcast-blog?format=rss'
 
 	feed "BlackArch Linux" "https://blackarch.org/rss.xml"
 	feed "Codemadness" "https://www.codemadness.nl/atom.xml"
@@ -74,6 +74,7 @@ feeds() {
 	feed "nullsecurity" "https://github.com/nullsecuritynet/site/commits.atom"
 	feed "qutebrowser" "https://github.com/qutebrowser/qutebrowser/releases.atom"
 	feed "tmp.0ut" "https://github.com/tmpout/tmpout.github.io/commits.atom"
+	feed "XMPP" "https://xmpp.org/blog/index.xml"
 
 	feed "frame.work" "https://frame.work/blog.rss"
 	feed "pine64" "https://pine64.com/feed/"

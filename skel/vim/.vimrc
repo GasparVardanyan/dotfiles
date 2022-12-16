@@ -23,6 +23,8 @@ Plugin 'WolfgangMehner/c-support'
 " Plugin 'WolfgangMehner/verilog-support'
 " Plugin 'WolfgangMehner/vim-support'
 
+" Plugin 'dbeniamine/cheat.sh-vim'
+
 " Plugin 'Yggdroot/indentLine'
 Plugin 'chrisbra/Colorizer'
 
@@ -225,6 +227,9 @@ augroup END
 " }}}
 " colorize custom xdefaults and palettes {{{
 au BufNewFile,BufRead *.xdefaults,*.palette,~/.local/etc/theme* set syntax=xdefaults
+" }}}
+" bs compatibility {{{
+au BufNewFile,BufRead ~/windows/* set ff=dos
 " }}}
 " colorize urxvt config file {{{
 au BufNewFile,BufRead ~/.urxvt/config set filetype=xdefaults
