@@ -19,7 +19,7 @@ fs="dosfstools btrfs-progs"
 arch="arch-wiki-docs arch-wiki-lite pkgfile reflector"
 fonts="ttf-ibm-plex ttf-dejavu ttf-font-awesome otf-font-awesome ttf-hack
 noto-fonts-emoji ttf-joypixels awesome-terminal-fonts"
-media="imagemagick ffmpeg sxiv cmus youtube-dl ffmpegthumbnailer mpv"
+media="imagemagick ffmpeg sxiv cmus opusfile youtube-dl ffmpegthumbnailer mpv"
 docs="man-db man-pages"
 nvim="neovim python-pynvim ctags fzf bat the_silver_searcher fd
 ripgrep ripgrep-all"
