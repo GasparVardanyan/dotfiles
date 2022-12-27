@@ -203,8 +203,8 @@ alias xos="xsel -os"
 alias xup="xrdb ~/.Xresources"
 alias yta="yt-dlp --add-metadata -f bestaudio/best -x"
 alias yt="yt-dlp --add-metadata -f 'bestvideo+bestaudio/best'"
-alias ytpa="yt-dlp --add-metadata -f bestaudio/best -x --download-archive list.txt"
-alias ytp="yt-dlp --add-metadata -f 'bestvideo+bestaudio/best' --download-archive list.txt"
+alias ytpa="yt-dlp --add-metadata -f bestaudio/best -x --download-archive archive.txt"
+alias ytp="yt-dlp --add-metadata -f 'bestvideo+bestaudio/best' --download-archive archive.txt"
 chpwd () { chtitle "$TERMINAL -> $PWD" }
 chtitle () { printf '\33]2;%s\007' $1 }
 dotdiff () {

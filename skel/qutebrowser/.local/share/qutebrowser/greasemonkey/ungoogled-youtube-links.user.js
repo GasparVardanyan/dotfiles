@@ -5,6 +5,7 @@
 // @description Scan page for Youtube embeds and urls and replace with Invidious.
 // @include     *
 // @exclude     /^http(s|)://(www\.|)yewtu\.be/.*$/
+// @exclude     /^http(s|)://(www\.|)y\.com\.sb/.*$/
 // @grant       GM_xmlhttpRequest
 // @version     8.4
 // ==/UserScript==

@@ -76,6 +76,7 @@ c.url.searchengines	 = {
 	'DEFAULT'			:		'https://duckduckgo.com/?q={}'									,
 	'/ai'				:		'https://www.appimagehub.com/find?search={}'					,
 	'/aur'				:		'https://aur.archlinux.org/packages/?O=0&K={}'					,
+	'/ba'				:		'https://bararanonline.com/{}'									,
 	'/duck'				:		'https://duckduckgo.com/?q={}'									,
 	'/fh'				:		'https://flathub.org/apps/search/{}'							,
 	'/gen'				:		'https://libgen.is/search.php?req={}'							,

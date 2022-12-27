@@ -16,7 +16,7 @@ feeds() {
 	feed "antranigv #hy" "https://անդրանիկ.հայ/feed/"
 	feed "խօսենք" "https://խօսենք.ցանցառներ.հայ/rss"
 	feed "ցանցառներ ռադիօ - Invidious" "https://y.com.sb/feed/channel/UCLjhnWg0f3BeJATvFiLnrJw"
-	feed "ցանցառներ ռադիօ" "https://ռադիօ.ցանցառներ.հայ/index.xml"
+	feed "ցանցառներ ռադիօ" "https://ռադիօ.ցանցառներ.հայ/ցանցառներ_ռադիօ.xml"
 
 	# feed ":Բուն TV - Invidious" "https://y.com.sb/feed/channel/UCRrEtoEV1qKbmhL3JHabWSQ"
 	feed "Լուսնի հակառակ կողմը․․․" "https://www.syuneci.am/rss.xml"
