@@ -13,7 +13,7 @@ Plugin 'mbbill/undotree'
 
 " Plugin 'WolfgangMehner/awk-support'
 " Plugin 'WolfgangMehner/bash-support'
-Plugin 'WolfgangMehner/c-support'
+" Plugin 'WolfgangMehner/c-support'
 " Plugin 'WolfgangMehner/git-support'
 " Plugin 'WolfgangMehner/latex-support'
 " Plugin 'WolfgangMehner/lua-support'
