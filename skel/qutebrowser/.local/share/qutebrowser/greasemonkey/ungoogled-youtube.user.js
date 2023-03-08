@@ -9,5 +9,5 @@
 
 (function () {
 	'use strict';
-	top.location.hostname = "y.com.sb";
+	top.location.hostname = "yewtu.be";
 })();

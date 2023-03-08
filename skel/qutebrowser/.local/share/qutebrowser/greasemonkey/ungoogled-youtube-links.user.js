@@ -11,7 +11,7 @@
 // ==/UserScript==
 /* jshint esversion: 6 */
 
-var instance='y.com.sb'; //set you favorite Invidious instance! (https://github.com/omarroth/invidious/wiki/Invidious-Instances)
+var instance='yewtu.be'; //set you favorite Invidious instance! (https://github.com/omarroth/invidious/wiki/Invidious-Instances)
 
 //change script options, default values recommended
 var a=1; //set to 0 to force autoplay off, set to 1 to keep embed's value [default 1]

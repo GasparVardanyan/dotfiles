@@ -55,6 +55,7 @@ Plugin 'plasticboy/vim-markdown'
 " Plugin 'peterhoeg/vim-qml'
 " Plugin 'vim-scripts/c.vim'
 " Plugin 'vimwiki/vimwiki'
+Plugin 'lervag/vimtex'
 
 " Plugin 'vim-syntastic/syntastic'
 " Plugin 'davidhalter/jedi-vim'

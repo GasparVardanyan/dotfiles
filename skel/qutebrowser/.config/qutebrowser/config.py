@@ -110,7 +110,7 @@ c.url.searchengines	 = {
 	'/x'				:		'https://1337x.wtf/search/{}/1/'								,
 	'/yi'				:		'https://yandex.com/images/search?text={}'						,
 	'/yiu'				:		'https://yandex.com/images/search?rpt=imageview&url={}'			,
-	'/yt'				:		'https://y.com.sb/search?q={}'									,
+	'/yt'				:		'https://yewtu.be/search?q={}'									,
 }
 
 
