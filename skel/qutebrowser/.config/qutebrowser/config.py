@@ -107,7 +107,7 @@ c.url.searchengines	 = {
 	'/wg'				:		'https://wiki.gentoo.org/?search={}'							,
 	'/wiki'				:		'https://en.wikipedia.org/w/index.php?search={}'				,
 	'/wp'				:		'https://wallhaven.cc/search?q={}'								,
-	'/x'				:		'https://1337x.wtf/search/{}/1/'								,
+	'/x'				:		'https://1337x.to/search/{}/1/'									,
 	'/yi'				:		'https://yandex.com/images/search?text={}'						,
 	'/yiu'				:		'https://yandex.com/images/search?rpt=imageview&url={}'			,
 	'/yt'				:		'https://yewtu.be/search?q={}'									,

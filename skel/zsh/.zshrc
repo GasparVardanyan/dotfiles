@@ -169,6 +169,9 @@ alias getfeeds='curl "$(xsel -op)" | sfeed_web | cut -f 1'
 alias gfup="git fetch upstream master:upstream"
 alias ginit="git init --initial-branch=master"
 alias glog="git log --oneline"
+gsu() {
+	XAUTHKEY=$(xauth list | grep "$(uname -n)" | cut -f 5 -d ' ') su --whitelist-environment DISPLAY,XAUTHKEY $@ # xauth add $DISPLAY . $XAUTHKEY
+}
 alias gmup="git merge upstream/master master"
 alias hsrv="hugo server --noHTTPCache"
 alias lv="less -ru~ +g"
@@ -188,6 +191,7 @@ alias _="sudo"
 compdef _sudo _
 alias svim="sudo nvim"
 alias sysupgrade="yes | sudo pacman -Scc && (echo -e '\033[1;34m::\033[0;1m Look for the best server...\033[0m' ; sudo reflector --verbose --latest 10 --protocol https --sort rate --save /etc/pacman.d/mirrorlist && sudo pacman -Syu && vim +PluginUpdate) && tldr -u"
+alias S="syncthing serve --no-browser"
 alias tb="t -brief"
 alias t="trans en:hy"
 alias vimupdate="vim +PluginUpdate"
