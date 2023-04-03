@@ -12,6 +12,10 @@
 // @include       https://xn--29ap2a0a1bc.xn--y9aam0eb9a4abc.xn--y9a3aq/*
 // @include       http://*.xn--29ap2a0a1bc.xn--y9aam0eb9a4abc.xn--y9a3aq/*
 // @include       https://*.xn--29ap2a0a1bc.xn--y9aam0eb9a4abc.xn--y9a3aq/*
+// @include       http://xn--y9aal3e5at.xn--y9aam0eb9a4abc.xn--y9a3aq/*
+// @include       https://xn--y9aal3e5at.xn--y9aam0eb9a4abc.xn--y9a3aq/*
+// @include       http://*.xn--y9aal3e5at.xn--y9aam0eb9a4abc.xn--y9a3aq/*
+// @include       https://*.xn--y9aal3e5at.xn--y9aam0eb9a4abc.xn--y9a3aq/*
 // @run-at        document-start
 // @version       0.20170222153618
 // ==/UserScript==
