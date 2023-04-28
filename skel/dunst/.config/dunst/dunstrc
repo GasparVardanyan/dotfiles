@@ -8,7 +8,7 @@
 
 [global]
  frame_color = "#839496"
- font = Monospace 16
+ font = IBM Plex Mono 16
 
 [urgency_normal]
     foreground = "#839496"

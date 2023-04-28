@@ -1,8 +1,8 @@
 #!/bin/sh
 
-choose()
+_choose()
 {
-	if [[ $(echo "$@" | command wc -l) -eq 1 ]]
+	if [[ $(echo "$@" | wc -l) -eq 1 ]]
 	then
 		echo $@
 	else
@@ -10,9 +10,9 @@ choose()
 	fi
 }
 
-lu()
+_lu()
 {
-	iface=$(choose "$(ifconfig -a | grep '^enp' | sed '/^enp2s0:/d;s/:.*//')")
+	iface=$(_choose "$(ifconfig -a | grep '^enp' | sed '/^enp2s0:/d;s/:.*//')")
 
 	[ -z "$iface" ] && exit
 
@@ -20,70 +20,70 @@ lu()
 	sudo dhclient $iface
 }
 
-li()
+_li()
 {
-	iface=$(choose "$(ifconfig -a | grep '^enp' | sed '/^enp2s0:/d;s/:.*//')")
+	iface=$(_choose "$(ifconfig -a | grep '^enp' | sed '/^enp2s0:/d;s/:.*//')")
 
 	[ -z "$iface" ] && exit
 
 	sudo dhclient $iface
 }
 
-ld()
+_ld()
 {
-	iface=$(choose "$(ifconfig -a | grep '^enp' | sed '/^enp2s0:/d;s/:.*//')")
+	iface=$(_choose "$(ifconfig -a | grep '^enp' | sed '/^enp2s0:/d;s/:.*//')")
 
 	[ -z "$iface" ] && exit
 
 	sudo ifconfig $iface down
 }
 
-wu()
+_wu()
 {
 	sudo rfkill unblock wlan
 	sudo ifconfig wlp3s0 up
 }
 
-wi()
+_wi()
 {
 	sudo dhclient wlp3s0
 }
 
-wc()
+_wc()
 {
 	sudo wpa_cli -i wlp3s0
 }
 
-wsu()
+_wsu()
 {
 	sudo systemctl start wpa_supplicant@wlp3s0.service
 	sudo systemctl start dhclient@wlp3s0.service
 }
 
-wsd()
+_wsd()
 {
 	sudo systemctl stop wpa_supplicant@wlp3s0.service
 	sudo systemctl stop dhclient@wlp3s0.service
 }
 
-wd()
+_wd()
 {
 	sudo ifconfig wlp3s0 down
 	sudo rfkill block wlan
 }
 
-wr()
+_wr()
 {
-	wsd
-	wd
-	wu
-	wsu
-	wi
+	_wsd
+	_wd
+	_wu
+	_wsu
+	_wi
 }
 
-du()
+_du()
 {
-	mon=$(choose "$(xrandr | grep '^\w' | sed '1d;/eDP1/d;/disconnected/d' | cut -d ' ' -f1)")
+	mon=$(_choose "$(xrandr | grep '^\w' | sed '1d;/eDP1/d;/disconnected/d' | cut -d ' ' -f1)")
 
 	[ -z "$mon" ] && exit
 
@@ -93,31 +93,31 @@ du()
 	~/.fehbg
 }
 
-dd()
+_dd()
 {
-	mon=$(choose "$(xrandr | grep '^\w' | sed '1d;/eDP1/d;/disconnected/d' | cut -d ' ' -f1)")
+	mon=$(_choose "$(xrandr | grep '^\w' | sed '1d;/eDP1/d;/disconnected/d' | cut -d ' ' -f1)")
 
 	[ -z "$mon" ] && exit
 
 	xrandr --output $mon --off
 }
 
-au()
+_au()
 {
 	rm -rf ~/mnt
 	mkdir -p ~/mnt
-	ad 2>/dev/null
+	_ad 2>/dev/null
 	simple-mtpfs --device 1 ~/mnt
 }
 
-ad()
+_ad()
 {
 	fusermount -u ~/mnt
 }
 
-il()
+_il()
 {
 	ifconfig -a
 }
 
-$1
+_$1
