@@ -252,3 +252,5 @@ w2 () { wttr2 $@ m }
 
 # window title
 chpwd
+
+# echo "$(cat ~/.local/etc/banner)"

@@ -10,6 +10,7 @@ Plugin 'VundleVim/Vundle.vim'
 " Plugin 'Shougo/deol.nvim'
 
 Plugin 'mbbill/undotree'
+" Plugin 'vim-scripts/AnsiEsc.vim'
 
 " Plugin 'WolfgangMehner/awk-support'
 " Plugin 'WolfgangMehner/bash-support'
@@ -55,7 +56,7 @@ Plugin 'plasticboy/vim-markdown'
 " Plugin 'peterhoeg/vim-qml'
 " Plugin 'vim-scripts/c.vim'
 " Plugin 'vimwiki/vimwiki'
-Plugin 'lervag/vimtex'
+" Plugin 'lervag/vimtex'
 
 " Plugin 'vim-syntastic/syntastic'
 " Plugin 'davidhalter/jedi-vim'
@@ -70,7 +71,7 @@ Plugin 'romainl/flattened'
 " Plugin 'bluz71/vim-moonfly-colors'
 " Plugin 'dracula/vim', { 'name': 'dracula' }
 " Plugin 'jnurmine/Zenburn'
-Plugin 'morhetz/gruvbox'
+" Plugin 'morhetz/gruvbox'
 " Plugin 'tomasiser/vim-code-dark'
 
 " GODMODE ON !!!
@@ -194,6 +195,11 @@ nmap [h <Plug>(GitGutterPrevHunk)
 nmap <Leader>hh <Plug>(HighlineToggle)
 xmap <Leader>hh <Plug>(HighlineToggle)
 nmap <Leader>hc <Plug>(HighlineClear)
+" }}}
+" undotree {{{
+let g:undotree_WindowLayout=2
+let g:undotree_DiffpanelHeight=8
+" let g:undotree_DiffCommand = "delta"
 " }}}
 " rainbow {{{
 " let g:rainbow_active = 1

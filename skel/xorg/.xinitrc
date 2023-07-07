@@ -22,41 +22,44 @@ fi
 
 
 
-### autostart ###
-numlockx &
-xcompmgr &
-clipmenud &
-sxhkd &
-kbd &
-# (sleep 2; xrandr --output DP1 --off; xrandr --output DP1 --mode 1366x768 --right-of eDP1; ~/.fehbg 2>/dev/null) &
-~/.fehbg 2>/dev/null &
+if [ "$WM" == "dwm" ]
+then
+	### autostart ###
+	numlockx &
+	xcompmgr &
+	clipmenud &
+	sxhkd &
+	kbd &
+	# (sleep 2; xrandr --output DP1 --off; xrandr --output DP1 --mode 1366x768 --right-of eDP1; ~/.fehbg 2>/dev/null) &
+	~/.fehbg 2>/dev/null &
 
 
 
-### caching ###
-find -L ~/media -type f -not -path '*/\.*' >/dev/null &
-dmenu_path >/dev/null &
-$SHELL -c '' >/dev/null &
-[[ $EDITOR = *vim* ]] && $EDITOR +q >/dev/null &
+	### caching ###
+	find -L ~/media -type f -not -path '*/\.*' >/dev/null &
+	dmenu_path >/dev/null &
+	$SHELL -c '' >/dev/null &
+	[[ $EDITOR = *vim* ]] && $EDITOR +q >/dev/null &
 
 
 
-### todos ###
-while :; do todos=$(cat ~/.todo 2>/dev/null | wc -l); [ $todos != 0 ] && dunstify todo "you have $todos todos!"; sleep $(( 60 * 60 )); done &
+	### todos ###
+	while :; do todos=$(cat ~/.todo 2>/dev/null | wc -l); [ $todos != 0 ] && dunstify todo "you have $todos todos!"; sleep $(( 60 * 60 )); done &
 
 
 
-### feeds ###
-(sleep 30; while :; do sfeed_update; sleep $((30 * 60)); done) &
+	### feeds ###
+	(sleep 30; while :; do sfeed_update; sleep $((30 * 60)); done) &
 
 
 
-### dwm ###
-[ "$WM" == "dwm" ] && while true; do
-	# xsetroot -name "| $(pamixer --get-volume-human) | $(free -h | awk '/^Mem:/ {print $3}') | $(date +'[%u] %d.%m.%Y | %T') | *$(cat ~/.todo | wc -l)* |"
-	dwmstatus
-    sleep 1
-done &
+	### dwm ###
+	[ "$WM" == "dwm" ] && while true; do
+		# xsetroot -name "| $(pamixer --get-volume-human) | $(free -h | awk '/^Mem:/ {print $3}') | $(date +'[%u] %d.%m.%Y | %T') | *$(cat ~/.todo | wc -l)* |"
+		dwmstatus
+		sleep 1
+	done &
+fi
 
 
 

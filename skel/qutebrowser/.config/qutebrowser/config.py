@@ -2,7 +2,7 @@ config.load_autoconfig (True)
 
 
 
-c.fonts.default_family				=		['monospace']
+c.fonts.default_family				=		['IBM Plex Mono']
 c.downloads.location.directory		=		'~'
 c.content.pdfjs						=		False
 # c.content.user_stylesheets			=		'solarized-dark-all-sites.css'
@@ -74,6 +74,7 @@ c.url.default_page		=		'https://duckduckgo.com/'
 c.url.searchengines	 = {
 	# 'DEFAULT'			:		'https://searx.org/?q={}'										,
 	'DEFAULT'			:		'https://duckduckgo.com/?q={}'									,
+	'/'					:		'https://duckduckgo.com/?q={}'									,
 	'/ai'				:		'https://www.appimagehub.com/find?search={}'					,
 	'/aur'				:		'https://aur.archlinux.org/packages/?O=0&K={}'					,
 	'/ba'				:		'https://bararanonline.com/{}'									,

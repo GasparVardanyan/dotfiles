@@ -1,4 +1,5 @@
 export WM=dwm
+# export WM=icewm-session
 export TERMINAL=st
 export SHELL=zsh
 export EDITOR=nvim

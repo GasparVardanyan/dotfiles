@@ -87,8 +87,10 @@ _du()
 
 	[ -z "$mon" ] && exit
 
+	lr=$(_choose "$(echo -e 'left\nright')")
+
 	xrandr --output $mon --off
-	xrandr --output $mon --mode 1920x1080 --left-of eDP1
+	xrandr --output $mon --mode 1920x1080 "--$lr-of" eDP1
 
 	~/.fehbg
 }

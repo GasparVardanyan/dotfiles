@@ -1,5 +1,5 @@
 [Default Applications]
-application/pdf=mupdf.desktop
+application/pdf=org.pwmt.zathura.desktop
 image/gif=sxiv.desktop
 image/jpeg=sxiv.desktop
 image/jpg=sxiv.desktop
