@@ -124,13 +124,10 @@ nmap <Leader>hs :nohlsearch<cr>
 " augroup END
 " }}}
 " Solarized8 {{{
-
 let g:solarized_extra_hi_groups=1
 let g:solarized_termtrans=1
-
 " }}}
 " NeoSolarized {{{
-
 let g:neosolarized_bold = 1
 let g:neosolarized_contrast = "normal"
 let g:neosolarized_italic = 1
@@ -139,10 +136,8 @@ let g:neosolarized_termtrans = 1
 let g:neosolarized_underline = 1
 let g:neosolarized_vertSplitBgTrans = 1
 let g:neosolarized_visibility = "normal"
-
 " }}}
 " colorscheme {{{
-
 set background=dark
 
 let themefile = '~/.local/share/themes/theme.vim'
@@ -157,7 +152,6 @@ else
 	set termguicolors
 	colorscheme NeoSolarized
 endif
-
 " }}}
 " gcrypt {{{
 command -range=% Encrypt execute "'<,'>!gcrypt -S -e \"$(pass show pdata)\" | base64"
