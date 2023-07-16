@@ -23,10 +23,10 @@ super + shift + backslash
 	passmenu --type; xdotool key KP_Enter
 
 super + ctrl + backslash
-	xfill ~/.local/share/logins.list
+	xfill
 
 super + ctrl + shift + backslash
-	xlogin ~/.local/share/logins.list
+	xlogin
 
 super + space
 	kbd toggle && dwmstatus

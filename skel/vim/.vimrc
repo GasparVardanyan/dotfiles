@@ -43,6 +43,7 @@ Plugin 'airblade/vim-rooter'
 Plugin 'airblade/vim-highline'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'editorconfig/editorconfig-vim'
 
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
