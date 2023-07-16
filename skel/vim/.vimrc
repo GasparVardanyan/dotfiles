@@ -36,6 +36,7 @@ Plugin 'chrisbra/Colorizer'
 " Plugin 'vim-airline/vim-airline'
 
 Plugin 'airblade/vim-gitgutter'
+Plugin 'rhysd/git-messenger.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'junegunn/fzf.vim'
 Plugin 'airblade/vim-rooter'
@@ -122,25 +123,13 @@ nmap <Leader>hs :nohlsearch<cr>
 "   autocmd CmdlineLeave [/\?] :set nohlsearch
 " augroup END
 " }}}
-" colorscheme {{{
+" Solarized8 {{{
 
-" set background=dark
-"
-" let themefile = '~/.local/share/themes/theme.vim'
-"
-" if filereadable (expand (themefile))
-"     execute 'source' themefile
-" else
-"     color solarized
-"     call togglebg#map("<F5>")
-" endif
+let g:solarized_extra_hi_groups=1
+let g:solarized_termtrans=1
 
-set background=dark
-set termguicolors
-
-" let g:solarized_extra_hi_groups=1
-" let g:solarized_termtrans=1
-" colorscheme solarized8
+" }}}
+" NeoSolarized {{{
 
 let g:neosolarized_bold = 1
 let g:neosolarized_contrast = "normal"
@@ -150,7 +139,24 @@ let g:neosolarized_termtrans = 1
 let g:neosolarized_underline = 1
 let g:neosolarized_vertSplitBgTrans = 1
 let g:neosolarized_visibility = "normal"
-colorscheme NeoSolarized
+
+" }}}
+" colorscheme {{{
+
+set background=dark
+
+let themefile = '~/.local/share/themes/theme.vim'
+
+if filereadable (expand (themefile))
+	execute 'source' themefile
+else
+	" color solarized
+	" call togglebg#map("<F5>")
+
+	set background=dark
+	set termguicolors
+	colorscheme NeoSolarized
+endif
 
 " }}}
 " gcrypt {{{
