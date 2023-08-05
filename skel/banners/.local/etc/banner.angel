@@ -10,7 +10,7 @@
      ;;;;;;mMSM;     ,_ ;MMmS;;;;;;mmmM;  -,;MMMMMMm;;;;
     ;;;;;;;MMSMM;     \"*;M;( ( '') );m;*"/ ;MMMMMM;;;;;,
    .;;;;;;mMMSMM;      \(@;! _     _ !;@)/ ;MMMMMMMM;;;;;,
-   ;;;;;;;MMSSSM;       ;,;.*o*> <*o*.;m; ;MMMMMMMMM;;;;;;,
+   ;;;;;;;MMSSSM;       ;,;.*\033[1mo\033[0m*> <*\033[1mo\033[0m*.;m; ;MMMMMMMMM;;;;;;,
   .;;;;;;;MMSSSMM;     ;Mm;           ;M;,MMMMMMMMMMm;;;;;;.
   ;;;;;;;mmMSSSMMMM,   ;Mm;,   '-    ,;M;MMMMMMMSMMMMm;;;;;;;
   ;;;;;;;MMMSSSMMMMMMMm;Mm;;,  ___  ,;SmM;MMMMMMSSMMMM;;;;;;;;
@@ -22,7 +22,7 @@
        ;;;; ',    ; .mm!     \.   `.   /  ;MMM' `qSS'    ';;;;;;
        ';;;       ' mmS';     ;     ,  `. ;'M'   `S       ';;;;;
         `;;.        mS;;`;    ;     ;    ;M,!     '        ';;;;
-         ';;       .mS;;, ;   '. o  ;   oMM;                ;;;;
+         ';;       .mS;;, ;   '. \033[1mo\033[0m  ;   \033[1mo\033[0mMM;                ;;;;
           ';;      MMmS;; `,   ;._.' -_.'MM;                 ;;;
            `;;     MMmS;;; ;   ;      ;  MM;                 ;;;
              `'.   'MMmS;; `;) ',    .' ,M;'                 ;;;
