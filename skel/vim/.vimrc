@@ -158,6 +158,22 @@ endif
 command -range=% Encrypt execute "'<,'>!gcrypt -S -e \"$(pass show pdata)\" | base64"
 command -range=% Decrypt execute "'<,'>!base64 -d | gcrypt -S -d \"$(pass show pdata)\""
 " }}}
+" undotree {{{
+noremap <leader>fu :UndotreeToggle<cr>
+
+if has("persistent_undo")
+   let target_path = expand('~/.undodir')
+
+    " create the directory and any parent directories
+    " if the location does not exist.
+    if !isdirectory(target_path)
+        call mkdir(target_path, "p", 0700)
+    endif
+
+    let &undodir=target_path
+    set undofile
+endif
+" }}}
 " fzf {{{
 let $FZF_DEFAULT_OPTS = '--layout=reverse'
 let $FZF_DEFAULT_COMMAND = 'fd --type f'
