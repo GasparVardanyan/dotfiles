@@ -1,9 +1,9 @@
 [Default Applications]
 application/pdf=org.pwmt.zathura.desktop
-image/gif=sxiv.desktop
-image/jpeg=sxiv.desktop
-image/jpg=sxiv.desktop
-image/png=sxiv.desktop
+image/gif=nsxiv.desktop
+image/jpeg=nsxiv.desktop
+image/jpg=nsxiv.desktop
+image/png=nsxiv.desktop
 video/MP2T=mpv.desktop
 video/mp4=mpv.desktop
 video/x-m4v=mpv.desktop
