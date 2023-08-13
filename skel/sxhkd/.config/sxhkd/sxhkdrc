@@ -46,6 +46,9 @@ super + semicolon
 super + shift + semicolon
 	sfl f
 
+super + ctrl + semicolon
+	dmenufm
+
 super + ctrl + l
 	setxkbmap -layout us; slock & sleep .5; xset dpms force off
 

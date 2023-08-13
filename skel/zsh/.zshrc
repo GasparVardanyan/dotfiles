@@ -149,7 +149,7 @@ alias lynx="lynx -display_charset=UTF-8"
 alias mc="mc -S yadt256"
 alias mkdir="mkdir -p"
 alias rm="rm -i"
-alias sxiv="sxiv -b"
+alias sxiv="nsxiv"
 alias tree="tree -fNpugshFviC"
 alias vdir="vdir --color=auto"
 alias space="command vim"
@@ -186,7 +186,7 @@ alias s="sc-im"
 alias spaste="curl -F 'sprunge=<-' http://sprunge.us"
 alias srvcln="wget -r -m -np -nH -R index.html 2> /dev/null"
 alias srv="www --directory ~/.local/srv"
-alias suckless="curl https://git.suckless.org/ 2> /dev/null | grep '<a href=\"' | sed 's/^.*<a href=\".*\/log.html\">\(.*\)<\/a><\/td><td>\(.*$\)/\1|\2/' | column -t -s \|"
+alias suckless="curl https://git.suckless.org/ 2> /dev/null | command grep '<a href=\"' | command sed 's/^.*<a href=\".*\/log.html\">\(.*\)<\/a><\/td><td>\(.*$\)/\1|\2/' | column -t -s \|"
 alias _="sudo"
 compdef _sudo _
 alias svim="sudo nvim"
@@ -232,7 +232,7 @@ dotdiff () {
 			find $1 -type f | \sed "s#$1/\(.[^/]*/\(.*\)\)#cmp -s $1/\1 ~/\2 || echo \1#" | zsh | cat -n
 	elif [[ $3 == '' ]]
 	then
-			find $1 -type f | \sed "s#$1/\(.[^/]*/\(.*\)\)#cmp -s $1/\1 ~/\2 || echo diff --color=auto $1/\1 ~/\2#" | zsh | \sed "$2!d" | zsh
+			find $1 -type f | \sed "s#$1/\(.[^/]*/\(.*\)\)#cmp -s $1/\1 ~/\2 || echo diff -uraN $1/\1 ~/\2 \\\| delta#" | zsh | \sed "$2!d" | zsh
 	elif [[ $3 == 'u' ]]
 	then
 		find $1 -type f | \sed "s#$1/\(.[^/]*/\(.*\)\)#cmp -s $1/\1 ~/\2 || echo cp ~/\2 $1/\1 2\\\\>/dev/null \\\\|\\\\| rm $1/\1#" | zsh | \sed "$2!d" | zsh

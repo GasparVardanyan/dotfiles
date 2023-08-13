@@ -10,6 +10,7 @@ Plugin 'VundleVim/Vundle.vim'
 " Plugin 'Shougo/deol.nvim'
 
 Plugin 'mbbill/undotree'
+Plugin 'dbeniamine/cheat.sh-vim'
 " Plugin 'vim-scripts/AnsiEsc.vim'
 
 " Plugin 'WolfgangMehner/awk-support'
@@ -45,7 +46,7 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'editorconfig/editorconfig-vim'
 
-Plugin 'scrooloose/nerdtree'
+Plugin 'preservim/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 
 Plugin 'ctrlpvim/ctrlp.vim'
@@ -60,10 +61,10 @@ Plugin 'plasticboy/vim-markdown'
 " Plugin 'vimwiki/vimwiki'
 " Plugin 'lervag/vimtex'
 
-" Plugin 'vim-syntastic/syntastic'
+Plugin 'vim-syntastic/syntastic'
 " Plugin 'davidhalter/jedi-vim'
 " Plugin 'xavierd/clang_complete'
-" Plugin 'ycm-core/YouCompleteMe'
+Plugin 'ycm-core/YouCompleteMe'
 
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'lifepillar/vim-solarized8'
@@ -158,21 +159,10 @@ endif
 command -range=% Encrypt execute "'<,'>!gcrypt -S -e \"$(pass show pdata)\" | base64"
 command -range=% Decrypt execute "'<,'>!base64 -d | gcrypt -S -d \"$(pass show pdata)\""
 " }}}
-" undotree {{{
-noremap <leader>fu :UndotreeToggle<cr>
-
-if has("persistent_undo")
-   let target_path = expand('~/.undodir')
-
-    " create the directory and any parent directories
-    " if the location does not exist.
-    if !isdirectory(target_path)
-        call mkdir(target_path, "p", 0700)
-    endif
-
-    let &undodir=target_path
-    set undofile
-endif
+" {{{ ToggleWindows
+noremap <leader>tu :UndotreeToggle<cr>
+noremap <leader>tn :NERDTreeToggle<cr>
+noremap <leader>tt :TagbarToggle<cr>
 " }}}
 " fzf {{{
 let $FZF_DEFAULT_OPTS = '--layout=reverse'
@@ -209,7 +199,6 @@ nmap ]h <Plug>(GitGutterNextHunk)
 nmap [h <Plug>(GitGutterPrevHunk)
 " }}}
 " highline {{{
-nmap <Leader>hh <Plug>(HighlineToggle)
 xmap <Leader>hh <Plug>(HighlineToggle)
 nmap <Leader>hc <Plug>(HighlineClear)
 " }}}
@@ -217,6 +206,19 @@ nmap <Leader>hc <Plug>(HighlineClear)
 let g:undotree_WindowLayout=2
 let g:undotree_DiffpanelHeight=8
 " let g:undotree_DiffCommand = "delta"
+
+if has("persistent_undo")
+   let target_path = expand('~/.undodir')
+
+    " create the directory and any parent directories
+    " if the location does not exist.
+    if !isdirectory(target_path)
+        call mkdir(target_path, "p", 0700)
+    endif
+
+    let &undodir=target_path
+    set undofile
+endif
 " }}}
 " rainbow {{{
 " let g:rainbow_active = 1

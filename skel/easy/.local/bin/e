@@ -92,6 +92,8 @@ _du()
 	xrandr --output $mon --off
 	xrandr --output $mon --mode 1920x1080 "--$lr-of" eDP1
 
+	sleep 1
+
 	~/.fehbg
 }
 
