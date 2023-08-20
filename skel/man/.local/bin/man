@@ -1,0 +1,3 @@
+#!/bin/sh
+
+nvim -c "Man $1" -c "only" -c "set ft=man" -c "nmap q :q<CR>"
