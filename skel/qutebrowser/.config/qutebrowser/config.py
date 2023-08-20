@@ -5,7 +5,6 @@ config.load_autoconfig (True)
 c.fonts.default_family				=		['IBM Plex Mono']
 c.downloads.location.directory		=		'~'
 c.content.pdfjs						=		False
-# c.content.user_stylesheets			=		'solarized-dark-all-sites.css'
 
 
 
@@ -17,17 +16,18 @@ config.bind (	'<Ctrl+Shift+d>'	,	'scroll-page 0 -0.5'																			)
 config.bind (		'<Ctrl+o>'		,	'set-cmd-text :open /'																			)
 config.bind (	'<Ctrl+Shift+o>'	,	'set-cmd-text :open -t /'																		)
 config.bind (			',m'		,	'hint links spawn mpv --fullscreen --ytdl-format="bestvideo+bestaudio/best" {hint-url}'			)
+config.bind (			',p'		,	'spawn mpv --fullscreen --ytdl-format="bestvideo+bestaudio/best" {url:pretty}'					)
 
 
 
 config.bind (
 	',sd',
-	'config-cycle content.user_stylesheets ~/.config/qutebrowser/solarized-everything-css/css/solarized-dark/solarized-dark-all-sites.css ""'
+	'config-cycle content.user_stylesheets solarized-everything-css/css/solarized-dark/solarized-dark-all-sites.css ""'
 )
 
 config.bind (
 	',sl',
-	'config-cycle content.user_stylesheets ~/.config/qutebrowser/solarized-everything-css/css/solarized-light/solarized-light-all-sites.css ""'
+	'config-cycle content.user_stylesheets solarized-everything-css/css/solarized-light/solarized-light-all-sites.css ""'
 )
 
 

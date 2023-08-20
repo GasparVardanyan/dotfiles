@@ -98,7 +98,7 @@ super + ctrl + n
 	$TERMINAL -n pop-up -g 120x30 -e $SHELL -c 'sfeed_curses ~/.sfeed/feeds/*'
 
 super + ctrl + m
-	manbrowse | xargs $TERMINAL -n pop-up -g 120x30 man
+	manbrowse | xargs $TERMINAL -n pop-up -g 120x30 nman
 
 super + ctrl + t
 	$TERMINAL -n pop-up -g 120x30 -e $SHELL -c nvim\ ~/.todo.org

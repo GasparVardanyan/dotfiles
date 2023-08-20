@@ -154,6 +154,7 @@ alias tree="tree -fNpugshFviC"
 alias vdir="vdir --color=auto"
 alias space="command vim"
 alias vim="nvim"
+alias man="nman"
 
 # utility
 alias ccat="pygmentize -g"
