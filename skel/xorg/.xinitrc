@@ -22,6 +22,11 @@ fi
 
 
 
+# run first without -delete to be sure
+find ~/.cache/thumbnails/mpv-gallery/ -maxdepth 1 -type f -amin +$((7 * 60 * 24)) -delete
+
+
+
 if [ "$WM" == "dwm" ]
 then
 	### autostart ###

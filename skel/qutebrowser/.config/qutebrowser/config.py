@@ -9,14 +9,14 @@ c.content.pdfjs						=		False
 
 
 
-config.bind (			'wb'		,	'open -- http://web.archive.org/web/{url:pretty}'									)
-config.bind (			'xx'		,	'config-cycle statusbar.show always never;; config-cycle tabs.show always never'	)
-config.bind (			'yiu'		,	'open -t -- https://yandex.com/images/search?rpt=imageview&url={url:pretty}'		)
-config.bind (			';D'		,	'hint images download'																)
-config.bind (	'<Ctrl+Shift+d>'	,	'scroll-page 0 -0.5'																)
-config.bind (		'<Ctrl+o>'		,	'set-cmd-text :open /'																)
-config.bind (	'<Ctrl+Shift+o>'	,	'set-cmd-text :open -t /'															)
-# config.bind (			'M'			,	'hint links spawn mpv {hint-url}'													)
+config.bind (			'wb'		,	'open -- http://web.archive.org/web/{url:pretty}'												)
+config.bind (			'xx'		,	'config-cycle statusbar.show always never;; config-cycle tabs.show always never'				)
+config.bind (			'yiu'		,	'open -t -- https://yandex.com/images/search?rpt=imageview&url={url:pretty}'					)
+config.bind (			';D'		,	'hint images download'																			)
+config.bind (	'<Ctrl+Shift+d>'	,	'scroll-page 0 -0.5'																			)
+config.bind (		'<Ctrl+o>'		,	'set-cmd-text :open /'																			)
+config.bind (	'<Ctrl+Shift+o>'	,	'set-cmd-text :open -t /'																		)
+config.bind (			',m'		,	'hint links spawn mpv --fullscreen --ytdl-format="bestvideo+bestaudio/best" {hint-url}'			)
 
 
 

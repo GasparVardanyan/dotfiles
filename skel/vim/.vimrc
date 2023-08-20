@@ -10,7 +10,7 @@ Plugin 'VundleVim/Vundle.vim'
 " Plugin 'Shougo/deol.nvim'
 
 Plugin 'mbbill/undotree'
-Plugin 'dbeniamine/cheat.sh-vim'
+" Plugin 'dbeniamine/cheat.sh-vim'
 " Plugin 'vim-scripts/AnsiEsc.vim'
 
 " Plugin 'WolfgangMehner/awk-support'
@@ -160,9 +160,9 @@ command -range=% Encrypt execute "'<,'>!gcrypt -S -e \"$(pass show pdata)\" | ba
 command -range=% Decrypt execute "'<,'>!base64 -d | gcrypt -S -d \"$(pass show pdata)\""
 " }}}
 " {{{ ToggleWindows
-noremap <leader>tu :UndotreeToggle<cr>
 noremap <leader>tn :NERDTreeToggle<cr>
 noremap <leader>tt :TagbarToggle<cr>
+noremap <leader>tu :UndotreeToggle<cr>
 " }}}
 " fzf {{{
 let $FZF_DEFAULT_OPTS = '--layout=reverse'

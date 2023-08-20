@@ -6,7 +6,7 @@ feeds() {
 
 	feed "Awesome ArmDevs" "https://github.com/bugron/awesome-armdevs/commits.atom"
 	feed "Barcamp Yerevan - Invidious" "https://y.com.sb/feed/channel/UCz4Gaw-vexemY-WtB2NJu6w"
-	feed "Lobsters" "https://lobste.rs/rss"
+	# feed "Lobsters" "https://lobste.rs/rss"
 	feed "SWL Armenia - Invidious" "https://y.com.sb/feed/channel/UCRuW04PI8gIw1Wi7ryH3MWg"
 	feed "SWL Armenia" "https://swl.am/index.xml"
 	feed "Sippin' && 'Hackin'" "https://en.syuneci.am/rss.xml"
