@@ -3,9 +3,11 @@ export WM=dwm
 export TERMINAL=st
 export SHELL=zsh
 export EDITOR=nvim
+export VISUAL=nvim
 export BROWSER=qutebrowser
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 export SUDO_ASKPASS="$HOME/.local/bin/dmenupass"
+export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 
 export PATH="$HOME/.local/share/themes/bin:$HOME/.local/bin:$PATH"
 
@@ -18,6 +20,8 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 
 # man colors
+# export MANPAGER="less -R --use-color -Dd+r -Du+b"
+# export MANROFFOPT="-P -c"
 export LESS_TERMCAP_mb=$'\E[1;31m'     # begin bold
 export LESS_TERMCAP_md=$'\E[1;36m'     # begin blink
 export LESS_TERMCAP_me=$'\E[0m'        # reset bold/blink
@@ -34,6 +38,7 @@ export SFEED_URL_FILE="$HOME/.sfeed/urls"
 [ -f "$SFEED_URL_FILE" ] || touch "$SFEED_URL_FILE"
 
 export QT_QPA_PLATFORMTHEME="qt5ct"
+export QT_LOGGING_RULES="*.debug=true"
 
 [[ $SHELL = 'zsh' && -f ~/.zshp ]] && source ~/.zshp
 

@@ -12,6 +12,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'mbbill/undotree'
 " Plugin 'dbeniamine/cheat.sh-vim'
 " Plugin 'vim-scripts/AnsiEsc.vim'
+Plugin 'm00qek/baleia.nvim'
 
 " Plugin 'WolfgangMehner/awk-support'
 " Plugin 'WolfgangMehner/bash-support'
@@ -45,11 +46,12 @@ Plugin 'airblade/vim-highline'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'kshenoy/vim-signature'
 
 Plugin 'preservim/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 
-Plugin 'ctrlpvim/ctrlp.vim'
+" Plugin 'ctrlpvim/ctrlp.vim'
 " Plugin 'FredKSchott/CoVim'
 
 Plugin 'baskerville/vim-sxhkdrc'
@@ -61,14 +63,15 @@ Plugin 'plasticboy/vim-markdown'
 " Plugin 'vimwiki/vimwiki'
 " Plugin 'lervag/vimtex'
 
-" Plugin 'vim-syntastic/syntastic'
+Plugin 'vim-syntastic/syntastic'
 " Plugin 'davidhalter/jedi-vim'
 " Plugin 'xavierd/clang_complete'
-" Plugin 'ycm-core/YouCompleteMe'
+Plugin 'ycm-core/YouCompleteMe'
 
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'lifepillar/vim-solarized8'
 Plugin 'overcache/NeoSolarized'
+" Plugin 'Tsuzat/NeoSolarized.nvim'
 Plugin 'romainl/flattened'
 
 " Plugin 'bluz71/vim-moonfly-colors'
@@ -159,10 +162,11 @@ endif
 command -range=% Encrypt execute "'<,'>!gcrypt -S -e \"$(pass show pdata)\" | base64"
 command -range=% Decrypt execute "'<,'>!base64 -d | gcrypt -S -d \"$(pass show pdata)\""
 " }}}
-" {{{ ToggleWindows
+" {{{ Toggles
 noremap <leader>tn :NERDTreeToggle<cr>
 noremap <leader>tt :TagbarToggle<cr>
 noremap <leader>tu :UndotreeToggle<cr>
+noremap <leader>tc :ColorToggle<cr>
 " }}}
 " fzf {{{
 let $FZF_DEFAULT_OPTS = '--layout=reverse'

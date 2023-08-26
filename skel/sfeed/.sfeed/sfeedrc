@@ -28,6 +28,7 @@ feeds() {
 
 	# feed "Bruce Lee - Podcast" 'https://brucelee.com/podcast-blog?format=rss'
 
+	feed "Arch Linux" "https://archlinux.org/feeds/news/"
 	feed "BlackArch Linux" "https://blackarch.org/rss.xml"
 	feed "Codemadness" "https://www.codemadness.nl/atom.xml"
 	feed "SkullSecurity" "https://blog.skullsecurity.org/feed"
