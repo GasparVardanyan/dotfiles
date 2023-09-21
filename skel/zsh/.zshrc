@@ -154,7 +154,7 @@ alias tree="tree -fNpugshFviC"
 alias vdir="vdir --color=auto"
 alias space="command vim"
 alias vim="nvim"
-alias man="nman"
+# alias man="nman"
 
 # utility
 alias ccat="pygmentize -g"
@@ -246,6 +246,8 @@ dotdiff () {
 }
 enfix () { trans -brief ru:en "$(trans -brief en:ru $@)" }
 gpush () { git add . ; git commit -m "$@" ; git push }
+alias gupdate="gpush update"
+alias gbackup="gpush backup"
 imfixsize () { magick $1 $1 }
 m () { mega-$1 ${@:2} }
 w1 () { wttr $@ m }

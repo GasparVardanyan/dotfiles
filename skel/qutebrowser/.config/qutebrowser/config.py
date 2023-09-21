@@ -13,8 +13,8 @@ config.bind (			'xx'		,	'config-cycle statusbar.show always never;; config-cycle
 config.bind (			'yiu'		,	'open -t -- https://yandex.com/images/search?rpt=imageview&url={url:pretty}'					)
 config.bind (			';D'		,	'hint images download'																			)
 config.bind (	'<Ctrl+Shift+d>'	,	'scroll-page 0 -0.5'																			)
-config.bind (		'<Ctrl+o>'		,	'set-cmd-text :open /'																			)
-config.bind (	'<Ctrl+Shift+o>'	,	'set-cmd-text :open -t /'																		)
+config.bind (		'<Ctrl+o>'		,	'cmd-set-text :open /'																			)
+config.bind (	'<Ctrl+Shift+o>'	,	'cmd-set-text :open -t /'																		)
 config.bind (			',m'		,	'hint links spawn mpv --fullscreen --ytdl-format="bestvideo+bestaudio/best" {hint-url}'			)
 config.bind (			',p'		,	'spawn mpv --fullscreen --ytdl-format="bestvideo+bestaudio/best" {url:pretty}'					)
 
@@ -81,6 +81,7 @@ c.url.searchengines	 = {
 	'/ba'				:		'https://bararanonline.com/{}'									,
 	'/duck'				:		'https://duckduckgo.com/?q={}'									,
 	'/fh'				:		'https://flathub.org/apps/search/{}'							,
+	'/file'				:		'https://fileinfo.com/extension/{}'								,
 	'/gen'				:		'https://libgen.is/search.php?req={}'							,
 	'/gi'				:		'https://github.com/search?q={}'								,
 	'/gp'				:		'https://github.com/{}'											,
@@ -93,6 +94,7 @@ c.url.searchengines	 = {
 	'/pacman'			:		'https://archlinux.org/packages/?q={}'							,
 	'/pdf'				:		'https://www.pdfdrive.com/search?q={}'							,
 	'/pip'				:		'https://pypi.org/search/?q={}'									,
+	'/pw'				:		'https://proofwiki.org/w/index.php?search={}'					,
 	'/r'				:		'https://www.reddit.com/r/{}'									,
 	'/solve'			:		'https://www.symbolab.com/solver/step-by-step/{}'				,
 	'/st'				:		'https://userstyles.org/styles/browse?search_terms={}'			,
@@ -139,7 +141,7 @@ c.colors.webpage.darkmode.enabled = True
 
 
 import os
-themefile = os.getenv ('HOME') + '/.local/share/themes/theme-qutebrowser.py'
+themefile = 'DISABLE' + os.getenv ('HOME') + '/.local/share/themes/theme-qutebrowser.py'
 
 if os.path.exists (themefile) :
 	config.source (themefile)

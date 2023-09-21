@@ -7,10 +7,10 @@
 
 
 [global]
- frame_color = "#839496"
+ frame_color = "#FF0000"
  font = IBM Plex Mono 16
 
 [urgency_normal]
-    foreground = "#839496"
-    background = "#002b36"
+    foreground = "#FF0000"
+    background = "#080000"
  timeout = 0

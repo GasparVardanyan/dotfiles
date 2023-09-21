@@ -41,12 +41,12 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'rhysd/git-messenger.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'junegunn/fzf.vim'
-Plugin 'airblade/vim-rooter'
+" Plugin 'airblade/vim-rooter'
 Plugin 'airblade/vim-highline'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'editorconfig/editorconfig-vim'
-Plugin 'kshenoy/vim-signature'
+" Plugin 'kshenoy/vim-signature'
 
 Plugin 'preservim/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
@@ -63,10 +63,10 @@ Plugin 'plasticboy/vim-markdown'
 " Plugin 'vimwiki/vimwiki'
 " Plugin 'lervag/vimtex'
 
-Plugin 'vim-syntastic/syntastic'
+" Plugin 'vim-syntastic/syntastic'
 " Plugin 'davidhalter/jedi-vim'
 " Plugin 'xavierd/clang_complete'
-Plugin 'ycm-core/YouCompleteMe'
+" Plugin 'ycm-core/YouCompleteMe'
 
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'lifepillar/vim-solarized8'
@@ -81,12 +81,12 @@ Plugin 'romainl/flattened'
 " Plugin 'tomasiser/vim-code-dark'
 
 " GODMODE ON !!!
-Plugin 'othree/eregex.vim'
-Plugin 'jacquesg/p5-Neovim-Ext'
-Plugin 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlight-all-pragmas moose test-more try-tiny' }
-let g:eregex_force_case = 1
-nnoremap <leader>/ :call eregex#toggle()<CR>
-noremap <leader>: :perldo<space>
+" Plugin 'othree/eregex.vim'
+" Plugin 'jacquesg/p5-Neovim-Ext'
+" Plugin 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlight-all-pragmas moose test-more try-tiny' }
+" let g:eregex_force_case = 1
+" nnoremap <leader>/ :call eregex#toggle()<CR>
+" noremap <leader>: :perldo<space>
 
 call vundle#end()
 " }}}
@@ -137,7 +137,7 @@ let g:neosolarized_bold = 1
 let g:neosolarized_contrast = "normal"
 let g:neosolarized_italic = 1
 let g:neosolarized_termBoldAsBright = 1
-let g:neosolarized_termtrans = 1
+let g:neosolarized_termtrans = 0
 let g:neosolarized_underline = 1
 let g:neosolarized_vertSplitBgTrans = 1
 let g:neosolarized_visibility = "normal"

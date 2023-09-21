@@ -22,13 +22,14 @@ export XDG_DATA_HOME="$HOME/.local/share"
 # man colors
 # export MANPAGER="less -R --use-color -Dd+r -Du+b"
 # export MANROFFOPT="-P -c"
-export LESS_TERMCAP_mb=$'\E[1;31m'     # begin bold
-export LESS_TERMCAP_md=$'\E[1;36m'     # begin blink
-export LESS_TERMCAP_me=$'\E[0m'        # reset bold/blink
-export LESS_TERMCAP_so=$'\E[01;44;33m' # begin reverse video
-export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
-export LESS_TERMCAP_us=$'\E[4;32m'     # begin underline
-export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
+export MANPAGER="nvim +Man!"
+# export LESS_TERMCAP_mb=$'\E[1;31m'     # begin bold
+# export LESS_TERMCAP_md=$'\E[1;36m'     # begin blink
+# export LESS_TERMCAP_me=$'\E[0m'        # reset bold/blink
+# export LESS_TERMCAP_so=$'\E[01;44;33m' # begin reverse video
+# export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
+# export LESS_TERMCAP_us=$'\E[4;32m'     # begin underline
+# export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 
 rm -rf ~/.local/tmp
 mkdir ~/.local/tmp
@@ -38,7 +39,8 @@ export SFEED_URL_FILE="$HOME/.sfeed/urls"
 [ -f "$SFEED_URL_FILE" ] || touch "$SFEED_URL_FILE"
 
 export QT_QPA_PLATFORMTHEME="qt5ct"
-export QT_LOGGING_RULES="*.debug=true"
+# export QT_LOGGING_RULES="*.debug=true;*.*=true;*=true"
+export QT_ASSUME_STDERR_HAS_CONSOLE=1
 
 [[ $SHELL = 'zsh' && -f ~/.zshp ]] && source ~/.zshp
 
@@ -47,7 +49,8 @@ if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]
 	# if [ $((($(date +%s) - $(date +%s -r .startx_log.old))/3600)) -ge 6 ]
 	# then
 		clear
-		echo "$(cat ~/.local/etc/issue)"
+		echo "$(cat ~/.local/etc/banner.reaper)"
+		echo "$(cat ~/.local/etc/banner.blackarch)"
 		sleep 3
 	# fi
 
