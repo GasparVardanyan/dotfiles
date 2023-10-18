@@ -12,7 +12,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'mbbill/undotree'
 " Plugin 'dbeniamine/cheat.sh-vim'
 " Plugin 'vim-scripts/AnsiEsc.vim'
-Plugin 'm00qek/baleia.nvim'
+" Plugin 'm00qek/baleia.nvim'
 
 " Plugin 'WolfgangMehner/awk-support'
 " Plugin 'WolfgangMehner/bash-support'
@@ -43,13 +43,14 @@ Plugin 'majutsushi/tagbar'
 Plugin 'junegunn/fzf.vim'
 " Plugin 'airblade/vim-rooter'
 Plugin 'airblade/vim-highline'
-Plugin 'terryma/vim-multiple-cursors'
+" Plugin 'terryma/vim-multiple-cursors'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'editorconfig/editorconfig-vim'
+" Plugin 'editorconfig/editorconfig-vim'
 " Plugin 'kshenoy/vim-signature'
 
-Plugin 'preservim/nerdtree'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
+" Plugin 'preservim/nerdtree'
+" Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
 
 " Plugin 'ctrlpvim/ctrlp.vim'
 " Plugin 'FredKSchott/CoVim'
@@ -67,6 +68,7 @@ Plugin 'plasticboy/vim-markdown'
 " Plugin 'davidhalter/jedi-vim'
 " Plugin 'xavierd/clang_complete'
 " Plugin 'ycm-core/YouCompleteMe'
+" Plugin 'jeaye/color_coded'
 
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'lifepillar/vim-solarized8'
@@ -81,12 +83,12 @@ Plugin 'romainl/flattened'
 " Plugin 'tomasiser/vim-code-dark'
 
 " GODMODE ON !!!
-" Plugin 'othree/eregex.vim'
-" Plugin 'jacquesg/p5-Neovim-Ext'
-" Plugin 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlight-all-pragmas moose test-more try-tiny' }
-" let g:eregex_force_case = 1
-" nnoremap <leader>/ :call eregex#toggle()<CR>
-" noremap <leader>: :perldo<space>
+Plugin 'othree/eregex.vim'
+Plugin 'jacquesg/p5-Neovim-Ext'
+Plugin 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlight-all-pragmas moose test-more try-tiny' }
+let g:eregex_force_case = 1
+nnoremap <leader>/ :call eregex#toggle()<CR>
+noremap <leader>: :perldo<space>
 
 call vundle#end()
 " }}}
@@ -137,7 +139,7 @@ let g:neosolarized_bold = 1
 let g:neosolarized_contrast = "normal"
 let g:neosolarized_italic = 1
 let g:neosolarized_termBoldAsBright = 1
-let g:neosolarized_termtrans = 0
+let g:neosolarized_termtrans = 1
 let g:neosolarized_underline = 1
 let g:neosolarized_vertSplitBgTrans = 1
 let g:neosolarized_visibility = "normal"
@@ -163,7 +165,7 @@ command -range=% Encrypt execute "'<,'>!gcrypt -S -e \"$(pass show pdata)\" | ba
 command -range=% Decrypt execute "'<,'>!base64 -d | gcrypt -S -d \"$(pass show pdata)\""
 " }}}
 " {{{ Toggles
-noremap <leader>tn :NERDTreeToggle<cr>
+noremap <leader>tn :CHADopen<cr>
 noremap <leader>tt :TagbarToggle<cr>
 noremap <leader>tu :UndotreeToggle<cr>
 noremap <leader>tc :ColorToggle<cr>

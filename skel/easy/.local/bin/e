@@ -102,6 +102,8 @@ _dd()
 	[ -z "$mon" ] && exit
 
 	xrandr --output $mon --off
+
+	( sleep 1 ; ~/.fehbg ) &
 }
 
 _au()

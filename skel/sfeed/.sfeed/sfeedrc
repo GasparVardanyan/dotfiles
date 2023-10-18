@@ -4,9 +4,9 @@
 feeds() {
 	# feed <name> <feedurl> [basesiteurl] [encoding]
 
+	# feed "Lobsters" "https://lobste.rs/rss"
 	feed "Awesome ArmDevs" "https://github.com/bugron/awesome-armdevs/commits.atom"
 	feed "Barcamp Yerevan - Invidious" "https://y.com.sb/feed/channel/UCz4Gaw-vexemY-WtB2NJu6w"
-	# feed "Lobsters" "https://lobste.rs/rss"
 	feed "SWL Armenia - Invidious" "https://y.com.sb/feed/channel/UCRuW04PI8gIw1Wi7ryH3MWg"
 	feed "SWL Armenia" "https://swl.am/index.xml"
 	feed "Sippin' && 'Hackin'" "https://en.syuneci.am/rss.xml"
@@ -14,11 +14,12 @@ feeds() {
 	feed "ambug" "https://github.com/ambug/website/commits.atom"
 	feed "antranigv #en" "https://weblog.antranigv.am/feed/"
 	feed "antranigv #hy" "https://անդրանիկ.հայ/feed/"
+	feed "Ռուբենի Բլոգը" "https://rbn.am/index.xml"
 	feed "խօսենք" "https://խօսենք.ցանցառներ.հայ/rss"
 	feed "սարեան" "https://սարեան.ցանցառներ.հայ/rss"
 	feed "ցանցառներ ռադիօ - Invidious" "https://y.com.sb/feed/channel/UCLjhnWg0f3BeJATvFiLnrJw"
-	feed "ցանցառներ ռադիօ" "https://ռադիօ.ցանցառներ.հայ/ցանցառներ_ռադիօ.xml"
 	feed "ցանցառներ ռադիօ - հոսք" "https://ռադիօ.ցանցառներ.հայ/թողարկում/հոսք.xml"
+	feed "ցանցառներ ռադիօ" "https://ռադիօ.ցանցառներ.հայ/ցանցառներ_ռադիօ.xml"
 
 	# feed ":Բուն TV - Invidious" "https://y.com.sb/feed/channel/UCRrEtoEV1qKbmhL3JHabWSQ"
 	feed "Լուսնի հակառակ կողմը․․․" "https://www.syuneci.am/rss.xml"
@@ -79,6 +80,7 @@ feeds() {
 	feed "tmp.0ut" "https://github.com/tmpout/tmpout.github.io/commits.atom"
 	feed "XMPP" "https://xmpp.org/blog/index.xml"
 	feed "CppCast" "https://cppcast.com/feed.rss"
+	# feed "XDA Forums" "https://xdaforums.com/f/-/index.rss"
 
 	feed "frame.work" "https://frame.work/blog.rss"
 	feed "pine64" "https://pine64.com/feed/"

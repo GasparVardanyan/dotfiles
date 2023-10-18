@@ -122,7 +122,7 @@ c.url.searchengines	 = {
 # config.source ("gruvbox.py")
 # config.source ("selenized.py")
 
-c.colors.webpage.darkmode.enabled = True
+# c.colors.webpage.darkmode.enabled = True
 
 
 

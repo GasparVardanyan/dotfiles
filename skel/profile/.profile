@@ -19,6 +19,12 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 
+PATH="/home/gaspar/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/gaspar/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/gaspar/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/gaspar/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/gaspar/perl5"; export PERL_MM_OPT;
+
 # man colors
 # export MANPAGER="less -R --use-color -Dd+r -Du+b"
 # export MANROFFOPT="-P -c"
@@ -49,8 +55,7 @@ if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]
 	# if [ $((($(date +%s) - $(date +%s -r .startx_log.old))/3600)) -ge 6 ]
 	# then
 		clear
-		echo "$(cat ~/.local/etc/banner.reaper)"
-		echo "$(cat ~/.local/etc/banner.blackarch)"
+		echo "$(cat $(find ~/.local/etc/banner* | shuf -n 1))"
 		sleep 3
 	# fi
 

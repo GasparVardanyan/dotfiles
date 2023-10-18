@@ -191,7 +191,7 @@ alias suckless="curl https://git.suckless.org/ 2> /dev/null | command grep '<a h
 alias _="sudo"
 compdef _sudo _
 alias svim="sudo nvim"
-alias sysupgrade="yes | sudo pacman -Scc && (echo -e '\033[1;34m::\033[0;1m Look for the best server...\033[0m' ; sudo reflector --verbose --latest 10 --protocol https --sort rate --save /etc/pacman.d/mirrorlist && sudo pacman -Syu && vim +PluginUpdate) && tldr -u"
+alias sysupgrade="yes | sudo pacman -Scc && (echo -e '\033[1;34m::\033[0;1m Look for the best server...\033[0m' ; sudo reflector --verbose --latest 10 --protocol https --sort rate --save /etc/pacman.d/mirrorlist && sudo pacman -Syyuu && vim +PluginUpdate) && tldr -u"
 alias S="syncthing serve --no-browser"
 alias tb="t -brief"
 alias t="trans en:hy"

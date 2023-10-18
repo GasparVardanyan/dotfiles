@@ -35,6 +35,7 @@ then
 	clipmenud &
 	sxhkd &
 	kbd &
+	syncthing serve --no-browser &
 	# (sleep 2; xrandr --output DP1 --off; xrandr --output DP1 --mode 1366x768 --right-of eDP1; ~/.fehbg 2>/dev/null) &
 	~/.fehbg 2>/dev/null &
 
