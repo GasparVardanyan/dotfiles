@@ -191,7 +191,7 @@ alias suckless="curl https://git.suckless.org/ 2> /dev/null | command grep '<a h
 alias _="sudo"
 compdef _sudo _
 alias svim="sudo nvim"
-alias sysupgrade="yes | sudo pacman -Scc && (echo -e '\033[1;34m::\033[0;1m Look for the best server...\033[0m' ; sudo reflector --verbose --latest 10 --protocol https --sort rate --save /etc/pacman.d/mirrorlist && sudo pacman -Syyuu && vim +PluginUpdate) && tldr -u"
+alias sysupgrade="yes | sudo pacman -Scc && (echo -e '\033[1;34m::\033[0;1m Look for the best server...\033[0m' ; sudo reflector --verbose --latest 10 --protocol https --sort rate --save /etc/pacman.d/mirrorlist && sudo pacman -Syyuu && sudo pacman -Fy && vim +PluginUpdate) && tldr -u"
 alias S="syncthing serve --no-browser"
 alias tb="t -brief"
 alias t="trans en:hy"
@@ -209,7 +209,11 @@ alias xup="xrdb ~/.Xresources"
 alias yta="yt-dlp --embed-thumbnail --add-metadata -f bestaudio/best -x"
 alias yt="yt-dlp --add-metadata -f 'bestvideo+bestaudio/best'"
 alias ytpa="yt-dlp --embed-thumbnail --add-metadata -f bestaudio/best -x --download-archive archive.txt"
+alias ytpau="yt-dlp --embed-thumbnail --add-metadata -f bestaudio/best -x --download-archive archive.txt -a urls.txt"
 alias ytp="yt-dlp --add-metadata -f 'bestvideo+bestaudio/best' --download-archive archive.txt"
+alias ytpu="yt-dlp --add-metadata -f 'bestvideo+bestaudio/best' --download-archive archive.txt -a urls.txt"
+
+alias ytv="mpv --fullscreen --ytdl-format='bestvideo+bestaudio/best'"
 chpwd () { chtitle "$TERMINAL -> $PWD" }
 chtitle () { printf '\33]2;%s\007' $1 }
 dotdiff () {
@@ -248,6 +252,7 @@ enfix () { trans -brief ru:en "$(trans -brief en:ru $@)" }
 gpush () { git add . ; git commit -m "$@" ; git push }
 alias gupdate="gpush update"
 alias gbackup="gpush backup"
+alias gbugfix="gpush bugfix"
 imfixsize () { magick $1 $1 }
 m () { mega-$1 ${@:2} }
 w1 () { wttr $@ m }

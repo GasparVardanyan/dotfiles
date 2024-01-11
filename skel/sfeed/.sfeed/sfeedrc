@@ -4,6 +4,9 @@
 feeds() {
 	# feed <name> <feedurl> [basesiteurl] [encoding]
 
+	feed "Michio Kaku" "http://feeds.feedburner.com/mkaku"
+	feed "StarTalk" "https://y.com.sb/feed/channel/UCqoAEDirJPjEUFcF2FklnBA"
+
 	# feed "Lobsters" "https://lobste.rs/rss"
 	feed "Awesome ArmDevs" "https://github.com/bugron/awesome-armdevs/commits.atom"
 	feed "Barcamp Yerevan - Invidious" "https://y.com.sb/feed/channel/UCz4Gaw-vexemY-WtB2NJu6w"
@@ -64,6 +67,7 @@ feeds() {
 	feed "The Linux Experiment - Invidious" "https://y.com.sb/feed/channel/UC5UAwBUum7CPN5buc-_N1Fw"
 	feed "The Linux Experiment - Odysee" "https://odysee.com/$/rss/@TheLinuxExperiment/e"
 	feed "Wolfgang's Channel - Invidious" "https://y.com.sb/feed/channel/UCsnGwSIHyoYN0kiINAGUKxg"
+	feed "Enrico Tartarotti - Invidious" "https://y.com.sb/feed/channel/UCuQT7Vc3OjjZuGkqehNxb6w"
 
 	feed "C04tl3 - Invidious" "https://y.com.sb/feed/channel/UCZ073r7qPBpFZlslLtmt70w"
 	feed "Planet 9" "http://planet9.cat-v.org/atom.xml"

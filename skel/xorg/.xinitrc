@@ -11,6 +11,13 @@ fi
 
 
 
+# # turn off Display Power Management Service (DPMS)
+# xset -dpms
+# # turn off black Screensaver
+# xset s off
+
+
+
 # virtualbox
 vbox=$(dmesg |grep -io virtualbox)
 if [ ! -z "$vbox" ]
@@ -55,7 +62,21 @@ then
 
 
 	### feeds ###
-	(sleep 30; while :; do sfeed_update; sleep $((30 * 60)); done) &
+	(sleep 30; while :; do touch ~/.local/tmp/sfu; sfeed_update; rm ~/.local/tmp/sfu; sleep $((30 * 60)); done) &
+
+
+
+	### battery ###
+	(while :; do
+		batp="$(upower -i /org/freedesktop/UPower/devices/battery_BAT1 | sed '/ignored/d' | grep percentage | sed 's/[[:space:]]\+.*[[:space:]]\+//;s/%//')"
+		bat_status="$(upower -i /org/freedesktop/UPower/devices/battery_BAT1 | grep state | sed 's/[[:space:]]\+.*[[:space:]]\+//')"
+
+		if [[ $batp -le 20 ]] ; then
+			if [[ $bat_status != 'charging' ]] ; then
+				dunstify Battery "Remaining $batp%"
+			fi
+		fi
+	sleep $((5 * 60)); done) &
 
 
 

@@ -9,6 +9,7 @@
 // @include       https://xn--y9aey5fdz.xn--y9a3aq/*
 // @include       https://y.com.sb/*
 // @include       https://yewtu.be/*
+// @include       https://invidious.nerdvpn.de/*
 // @include       about:blank
 // @run-at        document-start
 // ==/UserScript==

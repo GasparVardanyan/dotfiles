@@ -114,7 +114,7 @@ c.url.searchengines	 = {
 	'/x'				:		'https://1337x.to/search/{}/1/'									,
 	'/yi'				:		'https://yandex.com/images/search?text={}'						,
 	'/yiu'				:		'https://yandex.com/images/search?rpt=imageview&url={}'			,
-	'/yt'				:		'https://yewtu.be/search?q={}'									,
+	'/yt'				:		'https://invidious.nerdvpn.de/search?q={}'						,
 }
 
 
