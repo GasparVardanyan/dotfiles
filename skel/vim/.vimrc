@@ -55,6 +55,7 @@ Plugin 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
 " Plugin 'ctrlpvim/ctrlp.vim'
 " Plugin 'FredKSchott/CoVim'
 
+Plugin 'jdonaldson/vaxe'
 Plugin 'baskerville/vim-sxhkdrc'
 Plugin 'jceb/vim-orgmode'
 " Plugin 'makerj/vim-pdf'

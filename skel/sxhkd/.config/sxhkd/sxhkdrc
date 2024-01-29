@@ -17,10 +17,10 @@ XF86MonBrightness{Up,Down}
 	xbacklight {-inc 10,-dec 10}
 
 super + backslash
-	passmenu --type
+	xpass
 
 super + shift + backslash
-	passmenu --type; xdotool key KP_Enter
+	xpass e
 
 super + ctrl + backslash
 	xfill
@@ -89,7 +89,7 @@ super + ctrl + d
 	dunstctl close-all
 
 super + ctrl + e
-	$TERMINAL -n pop-up -g 120x30 -e $SHELL -c $EDITOR
+	$TERMINAL -n pop-up -g 120x30 -e $SHELL -c "xsel -op | vipe | xsel -ib"
 
 super + ctrl + p
 	$TERMINAL -n pop-up -g 120x30 -e $SHELL -c python\ -q

@@ -8,15 +8,15 @@ c.content.pdfjs						=		False
 
 
 
-config.bind (			'wb'		,	'open -- http://web.archive.org/web/{url:pretty}'												)
-config.bind (			'xx'		,	'config-cycle statusbar.show always never;; config-cycle tabs.show always never'				)
-config.bind (			'yiu'		,	'open -t -- https://yandex.com/images/search?rpt=imageview&url={url:pretty}'					)
-config.bind (			';D'		,	'hint images download'																			)
-config.bind (	'<Ctrl+Shift+d>'	,	'scroll-page 0 -0.5'																			)
-config.bind (		'<Ctrl+o>'		,	'cmd-set-text :open /'																			)
-config.bind (	'<Ctrl+Shift+o>'	,	'cmd-set-text :open -t /'																		)
-config.bind (			',m'		,	'hint links spawn mpv --fullscreen --ytdl-format="bestvideo+bestaudio/best" {hint-url}'			)
-config.bind (			',p'		,	'spawn mpv --fullscreen --ytdl-format="bestvideo+bestaudio/best" {url:pretty}'					)
+config.bind (			'wb'		,	'open -- http://web.archive.org/web/{url:pretty}'														)
+config.bind (			'xx'		,	'config-cycle statusbar.show always never;; config-cycle tabs.show always never'						)
+config.bind (			'yiu'		,	'open -t -- https://yandex.com/images/search?rpt=imageview&url={url:pretty}'							)
+config.bind (			';D'		,	'hint images download'																					)
+config.bind (	'<Ctrl+Shift+d>'	,	'scroll-page 0 -0.5'																					)
+config.bind (		'<Ctrl+o>'		,	'cmd-set-text :open /'																					)
+config.bind (	'<Ctrl+Shift+o>'	,	'cmd-set-text :open -t /'																				)
+config.bind (			',m'		,	'hint links spawn --detach mpv --fullscreen --ytdl-format="bestvideo+bestaudio/best" {hint-url}'		)
+config.bind (			',p'		,	'spawn --detach mpv --fullscreen --ytdl-format="bestvideo+bestaudio/best" {url:pretty}'					)
 
 
 
@@ -57,6 +57,14 @@ config.set (
 	'Mozilla/5.0 (Linux; Android 10) AppleWebKit/537.36 (KHTML,'
 		'like Gecko) Chrome/103.0.5060.53 Mobile Safari/537.36'		,
 	'*://www.udrop.com/*'
+)
+
+# Seems googlE chaT's notifications work only on chromE.
+config.set (
+	'content.headers.user_agent'									,
+	'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+	' (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.3'			,
+	'*://*.google.com/*'
 )
 
 
