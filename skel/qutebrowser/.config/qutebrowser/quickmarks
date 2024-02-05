@@ -5,6 +5,7 @@
 /ak https://ankiweb.net/decks/
 /asm https://gcc.godbolt.org/
 /ba https://bararanonline.com/
+/bard https://bard.google.com/u/1/chat
 /bi https://bitbucket.org/
 /br https://brilliant.org/
 /cf https://codeforces.com/profile/gaspar_cf
@@ -16,6 +17,7 @@
 /dim https://webmail.disroot.org/?_task=mail&_mbox=INBOX
 /dis https://apps.disroot.org/
 /disch https://webchat.disroot.org/
+/dr https://drive.google.com/drive/u/0/my-drive
 /dx https://www.dropbox.com/home
 /el https://app.element.io/
 /fh https://flathub.org/
@@ -40,11 +42,13 @@
 /pd https://piped.adminforge.de/trending
 /pdf https://www.pdfdrive.com/
 /pe https://pedantic.software/philosophy/c89.html
+/pph https://www.peopleperhour.com/dashboard/seller
 /pw https://proofwiki.org/wiki/Main_Page
 /r https://www.reddit.com/
 /ra https://rss.app/myfeeds
 /re https://www.regular-expressions.info/quickstart.html
 /rs https://www.reddit.com/user/GasparVardanyan/saved/
+/sci https://sci-hub.se/
 /skp https://sketch.io/sketchpad/
 /solve https://www.symbolab.com/solver
 /su https://suckless.org/
@@ -61,6 +65,3 @@
 /yl https://e-learning.ysu.am/my/
 /yt https://invidious.nerdvpn.de/
 /yth https://invidious.nerdvpn.de/feed/history
-/dr https://drive.google.com/drive/u/0/my-drive
-/pph https://www.peopleperhour.com/dashboard/seller
-/bard https://bard.google.com/u/1/chat

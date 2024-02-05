@@ -38,7 +38,7 @@ Plugin 'chrisbra/Colorizer'
 " Plugin 'vim-airline/vim-airline'
 
 Plugin 'airblade/vim-gitgutter'
-Plugin 'rhysd/git-messenger.vim'
+" Plugin 'rhysd/git-messenger.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'junegunn/fzf.vim'
 " Plugin 'airblade/vim-rooter'
@@ -50,12 +50,12 @@ Plugin 'scrooloose/nerdcommenter'
 
 " Plugin 'preservim/nerdtree'
 " Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
+" Plugin 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
 
 " Plugin 'ctrlpvim/ctrlp.vim'
 " Plugin 'FredKSchott/CoVim'
 
-Plugin 'jdonaldson/vaxe'
+" Plugin 'jdonaldson/vaxe'
 Plugin 'baskerville/vim-sxhkdrc'
 Plugin 'jceb/vim-orgmode'
 " Plugin 'makerj/vim-pdf'

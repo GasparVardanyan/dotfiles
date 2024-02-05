@@ -1,11 +1,13 @@
 Print
-	scrot -q 100 -e "xclip -sel clip -t image/png \$f; mkdir -p ~/screenshots ; magick \$f \$f ; mv \$f ~/screenshots"
+	# scrot -q 100 -e "xclip -sel clip -t image/png \$f; mkdir -p ~/screenshots ; magick \$f \$f ; mv \$f ~/screenshots"
+	flameshot full $HOME/screenshots
 
 @shift + Print
-	scrot -q 100 -s -e "xclip -sel clip -t image/png \$f; mkdir -p ~/screenshots ; magick \$f \$f ; mv \$f ~/screenshots"
+	flameshot gui
+	# scrot -q 100 -s -e "xclip -sel clip -t image/png \$f; mkdir -p ~/screenshots ; magick \$f \$f ; mv \$f ~/screenshots"
 
-@ctrl + Print
-	scrot -q 100 -u -e "xclip -sel clip -t image/png \$f; mkdir -p ~/screenshots ; magick \$f \$f ; mv \$f ~/screenshots"
+# @ctrl + Print
+#     scrot -q 100 -u -e "xclip -sel clip -t image/png \$f; mkdir -p ~/screenshots ; magick \$f \$f ; mv \$f ~/screenshots"
 
 XF86Audio{RaiseVolume,LowerVolume,Mute,MicMute}
 	pamixer {-i 5,-d 5,-t,-t} && dwmstatus

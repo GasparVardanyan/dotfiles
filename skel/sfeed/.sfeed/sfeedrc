@@ -6,6 +6,7 @@ feeds() {
 
 	feed "Michio Kaku" "http://feeds.feedburner.com/mkaku"
 	feed "StarTalk" "https://y.com.sb/feed/channel/UCqoAEDirJPjEUFcF2FklnBA"
+	feed "Up and Atom - Invidious" "https://y.com.sb/feed/channel/UCSIvk78tK2TiviLQn4fSHaw"
 
 	# feed "Lobsters" "https://lobste.rs/rss"
 	feed "Awesome ArmDevs" "https://github.com/bugron/awesome-armdevs/commits.atom"
