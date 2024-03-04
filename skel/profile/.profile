@@ -10,6 +10,7 @@ export SUDO_ASKPASS="$HOME/.local/bin/dmenupass"
 export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 
 export PATH="$HOME/.local/share/themes/bin:$HOME/.local/bin:$PATH"
+export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
 
 export CPATH="$HOME/.local/include:$CPATH"
 export LD_LIBRARY_PATH="$HOME/.local/lib:$LD_LIBRARY_PATH"
@@ -44,6 +45,7 @@ TMPDIR=$HOME/.local/tmp
 export SFEED_URL_FILE="$HOME/.sfeed/urls"
 [ -f "$SFEED_URL_FILE" ] || touch "$SFEED_URL_FILE"
 
+export QT_MEDIA_BACKEND=gstreamer
 export QT_QPA_PLATFORMTHEME="qt5ct"
 # export QT_LOGGING_RULES="*.debug=true;*.*=true;*=true"
 export QT_ASSUME_STDERR_HAS_CONSOLE=1

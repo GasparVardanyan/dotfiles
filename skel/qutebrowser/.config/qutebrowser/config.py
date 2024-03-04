@@ -15,8 +15,10 @@ config.bind (			';D'		,	'hint images download'																					)
 config.bind (	'<Ctrl+Shift+d>'	,	'scroll-page 0 -0.5'																					)
 config.bind (		'<Ctrl+o>'		,	'cmd-set-text :open /'																					)
 config.bind (	'<Ctrl+Shift+o>'	,	'cmd-set-text :open -t /'																				)
-config.bind (			',m'		,	'hint links spawn --detach mpv --fullscreen --ytdl-format="bestvideo+bestaudio/best" {hint-url}'		)
-config.bind (			',p'		,	'spawn --detach mpv --fullscreen --ytdl-format="bestvideo+bestaudio/best" {url:pretty}'					)
+config.bind (			',m'		,
+				'hint links spawn --detach mpv --fullscreen --ytdl-format="bestvideo[width<=1920][height<=1080]+bestaudio/best" {hint-url}'		)
+config.bind (			',p'		,
+				'spawn --detach mpv --fullscreen --ytdl-format="bestvideo[width<=1920][height<=1080]+bestaudio/best" {url:pretty}'				)
 
 
 

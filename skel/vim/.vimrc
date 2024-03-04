@@ -71,11 +71,12 @@ Plugin 'plasticboy/vim-markdown'
 " Plugin 'ycm-core/YouCompleteMe'
 " Plugin 'jeaye/color_coded'
 
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'lifepillar/vim-solarized8'
+" Plugin 'altercation/vim-colors-solarized'
+" Plugin 'lifepillar/vim-solarized8'
 Plugin 'overcache/NeoSolarized'
+" Plugin 'Tsuzat/NeoSolarized.nvim', { 'branch': 'master' }
 " Plugin 'Tsuzat/NeoSolarized.nvim'
-Plugin 'romainl/flattened'
+" Plugin 'romainl/flattened'
 
 " Plugin 'bluz71/vim-moonfly-colors'
 " Plugin 'dracula/vim', { 'name': 'dracula' }
@@ -137,11 +138,11 @@ let g:solarized_termtrans=1
 " }}}
 " NeoSolarized {{{
 let g:neosolarized_bold = 1
-let g:neosolarized_contrast = "normal"
-let g:neosolarized_italic = 1
-let g:neosolarized_termBoldAsBright = 1
-let g:neosolarized_termtrans = 1
 let g:neosolarized_underline = 1
+let g:neosolarized_italic = 1
+let g:neosolarized_contrast = "normal"
+let g:neosolarized_termBoldAsBright = 1
+let g:neosolarized_termtrans = 0
 let g:neosolarized_vertSplitBgTrans = 1
 let g:neosolarized_visibility = "normal"
 " }}}
@@ -158,7 +159,8 @@ else
 
 	set background=dark
 	set termguicolors
-	colorscheme NeoSolarized
+	" colorscheme NeoSolarized
+	colorscheme selenized_bw
 endif
 " }}}
 " gcrypt {{{
