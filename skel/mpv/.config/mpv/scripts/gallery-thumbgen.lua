@@ -151,40 +151,70 @@ function thumbnail_command(input_path, width, height, take_thumbnail_at, output_
 
     if not with_mpv then
         out = { "ffmpeg" }
-        if is_video(input_path) then
-            if string.sub(take_thumbnail_at, -1) == "%" then
-                --if only fucking ffmpeg supported percent-style seeking
-                local res = utils.subprocess({ args = {
-                    "ffprobe", "-v", "error",
-                    "-show_entries", "format=duration", "-of",
-                    "default=noprint_wrappers=1:nokey=1", input_path
-                }, cancellable = false })
-                if res.status == 0 then
-                    local duration = tonumber(string.match(res.stdout, "^%s*(.-)%s*$"))
-                    if duration then
-                        local percent = tonumber(string.sub(take_thumbnail_at, 1, -2))
-                        local start = tostring(duration * percent / 100)
-                        add({ "-ss", start })
-                    end
-                end
-            else
-                add({ "-ss", take_thumbnail_at })
+
+        local localThumbnail = false
+
+        -- local dir, file = input_path:match("^(.-)([^/]+)%.(" .. table.concat (video_extensions, "|") .. ")$")
+        --          Lua pattern matching doesn't support alternation, so for now this will work only for mkv files
+
+        local dir, file = input_path:match("^(.-)([^/]+)%.mkv$")
+
+        if dir and file then
+            local thumbnail_path = dir .. ".thumbnails/" .. file .. ".jpg"
+
+            local file = io.open(thumbnail_path, "r")
+            if file then
+                file:close()
+                localThumbnail = true
+                add({
+                    "-i", thumbnail_path,
+                    "-vf", vf,
+                    "-map", "v:0",
+                    "-f", "rawvideo",
+                    "-pix_fmt", "bgra",
+                    "-c:v", "rawvideo",
+                    "-frames:v", "1",
+                    "-y", "-loglevel", "quiet",
+                    output_path
+                })
             end
         end
-        if not accurate then
-            add({"-noaccurate_seek"})
+        if not localThumbnail then
+            if is_video(input_path) then
+                if string.sub(take_thumbnail_at, -1) == "%" then
+                    --if only fucking ffmpeg supported percent-style seeking
+                    local res = utils.subprocess({ args = {
+                        "ffprobe", "-v", "error",
+                        "-show_entries", "format=duration", "-of",
+                        "default=noprint_wrappers=1:nokey=1", input_path
+                    }, cancellable = false })
+                    if res.status == 0 then
+                        local duration = tonumber(string.match(res.stdout, "^%s*(.-)%s*$"))
+                        if duration then
+                            local percent = tonumber(string.sub(take_thumbnail_at, 1, -2))
+                            local start = tostring(duration * percent / 100)
+                            add({ "-ss", start })
+                        end
+                    end
+                else
+                    add({ "-ss", take_thumbnail_at })
+                end
+            end
+            if not accurate then
+                add({"-noaccurate_seek"})
+            end
+            add({
+                "-i", input_path,
+                "-vf", vf,
+                "-map", "v:0",
+                "-f", "rawvideo",
+                "-pix_fmt", "bgra",
+                "-c:v", "rawvideo",
+                "-frames:v", "1",
+                "-y", "-loglevel", "quiet",
+                output_path
+            })
         end
-        add({
-            "-i", input_path,
-            "-vf", vf,
-            "-map", "v:0",
-            "-f", "rawvideo",
-            "-pix_fmt", "bgra",
-            "-c:v", "rawvideo",
-            "-frames:v", "1",
-            "-y", "-loglevel", "quiet",
-            output_path
-        })
     else
         out = { "mpv", input_path }
         if take_thumbnail_at ~= "0" and is_video(input_path) then

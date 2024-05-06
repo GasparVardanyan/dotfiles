@@ -11,10 +11,10 @@ fi
 
 
 
-# # turn off Display Power Management Service (DPMS)
-# xset -dpms
-# # turn off black Screensaver
-# xset s off
+# turn off Display Power Management Service (DPMS)
+xset -dpms
+# turn off black Screensaver
+xset s off
 
 
 
@@ -30,6 +30,7 @@ fi
 
 
 # run first without -delete to be sure
+mkdir -p ~/.cache/thumbnails/mpv-gallery
 find ~/.cache/thumbnails/mpv-gallery/ -maxdepth 1 -type f -amin +$((7 * 60 * 24)) -delete
 
 

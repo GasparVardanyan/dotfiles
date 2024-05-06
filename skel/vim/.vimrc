@@ -102,8 +102,7 @@ syntax on
 autocmd FileType vim setlocal foldmethod=marker | norm zM
 " }}}
 " specific settings {{{
-set colorcolumn=80
-set cursorline
+set colorcolumn=81
 set exrc
 set foldlevel=99
 set foldmethod=indent
@@ -124,6 +123,11 @@ let g:python_recommended_style = 0
 
 nmap <Leader>hs :nohlsearch<cr>
 " }}}
+" cursorline {{{
+au WinLeave * set nocursorline
+au WinEnter * set cursorline
+set cursorline
+" }}}
 " {{{ enable highlighting all the matches only in incsearch mode
 " set nohlsearch
 " augroup vimrc-incsearch-highlight
@@ -142,7 +146,7 @@ let g:neosolarized_underline = 1
 let g:neosolarized_italic = 1
 let g:neosolarized_contrast = "normal"
 let g:neosolarized_termBoldAsBright = 1
-let g:neosolarized_termtrans = 0
+let g:neosolarized_termtrans = 1
 let g:neosolarized_vertSplitBgTrans = 1
 let g:neosolarized_visibility = "normal"
 " }}}
@@ -159,13 +163,13 @@ else
 
 	set background=dark
 	set termguicolors
-	" colorscheme NeoSolarized
-	colorscheme selenized_bw
+	colorscheme NeoSolarized
+	" colorscheme selenized_bw
 endif
 " }}}
 " gcrypt {{{
-command -range=% Encrypt execute "'<,'>!gcrypt -S -e \"$(pass show pdata)\" | base64"
-command -range=% Decrypt execute "'<,'>!base64 -d | gcrypt -S -d \"$(pass show pdata)\""
+command -range=% Encrypt execute "'<,'>!gcrypt -S -e \"$(pass show pdata1)\" | base64"
+command -range=% Decrypt execute "'<,'>!base64 -d | gcrypt -S -d \"$(pass show pdata1)\""
 " }}}
 " {{{ Toggles
 noremap <leader>tn :CHADopen<cr>
@@ -174,7 +178,7 @@ noremap <leader>tu :UndotreeToggle<cr>
 noremap <leader>tc :ColorToggle<cr>
 " }}}
 " fzf {{{
-let $FZF_DEFAULT_OPTS = '--layout=reverse'
+let $FZF_DEFAULT_OPTS = '--layout=reverse --color fg:-1,bg:-1,hl:#268bd2,fg+:#eee8d5,bg+:#073642,hl+:#268bd2 --color info:#b58900,prompt:#b58900,pointer:#fdf6e3,marker:#fdf6e3,spinner:#b58900'
 let $FZF_DEFAULT_COMMAND = 'fd --type f'
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9, 'relative': v:false } }
 let g:fzf_preview_window = ['right:50%', 'ctrl-/']
@@ -344,4 +348,11 @@ endif
 if !isdirectory(expand(&directory))
     call mkdir(expand(&directory), "p")
 endif
+" }}}
+" utility {{{
+function GetM3UHeader()
+	norm O#EXTINF:,j0f=lvg_"*yk
+	read !mediainfo --Output='General;\%Movie\%' -- "$(xsel -op)".mkv
+	norm kJxjj
+endfunction
 " }}}
