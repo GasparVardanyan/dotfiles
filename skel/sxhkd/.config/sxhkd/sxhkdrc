@@ -105,12 +105,13 @@ super + ctrl + m
 super + ctrl + t
 	$TERMINAL -n pop-up -g 120x30 -e $SHELL -c nvim\ ~/.todo.org
 
-super + x
-	[[ "$(pgrep keym)" = '' ]] && (				\
-		dunstify "keym on" -r 1112 -t 3000		\
-		; keym									\
-		; dunstify "keym off" -r 1112 -t 3000	\
-	)
+# super + x
+#     [[ "$(pgrep keym)" = '' ]] && (				\
+#         dunstify "keym on" -r 1112 -t 3000		\
+#         ; setxkbmap -layout us					\
+#         ; keym									\
+#         ; dunstify "keym off" -r 1112 -t 3000	\
+#     )
 
 super + e
 	emo
