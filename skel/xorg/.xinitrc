@@ -11,10 +11,13 @@ fi
 
 
 
-# turn off Display Power Management Service (DPMS)
-xset -dpms
-# turn off black Screensaver
-xset s off
+(
+	sleep 2
+	# turn off Display Power Management Service (DPMS)
+	xset -dpms
+	# turn off black Screensaver
+	xset s off
+)
 
 
 

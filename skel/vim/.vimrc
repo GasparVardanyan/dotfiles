@@ -57,6 +57,7 @@ Plugin 'scrooloose/nerdcommenter'
 
 " Plugin 'jdonaldson/vaxe'
 Plugin 'baskerville/vim-sxhkdrc'
+Plugin 'tpope/vim-speeddating'
 Plugin 'jceb/vim-orgmode'
 " Plugin 'makerj/vim-pdf'
 Plugin 'plasticboy/vim-markdown'
@@ -350,9 +351,16 @@ if !isdirectory(expand(&directory))
 endif
 " }}}
 " utility {{{
-function GetM3UHeader()
+function GetM3UHeaderA()
+	norm O#EXTINF:,j0f=lvg_"*yk
+	" read !mediainfo --Output='General;\%Movie\%' -- "$(xsel -op)".mkv
+	read !mediainfo --Output='General;\%Track\%' -- "$(xsel -op)".opus
+	norm kJxjj
+endfunction
+function GetM3UHeaderV()
 	norm O#EXTINF:,j0f=lvg_"*yk
 	read !mediainfo --Output='General;\%Movie\%' -- "$(xsel -op)".mkv
+	" read !mediainfo --Output='General;\%Track\%' -- "$(xsel -op)".opus
 	norm kJxjj
 endfunction
 " }}}

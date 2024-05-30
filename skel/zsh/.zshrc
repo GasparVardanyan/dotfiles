@@ -317,6 +317,7 @@ w2 () { wttr2 $@ m }
 
 nt () { nsxiv -e $XEMBED $@ }
 mt () { mpv --wid=$XEMBED $@ }
+compdef _mpv mt
 
 # window title
 chpwd
