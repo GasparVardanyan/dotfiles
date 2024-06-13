@@ -45,7 +45,7 @@ TMPDIR=$HOME/.local/tmp
 export SFEED_URL_FILE="$HOME/.sfeed/urls"
 [ -f "$SFEED_URL_FILE" ] || touch "$SFEED_URL_FILE"
 
-export QT_MEDIA_BACKEND=gstreamer
+# export QT_MEDIA_BACKEND=gstreamer
 export QT_QPA_PLATFORMTHEME="qt5ct"
 # export QT_LOGGING_RULES="*.debug=true;*.*=true;*=true"
 export QT_ASSUME_STDERR_HAS_CONSOLE=1

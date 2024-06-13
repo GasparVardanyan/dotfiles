@@ -17,7 +17,7 @@ fi
 	xset -dpms
 	# turn off black Screensaver
 	xset s off
-)
+) &
 
 
 

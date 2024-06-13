@@ -1,7 +1,7 @@
 #!/bin/sh
 
 base="base base-devel linux linux-firmware amd-ucode intel-ucode linux-headers
-efibootmgr grub pulseaudio sof-firmware"
+efibootmgr grub pulseaudio sof-firmware alsa-utils alsa-firmware alsa-plugins"
 xorg="xorg-server xorg-drivers xorg-xinit xterm xsel xclip xorg-xbacklight
 xcompmgr sxhkd libinput"
 cli="vi sudo tmux tree dialog htop git translate-shell exa git-delta mediainfo
