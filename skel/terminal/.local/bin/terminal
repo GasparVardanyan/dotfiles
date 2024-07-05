@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+
+l=$(echo -e "blackarch\nwork" | sort | dmenu -p 'terminal: ' -l 20)
+if [ "$l" != '' ]
+then
+	case "$l" in
+		blackarch)
+			st_redish -n pop-up -g 120x30 -e sh -c 'sudo blackarch'
+		;;
+		work)
+			st_leet -n pop-up -g 120x30 -e sh -c 'sudo work'
+		;;
+		*)
+		;;
+	esac
+fi

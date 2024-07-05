@@ -103,7 +103,7 @@ super + ctrl + n
 	$TERMINAL -n pop-up -g 120x30 -e $SHELL -c 'sfeed_curses ~/.sfeed/feeds/*'
 
 super + ctrl + m
-	manbrowse | xargs $TERMINAL -n pop-up -g 120x30 nman
+	manbrowse
 
 super + ctrl + t
 	$TERMINAL -n pop-up -g 120x30 -e $SHELL -c nvim\ ~/.todo.org
@@ -121,3 +121,9 @@ super + e
 
 super + a
 	magick -size 1x1 canvas:white .local/tmp/lightscreen.png; feh --zoom fill -F .local/tmp/lightscreen.png
+
+super + shift + a
+	magick -size 1x1 canvas:black .local/tmp/darkscreen.png; feh --zoom fill -F .local/tmp/darkscreen.png
+
+super + ctrl + shift + s
+	terminal

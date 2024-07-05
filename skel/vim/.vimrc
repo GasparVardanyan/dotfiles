@@ -147,7 +147,7 @@ let g:neosolarized_underline = 1
 let g:neosolarized_italic = 1
 let g:neosolarized_contrast = "normal"
 let g:neosolarized_termBoldAsBright = 1
-let g:neosolarized_termtrans = 1
+let g:neosolarized_termtrans = 0
 let g:neosolarized_vertSplitBgTrans = 1
 let g:neosolarized_visibility = "normal"
 " }}}
@@ -162,15 +162,15 @@ else
 	" color solarized
 	" call togglebg#map("<F5>")
 
-	set background=dark
+	set background=light
 	set termguicolors
 	colorscheme NeoSolarized
 	" colorscheme selenized_bw
 endif
 " }}}
 " gcrypt {{{
-command -range=% Encrypt execute "'<,'>!gcrypt -S -e \"$(pass show pdata1)\" | base64"
-command -range=% Decrypt execute "'<,'>!base64 -d | gcrypt -S -d \"$(pass show pdata1)\""
+command -range=% Encrypt execute "'<,'>!gcrypt -S -e \"$(pass show pdata)\" | base64"
+command -range=% Decrypt execute "'<,'>!base64 -d | gcrypt -S -d \"$(pass show pdata)\""
 " }}}
 " {{{ Toggles
 noremap <leader>tn :CHADopen<cr>
