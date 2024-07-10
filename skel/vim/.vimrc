@@ -147,7 +147,7 @@ let g:neosolarized_underline = 1
 let g:neosolarized_italic = 1
 let g:neosolarized_contrast = "normal"
 let g:neosolarized_termBoldAsBright = 1
-let g:neosolarized_termtrans = 0
+let g:neosolarized_termtrans = 1
 let g:neosolarized_vertSplitBgTrans = 1
 let g:neosolarized_visibility = "normal"
 " }}}
@@ -162,7 +162,7 @@ else
 	" color solarized
 	" call togglebg#map("<F5>")
 
-	set background=light
+	set background=dark
 	set termguicolors
 	colorscheme NeoSolarized
 	" colorscheme selenized_bw

@@ -1,11 +1,9 @@
-# 0 "solarized-light.xdefaults"
+# 0 "solarized-dark.xdefaults"
 # 0 "<built-in>"
 # 0 "<command-line>"
 # 1 "/usr/include/stdc-predef.h" 1 3 4
 # 0 "<command-line>" 2
-# 1 "solarized-light.xdefaults"
-
-# 1 "solarized-dark.xdefaults" 1
+# 1 "solarized-dark.xdefaults"
 # 1 "solarized.palette" 1
 ! Solarized color scheme for the X Window System
 !
@@ -33,64 +31,65 @@
 
 
 ! Common
-# 53 "solarized.palette"
-!
+# 40 "solarized.palette"
+! Dark
 # 67 "solarized.palette"
 ! To only apply colors to your terminal, for example, prefix
 ! the color assignment statement with its name. Example:
 !
-! URxvt*background: #fdf6e3
+! URxvt*background: #002b36
 
-*background: #fdf6e3
-*foreground: #657b83
+*background: #002b36
+*foreground: #839496
 *fading: 40
-*fadeColor: #fdf6e3
-*cursorColor: #586e75
-*pointerColorBackground: #93a1a1
-*pointerColorForeground: #586e75
+*fadeColor: #002b36
+*cursorColor: #93a1a1
+*pointerColorBackground: #586e75
+*pointerColorForeground: #93a1a1
 
-*color0: #eee8d5
+*color0: #073642
 *color1: #dc322f
 *color2: #859900
 *color3: #b58900
 *color4: #268bd2
 *color5: #d33682
 *color6: #2aa198
-*color7: #073642
+*color7: #eee8d5
 *color9: #cb4b16
-*color8: #fdf6e3
-*color10: #93a1a1
-*color11: #839496
-*color12: #657b83
+*color8: #002b36
+*color10: #586e75
+*color11: #657b83
+*color12: #839496
 *color13: #6c71c4
-*color14: #586e75
-*color15: #002b36
+*color14: #93a1a1
+*color15: #fdf6e3
 # 2 "solarized-dark.xdefaults" 2
-# 13 "solarized-dark.xdefaults"
-qutebrowser*theme: solarized-light-qutebrowser
 
 
 
+
+
+qutebrowser*theme: solarized-dark-qutebrowser
+# 17 "solarized-dark.xdefaults"
 wallpaper: cubes
 vim*theme: solarized
 
 dwm*barSingleBg: 1
 dwm*borderpx: 6
-dwm*foreground: #657b83
-dwm*background: #fdf6e3
-dwm*border: #eee8d5
-dwm*selforeground: #586e75
-dwm*selbackground: #e9e4d0
-dwm*selborder: #e9e4d0
+dwm*foreground: #839496
+dwm*background: #002b36
+dwm*border: #073642
+dwm*selforeground: #93a1a1
+dwm*selbackground: #174956
+dwm*selborder: #174956
 st*boldIsBright: 0
-st*cursorColor: #586e75
-st*revCurColor: #93a1a1
-dmenu*foreground: #657b83
-dmenu*background: #fdf6e3
-dmenu*selforeground: #002b36
-dmenu*selbackground: #eee8d5
-tabbed*foreground: #657b83
-tabbed*background: #eee8d5
-tabbed*selforeground: #002b36
-tabbed*selbackground: #fdf6e3
-# 3 "solarized-light.xdefaults" 2
+st*cursorColor: #93a1a1
+st*revCurColor: #586e75
+dmenu*foreground: #839496
+dmenu*background: #002b36
+dmenu*selforeground: #fdf6e3
+dmenu*selbackground: #073642
+tabbed*foreground: #839496
+tabbed*background: #073642
+tabbed*selforeground: #fdf6e3
+tabbed*selbackground: #002b36
