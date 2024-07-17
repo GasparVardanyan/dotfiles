@@ -2,6 +2,7 @@
 
 WORK_MOUNTED=/tmp/WORK_MOUNTED
 BLACKARCH_MOUNTED=/tmp/BLACKARCH_MOUNTED
+ARCHDRIVE_MOUNTED=/tmp/ARCHDRIVE_MOUNTED
 
 login_work() {
 	if [ ! -f "$WORK_MOUNTED" ]
@@ -24,9 +25,9 @@ login_work() {
 }
 
 _logout_work() {
-	rm "$WORK_MOUNTED"
-	umount /work/proc/
-	umount /work/sys/
+	umount /work/proc/ && \
+		umount /work/sys/ && \
+			rm "$WORK_MOUNTED"
 }
 
 login_blackarch() {
@@ -49,16 +50,37 @@ login_blackarch() {
 }
 
 _logout_blackarch() {
-	rm "$BLACKARCH_MOUNTED"
-	umount /blackarch/proc/
-	umount /blackarch/sys/
+	umount /blackarch/proc/ && \
+		umount /blackarch/sys/ && \
+			rm "$BLACKARCH_MOUNTED"
+}
+
+login_archdrive() {
+	if [ ! -f "$ARCHDRIVE_MOUNTED" ]
+	then
+		trap '_logout_archdrive' exit
+
+		mount -o subvol=/drive /dev/sda3 /home/archdrive/drive/
+
+		touch "$ARCHDRIVE_MOUNTED"
+	fi
+
+	su --whitelist-environment DISPLAY - archdrive -c T
+}
+
+_logout_archdrive() {
+	umount /home/archdrive/drive/ && \
+		rm "$ARCHDRIVE_MOUNTED"
 }
 
 login() {
-	l=$(echo -e "blackarch\nwork" | sort | dmenu -p 'terminal: ' -l 20)
+	l=$(echo -e "archdrive\nblackarch\nwork" | sort | dmenu -p 'terminal: ' -l 20)
 	if [ "$l" != '' ]
 	then
 		case "$l" in
+			archdrive)
+				sudo terminal login_archdrive
+			;;
 			blackarch)
 				st_redish -n pop-up -g 120x30 -e sh -c 'sudo terminal login_blackarch'
 			;;

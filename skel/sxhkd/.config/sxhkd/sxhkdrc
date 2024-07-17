@@ -10,16 +10,28 @@
 	scrot -q 100 -u -e "xclip -sel clip -t image/png \$f; mkdir -p ~/screenshots ; magick \$f \$f ; mv \$f ~/screenshots"
 
 XF86Audio{RaiseVolume,LowerVolume,Mute,MicMute}
-	pamixer {-i 5,-d 5,-t,-t} && dwmstatus
+	pamixer -t; setxkbmap -layout us; slock & sleep .5; xset dpms force off
+	# pamixer {-i 5,-d 5,-t,-t} && dwmstatus
+
+XF86Audio{Next,Prev,Play,Stop}
+	cmus-remotr -u; setxkbmap -layout us; slock & sleep .5; xset dpms force off
+	# cmus-remote {-n,-r,-u,-s} && dwmstatus
+
+XF86MonBrightness{Up,Down}
+	setxkbmap -layout us; slock & sleep .5; xset dpms force off
+	# xbacklight {-inc 10,-dec 10}
 
 super + {u,i,o}
 	pamixer {-d 5,-i 5,-t} && dwmstatus
 
-XF86Audio{Next,Prev,Play,Stop}
-	cmus-remote {-n,-r,-u,-s} && dwmstatus
+super + shift + {u,i,o}
+	cmus-remote {-r,-n,-u} && dwmstatus
 
-XF86MonBrightness{Up,Down}
-	xbacklight {-inc 10,-dec 10}
+super + ctrl + o
+	cmus-remote -s && dwmstatus
+
+super + ctrl + {u,i}
+	xbacklight {-dec 10,-inc 10}
 
 super + backslash
 	xpass
@@ -126,4 +138,4 @@ super + shift + a
 	magick -size 1x1 canvas:black .local/tmp/darkscreen.png; feh --zoom fill -F .local/tmp/darkscreen.png
 
 super + ctrl + shift + s
-	terminal
+	terminal login
