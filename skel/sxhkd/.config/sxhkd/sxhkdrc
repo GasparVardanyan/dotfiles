@@ -33,6 +33,9 @@ super + ctrl + o
 super + ctrl + {u,i}
 	xbacklight {-dec 10,-inc 10}
 
+super + ctrl + shift + i
+	play
+
 super + backslash
 	xpass
 
