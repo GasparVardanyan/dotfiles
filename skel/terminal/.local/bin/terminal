@@ -65,7 +65,8 @@ login_archdrive() {
 		touch "$ARCHDRIVE_MOUNTED"
 	fi
 
-	su --whitelist-environment DISPLAY - archdrive -c T
+	su --whitelist-environment DISPLAY - archdrive -c \
+		'ls -1 ~/drive/bin | dmenu -p "run:" -l 20 | xargs -I _ sh -c ~/drive/bin/_'
 }
 
 _logout_archdrive() {
