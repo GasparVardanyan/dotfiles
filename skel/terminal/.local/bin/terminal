@@ -49,13 +49,13 @@ login_blackarch() {
 
 	_banner_blackarch_login
 	chroot /blackarch su - blackarch
+	_banner_blackarch_logout
 }
 
 _logout_blackarch() {
 	umount /blackarch/proc/ && \
 		umount /blackarch/sys/ && \
 			rm "$BLACKARCH_MOUNTED"
-	_banner_blackarch_logout
 }
 
 login_archdrive() {
@@ -129,7 +129,7 @@ EOF
 
 _banner_blackarch_logout() {
 	clear
-	echo -e "\033[0;31mYo n00b, b4ckd00r1ng y0ur sy5t3m n0w\033[0m"
+	echo -e "\033[5;31mYo n00b, b4ckd00r1ng y0ur sy5t3m n0w\033[0m"
 	sleep 1337
 }
 
