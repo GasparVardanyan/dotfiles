@@ -21,6 +21,7 @@ login_work() {
 		touch "$WORK_MOUNTED"
 	fi
 
+	_banner_work_login
 	chroot /work su - improvis
 }
 
@@ -46,6 +47,7 @@ login_blackarch() {
 		touch "$BLACKARCH_MOUNTED"
 	fi
 
+	_banner_blackarch_login
 	chroot /blackarch su - blackarch
 }
 
@@ -53,6 +55,7 @@ _logout_blackarch() {
 	umount /blackarch/proc/ && \
 		umount /blackarch/sys/ && \
 			rm "$BLACKARCH_MOUNTED"
+	_banner_blackarch_logout
 }
 
 login_archdrive() {
@@ -92,6 +95,57 @@ login() {
 			;;
 		esac
 	fi
+}
+
+_banner_blackarch_login() {
+	clear
+	read -rd '' banner <<'EOF'
+\033[0;31m
+              ...
+             ;::::;
+           ;::::; :;
+         ;:::::'   :;
+        ;:::::;     ;.
+       ,:::::'       ;           OOO\
+       ::::::;       ;          OOOOO\
+       ;:::::;       ;         OOOOOOOO
+      ,;::::::;     ;'         / OOOOOOO
+    ;:::::::::`. ,,,;.        /  / DOOOOOO
+  .';:::::::::::::::::;,     /  /     DOOOO
+ ,::::::;::::::;;;;::::;,   /  /        DOOO
+;`::::::`'::::::;;;::::: ,#/  /          DOOO
+:`:::::::`;::::::;;::: ;::#  /            DOOO
+::`:::::::`;:::::::: ;::::# /              DOO
+`:`:::::::`;:::::: ;::::::#/               DOO
+ :::`:::::::`;; ;:::::::::##                OO
+ ::::`:::::::`;::::::::;:::#                OO
+ `:::::`::::::::::::;'`:;::#                O
+  `:::::`::::::::;' /  / `:#
+   ::::::`:::::;'  /  /   `#
+\033[0m
+EOF
+	echo -e "$banner"
+}
+
+_banner_blackarch_logout() {
+	clear
+	echo -e "\033[0;31mYo n00b, b4ckd00r1ng y0ur sy5t3m n0w\033[0m"
+	sleep 1337
+}
+
+_banner_work_login() {
+	clear
+	read -rd '' banner <<'EOF'
+\033[0;31m
+      ____                                    github.com/GasparVardanyan
+     / ___| __ _ ___ _ __   __ _ _ __         gitlab.com/GasparVardanyan
+    | |  _ / _` / __| '_ \ / _` | '__|        @gaspar@թութ.հայ
+    | |_| | (_| \__ \ |_) | (_| | |           gaspar@jabber.am
+     \____|\__,_|___/ .__/ \__,_|_|           @gaspar_m:matrix.org
+                    |_|                       gaspar_pm@proton.me
+\033[0m
+EOF
+	echo -e "$banner"
 }
 
 $1
