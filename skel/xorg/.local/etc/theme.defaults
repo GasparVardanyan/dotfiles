@@ -9,3 +9,5 @@ tabbed*font:		SYSTEM_FONT
 st*font:			SYSTEM_FONT:size=12
 st*font2:			SYSTEM_FONT:size=12, EMOJI_FONTS
 st*alpha:			0.95
+dwm*topbar:         1
+dmenu*topbar:       1

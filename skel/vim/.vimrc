@@ -10,6 +10,7 @@ Plugin 'VundleVim/Vundle.vim'
 " Plugin 'Shougo/deol.nvim'
 
 Plugin 'mbbill/undotree'
+Plugin 'christoomey/vim-tmux-navigator'
 " Plugin 'dbeniamine/cheat.sh-vim'
 " Plugin 'vim-scripts/AnsiEsc.vim'
 " Plugin 'm00qek/baleia.nvim'
@@ -99,8 +100,17 @@ call vundle#end()
 filetype plugin indent on
 syntax on
 " }}}
+" vim-tmux-navigator {{{
+let g:tmux_navigator_no_mappings = 1
+
+nnoremap <silent> <M-h> :<C-U>TmuxNavigateLeft<cr>
+nnoremap <silent> <M-j> :<C-U>TmuxNavigateDown<cr>
+nnoremap <silent> <M-k> :<C-U>TmuxNavigateUp<cr>
+nnoremap <silent> <M-l> :<C-U>TmuxNavigateRight<cr>
+" nnoremap <silent> <S-C-\|> :<C-U>TmuxNavigatePrevious<cr>
+" }}}
 " vim foldings {{{
-autocmd FileType vim setlocal foldmethod=marker | norm zM
+autocmd FileType vim,tmux setlocal foldmethod=marker | norm zM
 " }}}
 " specific settings {{{
 set colorcolumn=81
@@ -146,7 +156,7 @@ let g:neosolarized_bold = 1
 let g:neosolarized_underline = 1
 let g:neosolarized_italic = 1
 let g:neosolarized_contrast = "normal"
-let g:neosolarized_termBoldAsBright = 1
+let g:neosolarized_termBoldAsBright = 0
 let g:neosolarized_termtrans = 1
 let g:neosolarized_vertSplitBgTrans = 1
 let g:neosolarized_visibility = "normal"
@@ -238,10 +248,10 @@ endif
 " let g:rainbow_active = 1
 " }}}
 " split navigations {{{
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+" nnoremap <C-J> <C-W><C-J>
+" nnoremap <C-K> <C-W><C-K>
+" nnoremap <C-L> <C-W><C-L>
+" nnoremap <C-H> <C-W><C-H>
 " }}}
 " sessions {{{
 noremap <F1> :mksession! .vim.session <cr>

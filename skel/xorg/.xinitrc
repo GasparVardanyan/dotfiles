@@ -44,7 +44,7 @@ then
 	numlockx &
 	xcompmgr &
 	clipmenud &
-	sxhkd &
+	flameshot &
 	kbd &
 	syncthing serve --no-browser &
 	# (sleep 2; xrandr --output DP1 --off; xrandr --output DP1 --mode 1366x768 --right-of eDP1; ~/.fehbg 2>/dev/null) &
@@ -60,6 +60,11 @@ then
 
 
 
+	### waiting for pinetab-v ###
+	(sleep 30; while :; do [[ 0 = $(curl 'https://pine64.com/product/pinetab-v-10-1-8gb-128gb-risc-v-based-linux-tablet-with-detached-backlit-keyboard/' | grep '<p class="stock out-of-stock">Out of stock</p>' | wc -l) ]] && dunstify 'PineTab-V is ready'; sleep $((30 * 60)); done) &
+
+
+
 	### todos ###
 	while :; do todos=$(cat ~/.todo 2>/dev/null | wc -l); [ $todos != 0 ] && dunstify todo "you have $todos todos!"; sleep $(( 3 * 60 * 60 )); done &
 
@@ -67,6 +72,9 @@ then
 
 	### feeds ###
 	(sleep 30; while :; do touch ~/.local/tmp/sfu; sfeed_update; rm ~/.local/tmp/sfu; sleep $((30 * 60)); done) &
+
+
+
 
 
 

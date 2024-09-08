@@ -9,22 +9,18 @@ export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 export SUDO_ASKPASS="$HOME/.local/bin/dmenupass"
 export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 
+export GIT=127.0.0.1:/srv/git
+
 export PATH="$HOME/.local/share/themes/bin:$HOME/.local/bin:$PATH"
 export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
 
-export CPATH="$HOME/.local/include:$CPATH"
-export LD_LIBRARY_PATH="$HOME/.local/lib:$LD_LIBRARY_PATH"
-export LIBRARY_PATH="$HOME/.local/lib:$LIBRARY_PATH"
+# export CPATH="$HOME/.local/include:$CPATH"
+# export LD_LIBRARY_PATH="$HOME/.local/lib:$LD_LIBRARY_PATH"
+# export LIBRARY_PATH="$HOME/.local/lib:$LIBRARY_PATH"
 
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
-
-# PATH="/home/gaspar/perl5/bin${PATH:+:${PATH}}"; export PATH;
-# PERL5LIB="/home/gaspar/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-# PERL_LOCAL_LIB_ROOT="/home/gaspar/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-# PERL_MB_OPT="--install_base \"/home/gaspar/perl5\""; export PERL_MB_OPT;
-# PERL_MM_OPT="INSTALL_BASE=/home/gaspar/perl5"; export PERL_MM_OPT;
 
 # man colors
 # export MANPAGER="less -R --use-color -Dd+r -Du+b"

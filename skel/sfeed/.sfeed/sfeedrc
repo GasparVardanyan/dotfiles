@@ -19,7 +19,7 @@ feeds() {
 	feed "ambug" "https://github.com/ambug/website/commits.atom"
 	feed "antranigv #en" "https://weblog.antranigv.am/feed/"
 	feed "antranigv #hy" "https://անդրանիկ.հայ/feed/"
-	feed "Ռուբենի Բլոգը" "https://rbn.am/index.xml"
+	# feed "Ռուբենի Բլոգը" "https://rbn.am/index.xml"
 	# feed "խօսենք" "https://խօսենք.ցանցառներ.հայ/rss"
 	# feed "սարեան" "https://սարեան.ցանցառներ.հայ/rss"
 	feed "ցանցառներ ռադիօ - Invidious" "https://yewtu.be/feed/channel/UCLjhnWg0f3BeJATvFiLnrJw"
@@ -112,7 +112,7 @@ filter() {
 	case "$1" in
 		"GitLab")
 			awk -F '\t' 'BEGIN { OFS = "\t"; }
-				$2 ~ /^Gaspar Vardanyan pushed to project branch master at Gaspar Vardanyan/ {
+				$2 ~ /^Gaspar Vardanyan pushed to project branch \w+ at Gaspar Vardanyan/ {
 					next;
 				}
 				{
