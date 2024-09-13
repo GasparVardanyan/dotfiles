@@ -11,16 +11,6 @@ fi
 
 
 
-(
-	sleep 2
-	# turn off Display Power Management Service (DPMS)
-	xset -dpms
-	# turn off black Screensaver
-	xset s off
-) &
-
-
-
 # virtualbox
 vbox=$(dmesg |grep -io virtualbox)
 if [ ! -z "$vbox" ]
@@ -49,6 +39,16 @@ then
 	syncthing serve --no-browser &
 	# (sleep 2; xrandr --output DP1 --off; xrandr --output DP1 --mode 1366x768 --right-of eDP1; ~/.fehbg 2>/dev/null) &
 	~/.fehbg 2>/dev/null &
+
+
+
+	(
+		sleep 2
+		# turn off Display Power Management Service (DPMS)
+		xset -dpms
+		# turn off black Screensaver
+		xset s off
+	) &
 
 
 

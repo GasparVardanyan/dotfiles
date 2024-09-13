@@ -5,11 +5,11 @@ c="$(echo -e 'conf\ndmenu\ndunstrc\ndwm\npam\nprofile\nqutebrowser\nsettheme\nsf
 if [[ $c == conf ]] ; then
 	e="$EDITOR ~/.local/bin/conf"
 elif [[ $c == dmenu ]] ; then
-	e="(cd ~/.local/src/dmenu && $EDITOR config.h && make clean PREFIX=$HOME/.local install) ; read -n 1 -s"
+	e="(cd ~/.local/src/dmenu && $EDITOR config.h && sudo make clean install) ; read -n 1 -s"
 elif [[ $c == dunstrc ]] ; then
 	e="$EDITOR ~/.config/dunst/dunstrc"
 elif [[ $c == dwm ]] ; then
-	e="(cd ~/.local/src/dwm && $EDITOR config.h && make clean PREFIX=~/.local install) ; read -n 1 -s"
+	e="(cd ~/.local/src/dwm && $EDITOR config.h && sudo make clean install) ; read -n 1 -s"
 elif [[ $c == kshrc ]] ; then
 	e="$EDITOR ~/.kshrc"
 elif [[ $c == pam ]] ; then
@@ -23,13 +23,13 @@ elif [[ $c == settheme ]] ; then
 elif [[ $c == sfeedrc ]] ; then
 	e="$EDITOR ~/.sfeed/sfeedrc"
 elif [[ $c == st ]] ; then
-	e="(cd .local/src/st && $EDITOR config.h && make clean PREFIX=~/.local TERMINFO=~/.terminfo install) ; read -n 1 -s"
+	e="(cd .local/src/st && $EDITOR config.h && sudo make clean install) ; read -n 1 -s"
 elif [[ $c == sxhkdrc ]] ; then
 	e="$EDITOR ~/.config/sxhkd/sxhkdrc"
 elif [[ $c == sxiv-keyhandler ]] ; then
 	e="$EDITOR ~/.config/sxiv/exec/key-handler"
 elif [[ $c == tabbed ]] ; then
-	e="(cd ~/.local/src/tabbed && $EDITOR config.h && make clean PREFIX=$HOME/.local install) ; read -n 1 -s"
+	e="(cd ~/.local/src/tabbed && $EDITOR config.h && sudo make clean install) ; read -n 1 -s"
 elif [[ $c == theme ]] ; then
 	settheme "$(ls ~/.local/share/themes | grep '\.xdefaults$' | sed 's/\.xdefaults$//' | dmenu -p theme: -i -l 10)"
 elif [[ $c == themes ]] ; then

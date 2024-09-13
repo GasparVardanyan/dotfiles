@@ -9,26 +9,26 @@ login_work() {
 	then
 		trap '_logout_work' exit
 
-		# mount -t proc /proc /work/proc/
-		# mount -t sysfs /sys /work/sys/
-		# if [ -z "$(ls -A /work/dev)" ]
-		# then
-		#     mount --rbind -r /dev /work/dev/
-		# fi
-        #
-		# cp /etc/resolv.conf /work/etc/resolv.conf
+		mount -t proc /proc /work/proc/
+		mount -t sysfs /sys /work/sys/
+		if [ -z "$(ls -A /work/dev)" ]
+		then
+			mount --rbind -r /dev /work/dev/
+		fi
+
+		cp /etc/resolv.conf /work/etc/resolv.conf
 
 		touch "$WORK_MOUNTED"
 	fi
 
 	_banner_work_login
-	# chroot /work su - improvis
-	arch-chroot /work su - improvis
+	chroot /work su - improvis
+	# arch-chroot /work su - improvis
 }
 
 _logout_work() {
-	# umount /work/proc/ && \
-	#     umount /work/sys/ && \
+	umount /work/proc/ && \
+		umount /work/sys/ && \
 			rm "$WORK_MOUNTED"
 }
 
