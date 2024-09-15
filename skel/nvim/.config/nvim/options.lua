@@ -1,0 +1,11 @@
+vim.opt.foldmethod = "marker"
+vim.opt.colorcolumn = "81"
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.shiftwidth = 4
+vim.opt.tabstop = 4
+vim.opt.splitbelow = true
+vim.opt.splitright = true
+-- vim.opt.wildignore += "*.o,*.out,.git"
+vim.opt.updatetime = 250
+vim.g.python_recommended_style = 0
