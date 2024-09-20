@@ -9,7 +9,6 @@
 
 (function () {setTimeout(function () {
 // Function to apply pointer cursor to all yellow-background elements
-	alert ("LOADED");
     function removeAds() {
         const ad = document.querySelectorAll('*');
         ad.forEach(element => {
@@ -24,7 +23,6 @@
 						button.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, cancelable: true }));
 						button.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
 						element.parentNode.removeChild(element);
-						alert("FIXED");
 					}
 			}
         });
