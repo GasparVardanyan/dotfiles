@@ -3,6 +3,28 @@
 WORK_MOUNTED=/tmp/WORK_MOUNTED
 BLACKARCH_MOUNTED=/tmp/BLACKARCH_MOUNTED
 ARCHDRIVE_MOUNTED=/tmp/ARCHDRIVE_MOUNTED
+TERMINATOR_MOUNTED=/tmp/TERMINATOR_MOUNTED
+
+login_terminator() {
+	if [ ! -f "$TERMINATOR_MOUNTED" ]
+	then
+		trap '_logout_terminator' exit
+
+		mount -t proc /proc /terminator/proc/
+		mount -t sysfs /sys /terminator/sys/
+		if [ -z "$(ls -A /terminator/dev)" ]
+		then
+			mount --rbind -r /dev /terminator/dev/
+		fi
+
+		cp /etc/resolv.conf /terminator/etc/resolv.conf
+
+		touch "$TERMINATOR_MOUNTED"
+	fi
+
+	chroot /terminator su - blackarch
+	# arch-chroot /terminator su - improvis
+}
 
 login_work() {
 	if [ ! -f "$WORK_MOUNTED" ]
@@ -24,6 +46,12 @@ login_work() {
 	_banner_work_login
 	chroot /work su - improvis
 	# arch-chroot /work su - improvis
+}
+
+_logout_terminator() {
+	umount /terminator/proc/ && \
+		umount /terminator/sys/ && \
+			rm "$TERMINATOR_MOUNTED"
 }
 
 _logout_work() {
@@ -79,7 +107,7 @@ _logout_archdrive() {
 }
 
 login() {
-	l=$(echo -e "archdrive\nblackarch\nwork" | sort | dmenu -p 'terminal: ' -l 20)
+	l=$(echo -e "archdrive\nblackarch\nwork\nterminator" | sort | dmenu -p 'terminal: ' -l 20)
 	if [ "$l" != '' ]
 	then
 		case "$l" in
@@ -91,6 +119,9 @@ login() {
 			;;
 			work)
 				st_leet -n pop-up -g 120x30 -e sh -c 'sudo terminal login_work'
+			;;
+			terminator)
+				alacritty --class pop-up -e sh -c 'sudo terminal login_terminator'
 			;;
 			*)
 			;;
