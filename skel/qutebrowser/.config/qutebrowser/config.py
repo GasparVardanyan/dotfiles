@@ -78,14 +78,14 @@ c.tabs.show											=		'always'
 
 
 
-c.url.start_pages		=		['about:blank']
+c.url.start_pages		=		['https://search.brave.com/']
 # c.url.start_pages		=		['https://regexcrossword.com/']
-c.url.default_page		=		'https://duckduckgo.com/'
+c.url.default_page		=		'https://search.brave.com/'
 
 c.url.searchengines	 = {
 	# 'DEFAULT'			:		'https://searx.org/?q={}'										,
-	'DEFAULT'			:		'https://duckduckgo.com/?q={}'									,
-	'/'					:		'https://duckduckgo.com/?q={}'									,
+	'DEFAULT'			:		'https://search.brave.com/search?q={}'							,
+	'/'					:		'https://search.brave.com/search?q={}'							,
 	'/ai'				:		'https://www.appimagehub.com/find?search={}'					,
 	'/aur'				:		'https://aur.archlinux.org/packages/?O=0&K={}'					,
 	'/ba'				:		'https://bararanonline.com/{}'									,

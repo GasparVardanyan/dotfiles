@@ -157,7 +157,7 @@ let g:neosolarized_underline = 1
 let g:neosolarized_italic = 1
 let g:neosolarized_contrast = "normal"
 let g:neosolarized_termBoldAsBright = 0
-let g:neosolarized_termtrans = 1
+let g:neosolarized_termtrans = 0
 let g:neosolarized_vertSplitBgTrans = 1
 let g:neosolarized_visibility = "normal"
 " }}}
@@ -361,16 +361,24 @@ if !isdirectory(expand(&directory))
 endif
 " }}}
 " utility {{{
-function GetM3UHeaderA()
+function GetM3UHeaderOPUS()
 	norm O#EXTINF:,j0f=lvg_"*yk
-	" read !mediainfo --Output='General;\%Movie\%' -- "$(xsel -op)".mkv
 	read !mediainfo --Output='General;\%Track\%' -- "$(xsel -op)".opus
 	norm kJxjj
 endfunction
-function GetM3UHeaderV()
+function GetM3UHeaderM4A()
+	norm O#EXTINF:,j0f=lvg_"*yk
+	read !mediainfo --Output='General;\%Track\%' -- "$(xsel -op)".m4a
+	norm kJxjj
+endfunction
+function GetM3UHeaderMKV()
 	norm O#EXTINF:,j0f=lvg_"*yk
 	read !mediainfo --Output='General;\%Movie\%' -- "$(xsel -op)".mkv
-	" read !mediainfo --Output='General;\%Track\%' -- "$(xsel -op)".opus
+	norm kJxjj
+endfunction
+function GetM3UHeaderMP4()
+	norm O#EXTINF:,j0f=lvg_"*yk
+	read !mediainfo --Output='General;\%Movie\%' -- "$(xsel -op)".mp4
 	norm kJxjj
 endfunction
 " }}}

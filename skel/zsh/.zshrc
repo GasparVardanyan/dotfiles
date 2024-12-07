@@ -81,7 +81,12 @@ bindkey '^e' edit-command-line
 
 # PROMPT="%{$fg[red]%}[%{$fg[blue]%}%n %{$fg[yellow]%}%1~%{$fg[red]%}]%}%{$fg[white]%}$ %{$reset_color%}"
 #PROMPT="%{$fg[magenta]%}%n%{$fg[yellow]%} -> %{$fg[red]%}[ %{$fg[blue]%}%1~%{$fg[red]%} ]%}%{$fg[yellow]%} :: %{$reset_color%}"
-PROMPT="%{$fg[yellow]%}-> %{$fg[red]%}[ %{$fg[blue]%}%1~%{$fg[red]%} ]%}%{$fg[yellow]%} :: %{$reset_color%}"
+if [ "$TERM" = st-256color ]
+then
+	PROMPT="%{$fg[yellow]%}-> %{$fg[red]%}[ %{$fg[blue]%}%1~%{$fg[red]%} ]%}%{$fg[yellow]%} :: %{$reset_color%}"
+else
+	PROMPT="%{$fg[red]%}[ %{$fg[blue]%}%1~%{$fg[red]%} ]%}%{$fg[yellow]%} %{$fg[blue]%}  %{$reset_color%}"
+fi
 #PROMPT="$(xrdb -query | grep -P '^zsh\*prompt:' | sed 's/^zsh\*prompt:\s//')"
 unset HISTFILE
 HISTSIZE=2000
@@ -210,7 +215,9 @@ alias mkdir="mkdir -p"
 alias sxiv="nsxiv"
 alias tree="tree -fNpugshFviC"
 alias vdir="vdir --color=auto"
-alias space="command vim"
+alias nvim="NVIM_APPNAME='' nvim"
+alias nide="NVIM_APPNAME=nvim-ide \\nvim"
+alias npde="NVIM_APPNAME=nvim-pde \\nvim"
 alias vim="nvim"
 # alias man="nman"
 
@@ -248,6 +255,7 @@ alias srv="www --directory ~/.local/srv"
 alias suckless="curl https://git.suckless.org/ 2> /dev/null | command grep '<a href=\"' | command sed 's/^.*<a href=\".*\/log.html\">\(.*\)<\/a><\/td><td>\(.*$\)/\1|\2/' | column -t -s \|"
 alias _="sudo"
 compdef _sudo _
+alias __="sudo su"
 alias svim="sudo nvim"
 alias sysupgrade="yes | sudo pacman -Scc && (echo -e '\033[1;34m::\033[0;1m Look for the best server...\033[0m' ; sudo reflector --verbose --latest 10 --protocol https --sort rate --save /etc/pacman.d/mirrorlist && sudo pacman -Syyuu && sudo pacman -Fy && sudo pkgfile -u && vim +PluginUpdate) && tldr -u"
 alias S="syncthing serve --no-browser"

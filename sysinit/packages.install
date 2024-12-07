@@ -1,29 +1,49 @@
 #!/bin/sh
 
-base="base base-devel linux linux-firmware amd-ucode intel-ucode linux-headers
-efibootmgr grub pulseaudio sof-firmware alsa-utils alsa-firmware alsa-plugins"
-xorg="xorg-server xorg-drivers xorg-xinit xterm xsel xclip xorg-xbacklight
-xcompmgr sxhkd libinput"
-cli="vi sudo tmux tree dialog htop git translate-shell exa git-delta mediainfo
-tldr moreutils perl-rename"
+# excluded:
+# amd-ucode
+# xorg-drivers
+# dialog
+
+base="base base-devel linux linux-firmware linux-firmware-whence efibootmgr grub
+pulseaudio sof-firmware alsa-utils alsa-firmware alsa-plugins"
+
+intel="intel-ucode intel-media-driver mesa vulkan-intel linux-firmware libva
+libva-intel-driver libva-utils intel-gpu-tools vulkan-icd-loader vulkan-tools
+libvdpau libvdpau-va-gl vdpauinfo"
+
+xorg="xorg-server xorg-xinit xsel xclip xorg-xbacklight xcompmgr libinput"
+
+cli="vi sudo tmux tree htop git translate-shell exa git-delta mediainfo tldr
+moreutils perl-rename"
+
 net="qutebrowser python-adblock pdfjs net-tools wpa_supplicant dhclient"
+
 wm="slock clipmenu feh numlockx pamixer flameshot dunst libnotify qt5ct qt6ct
 stalonetray"
+
 dwmdeps="libx11 libxinerama libxft freetype2 xorg-xrandr xorg-xsetroot"
 stdeps="libxft perl"
 dmenudeps="freetype2 libxft libxinerama sh"
 tabbeddeps="libx11"
+
 statusbar="pamixer grep sed awk upower"
+
 zsh="zsh zsh-completions bash-completion zsh-syntax-highlighting"
+
 fs="dosfstools btrfs-progs"
+
 arch="arch-wiki-docs arch-wiki-lite pkgfile reflector pacman-contrib devtools"
+
 fonts="ttf-ibm-plex ttf-dejavu ttf-font-awesome otf-font-awesome ttf-hack
 ttf-ibmplex-mono-nerd noto-fonts-emoji ttf-joypixels awesome-terminal-fonts"
+
 media="imagemagick ffmpeg nsxiv cmus opusfile ffmpegthumbnailer mpv yt-dlp
 python-mutagen atomicparsley"
+
 docs="man-db man-pages"
-nvim="neovim python-pynvim ctags fzf bat the_silver_searcher fd
-ripgrep ripgrep-all"
+
+nvim="neovim python-pynvim ctags fzf bat fd ripgrep ripgrep-all"
 
 # Qutebrowser DRM extension:
 #     widevine https://aur.archlinux.org/qt5-webengine-widevine.git
@@ -52,7 +72,7 @@ ripgrep ripgrep-all"
 #   manual build (https://github.com/saitoha/libsixel)
 #   configure --prefix=$HOME/.local
 
-packages="$base $xorg $cli $net $wm $dwmdeps $stdeps $dmenudeps
+packages="$base $intel $xorg $cli $net $wm $dwmdeps $stdeps $dmenudeps
 $tabbeddeps $statusbar $zsh $fs $arch $fonts $media $docs $nvim"
 
 pacman -S $packages --needed
