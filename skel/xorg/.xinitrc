@@ -26,8 +26,6 @@ fi
 mkdir -p ~/.cache/thumbnails/mpv-gallery
 find ~/.cache/thumbnails/mpv-gallery/ -maxdepth 1 -type f -amin +$((7 * 60 * 24)) -delete
 
-
-
 if [ "$WM" == "dwm" ]
 then
 	### autostart ###
@@ -53,7 +51,7 @@ then
 
 
 	### caching ###
-	find -L ~/media -type f -not -path '*/\.*' >/dev/null &
+	#find -L ~/media -type f -not -path '*/\.*' >/dev/null &
 	dmenu_path >/dev/null &
 	$SHELL -c '' >/dev/null &
 	[[ $EDITOR = *vim* ]] && $EDITOR +q >/dev/null &
@@ -62,6 +60,11 @@ then
 
 	### waiting for pinetab-v ###
 	(sleep 30; while :; do [[ 0 = $(curl 'https://pine64.com/product/pinetab-v-10-1-8gb-128gb-risc-v-based-linux-tablet-with-detached-backlit-keyboard/' | grep '<p class="stock out-of-stock">Out of stock</p>' | wc -l) ]] && dunstify 'PineTab-V is ready'; sleep $((30 * 60)); done) &
+
+
+
+	### waiting for ideapad ###
+	(sleep 30; while :; do [[ 0 = $(curl 'https://mtech.am/en_us/products/lenovo-ideapad-pro-5-14imh9-%2883d20024rk%29' | grep 'Out of Stock' | wc -l) ]] && dunstify 'Ideapad is Ready'; sleep $((30 * 60)); done) &
 
 
 
@@ -90,7 +93,14 @@ then
 		fi
 	sleep $((5 * 60)); done) &
 
+	(
+	sleep 3
+	xrandr --output DP-1 --mode 1920x1080 --right-of eDP-1
+	xrandr --output HDMI-1 --mode 1920x1080 --left-of eDP-1
 
+	# while :; do find ~/.local/share/wallpapers/sw -type f | shuf -n 3 | paste -s -d ' ' | xargs feh --no-fehbg --bg-fill; sleep 300; done
+	./.fehbg
+	) &
 
 	### dwm ###
 	[ "$WM" == "dwm" ] && while true; do
