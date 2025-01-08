@@ -5,12 +5,12 @@
 # xorg-drivers
 # dialog
 
-base="base base-devel linux linux-firmware linux-firmware-whence efibootmgr grub
-pulseaudio sof-firmware alsa-utils alsa-firmware alsa-plugins"
+base="base base-devel linux linux-firmware linux-firmware-whence linux-headers
+efibootmgr grub pulseaudio sof-firmware alsa-utils alsa-firmware alsa-plugins"
 
-intel="intel-ucode intel-media-driver mesa vulkan-intel linux-firmware libva
-libva-intel-driver libva-utils intel-gpu-tools vulkan-icd-loader vulkan-tools
-libvdpau libvdpau-va-gl vdpauinfo"
+intel="intel-ucode intel-media-driver intel-compute-runtime mesa vulkan-intel
+libva libva-utils libva-intel-driver intel-gpu-tools vulkan-icd-loader
+vulkan-tools libvdpau libvdpau-va-gl vdpauinfo"
 
 xorg="xorg-server xorg-xinit xsel xclip xorg-xbacklight xcompmgr libinput"
 
