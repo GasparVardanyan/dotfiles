@@ -93,7 +93,8 @@ login_archdrive() {
 	then
 		trap '_logout_archdrive' exit
 
-		mount -o subvol=/drive /dev/sda3 /home/archdrive/drive/
+		mount -o subvol=/data/drive_tmp /dev/sda3 /home/archdrive/drive/
+		mount -o subvol=/data/drive /dev/sda3 /home/archdrive/drive/.D
 
 		touch "$ARCHDRIVE_MOUNTED"
 	fi
@@ -102,8 +103,9 @@ login_archdrive() {
 }
 
 _logout_archdrive() {
-	umount /home/archdrive/drive/ && \
-		rm "$ARCHDRIVE_MOUNTED"
+	umount /home/archdrive/drive/.D/ && \
+		umount /home/archdrive/drive/ && \
+			rm "$ARCHDRIVE_MOUNTED"
 }
 
 login() {

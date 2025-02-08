@@ -42,6 +42,8 @@ _wu()
 {
 	sudo rfkill unblock wlan
 	sudo ifconfig wlp3s0 up
+	sudo systemctl enable --now wpa_supplicant@wlp3s0.service
+	sudo systemctl enable --now dhclient@wlp3s0.service
 }
 
 _wi()
@@ -69,6 +71,8 @@ _wsd()
 _wd()
 {
 	sudo ifconfig wlp3s0 down
+	sudo systemctl disable --now wpa_supplicant@wlp3s0.service
+	sudo systemctl disable --now dhclient@wlp3s0.service
 	sudo rfkill block wlan
 }
 
@@ -83,27 +87,25 @@ _wr()
 
 _du()
 {
-	mon=$(_choose "$(xrandr | grep '^\w' | sed '1d;/eDP1/d;/disconnected/d' | cut -d ' ' -f1)")
+	mon=$(_choose "$(xrandr | grep '^\w' | sed '1d;/eDP-1/d;/disconnected/d' | cut -d ' ' -f1)")
 
 	[ -z "$mon" ] && exit
 
 	lr=$(_choose "$(echo -e 'left\nright')")
 
 	xrandr --output $mon --off
-	xrandr --output $mon --mode 1920x1080 "--$lr-of" eDP1
+	xrandr --output $mon --mode 1920x1080 "--$lr-of" eDP-1
 
-	( sleep 1 ; ~/.fehbg ) &
+	~/.fehbg
 }
 
 _dd()
 {
-	mon=$(_choose "$(xrandr | grep '^\w' | sed '1d;/eDP1/d;/disconnected/d' | cut -d ' ' -f1)")
+	mon=$(_choose "$(xrandr | grep '^\w' | sed '1d;/eDP-1/d;/disconnected/d' | cut -d ' ' -f1)")
 
 	[ -z "$mon" ] && exit
 
 	xrandr --output $mon --off
-
-	( sleep 1 ; ~/.fehbg ) &
 }
 
 _au()
