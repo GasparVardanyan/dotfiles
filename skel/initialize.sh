@@ -2,6 +2,8 @@
 
 mkdir -p ~/.config ~/.local ~/.local/share ~/.local/etc
 
+pushd /desktop/dotfiles/skel
+
 ln -sfv $PWD/alacritty/.config/alacritty ~/.config
 ln -sfv $PWD/alsa/.asoundrc ~
 ln -sfv $PWD/bat/.config/bat ~/.config
@@ -17,6 +19,7 @@ ln -sfv $PWD/cmus/.config/cmus/rc ~/.config/cmus
 ln -sfv $PWD/conf/.local/bin/conf /desktop/bin
 ln -sfv $PWD/easy/.local/bin/e /desktop/bin
 ln -sfv $PWD/sxiv/.config/sxiv ~/.config
+rm -fv ~/.config/nsxiv
 ln -sfv ~/.config/{,n}sxiv
 ln -sfv $PWD/tmux/.tmux.conf ~
 ln -sfv $PWD/wttr/.local/bin/wttr /desktop/bin
@@ -52,8 +55,10 @@ ln -sfv $PWD/qutebrowser/.config/qutebrowser/solarized-everything-css ~/.config/
 mkdir -pv ~/.local/share/qutebrowser
 ln -sfv $PWD/qutebrowser/.local/share/qutebrowser/greasemonkey ~/.local/share/qutebrowser
 mkdir -pv ~/.local/share/scratchqb
-ln -s ~/.config/qutebrowser ~/.local/share/scratchqb/config
+ln -sfv ~/.config/qutebrowser ~/.local/share/scratchqb/config
 mkdir -pv ~/.local/share/scratchqbg
-ln -s ~/.config/qutebrowser ~/.local/share/scratchqbg/config
+ln -sfv ~/.config/qutebrowser ~/.local/share/scratchqbg/config
 mkdir -pv ~/.local/share/scratchqbw
-ln -s ~/.config/qutebrowser ~/.local/share/scratchqbw/config
+ln -sfv ~/.config/qutebrowser ~/.local/share/scratchqbw/config
+
+popd
