@@ -13,6 +13,7 @@ export QTWEBENGINE_CHROMIUM_FLAGS=--widevine-path="/media/libwidevinecdm.so"
 
 export GIT=127.0.0.1:/srv/git
 
+export PATH="/desktop/utilsbin:$PATH"
 export PATH="$HOME/.local/share/themes/bin:$HOME/.local/bin:$PATH"
 export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
 
