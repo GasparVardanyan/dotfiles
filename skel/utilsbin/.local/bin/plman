@@ -16,13 +16,13 @@ cmd_dv()
 
 	pushd "$DIR" > /dev/null
 
-	yt-dlp --add-metadata --embed-thumbnail --convert-thumbnails jpg --ppa 'ThumbnailsConvertor:-q:v 1' -f 'bestvideo+bestaudio/best' -o '%(id)s.%(ext)s' -a "$M3U" --download-archive <(archive_av)
+	yt-dlp --cookies-from-browser vivaldi --add-metadata --embed-thumbnail --convert-thumbnails jpg --ppa 'ThumbnailsConvertor:-q:v 1' -f 'bestvideo+bestaudio/best' -o '%(id)s.%(ext)s' -a "$M3U" --download-archive <(archive_av)
 
 		mkdir -p .thumbnails
 
 		pushd .thumbnails > /dev/null
 
-			yt-dlp --skip-download --write-thumbnail --convert-thumbnails jpg --ppa "ThumbnailsConvertor:-q:v 1" -o '%(id)s' -a ../"$M3U" --download-archive <(archive_th)
+			yt-dlp --cookies-from-browser vivaldi --skip-download --write-thumbnail --convert-thumbnails jpg --ppa "ThumbnailsConvertor:-q:v 1" -o '%(id)s' -a ../"$M3U" --download-archive <(archive_th)
 
 		popd > /dev/null
 
@@ -36,13 +36,13 @@ cmd_dv_fhd()
 
 	pushd "$DIR" > /dev/null
 
-	yt-dlp --add-metadata --embed-thumbnail --convert-thumbnails jpg --ppa 'ThumbnailsConvertor:-q:v 1' -f 'bestvideo[width<=1920][height<=1080]+bestaudio/best' -o '%(id)s.%(ext)s' -a "$M3U" --download-archive <(archive_av)
+	yt-dlp --cookies-from-browser vivaldi --add-metadata --embed-thumbnail --convert-thumbnails jpg --ppa 'ThumbnailsConvertor:-q:v 1' -f 'bestvideo[width<=1920][height<=1080]+bestaudio/best' -o '%(id)s.%(ext)s' -a "$M3U" --download-archive <(archive_av)
 
 		mkdir -p .thumbnails
 
 		pushd .thumbnails > /dev/null
 
-			yt-dlp --skip-download --write-thumbnail --convert-thumbnails jpg --ppa "ThumbnailsConvertor:-q:v 1" -o '%(id)s' -a ../"$M3U" --download-archive <(archive_th)
+			yt-dlp --cookies-from-browser vivaldi --skip-download --write-thumbnail --convert-thumbnails jpg --ppa "ThumbnailsConvertor:-q:v 1" -o '%(id)s' -a ../"$M3U" --download-archive <(archive_th)
 
 		popd > /dev/null
 
@@ -57,7 +57,7 @@ cmd_da()
 
 	pushd "$DIR" > /dev/null
 
-		yt-dlp --add-metadata --embed-thumbnail --convert-thumbnails jpg --ppa 'ThumbnailsConvertor:-q:v 1' -f 'bestaudio/best' -x -o '%(id)s.%(ext)s' -a "$M3U" --download-archive <(archive_av)
+		yt-dlp --cookies-from-browser vivaldi --add-metadata --embed-thumbnail --convert-thumbnails jpg --ppa 'ThumbnailsConvertor:-q:v 1' -f 'bestaudio/best' -x -o '%(id)s.%(ext)s' -a "$M3U" --download-archive <(archive_av)
 
 	popd > /dev/null
 }
@@ -137,21 +137,31 @@ cmd_fp()
 
 cmd_pl()
 {
+	file=$1
+
+	[ -d "$file" ] && [ -f "$file/playlist.m3u" ] && \
+		file="$file/playlist.m3u"
+
 	embed=""
 	[ "$XEMBED" != '' ] && embed="--wid=$XEMBED"
-	mpv --hwdec=vaapi --profile=enc-f-webm --fullscreen --loop-playlist=inf --ytdl-format="bestvideo[width<=1920][height<=1080]+bestaudio/best" --volume=60 $embed "$1"
+	mpv --hwdec=vaapi --profile=enc-f-webm --fullscreen --loop-playlist=inf --ytdl-format="bestvideo[width<=1920][height<=1080]+bestaudio/best" --volume=60 $embed "$file"
 }
 
 cmd_pls()
 {
+	file=$1
+
+	[ -d "$file" ] && [ -f "$file/playlist.m3u" ] && \
+		file="$file/playlist.m3u"
+
 	embed=""
 	[ "$XEMBED" != '' ] && embed="--wid=$XEMBED"
-	mpv --hwdec=vaapi --profile=enc-f-webm --fullscreen --loop-playlist=inf --ytdl-format="bestvideo[width<=1920][height<=1080]+bestaudio/best" --volume=60 --shuffle $embed "$1"
+	mpv --hwdec=vaapi --profile=enc-f-webm --fullscreen --loop-playlist=inf --ytdl-format="bestvideo[width<=1920][height<=1080]+bestaudio/best" --volume=60 --shuffle $embed "$file"
 }
 
 fcheck()
 {
-	if [ ! -f "$1" ]
+	if [ ! -f "$1" ] && [ ! -d "$1" ]
 	then
 		exit -1
 	fi

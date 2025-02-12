@@ -167,7 +167,7 @@ if __file__ in [os.getenv ('HOME') + '/.local/share/scratchqb/config/config.py',
 		}
 	})
 elif __file__ in [os.getenv ('HOME') + '/.local/share/scratchqbg/config/config.py'] :
-	config.source('themes/city-lights-theme.py')
+	import themes.catppuccin as catppuccin
 elif __file__ in [os.getenv ('HOME') + '/.local/share/scratchqbt/config/config.py'] :
 	import themes.catppuccin as catppuccin
 
