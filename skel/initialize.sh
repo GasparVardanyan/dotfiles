@@ -16,14 +16,10 @@ ln -sfv ~/.{,z}profile
 ln -sfv $PWD/zsh/.zsh.d ~
 mkdir -pv ~/.config/cmus
 ln -sfv $PWD/cmus/.config/cmus/rc ~/.config/cmus
-ln -sfv $PWD/conf/.local/bin/conf /desktop/bin
-ln -sfv $PWD/easy/.local/bin/e /desktop/bin
 ln -sfv $PWD/sxiv/.config/sxiv ~/.config
 rm -fv ~/.config/nsxiv
 ln -sfv ~/.config/{,n}sxiv
 ln -sfv $PWD/tmux/.tmux.conf ~
-ln -sfv $PWD/wttr/.local/bin/wttr /desktop/bin
-ln -sfv $PWD/wttr/.local/bin/wttr2 /desktop/bin
 mkdir -pv ~/.local/etc # TODO: move theming to /desktop
 ln -sfv $PWD/xorg/.local/etc/theme ~/.local/etc
 ln -sfv $PWD/xorg/.local/etc/theme.defaults ~/.local/etc
@@ -44,7 +40,6 @@ ln -sfv $PWD/banners/.local/etc/banner* ~/.local/etc
 rm -fv ~/.local/etc/banner.{angel,women}
 ln -sfv $PWD/lazygit/.config/lazygit ~/.config
 ln -sfv $PWD/ripgrep/.ripgreprc ~
-ln -sfv $PWD/terminal/.local/bin/terminal /desktop/bin
 ln -sfv $PWD/flameshot/.config/flameshot ~/.config
 ln -sfv $PWD/profanity/.config/profanity ~/.config
 mkdir -pv ~/.config/qutebrowser
@@ -60,5 +55,7 @@ mkdir -pv ~/.local/share/scratchqbg
 ln -sfv ~/.config/qutebrowser ~/.local/share/scratchqbg/config
 mkdir -pv ~/.local/share/scratchqbw
 ln -sfv ~/.config/qutebrowser ~/.local/share/scratchqbw/config
+
+ln -sfv $PWD/utilsbin/.local/bin /desktop/utilsbin
 
 popd

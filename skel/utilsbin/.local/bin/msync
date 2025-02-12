@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+locdir=$1
+remdir=$2
+
+verbose() { echo "-> $@"; $@; }
+
+diff <(mega-ls "$remdir" | sort) <(\ls "$locdir" | sort) --unchanged-line-format="" --old-line-format="" --new-line-format="%L" | while read f; do verbose mega-put "$locdir/$f" "$remdir/"; done
+diff <(mega-ls "$remdir" | sort) <(\ls "$locdir" | sort) --unchanged-line-format="" --old-line-format="%L" --new-line-format="" | while read f; do echo verbose mega-rm "$remdir/$f"; done
