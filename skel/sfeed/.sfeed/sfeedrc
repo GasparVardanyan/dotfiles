@@ -48,6 +48,7 @@ feeds() {
 	feed "Luke Smith - Odysee" "https://odysee.com/$/rss/@Luke/70"
 	feed "Luke Smith - Peertube" "https://videos.lukesmith.xyz/feeds/videos.xml?sort=-publishedAt"
 
+	feed "Bread on Penguins - Invidious" "https://y.com.sb/feed/channel/UCwHwDuNd9lCdA7chyyquDXw"
 	feed "Brodie Robertson - Invidious" "https://y.com.sb/feed/channel/UCld68syR8Wi-GY_n4CaoJGA"
 	feed "Brodie Robertson - Odysee" "https://odysee.com/$/rss/@BrodieRobertson/5"
 	feed "Chris Titus Tech" "https://christitus.com/index.xml"

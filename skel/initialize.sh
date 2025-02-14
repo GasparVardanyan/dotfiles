@@ -56,6 +56,11 @@ ln -sfv ~/.config/qutebrowser ~/.local/share/scratchqbg/config
 mkdir -pv ~/.local/share/scratchqbw
 ln -sfv ~/.config/qutebrowser ~/.local/share/scratchqbw/config
 
+rm -fv /desktop/utilsbin
 ln -sfv $PWD/utilsbin/.local/bin /desktop/utilsbin
+rm -fv ~/.local/share/themes
+ln -sfv /desktop/themes ~/.local/share
+rm -fv ~/.local/share/wallpapers
+ln -sfv /desktop/wallpapers ~/.local/share
 
 popd

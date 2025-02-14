@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-layouts=( 'us' 'am(phonetic-alt)' 'keym' )
+# layouts=( 'us' 'am(phonetic-alt)' 'keym' )
+layouts=( 'us' 'am(phonetic-alt)' )
 
 mkdir -p ~/.local/tmp
 
