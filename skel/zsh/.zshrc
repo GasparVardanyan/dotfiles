@@ -217,6 +217,7 @@ alias vdir="vdir --color=auto"
 alias nvim="NVIM_APPNAME='' nvim"
 alias nide="NVIM_APPNAME=nvim-ide \\nvim"
 alias npde="NVIM_APPNAME=nvim-pde \\nvim"
+alias lazy="NVIM_APPNAME=nvim-lazy \\nvim"
 alias vim="nvim"
 # alias man="nman"
 

@@ -43,6 +43,7 @@ elif [[ $1 = 'chtsh' ]]
 then
 	cmd="cht.sh \"$inp\""
 elif [[ $1 = 'tldr' ]]
+	inp=$(echo "$inp" | sed 's/ /-/g')
 then
 	cmd="tldr \"$inp\""
 elif [[ $1 = 'wiki' ]]
