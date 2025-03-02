@@ -38,7 +38,7 @@ pushd "$dest" >/dev/null
 	do
 		if [ ! -f "$src/$f" ]
 		then
-			echo rm "$src/$f"
+			rm "$dest/$f"
 		fi
 	done
 
@@ -46,7 +46,7 @@ pushd "$dest" >/dev/null
 	do
 		if [ ! -d "$src/$d" ]
 		then
-			echo rmdir "$src/$d"
+			rmdir "$dest/$d"
 		fi
 	done
 
