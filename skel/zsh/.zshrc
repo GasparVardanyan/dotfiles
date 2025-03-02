@@ -22,6 +22,7 @@ zle -N edit-command-line
 bindkey '^e' edit-command-line
 
 [ -f ~/.local/share/themes/theme.fzf ] && source ~/.local/share/themes/theme.fzf
+source <(fzf --zsh)
 
 
 

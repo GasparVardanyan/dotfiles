@@ -31,3 +31,23 @@ pushd "$src" >/dev/null
 	done
 
 popd >/dev/null
+
+pushd "$dest" >/dev/null
+
+	find . -type f | while read f
+	do
+		if [ ! -f "$src/$f" ]
+		then
+			echo rm "$src/$f"
+		fi
+	done
+
+	find . -type d | while read d
+	do
+		if [ ! -d "$src/$d" ]
+		then
+			echo rmdir "$src/$d"
+		fi
+	done
+
+popd >/dev/null
