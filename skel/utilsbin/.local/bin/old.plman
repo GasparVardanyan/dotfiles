@@ -9,6 +9,18 @@ archive_th()
 	rg --files --no-ignore | rg '\.jpg$' | sed 's/^/youtube /;s/\.[^.]\+$//'
 }
 
+YT="yt-dlp"
+YT_THUMB=""
+YT_COOKIES="--cookies-from-browser vivaldi"
+YT_TCONV="--convert-thumbnails jpg --ppa 'ThumbnailsConvertor:-q:v 1'"
+YT_META="--add-metadata --embed-thumbnail $YT_TCONV"
+MPV="mpv --hwdec=vaapi --profile=enc-f-webm --fullscreen --loop-playlist=inf --ytdl-format='bestvideo[width<=1920][height<=1080]+bestaudio/best' --volume=60"
+YT_QFULL="-f 'bestvideo+bestaudio/best'"
+YT_QHD="-f 'bestvideo[width<=1920][height<=1080]+bestaudio/best'"
+YT_AUDIO="-f 'bestaudio/best' -x"
+YT_VID="$YT $YT_COOKIES $YT_META -o '%(id)s.%(ext)s'"
+YT_THUMB="$YT $YT_COOKIES --skip-download --write-thumbnail $YT_TCONV -o '%(id)s'"
+
 cmd_dv()
 {
 	DIR=$(dirname "$1")
@@ -16,13 +28,13 @@ cmd_dv()
 
 	pushd "$DIR" > /dev/null
 
-	yt-dlp --cookies-from-browser vivaldi --add-metadata --embed-thumbnail --convert-thumbnails jpg --ppa 'ThumbnailsConvertor:-q:v 1' -f 'bestvideo+bestaudio/best' -o '%(id)s.%(ext)s' -a "$M3U" --download-archive <(archive_av)
+	$YT_VID $YT_QFULL -a "$M3U" --download-archive <(archive_av)
 
 		mkdir -p .thumbnails
 
 		pushd .thumbnails > /dev/null
 
-			yt-dlp --cookies-from-browser vivaldi --skip-download --write-thumbnail --convert-thumbnails jpg --ppa "ThumbnailsConvertor:-q:v 1" -o '%(id)s' -a ../"$M3U" --download-archive <(archive_th)
+			$YT_THUMB -a ../"$M3U" --download-archive <(archive_th)
 
 		popd > /dev/null
 
@@ -36,13 +48,13 @@ cmd_dv_fhd()
 
 	pushd "$DIR" > /dev/null
 
-	yt-dlp --cookies-from-browser vivaldi --add-metadata --embed-thumbnail --convert-thumbnails jpg --ppa 'ThumbnailsConvertor:-q:v 1' -f 'bestvideo[width<=1920][height<=1080]+bestaudio/best' -o '%(id)s.%(ext)s' -a "$M3U" --download-archive <(archive_av)
+	$YT_VID $YT_QHD -a "$M3U" --download-archive <(archive_av)
 
 		mkdir -p .thumbnails
 
 		pushd .thumbnails > /dev/null
 
-			yt-dlp --cookies-from-browser vivaldi --skip-download --write-thumbnail --convert-thumbnails jpg --ppa "ThumbnailsConvertor:-q:v 1" -o '%(id)s' -a ../"$M3U" --download-archive <(archive_th)
+			$YT_THUMB -a ../"$M3U" --download-archive <(archive_th)
 
 		popd > /dev/null
 
@@ -57,7 +69,7 @@ cmd_da()
 
 	pushd "$DIR" > /dev/null
 
-		yt-dlp --cookies-from-browser vivaldi --add-metadata --embed-thumbnail --convert-thumbnails jpg --ppa 'ThumbnailsConvertor:-q:v 1' -f 'bestaudio/best' -x -o '%(id)s.%(ext)s' -a "$M3U" --download-archive <(archive_av)
+		$YT_VID $YT_QAUDIO -a "$M3U" --download-archive <(archive_av)
 
 	popd > /dev/null
 }
@@ -144,7 +156,7 @@ cmd_pl()
 
 	embed=""
 	[ "$XEMBED" != '' ] && embed="--wid=$XEMBED"
-	mpv --hwdec=vaapi --profile=enc-f-webm --fullscreen --loop-playlist=inf --ytdl-format="bestvideo[width<=1920][height<=1080]+bestaudio/best" $embed "$file"
+	$MPV $embed "$file"
 }
 
 cmd_pls()
@@ -156,7 +168,7 @@ cmd_pls()
 
 	embed=""
 	[ "$XEMBED" != '' ] && embed="--wid=$XEMBED"
-	mpv --hwdec=vaapi --profile=enc-f-webm --fullscreen --loop-playlist=inf --ytdl-format="bestvideo[width<=1920][height<=1080]+bestaudio/best" --shuffle $embed "$file"
+	$MPV --shuffle $embed "$file"
 }
 
 fcheck()

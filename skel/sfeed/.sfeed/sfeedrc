@@ -35,6 +35,7 @@ feeds() {
 	# feed "Bruce Lee - Podcast" 'https://brucelee.com/podcast-blog?format=rss'
 
 	feed "Arch Linux" "https://archlinux.org/feeds/news/"
+	feed "NeoVim" "https://neovim.io/news.xml"
 	feed "BlackArch Linux" "https://blackarch.org/rss.xml"
 	feed "Codemadness" "https://www.codemadness.nl/atom.xml"
 	# feed "SkullSecurity" "https://blog.skullsecurity.org/feed"
@@ -71,6 +72,12 @@ feeds() {
 	feed "The Linux Experiment - Odysee" "https://odysee.com/$/rss/@TheLinuxExperiment/e"
 	feed "Wolfgang's Channel - Invidious" "https://y.com.sb/feed/channel/UCsnGwSIHyoYN0kiINAGUKxg"
 	feed "Enrico Tartarotti - Invidious" "https://y.com.sb/feed/channel/UCuQT7Vc3OjjZuGkqehNxb6w"
+
+	feed "typecraft - Invidious" "https://y.com.sb/feed/channel/UCo71RUe6DX4w-Vd47rFLXPg"
+	feed "ThePrimeagen - Invidious" "https://y.com.sb/feed/channel/UC8ENHE5xdFSwx71u3fDH5Xw"
+	feed "ThePrimeTime - Invidious" "https://y.com.sb/feed/channel/UCUyeluBRhGPCW4rPe_UvBZQ"
+	feed "Dreams of Code - Invidious" "https://y.com.sb/feed/channel/UCWQaM7SpSECp9FELz-cHzuQ"
+	feed "DevOps Toolbox - Invidious" "https://y.com.sb/feed/channel/UCYeiozh-4QwuC1sjgCmB92w"
 
 	feed "C04tl3 - Invidious" "https://y.com.sb/feed/channel/UCZ073r7qPBpFZlslLtmt70w"
 	feed "Planet 9" "http://planet9.cat-v.org/atom.xml"

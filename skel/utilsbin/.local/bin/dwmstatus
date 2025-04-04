@@ -47,25 +47,29 @@ comment
 
 batp="$(upower -i /org/freedesktop/UPower/devices/battery_BAT1 | sed '/ignored/d' | grep percentage | sed 's/[[:space:]]\+.*[[:space:]]\+//;s/%//')"
 bat_status="$(upower -i /org/freedesktop/UPower/devices/battery_BAT1 | grep state | sed 's/[[:space:]]\+.*[[:space:]]\+//')"
+bat_info=''
 
 if [[ $batp != '' ]] ; then
 	if [[ $bat_status == 'fully-charged' ]] ; then
-		bat_status=''
+		# bat_status=''
+		bat_info='F'
 	else
 		if [[ $bat_status == 'charging' ]] ; then
-		   bat_status=''
+		   # bat_status=''
+		   bat_info="C $batp"
 		else
-			if [[ $batp -le 20 ]] ; then
-				bat_status=''
-			elif [[ $batp -le 40 ]] ; then
-				bat_status=''
-			elif [[ $batp -le 60 ]] ; then
-				bat_status=''
-			elif [[ $batp -le 80 ]] ; then
-				bat_status=''
-			else
-				bat_status=''
-			fi
+#			if [[ $batp -le 20 ]] ; then
+#				bat_status=''
+#			elif [[ $batp -le 40 ]] ; then
+#				bat_status=''
+#			elif [[ $batp -le 60 ]] ; then
+#				bat_status=''
+#			elif [[ $batp -le 80 ]] ; then
+#				bat_status=''
+#			else
+#				bat_status=''
+#			fi
+			bat_info=$batp
 		fi
 		# bat_status="$bat_status $batp%"
 		bat_status="$bat_status $batp"
@@ -113,8 +117,9 @@ s="$s $vols$volp |"
 # s="$s  $cpu% |"
 # s="$s  $(free -h | awk '/^Mem:/ {print $3}') |"
 s="$s $cpu%$(free -h | awk '/^Mem:/ {print $3}') |"
-[[ $wireless != '' ]] && s="$s  |"
-[[ $batp != '' ]] && s="$s $bat_status |"
+[[ $wireless != '' ]] && s="$s W |"
+# [[ $batp != '' ]] && s="$s $bat_status |"
+[[ $batp != '' ]] && s="$s $bat_info |"
 # s="$s $(date +' %m%d%u:%H%M') |"
 s="$s $(date +'%m%d')$(( 1 + $(date +'%w') ))$(date +':%H%M') |"
 

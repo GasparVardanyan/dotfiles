@@ -16,18 +16,21 @@ pushd "$src" >/dev/null
 	do
 		files=$(find "$d" -type f)
 
-		echo "$files" | while read f
-		do
-			if [ ! -f "$dest/$f" ]
-			then
-				cp -v "$f" "$dest/$f"
-			elif [ "$f" -nt "$dest/$f" ]
-			then
-				cmp -s "$f" "$dest/$f"		\
-				||							\
+		if [ '' != "$files" ]
+		then
+			echo "$files" | while read f
+			do
+				if [ ! -f "$dest/$f" ]
+				then
 					cp -v "$f" "$dest/$f"
-			fi
-		done
+				elif [ "$f" -nt "$dest/$f" ]
+				then
+					cmp -s "$f" "$dest/$f"		\
+					||							\
+						cp -v "$f" "$dest/$f"
+				fi
+			done
+		fi
 	done
 
 popd >/dev/null
@@ -38,7 +41,7 @@ pushd "$dest" >/dev/null
 	do
 		if [ ! -f "$src/$f" ]
 		then
-			rm "$dest/$f"
+			rm -v "$dest/$f"
 		fi
 	done
 
@@ -46,7 +49,7 @@ pushd "$dest" >/dev/null
 	do
 		if [ ! -d "$src/$d" ]
 		then
-			rmdir "$dest/$d"
+			rmdir -v "$dest/$d"
 		fi
 	done
 
