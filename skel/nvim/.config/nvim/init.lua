@@ -1,8 +1,9 @@
 if nil then
 	vim.o.winborder = 'rounded'
-	vim.cmd [[
-		set completeopt+=noselect,menuone,preview,fuzzy
-	]]
+	-- vim.cmd [[
+	-- 	set completeopt+=noselect,menuone,preview,fuzzy
+	-- ]]
+	vim.cmd[[set completeopt+=menuone,noselect,popup]]
 
 	vim.diagnostic.config({
 		virtual_text = true,

@@ -45,7 +45,7 @@ pushd "$dest" >/dev/null
 		fi
 	done
 
-	find . -type d | while read d
+	find . -type d | tac | while read d
 	do
 		if [ ! -d "$src/$d" ]
 		then
