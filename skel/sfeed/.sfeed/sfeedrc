@@ -73,6 +73,7 @@ feeds() {
 	feed "Wolfgang's Channel - Invidious" "https://y.com.sb/feed/channel/UCsnGwSIHyoYN0kiINAGUKxg"
 	feed "Enrico Tartarotti - Invidious" "https://y.com.sb/feed/channel/UCuQT7Vc3OjjZuGkqehNxb6w"
 
+	feed "TJ DeVries - Invidious" "https://y.com.sb/feed/channel/UCd3dNckv1Za2coSaHGHl5aA"
 	feed "typecraft - Invidious" "https://y.com.sb/feed/channel/UCo71RUe6DX4w-Vd47rFLXPg"
 	feed "ThePrimeagen - Invidious" "https://y.com.sb/feed/channel/UC8ENHE5xdFSwx71u3fDH5Xw"
 	feed "ThePrimeTime - Invidious" "https://y.com.sb/feed/channel/UCUyeluBRhGPCW4rPe_UvBZQ"
