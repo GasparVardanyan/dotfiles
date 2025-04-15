@@ -335,4 +335,4 @@ chpwd
 
 # echo "$(cat ~/.local/etc/banner)"
 
-[ -f ~/.zshp ] && source ~/.zshp
+[ -f ~/.zshprc ] && source ~/.zshprc

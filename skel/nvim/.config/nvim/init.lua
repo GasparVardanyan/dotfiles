@@ -9,7 +9,7 @@ if nil then
 		virtual_lines = { current_line = true }
 	})
 
-	vim.cmd[[set completeopt=menuone,noselect,popup,fuzzy]]
+	vim.cmd[[set completeopt=menuone,noinsert,popup,fuzzy]]
 	vim.api.nvim_create_autocmd('LspAttach', {
 		callback = function(ev)
 			local client = vim.lsp.get_client_by_id(ev.data.client_id)
