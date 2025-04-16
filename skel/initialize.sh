@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-mkdir -p ~/.config ~/.local ~/.local/share ~/.local/etc
+mkdir -p ~/.config ~/.local ~/.local/share ~/.local/etc ~/.cache
 
 pushd /desktop/dotfiles/skel
 
