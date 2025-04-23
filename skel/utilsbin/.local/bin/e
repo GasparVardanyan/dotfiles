@@ -121,6 +121,14 @@ _ad()
 	fusermount -u ~/mnt
 }
 
+_ps()
+{
+	sink=$(_choose "$(pactl list sinks short | sed 's/\s\+/ /g')")
+	[ -z "$sink" ] && exit
+
+	pactl set-default-sink $(echo "$sink" | cut -f 1 -d ' ')
+}
+
 _il()
 {
 	ifconfig -a
