@@ -30,32 +30,32 @@ if [ "$WM" == "dwm" ]
 then
 	### autostart ###
 	numlockx &
-	xcompmgr &
+	# xcompmgr &
 	clipmenud &
 	flameshot &
 	kbd &
 	(sleep 1; setxkbmap -option caps:none) &
-	syncthing serve --no-browser &
+	# syncthing serve --no-browser &
 	# (sleep 2; xrandr --output DP1 --off; xrandr --output DP1 --mode 1366x768 --right-of eDP1; ~/.fehbg 2>/dev/null) &
 	~/.fehbg 2>/dev/null &
 
 
 
-	(
-		sleep 2
-		# turn off Display Power Management Service (DPMS)
-		xset -dpms
-		# turn off black Screensaver
-		xset s off
-	) &
+	# (
+	# 	sleep 2
+	# 	# turn off Display Power Management Service (DPMS)
+	# 	xset -dpms
+	# 	# turn off black Screensaver
+	# 	xset s off
+	# ) &
 
 
 
 	### caching ###
 	#find -L ~/media -type f -not -path '*/\.*' >/dev/null &
-	dmenu_path >/dev/null &
-	$SHELL -c '' >/dev/null &
-	[[ $EDITOR = *vim* ]] && $EDITOR +q >/dev/null &
+	# dmenu_path >/dev/null &
+	# $SHELL -c '' >/dev/null &
+	# [[ $EDITOR = *vim* ]] && $EDITOR +q >/dev/null &
 
 
 
@@ -68,7 +68,7 @@ then
 	# (sleep 30; while :; do [[ 0 = $(curl 'https://mtech.am/en_us/products/lenovo-ideapad-pro-5-14imh9-%2883d20024rk%29' | grep 'Out of Stock' | wc -l) ]] && dunstify 'Ideapad is Ready'; sleep $((30 * 60)); done) &
 
 	### waiting for ideapad price change ###
-	(sleep 30; while :; do c=$(curl 'https://mtech.am/en_us/products/lenovo-ideapad-pro-5-14imh9-%2883d20027rk%29' 2>/dev/null | paste -s -d ' ' | rg '<h5\s+class="price">\s+<strong>Price:</strong>\s+<span\s+class="price-amount">\s+629.900\s+AMD\s+</span>\s+</h5>' | wc -l); [ 1 -ne $c ] && dunstify 'Ideapad Price Changed'; sleep $((30 * 60)); done) &
+	# (sleep 30; while :; do c=$(curl 'https://mtech.am/en_us/products/lenovo-ideapad-pro-5-14imh9-%2883d20027rk%29' 2>/dev/null | paste -s -d ' ' | rg '<h5\s+class="price">\s+<strong>Price:</strong>\s+<span\s+class="price-amount">\s+629.900\s+AMD\s+</span>\s+</h5>' | wc -l); [ 1 -ne $c ] && dunstify 'Ideapad Price Changed'; sleep $((30 * 60)); done) &
 
 
 
@@ -106,14 +106,14 @@ then
 	# while :; do find ~/.local/share/wallpapers/sw -type f | shuf -n 3 | paste -s -d ' ' | xargs feh --no-fehbg --bg-fill; sleep 300; done
 	./.fehbg
 	) &
-
-	### dwm ###
-	[ "$WM" == "dwm" ] && while true; do
-		# xsetroot -name "| $(pamixer --get-volume-human) | $(free -h | awk '/^Mem:/ {print $3}') | $(date +'[%u] %d.%m.%Y | %T') | *$(cat ~/.todo | wc -l)* |"
-		dwmstatus
-		sleep 1
-	done &
 fi
+
+### dwm ###
+[ "$WM" == "dwm" ] && while true; do
+	# xsetroot -name "| $(pamixer --get-volume-human) | $(free -h | awk '/^Mem:/ {print $3}') | $(date +'[%u] %d.%m.%Y | %T') | *$(cat ~/.todo | wc -l)* |"
+	dwmstatus
+	sleep 1
+done &
 
 
 

@@ -30,30 +30,4 @@ if nil then
 	do return end
 end
 
-
-local MasonLspServers = require ("modular.mason.lspservers")
-MasonLspServers ["clangd"] = {}
-
-local MasonTools = require ("modular.mason.tools")
-vim.list_extend (MasonTools, {
-	"codelldb", "cpplint"
-})
-
-require ("modular")
-
-
-
-
-
-
-
-
--- RULES:
--- no module calls another one
--- modules are used only from modes
--- modes can import multiple modules
--- modes can be combined
-
-
--- continue from here:
---   https://youtu.be/S-xzYgTLVJE?list=PLsz00TDipIffreIaUNk64KxTIkQaGguqn&t=703
+require ("modular.user.gaspar")

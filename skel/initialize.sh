@@ -42,19 +42,25 @@ pushd /desktop/dotfiles/skel
 	ln -sfv $PWD/ripgrep/.ripgreprc ~
 	ln -sfv $PWD/flameshot/.config/flameshot ~/.config
 	ln -sfv $PWD/profanity/.config/profanity ~/.config
+
 	mkdir -pv ~/.config/qutebrowser
 	ln -sfv $PWD/qutebrowser/.config/qutebrowser/config.py ~/.config/qutebrowser
 	ln -sfv $PWD/qutebrowser/.config/qutebrowser/quickmarks ~/.config/qutebrowser
 	ln -sfv $PWD/qutebrowser/.config/qutebrowser/themes ~/.config/qutebrowser
 	ln -sfv $PWD/qutebrowser/.config/qutebrowser/solarized-everything-css ~/.config/qutebrowser
+
 	mkdir -pv ~/.local/share/qutebrowser
 	ln -sfv $PWD/qutebrowser/.local/share/qutebrowser/greasemonkey ~/.local/share/qutebrowser
-	mkdir -pv ~/.local/share/scratchqb
-	ln -sfv ~/.config/qutebrowser ~/.local/share/scratchqb/config
-	mkdir -pv ~/.local/share/scratchqbg
-	ln -sfv ~/.config/qutebrowser ~/.local/share/scratchqbg/config
-	mkdir -pv ~/.local/share/scratchqbw
-	ln -sfv ~/.config/qutebrowser ~/.local/share/scratchqbw/config
+
+	echo -ne "\ng\nw\n" | while read D
+	do
+		qDir=~/.local/share/scratchqb"$D"
+		mkdir -pv "$qDir"
+		ln -sfv ~/.config/qutebrowser "$qDir"/config
+		mkdir -pv "$qDir"/data
+		rm -fv "$qDir"/data/greasemonkey
+		ln -sfv ~/.local/share/qutebrowser/greasemonkey "$qDir"/data
+	done
 
 	rm -fv /desktop/utilsbin
 	ln -sfv $PWD/utilsbin/.local/bin /desktop/utilsbin
