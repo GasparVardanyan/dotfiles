@@ -9,7 +9,7 @@ export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 export SUDO_ASKPASS="/desktop/utilsbin/dmenupass"
 export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 
-export QTWEBENGINE_CHROMIUM_FLAGS=--widevine-path="/media/libwidevinecdm.so"
+# export QTWEBENGINE_CHROMIUM_FLAGS=--widevine-path="/media/libwidevinecdm.so"
 
 export GIT=127.0.0.1:/srv/git
 
@@ -62,5 +62,5 @@ if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]
 
 	cp .startx_log .startx_log.old > /dev/null
 	startx > ~/.startx_log 2>&1
-	logout
+	# logout
 fi

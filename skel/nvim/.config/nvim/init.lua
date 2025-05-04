@@ -31,6 +31,14 @@ if nil then
 end
 
 
+local MasonLspServers = require ("modular.mason.lspservers")
+MasonLspServers ["clangd"] = {}
+
+local MasonTools = require ("modular.mason.tools")
+vim.list_extend (MasonTools, {
+	"codelldb", "cpplint"
+})
+
 require ("modular")
 
 

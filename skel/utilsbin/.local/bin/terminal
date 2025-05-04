@@ -95,8 +95,6 @@ login_archdrive() {
 
 		mkdir -p /home/archdrive/drive/
 		mount -o subvol=/data/drive_tmp /dev/sda3 /home/archdrive/drive/
-		mkdir -p /home/archdrive/drive/.G/
-		mount -o subvol=/data/drive /dev/sda3 /home/archdrive/drive/.G
 
 		touch "$ARCHDRIVE_MOUNTED"
 	fi
@@ -105,9 +103,8 @@ login_archdrive() {
 }
 
 _logout_archdrive() {
-	umount /home/archdrive/drive/.G/ && \
-		umount /home/archdrive/drive/ && \
-			rm "$ARCHDRIVE_MOUNTED"
+	umount /home/archdrive/drive/ && \
+		rm "$ARCHDRIVE_MOUNTED"
 }
 
 login() {
@@ -137,16 +134,16 @@ _banner_blackarch_login() {
 	clear
 	read -rd '' banner <<'EOF'
 \033[0;31m
-              ...
-             ;::::;
-           ;::::; :;
-         ;:::::'   :;
-        ;:::::;     ;.
-       ,:::::'       ;           OOO\
-       ::::::;       ;          OOOOO\
-       ;:::::;       ;         OOOOOOOO
-      ,;::::::;     ;'         / OOOOOOO
-    ;:::::::::`. ,,,;.        /  / DOOOOOO
+			  ...
+			 ;::::;
+		   ;::::; :;
+		 ;:::::'   :;
+		;:::::;     ;.
+	   ,:::::'       ;           OOO\
+	   ::::::;       ;          OOOOO\
+	   ;:::::;       ;         OOOOOOOO
+	  ,;::::::;     ;'         / OOOOOOO
+	;:::::::::`. ,,,;.        /  / DOOOOOO
   .';:::::::::::::::::;,     /  /     DOOOO
  ,::::::;::::::;;;;::::;,   /  /        DOOO
 ;`::::::`'::::::;;;::::: ,#/  /          DOOO
@@ -173,12 +170,12 @@ _banner_work_login() {
 	clear
 	read -rd '' banner <<'EOF'
 \033[0;31m
-      ____                                    github.com/GasparVardanyan
-     / ___| __ _ ___ _ __   __ _ _ __         gitlab.com/GasparVardanyan
-    | |  _ / _` / __| '_ \ / _` | '__|        @gaspar@թութ.հայ
-    | |_| | (_| \__ \ |_) | (_| | |           gaspar@jabber.am
-     \____|\__,_|___/ .__/ \__,_|_|           @gaspar_m:matrix.org
-                    |_|                       gaspar_pm@proton.me
+	  ____                                    github.com/GasparVardanyan
+	 / ___| __ _ ___ _ __   __ _ _ __         gitlab.com/GasparVardanyan
+	| |  _ / _` / __| '_ \ / _` | '__|        @gaspar@թութ.հայ
+	| |_| | (_| \__ \ |_) | (_| | |           gaspar@jabber.am
+	 \____|\__,_|___/ .__/ \__,_|_|           @gaspar_m:matrix.org
+					|_|                       gaspar_pm@proton.me
 \033[0m
 EOF
 	echo -e "$banner"

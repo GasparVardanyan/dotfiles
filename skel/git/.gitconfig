@@ -41,3 +41,5 @@
 	directory = /media
 	directory = /media/music
 	directory = /media/music/music
+	directory = /media
+	directory = /media/solarized
