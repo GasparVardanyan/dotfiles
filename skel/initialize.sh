@@ -69,6 +69,11 @@ pushd /desktop/dotfiles/skel
 	rm -fv ~/.local/share/wallpapers
 	ln -sfv /desktop/wallpapers ~/.local/share
 
+	mkdir -pv ~/.local/share/icons
+	ln -sfv /desktop/dotfiles/themes/cursor-themes/.local/share/icons/Maya-Red24 ~/.local/share/icons
+	ln -sfv /desktop/dotfiles/themes/cursor-themes/.local/share/icons/Red-Dot ~/.local/share/icons
+	ln -sfv /desktop/dotfiles/themes/icon-themes/.local/share/icons/Solarized-Deluxe-Iconpack ~/.local/share/icons
+
 popd
 
 pushd /desktop/dotfiles/cachedots
