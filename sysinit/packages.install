@@ -5,7 +5,9 @@
 # xorg-drivers
 
 base="base base-devel linux linux-firmware linux-firmware-whence linux-headers
-efibootmgr grub pulseaudio sof-firmware alsa-utils alsa-firmware alsa-plugins"
+efibootmgr grub sof-firmware alsa-utils alsa-firmware alsa-plugins"
+
+audio="pipewire-audio libpulse pavucontrol-qt"
 
 intel="intel-ucode intel-media-driver intel-compute-runtime mesa vulkan-intel
 libva libva-utils libva-intel-driver intel-gpu-tools vulkan-icd-loader
@@ -71,7 +73,7 @@ nvim="neovim python-pynvim ctags fzf bat fd ripgrep ripgrep-all lua luarocks"
 #   manual build (https://github.com/saitoha/libsixel)
 #   configure --prefix=$HOME/.local
 
-packages="$base $intel $xorg $cli $net $wm $dwmdeps $stdeps $dmenudeps
+packages="$base $audio $intel $xorg $cli $net $wm $dwmdeps $stdeps $dmenudeps
 $tabbeddeps $statusbar $zsh $fs $arch $fonts $media $docs $nvim"
 
 pacman -S $packages --needed
