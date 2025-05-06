@@ -3,7 +3,6 @@
 # excluded:
 # amd-ucode
 # xorg-drivers
-# dialog
 
 base="base base-devel linux linux-firmware linux-firmware-whence linux-headers
 efibootmgr grub pulseaudio sof-firmware alsa-utils alsa-firmware alsa-plugins"
@@ -15,12 +14,12 @@ vulkan-tools libvdpau libvdpau-va-gl vdpauinfo"
 xorg="xorg-server xorg-xinit xsel xclip xorg-xbacklight xcompmgr libinput"
 
 cli="vi sudo tmux tree htop git translate-shell exa git-delta mediainfo tldr
-moreutils perl-rename"
+moreutils perl-rename lazygit dialog unzip lynx"
 
 net="qutebrowser python-adblock pdfjs net-tools wpa_supplicant dhclient"
 
 wm="slock clipmenu feh numlockx pamixer flameshot dunst libnotify qt5ct qt6ct
-stalonetray"
+stalonetray alacritty"
 
 dwmdeps="libx11 libxinerama libxft freetype2 xorg-xrandr xorg-xsetroot"
 stdeps="libxft perl"
@@ -36,14 +35,14 @@ fs="dosfstools btrfs-progs"
 arch="arch-wiki-docs arch-wiki-lite pkgfile reflector pacman-contrib devtools"
 
 fonts="ttf-ibm-plex ttf-dejavu ttf-font-awesome otf-font-awesome ttf-hack
-ttf-ibmplex-mono-nerd noto-fonts-emoji awesome-terminal-fonts"
+ttf-ibmplex-mono-nerd noto-fonts-emoji awesome-terminal-fonts ttf-iosevka-nerd"
 
 media="imagemagick ffmpeg nsxiv cmus opusfile ffmpegthumbnailer mpv yt-dlp
 python-mutagen atomicparsley"
 
 docs="man-db man-pages"
 
-nvim="neovim python-pynvim ctags fzf bat fd ripgrep ripgrep-all"
+nvim="neovim python-pynvim ctags fzf bat fd ripgrep ripgrep-all lua luarocks"
 
 # Qutebrowser DRM extension:
 #     widevine https://aur.archlinux.org/qt5-webengine-widevine.git

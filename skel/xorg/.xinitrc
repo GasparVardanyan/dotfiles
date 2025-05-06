@@ -1,28 +1,14 @@
 #!/bin/sh
 
-[ -f ~/.Xresources ] && xrdb ~/.Xresources
-
 if [ -d /etc/X11/xinit/xinitrc.d ] ; then
- for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
-  [ -x "$f" ] && . "$f"
- done
- unset f
+	for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
+		[ -x "$f" ] && . "$f"
+	done
+	unset f
 fi
 
+# [ -f ~/.Xresources ] && xrdb ~/.Xresources &
 
-
-# virtualbox
-vbox=$(dmesg |grep -io virtualbox)
-if [ ! -z "$vbox" ]
-then
-  /usr/bin/VBoxClient --seamless
-  /usr/bin/VBoxClient --clipboard
-  /usr/bin/VBoxClient --vmsvga
-fi
-
-
-
-# run first without -delete to be sure
 mkdir -p ~/.cache/thumbnails/mpv-gallery
 find ~/.cache/thumbnails/mpv-gallery/ -maxdepth 1 -type f -amin +$((7 * 60 * 24)) -delete
 
@@ -30,32 +16,18 @@ if [ "$WM" == "dwm" ]
 then
 	### autostart ###
 	numlockx &
-	# xcompmgr &
+	xcompmgr &
 	clipmenud &
 	flameshot &
 	kbd &
-	(sleep 1; setxkbmap -option caps:none) &
-	# syncthing serve --no-browser &
-	# (sleep 2; xrandr --output DP1 --off; xrandr --output DP1 --mode 1366x768 --right-of eDP1; ~/.fehbg 2>/dev/null) &
+	syncthing serve --no-browser &
 	~/.fehbg 2>/dev/null &
-
-
-
-	# (
-	# 	sleep 2
-	# 	# turn off Display Power Management Service (DPMS)
-	# 	xset -dpms
-	# 	# turn off black Screensaver
-	# 	xset s off
-	# ) &
 
 
 
 	### caching ###
 	#find -L ~/media -type f -not -path '*/\.*' >/dev/null &
-	# dmenu_path >/dev/null &
-	# $SHELL -c '' >/dev/null &
-	# [[ $EDITOR = *vim* ]] && $EDITOR +q >/dev/null &
+	dmenu_path >/dev/null &
 
 
 
@@ -82,9 +54,6 @@ then
 
 
 
-
-
-
 	### battery ###
 	(while :; do
 		batp="$(upower -i /org/freedesktop/UPower/devices/battery_BAT1 | sed '/ignored/d' | grep percentage | sed 's/[[:space:]]\+.*[[:space:]]\+//;s/%//')"
@@ -98,13 +67,20 @@ then
 	sleep $((5 * 60)); done) &
 
 	(
-	sleep 3
-	xrandr --output DP-1 --mode 1920x1080 --right-of eDP-1
-	xrandr --output HDMI-1 --mode 1920x1080 --left-of eDP-1
-	sleep 1
+		sleep 2
+		# turn off Display Power Management Service (DPMS)
+		xset -dpms
+		# turn off black Screensaver
+		xset s off
+		# disable caps lock
+		setxkbmap -option caps:none
 
-	# while :; do find ~/.local/share/wallpapers/sw -type f | shuf -n 3 | paste -s -d ' ' | xargs feh --no-fehbg --bg-fill; sleep 300; done
-	./.fehbg
+		xrandr --output DP-1 --mode 1920x1080 --right-of eDP-1
+		xrandr --output HDMI-1 --mode 1920x1080 --left-of eDP-1
+		sleep 1
+
+		# while :; do find ~/.local/share/wallpapers/sw -type f | shuf -n 3 | paste -s -d ' ' | xargs feh --no-fehbg --bg-fill; sleep 300; done
+		./.fehbg
 	) &
 fi
 
