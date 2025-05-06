@@ -1,8 +1,10 @@
+# include "theme.h"
+
 [global]
 	frame_color = DUNST_FOREGROUND
-	font = IBM Plex Mono 16
+	font = DUNST_FONT
 
 [urgency_normal]
-    foreground = DUNST_FOREGROUND
-    background = DUNST_BACKGROUND
+	foreground = DUNST_FOREGROUND
+	background = DUNST_BACKGROUND
 	timeout = 0

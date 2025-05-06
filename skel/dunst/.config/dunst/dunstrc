@@ -6,11 +6,12 @@
 # 1 "<stdin>"
 
 
+
 [global]
  frame_color = "#839496"
- font = IBM Plex Mono 16
+ font = "Iosevka Nerd Font"
 
 [urgency_normal]
-    foreground = "#839496"
-    background = "#002b36"
+ foreground = "#839496"
+ background = "#002b36"
  timeout = 0

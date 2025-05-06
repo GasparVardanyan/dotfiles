@@ -1,38 +1,53 @@
 #!/bin/sh
 
 prefix=dunst
-resfile=xresources.list
 themeout=theme.h
-themedefault=xresources.default
+xtable=xtable.md
 
 rm -f $themeout
 
-cat "$resfile" | while read r s
-do
-	m=DUNST_$(echo $r | tr '[:lower:]' '[:upper:]')
+set_resource ()
+{
+	T=$1
+	M=$2
+	V=$3
 
-	echo -e "$prefix\n" |
-	{
+	case $T in
+		S)
+			V=\"$V\"
+			;;
+		SA)
+			V="{\"$(echo $V | sed 's/, /", "/g')\"}"
+	esac
+
+	[[ $V == '{""}' ]] && V="{}"
+
+	echo "# define $M $V" >> $themeout
+}
+
+cat "$xtable"											|
+	sed '1,2d;s/\t*|\t*/|/g;s/\(^|\)\|\(|$\)//g'		|
+	while IFS='|' read T R D A
+	do
+		m=$(echo "$prefix"'_'"$R" | tr '[:lower:]' '[:upper:]')
+
 		l=''
 
-		while read p
+		for r in "$R" "$A"
 		do
-			l="$(																\
-				xrdb -query														\
-					| grep -P "^$p\*?\.?$r:\s*\S*$" -m 1						\
-					| sed "s/^$p\*\?\.\?$r:\s*\(\S*\)$/# define $m $s\1$s/"		\
-			)"
+			[[ "$r" == '' ]] && continue
+
+			l=$(xgetres "$prefix.$r")
 
 			if [[ "$l" != '' ]]
 			then
-				echo "$l" >> $themeout
+				set_resource $T $m "$l"
 				break
 			fi
 		done
 
-		if [[ "$l" == '' ]]
-		then
-			cat "$themedefault" | grep -P "^# define $m " >> $themeout
-		fi
-	}
-done
+		[[ "$l" == '' ]] &&
+			set_resource $T $m "$D"
+	done
+
+exit 0
