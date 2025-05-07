@@ -2,7 +2,7 @@ config.load_autoconfig (True)
 
 
 
-c.fonts.default_family				=		['IBM Plex Mono']
+c.fonts.default_family				=		['Iosevka Nerd Font']
 c.downloads.location.directory		=		'~'
 c.content.pdfjs						=		False
 
