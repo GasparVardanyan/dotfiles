@@ -1,0 +1,16 @@
+pkgname=gaspar-nvim
+pkgrel=1
+pkgver=1
+arch=('any')
+options=('!debug')
+depends=(
+	ctags
+	fd
+	git
+	git-delta
+	lazygit
+	neovim
+	ripgrep
+	xsel
+	xclip
+)

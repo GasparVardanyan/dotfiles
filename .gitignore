@@ -1,3 +1,4 @@
 **/__pycache__/
 skel/nvim/.config/nvim/cd-project.nvim.json
 **/.vim.session
+**/*.pkg.tar.zst

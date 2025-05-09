@@ -75,8 +75,8 @@ then
 		# disable caps lock
 		setxkbmap -option caps:none
 
-		xrandr --output DP-1 --mode 1920x1080 --right-of eDP-1
-		xrandr --output HDMI-1 --mode 1920x1080 --left-of eDP-1
+		xrandr --output DP-1 --mode 1440x900 --right-of eDP-1
+		xrandr --output HDMI-1 --mode 1440x900 --left-of eDP-1
 		sleep 1
 
 		# while :; do find ~/.local/share/wallpapers/sw -type f | shuf -n 3 | paste -s -d ' ' | xargs feh --no-fehbg --bg-fill; sleep 300; done
