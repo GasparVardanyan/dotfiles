@@ -1,9 +1,10 @@
 pkgname=gaspar-nvim
-pkgrel=1
 pkgver=1
+pkgrel=3
 arch=('any')
 options=('!debug')
 depends=(
+	base
 	ctags
 	fd
 	git
@@ -13,4 +14,7 @@ depends=(
 	ripgrep
 	xsel
 	xclip
+	unzip
+	lua
+	luarocks
 )

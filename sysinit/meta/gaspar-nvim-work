@@ -1,0 +1,10 @@
+pkgname=gaspar-nvim-work
+pkgver=1
+pkgrel=2
+arch=('any')
+options=('!debug')
+depends=(
+	gaspar-nvim
+	npm
+	python
+)
