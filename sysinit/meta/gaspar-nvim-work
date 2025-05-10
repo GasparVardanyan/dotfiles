@@ -8,3 +8,5 @@ depends=(
 	npm
 	python
 )
+
+# vim:ft=sh

@@ -7,3 +7,5 @@ depends=(
 	mesa
 	mesa-utils
 )
+
+# vim:ft=sh

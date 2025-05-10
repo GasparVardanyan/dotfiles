@@ -1,21 +1,23 @@
 pkgname=gaspar-shell
 pkgver=1
-pkgrel=2
+pkgrel=3
 arch=('any')
 options=('!debug')
 depends=(
+	bash-completion
+	bat
+	exa
+	fzf
+	lazygit
+	less
+	pcre2
+	perl
+	sudo
+	wget
+	xsel
 	zsh
 	zsh-completions
 	zsh-syntax-highlighting
-	bash-completion
-	fzf
-	exa
-	bat
-	lazygit
-	pcre2
-	perl
-	less
-	wget
-	xsel
-	sudo
 )
+
+# vim:ft=sh

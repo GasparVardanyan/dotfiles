@@ -18,3 +18,5 @@ depends=(
 	lua
 	luarocks
 )
+
+# vim:ft=sh
