@@ -3,26 +3,25 @@
 # excluded:
 # amd-ucode
 # xorg-drivers
-#
-# devtools
 
 base="base base-devel linux linux-firmware linux-firmware-whence linux-headers
 efibootmgr grub sof-firmware alsa-utils alsa-firmware alsa-plugins"
 
 audio="pipewire-audio libpulse pavucontrol-qt"
 
-intel="intel-ucode mesa vulkan-intel
+intel="intel-ucode intel-media-driver intel-compute-runtime mesa vulkan-intel
 libva libva-utils libva-intel-driver intel-gpu-tools vulkan-icd-loader
-vulkan-tools libvdpau libvdpau-va-gl vdpauinfo vulkan-mesa-layers"
+vulkan-tools libvdpau libvdpau-va-gl vdpauinfo"
 
-xorg="xorg-server xorg-xinit xorg-xbacklight xcompmgr libinput"
+xorg="xorg-server xorg-xinit xsel xclip xorg-xbacklight xcompmgr libinput"
 
-cli="htop translate-shell tldr moreutils dialog unzip lynx"
+cli="vi sudo tmux tree htop git translate-shell exa git-delta mediainfo tldr
+moreutils perl-rename lazygit dialog unzip lynx"
 
 net="qutebrowser python-adblock pdfjs net-tools wpa_supplicant dhclient"
 
 wm="slock clipmenu feh numlockx pamixer flameshot dunst libnotify qt5ct qt6ct
-stalonetray alacritty qalculate-qt"
+stalonetray alacritty"
 
 dwmdeps="libx11 libxinerama libxft freetype2 xorg-xrandr xorg-xsetroot"
 stdeps="libxft perl"
@@ -31,12 +30,21 @@ tabbeddeps="libx11"
 
 statusbar="pamixer grep sed awk upower"
 
+zsh="zsh zsh-completions bash-completion zsh-syntax-highlighting"
+
 fs="dosfstools btrfs-progs"
+
+arch="arch-wiki-docs arch-wiki-lite pkgfile reflector pacman-contrib devtools"
 
 fonts="ttf-ibm-plex ttf-dejavu ttf-font-awesome otf-font-awesome ttf-hack
 ttf-ibmplex-mono-nerd noto-fonts-emoji awesome-terminal-fonts ttf-iosevka-nerd"
 
+media="imagemagick ffmpeg nsxiv cmus opusfile ffmpegthumbnailer mpv yt-dlp
+python-mutagen atomicparsley"
+
 docs="man-db man-pages"
+
+nvim="neovim python-pynvim ctags fzf bat fd ripgrep ripgrep-all lua luarocks"
 
 # Qutebrowser DRM extension:
 #     widevine https://aur.archlinux.org/qt5-webengine-widevine.git
@@ -66,6 +74,6 @@ docs="man-db man-pages"
 #   configure --prefix=$HOME/.local
 
 packages="$base $audio $intel $xorg $cli $net $wm $dwmdeps $stdeps $dmenudeps
-$tabbeddeps $statusbar $fs $fonts $docs"
+$tabbeddeps $statusbar $zsh $fs $arch $fonts $media $docs $nvim"
 
-pacman -S $packages --needed
+pacman -Syyuu --asdeps $packages --needed

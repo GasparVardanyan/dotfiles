@@ -1,11 +1,16 @@
 pkgname=gaspar-gpu
 pkgver=1
-pkgrel=1
+pkgrel=3
 arch=('any')
 options=('!debug')
 depends=(
 	mesa
 	mesa-utils
+	vulkan-headers
+	vulkan-icd-loader
+	vulkan-intel
+	vulkan-radeon
+	vulkan-mesa-layers
 )
 
 # vim:ft=sh

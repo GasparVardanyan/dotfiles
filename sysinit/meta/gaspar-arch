@@ -1,0 +1,14 @@
+pkgname=gaspar-arch
+pkgver=1
+pkgrel=1
+arch=('any')
+options=('!debug')
+depends=(
+	arch-wiki-docs
+	arch-wiki-lite
+	pkgfile
+	reflector
+	pacman-contrib
+)
+
+# vim:ft=sh

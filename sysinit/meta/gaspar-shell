@@ -1,18 +1,20 @@
 pkgname=gaspar-shell
 pkgver=1
-pkgrel=3
+pkgrel=5
 arch=('any')
 options=('!debug')
 depends=(
 	bash-completion
 	bat
-	exa
+	eza
 	fzf
 	lazygit
 	less
 	pcre2
 	perl
+	perl-rename
 	sudo
+	tree
 	wget
 	xsel
 	zsh

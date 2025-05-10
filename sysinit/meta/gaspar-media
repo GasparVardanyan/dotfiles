@@ -1,0 +1,20 @@
+pkgname=gaspar-media
+pkgver=1
+pkgrel=2
+arch=('any')
+options=('!debug')
+depends=(
+	atomicparsley
+	cmus
+	ffmpeg
+	ffmpegthumbnailer
+	imagemagick
+	mediainfo
+	mpv
+	nsxiv
+	opusfile
+	python-mutagen
+	yt-dlp
+)
+
+# vim:ft=sh
