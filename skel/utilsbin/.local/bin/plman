@@ -16,13 +16,13 @@ cmd_dv()
 
 	pushd "$DIR" > /dev/null
 
-	yt-dlp --cookies-from-browser vivaldi --add-metadata --embed-thumbnail --convert-thumbnails jpg --ppa 'ThumbnailsConvertor:-q:v 1' -f 'bestvideo+bestaudio/best' -o '%(id)s.%(ext)s' -a "$M3U" --download-archive <(archive_av)
+	yt-dlp --add-metadata --embed-thumbnail --convert-thumbnails jpg --ppa 'ThumbnailsConvertor:-q:v 1' -f 'bestvideo+bestaudio/best' -o '%(id)s.%(ext)s' -a "$M3U" --download-archive <(archive_av)
 
 		mkdir -p .thumbnails
 
 		pushd .thumbnails > /dev/null
 
-			yt-dlp --cookies-from-browser vivaldi --skip-download --write-thumbnail --convert-thumbnails jpg --ppa "ThumbnailsConvertor:-q:v 1" -o '%(id)s' -a ../"$M3U" --download-archive <(archive_th)
+			yt-dlp --skip-download --write-thumbnail --convert-thumbnails jpg --ppa "ThumbnailsConvertor:-q:v 1" -o '%(id)s' -a ../"$M3U" --download-archive <(archive_th)
 
 		popd > /dev/null
 
@@ -36,13 +36,13 @@ cmd_dv_fhd()
 
 	pushd "$DIR" > /dev/null
 
-	yt-dlp --cookies-from-browser vivaldi --add-metadata --embed-thumbnail --convert-thumbnails jpg --ppa 'ThumbnailsConvertor:-q:v 1' -f 'bestvideo[width<=1920][height<=1080]+bestaudio/best' -o '%(id)s.%(ext)s' -a "$M3U" --download-archive <(archive_av)
+	yt-dlp --add-metadata --embed-thumbnail --convert-thumbnails jpg --ppa 'ThumbnailsConvertor:-q:v 1' -f 'bestvideo[width<=1920][height<=1080]+bestaudio/best' -o '%(id)s.%(ext)s' -a "$M3U" --download-archive <(archive_av)
 
 		mkdir -p .thumbnails
 
 		pushd .thumbnails > /dev/null
 
-			yt-dlp --cookies-from-browser vivaldi --skip-download --write-thumbnail --convert-thumbnails jpg --ppa "ThumbnailsConvertor:-q:v 1" -o '%(id)s' -a ../"$M3U" --download-archive <(archive_th)
+			yt-dlp --skip-download --write-thumbnail --convert-thumbnails jpg --ppa "ThumbnailsConvertor:-q:v 1" -o '%(id)s' -a ../"$M3U" --download-archive <(archive_th)
 
 		popd > /dev/null
 
@@ -57,7 +57,7 @@ cmd_da()
 
 	pushd "$DIR" > /dev/null
 
-		yt-dlp --cookies-from-browser vivaldi --add-metadata --embed-thumbnail --convert-thumbnails jpg --ppa 'ThumbnailsConvertor:-q:v 1' -f 'bestaudio/best' -x -o '%(id)s.%(ext)s' -a "$M3U" --download-archive <(archive_av)
+		yt-dlp --add-metadata --embed-thumbnail --convert-thumbnails jpg --ppa 'ThumbnailsConvertor:-q:v 1' -f 'bestaudio/best' -x -o '%(id)s.%(ext)s' -a "$M3U" --download-archive <(archive_av)
 
 	popd > /dev/null
 }

@@ -5,6 +5,8 @@ config.load_autoconfig (True)
 c.fonts.default_family				=		['Iosevka Nerd Font']
 c.downloads.location.directory		=		'~'
 c.content.pdfjs						=		False
+c.qt.environ = {'DRI_PRIME': '1', 'QT_XCB_GL_INTEGRATION': 'xcb_egl'}
+c.qt.workarounds.disable_accelerated_2d_canvas = 'never'
 
 
 

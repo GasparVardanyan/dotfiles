@@ -80,12 +80,12 @@ source <(fzf --zsh)
 
 # PROMPT="%{$fg[red]%}[%{$fg[blue]%}%n %{$fg[yellow]%}%1~%{$fg[red]%}]%}%{$fg[white]%}$ %{$reset_color%}"
 #PROMPT="%{$fg[magenta]%}%n%{$fg[yellow]%} -> %{$fg[red]%}[ %{$fg[blue]%}%1~%{$fg[red]%} ]%}%{$fg[yellow]%} :: %{$reset_color%}"
-if [ "$TERM" = st-256color ]
-then
+# if [ "$TERM" = st-256color ]
+# then
 	PROMPT="%{$fg[yellow]%}-> %{$fg[red]%}[ %{$fg[blue]%}%1~%{$fg[red]%} ]%}%{$fg[yellow]%} :: %{$reset_color%}"
-else
-	PROMPT="%{$fg[red]%}[ %{$fg[blue]%}%1~%{$fg[red]%} ]%}%{$fg[yellow]%} %{$fg[blue]%}  %{$reset_color%}"
-fi
+# else
+# 	PROMPT="%{$fg[red]%}[ %{$fg[blue]%}%1~%{$fg[red]%} ]%}%{$fg[yellow]%} %{$fg[blue]%}  %{$reset_color%}"
+# fi
 #PROMPT="$(xrdb -query | grep -P '^zsh\*prompt:' | sed 's/^zsh\*prompt:\s//')"
 unset HISTFILE
 HISTSIZE=2000
