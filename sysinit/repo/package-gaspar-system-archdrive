@@ -10,6 +10,7 @@ depends=(
 	gaspar-meta-media
 	gaspar-meta-nvim
 	gaspar-meta-shell
+	gaspar-meta-archdrive
 )
 
 # vim:ft=sh

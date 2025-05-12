@@ -65,7 +65,7 @@ pushd /desktop/dotfiles/skel
 	rm -fv /desktop/utilsbin
 	ln -sfv $PWD/utilsbin/.local/bin /desktop/utilsbin
 	rm -fv /desktop/repo
-	ln -sfv $PWD/utilsbin/.local/bin /desktop/repo
+	ln -sfv $PWD/../sysinit/repo /desktop/repo
 	rm -fv ~/.local/share/themes
 	ln -sfv /desktop/themes ~/.local/share
 	rm -fv ~/.local/share/wallpapers
