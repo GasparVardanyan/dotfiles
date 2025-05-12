@@ -1,22 +1,15 @@
-pkgname=gaspar-nvim
+pkgname=gaspar-meta-git
 pkgver=1
-pkgrel=3
+pkgrel=1
 arch=('any')
 options=('!debug')
+groups=('gaspar')
 depends=(
-	base
-	ctags
-	fd
 	git
 	git-delta
 	lazygit
 	neovim
-	ripgrep
-	xsel
-	xclip
-	unzip
-	lua
-	luarocks
+	openssh
 )
 
 # vim:ft=sh

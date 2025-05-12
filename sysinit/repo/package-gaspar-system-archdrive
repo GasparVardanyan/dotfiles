@@ -1,0 +1,15 @@
+pkgname=gaspar-system-archdrive
+pkgver=1
+pkgrel=1
+arch=('any')
+options=('!debug')
+groups=('gaspar')
+depends=(
+	gaspar-meta-git
+	gaspar-meta-gpu
+	gaspar-meta-media
+	gaspar-meta-nvim
+	gaspar-meta-shell
+)
+
+# vim:ft=sh

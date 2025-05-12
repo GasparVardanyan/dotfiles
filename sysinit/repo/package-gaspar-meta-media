@@ -1,8 +1,9 @@
-pkgname=gaspar-media
+pkgname=gaspar-meta-media
 pkgver=1
-pkgrel=2
+pkgrel=1
 arch=('any')
 options=('!debug')
+groups=('gaspar')
 depends=(
 	atomicparsley
 	cmus

@@ -1,0 +1,14 @@
+pkgname=gaspar-system-work
+pkgver=1
+pkgrel=1
+arch=('any')
+options=('!debug')
+groups=('gaspar')
+depends=(
+	gaspar-meta-git
+	gaspar-meta-gpu
+	gaspar-meta-nvim-work
+	gaspar-meta-shell
+)
+
+# vim:ft=sh

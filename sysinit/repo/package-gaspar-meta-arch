@@ -1,8 +1,9 @@
-pkgname=gaspar-arch
+pkgname=gaspar-meta-arch
 pkgver=1
 pkgrel=1
 arch=('any')
 options=('!debug')
+groups=('gaspar')
 depends=(
 	arch-wiki-docs
 	arch-wiki-lite

@@ -1,8 +1,9 @@
-pkgname=gaspar-gpu
+pkgname=gaspar-meta-gpu
 pkgver=1
-pkgrel=3
+pkgrel=1
 arch=('any')
 options=('!debug')
+groups=('gaspar')
 depends=(
 	mesa
 	mesa-utils
