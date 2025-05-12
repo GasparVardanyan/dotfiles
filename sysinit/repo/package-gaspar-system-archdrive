@@ -1,16 +1,16 @@
 pkgname=gaspar-system-archdrive
 pkgver=1
-pkgrel=1
+pkgrel=2
 arch=('any')
 options=('!debug')
 groups=('gaspar')
 depends=(
+	gaspar-meta-archdrive
 	gaspar-meta-git
 	gaspar-meta-gpu
 	gaspar-meta-media
 	gaspar-meta-nvim
 	gaspar-meta-shell
-	gaspar-meta-archdrive
 )
 
 # vim:ft=sh

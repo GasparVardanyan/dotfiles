@@ -1,0 +1,13 @@
+pkgname=gaspar-meta-fonts
+pkgver=1
+pkgrel=1
+arch=('any')
+options=('!debug')
+groups=('gaspar')
+depends=(
+	ttf-ibm-plex
+	ttf-ibmplex-mono-nerd
+	ttf-iosevka-nerd
+)
+
+# vim:ft=sh

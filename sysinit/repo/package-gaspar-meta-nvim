@@ -1,6 +1,6 @@
 pkgname=gaspar-meta-nvim
 pkgver=1
-pkgrel=1
+pkgrel=2
 arch=('any')
 options=('!debug')
 groups=('gaspar')
@@ -9,10 +9,6 @@ depends=(
 	base
 	ctags
 	fd
-	git
-	git-delta
-	lazygit
-	neovim
 	ripgrep
 	xsel
 	xclip
