@@ -1,0 +1,13 @@
+pkgname=gaspar-meta-linux
+pkgver=1
+pkgrel=1
+arch=('any')
+options=('!debug')
+groups=('gaspar')
+depends=(
+	linux
+	linux-firmware
+	linux-firmware-whence
+)
+
+# vim:ft=sh

@@ -1,14 +1,16 @@
 pkgname=gaspar-system-odyssey
 pkgver=1
-pkgrel=2
+pkgrel=3
 arch=('any')
 options=('!debug')
 groups=('gaspar')
 depends=(
 	gaspar-meta-arch
+	gaspar-meta-base
 	gaspar-meta-fonts
 	gaspar-meta-git
 	gaspar-meta-gpu
+	gaspar-meta-linux
 	gaspar-meta-media
 	gaspar-meta-nvim
 	gaspar-meta-shell

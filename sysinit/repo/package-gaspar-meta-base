@@ -1,0 +1,13 @@
+pkgname=gaspar-meta-base
+pkgver=1
+pkgrel=1
+arch=('any')
+options=('!debug')
+groups=('gaspar')
+depends=(
+	base
+	base-devel
+	vi
+)
+
+# vim:ft=sh

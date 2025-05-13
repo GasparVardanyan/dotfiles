@@ -1,0 +1,29 @@
+pkgname=gaspar-meta-desktoptools
+pkgver=1
+pkgrel=1
+arch=('any')
+options=('!debug')
+groups=('gaspar')
+depends=(
+	alacritty
+	clipmenu
+	dunst
+	flameshot
+	lynx
+	man-pages
+	numlockx
+	pamixer
+	pavucontrol-qt
+	qalculate-qt
+	qt5ct
+	qt6ct
+	qutebrowser
+	slock
+	stalonetray
+	tldr
+	translate-shell
+	upower
+	xcompmgr
+)
+
+# vim:ft=sh
