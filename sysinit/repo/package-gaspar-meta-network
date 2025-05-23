@@ -1,0 +1,13 @@
+pkgname=gaspar-meta-network
+pkgver=1
+pkgrel=1
+arch=('any')
+options=('!debug')
+groups=('gaspar')
+depends=(
+	dhclient
+	net-tools
+	wpa_supplicant
+)
+
+# vim:ft=sh

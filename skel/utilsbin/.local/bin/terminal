@@ -31,21 +31,21 @@ login_work() {
 	then
 		trap '_logout_work' exit
 
-		mount -t proc /proc /work/proc/
-		mount -t sysfs /sys /work/sys/
-		if [ -z "$(ls -A /work/dev)" ]
+		mount -t proc /proc /home/gaspar/work/proc/
+		mount -t sysfs /sys /home/gaspar/work/sys/
+		if [ -z "$(ls -A /home/gaspar/work/dev)" ]
 		then
-			mount --rbind -r /dev /work/dev/
+			mount --rbind -r /dev /home/gaspar/work/dev/
 		fi
 
-		cp /etc/resolv.conf /work/etc/resolv.conf
+		cp /etc/resolv.conf /home/gaspar/work/etc/resolv.conf
 
 		touch "$WORK_MOUNTED"
 	fi
 
 	_banner_work_login
-	chroot /work su - improvis
-	# arch-chroot /work su - improvis
+	chroot /home/gaspar/work su - improvis
+	# arch-chroot /home/gaspar/work su - improvis
 }
 
 _logout_terminator() {
@@ -55,8 +55,8 @@ _logout_terminator() {
 }
 
 _logout_work() {
-	umount /work/proc/ && \
-		umount /work/sys/ && \
+	umount /home/gaspar/work/proc/ && \
+		umount /home/gaspar/work/sys/ && \
 			rm "$WORK_MOUNTED"
 }
 
@@ -119,7 +119,7 @@ login() {
 				st_redish -n pop-up -g 120x30 -e sh -c 'sudo terminal login_blackarch'
 			;;
 			work)
-				st_leet -n pop-up -g 120x30 -e sh -c 'sudo terminal login_work'
+				st -n pop-up -g 120x30 -e sh -c 'sudo terminal login_work'
 			;;
 			terminator)
 				alacritty --class pop-up -e sh -c 'sudo terminal login_terminator'

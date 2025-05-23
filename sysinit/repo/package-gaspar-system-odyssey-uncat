@@ -1,0 +1,22 @@
+pkgname=gaspar-system-odyssey-uncat
+pkgver=1
+pkgrel=3
+arch=('any')
+options=('!debug')
+groups=('gaspar')
+depends=(
+	alsa-firmware
+	alsa-plugins
+	alsa-utils
+	devtools
+	grub
+	htop
+	pass-otp
+	syncthing
+	xorg-server-xephyr
+	xorg-xbacklight
+	xorg-xinit
+	xorg-xsetroot
+)
+
+# vim:ft=sh

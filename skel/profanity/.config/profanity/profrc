@@ -13,7 +13,7 @@ chlog=true
 [connection]
 carbons=true
 mam=false
-account=gaspar@disroot.org
+account=gaspar@jabber.am
 
 [notifications]
 message=true

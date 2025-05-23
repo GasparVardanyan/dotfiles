@@ -45,12 +45,15 @@ comment
 
 
 
-batp="$(upower -i /org/freedesktop/UPower/devices/battery_BAT1 | sed '/ignored/d' | grep percentage | sed 's/[[:space:]]\+.*[[:space:]]\+//;s/%//')"
-bat_status="$(upower -i /org/freedesktop/UPower/devices/battery_BAT1 | grep state | sed 's/[[:space:]]\+.*[[:space:]]\+//')"
+batinf=$(acpi | head -n 1 | cut -d : -f 2 | tr -d ' ' | tr '[:upper:]' '[:lower:]')
+# batp="$(upower -i /org/freedesktop/UPower/devices/battery_BAT1 | sed '/ignored/d' | grep percentage | sed 's/[[:space:]]\+.*[[:space:]]\+//;s/%//')"
+batp=$(echo "$batinf" | cut -d , -f 2)
+# bat_status="$(upower -i /org/freedesktop/UPower/devices/battery_BAT1 | grep state | sed 's/[[:space:]]\+.*[[:space:]]\+//')"
+bat_status=$(echo "$batinf" | cut -d , -f 1)
 bat_info=''
 
 if [[ $batp != '' ]] ; then
-	if [[ $bat_status == 'fully-charged' ]] ; then
+	if [[ $bat_status == 'notcharging' ]] ; then
 		# bat_status=''
 		bat_info='F'
 	else

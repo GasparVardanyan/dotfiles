@@ -54,17 +54,17 @@ then
 
 
 
-	### battery ###
-	(while :; do
-		batp="$(upower -i /org/freedesktop/UPower/devices/battery_BAT1 | sed '/ignored/d' | grep percentage | sed 's/[[:space:]]\+.*[[:space:]]\+//;s/%//')"
-		bat_status="$(upower -i /org/freedesktop/UPower/devices/battery_BAT1 | grep state | sed 's/[[:space:]]\+.*[[:space:]]\+//')"
-
-		if [[ $batp -le 20 ]] ; then
-			if [[ $bat_status != 'charging' ]] ; then
-				dunstify Battery "Remaining $batp%"
-			fi
-		fi
-	sleep $((5 * 60)); done) &
+	# ### battery ###
+	# (while :; do
+	# 	batp="$(upower -i /org/freedesktop/UPower/devices/battery_BAT1 | sed '/ignored/d' | grep percentage | sed 's/[[:space:]]\+.*[[:space:]]\+//;s/%//')"
+	# 	bat_status="$(upower -i /org/freedesktop/UPower/devices/battery_BAT1 | grep state | sed 's/[[:space:]]\+.*[[:space:]]\+//')"
+	#
+	# 	if [[ $batp -le 20 ]] ; then
+	# 		if [[ $bat_status != 'charging' ]] ; then
+	# 			dunstify Battery "Remaining $batp%"
+	# 		fi
+	# 	fi
+	# sleep $((5 * 60)); done) &
 
 	(
 		sleep 2
@@ -75,8 +75,8 @@ then
 		# disable caps lock
 		setxkbmap -option caps:none
 
-		xrandr --output DP-1 --mode 1920x1080 --right-of eDP-1
-		xrandr --output HDMI-1 --mode 1920x1080 --left-of eDP-1
+		# xrandr --output DP-1 --mode 1920x1080 --right-of eDP-1
+		xrandr --output HDMI-1-0 --mode 1920x1080 --left-of eDP-1
 		sleep 1
 
 		# while :; do find ~/.local/share/wallpapers/sw -type f | shuf -n 3 | paste -s -d ' ' | xargs feh --no-fehbg --bg-fill; sleep 300; done

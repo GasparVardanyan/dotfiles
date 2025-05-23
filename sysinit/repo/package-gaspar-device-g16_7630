@@ -1,0 +1,34 @@
+pkgname=gaspar-device-g16_7630
+pkgver=1
+pkgrel=6
+arch=('any')
+options=('!debug')
+groups=('gaspar')
+depends=(
+	acpi
+	acpi_call
+	fwupd
+	intel-media-driver
+	intel-ucode
+	libsmbios
+	libva
+	libva-utils
+	libvdpau
+	libvdpau-va-gl
+	mesa
+	mesa-utils
+	nvidia-open
+	nvidia-utils
+	nvtop
+	opencl-nvidia
+	sof-firmware
+	vdpauinfo
+	vpl-gpu-rt
+	vulkan-headers
+	vulkan-icd-loader
+	vulkan-intel
+	vulkan-mesa-layers
+	vulkan-tools
+)
+
+# vim:ft=sh
