@@ -68,4 +68,4 @@ docs="man-db man-pages"
 packages="$base $audio $intel $xorg $cli $net $wm $dwmdeps $stdeps $dmenudeps
 $tabbeddeps $statusbar $fs $fonts $docs"
 
-pacman -S $packages --needed
+pacman -S $packages --needed --asdeps

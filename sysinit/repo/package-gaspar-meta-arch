@@ -1,15 +1,16 @@
 pkgname=gaspar-meta-arch
 pkgver=1
-pkgrel=1
+pkgrel=2
 arch=('any')
 options=('!debug')
 groups=('gaspar')
 depends=(
 	arch-wiki-docs
 	arch-wiki-lite
+	dialog
+	pacman-contrib
 	pkgfile
 	reflector
-	pacman-contrib
 )
 
 # vim:ft=sh
