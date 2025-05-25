@@ -64,5 +64,5 @@ if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]
 
 	cp .startx_log .startx_log.old > /dev/null
 	startx > ~/.startx_log 2>&1
-	# logout
+	logout
 fi

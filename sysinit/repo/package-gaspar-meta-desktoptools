@@ -1,11 +1,12 @@
 pkgname=gaspar-meta-desktoptools
 pkgver=1
-pkgrel=1
+pkgrel=2
 arch=('any')
 options=('!debug')
 groups=('gaspar')
 depends=(
 	alacritty
+	feh
 	clipmenu
 	dunst
 	flameshot

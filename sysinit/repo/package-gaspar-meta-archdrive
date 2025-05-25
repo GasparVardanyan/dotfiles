@@ -1,13 +1,12 @@
 pkgname=gaspar-meta-archdrive
 pkgver=1
-pkgrel=1
+pkgrel=2
 arch=('any')
 options=('!debug')
 groups=('gaspar')
 depends=(
 	alacritty
 	dmenu
-	moreutils
 	python-praw
 	qutebrowser
 	vivaldi
