@@ -59,7 +59,7 @@ if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]
 	# then
 		clear
 		echo "$(cat $(find ~/.local/etc/banner* | shuf -n 1))"
-		sleep 3
+		# sleep 3
 	# fi
 
 	cp .startx_log .startx_log.old > /dev/null

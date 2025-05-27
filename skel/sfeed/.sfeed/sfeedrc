@@ -4,6 +4,8 @@
 feeds() {
 	# feed <name> <feedurl> [basesiteurl] [encoding]
 
+	feed "LVFS: G15 5530 G16 7630" "https://fwupd.org/lvfs/devices/com.dell.uefi789a9ef7.firmware/atom"
+
 	feed "Michio Kaku" "http://feeds.feedburner.com/mkaku"
 	feed "StarTalk" "https://y.com.sb/feed/channel/UCqoAEDirJPjEUFcF2FklnBA"
 	feed "Up and Atom - Invidious" "https://y.com.sb/feed/channel/UCSIvk78tK2TiviLQn4fSHaw"

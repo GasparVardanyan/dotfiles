@@ -1,6 +1,6 @@
 pkgname=gaspar-meta-shell
 pkgver=1
-pkgrel=2
+pkgrel=3
 arch=('any')
 options=('!debug')
 groups=('gaspar')
@@ -12,6 +12,8 @@ depends=(
 	fzf
 	lazygit
 	less
+	man-db
+	man-pages
 	moreutils
 	pcre2
 	perl

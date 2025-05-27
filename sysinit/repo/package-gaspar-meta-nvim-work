@@ -1,6 +1,6 @@
 pkgname=gaspar-meta-nvim-work
 pkgver=1
-pkgrel=1
+pkgrel=3
 arch=('any')
 options=('!debug')
 groups=('gaspar')
@@ -8,6 +8,8 @@ depends=(
 	gaspar-meta-nvim
 	npm
 	python
+	clang
+	cppcheck
 )
 
 # vim:ft=sh
