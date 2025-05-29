@@ -1,11 +1,12 @@
 pkgname=gaspar-meta-desktoptools
 pkgver=1
-pkgrel=4
+pkgrel=5
 arch=('any')
 options=('!debug')
 groups=('gaspar')
 depends=(
 	alacritty
+	brightnessctl
 	clipmenu
 	dunst
 	feh

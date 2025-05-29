@@ -1,6 +1,6 @@
 pkgname=gaspar-system-odyssey-uncat
 pkgver=1
-pkgrel=4
+pkgrel=5
 arch=('any')
 options=('!debug')
 groups=('gaspar')
@@ -12,7 +12,6 @@ depends=(
 	htop
 	syncthing
 	xorg-server-xephyr
-	xorg-xbacklight
 	xorg-xinit
 	xorg-xsetroot
 )

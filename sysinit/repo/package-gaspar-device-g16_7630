@@ -1,6 +1,6 @@
 pkgname=gaspar-device-g16_7630
 pkgver=1
-pkgrel=7
+pkgrel=8
 arch=('any')
 options=('!debug')
 groups=('gaspar')
