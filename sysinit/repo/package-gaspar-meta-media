@@ -1,6 +1,6 @@
 pkgname=gaspar-meta-media
 pkgver=1
-pkgrel=1
+pkgrel=2
 arch=('any')
 options=('!debug')
 groups=('gaspar')
@@ -12,6 +12,7 @@ depends=(
 	imagemagick
 	mediainfo
 	mpv
+	mupdf-gl
 	nsxiv
 	opusfile
 	python-mutagen

@@ -1,17 +1,16 @@
 pkgname=gaspar-meta-desktoptools
 pkgver=1
-pkgrel=2
+pkgrel=4
 arch=('any')
 options=('!debug')
 groups=('gaspar')
 depends=(
 	alacritty
-	feh
 	clipmenu
 	dunst
+	feh
 	flameshot
 	lynx
-	man-pages
 	numlockx
 	pamixer
 	pavucontrol-qt
@@ -25,6 +24,7 @@ depends=(
 	translate-shell
 	upower
 	xcompmgr
+	xorg-xrandr
 )
 
 # vim:ft=sh

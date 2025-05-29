@@ -5,15 +5,15 @@ arch=('any')
 options=('!debug')
 groups=('gaspar')
 depends=(
-	acpi
-	acpi_call
+	acpi # for AWCC
+	acpi_call # for AWCC
 	fwupd
 	gaspar-device-g16_7630-gpu
 	intel-ucode
-	libsmbios
+	libsmbios # maybe unnecessary
 	nvidia-open
 	sof-firmware
-	udisks2
+	udisks2 # for fwupd
 )
 
 # vim:ft=sh

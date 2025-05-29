@@ -76,6 +76,7 @@ then
 		setxkbmap -option caps:none
 
 		# xrandr --output DP-1 --mode 1920x1080 --right-of eDP-1
+		xrandr --output eDP-1 --mode 2560x1600 --rate 60
 		xrandr --output HDMI-1-0 --mode 1920x1080 --left-of eDP-1
 		sleep 1
 
