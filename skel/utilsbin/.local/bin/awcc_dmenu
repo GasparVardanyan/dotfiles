@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+cmd=$(echo "qm                     Query current fan mode
+g                      Set G-Mode
+q                      Set Quiet Mode
+p                      Set Performance Mode
+b                      Set Balanced Mode
+bs                     Set Battery Saver Mode
+gt                     Toggle G-Mode (useful for keybinds)" | \
+	dmenu -p "AWCC: " -l 20 | cut -f 1 -d ' ')
+cmd="${cmd:-qm}"
+
+msg=$(sudo -A awcc "$cmd")
+dunstify -r 2222 AWCC "$msg"

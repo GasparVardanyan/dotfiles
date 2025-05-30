@@ -68,9 +68,9 @@ then
 
 	(
 		# xrandr --output eDP-1 --mode 2560x1600 --rate 60
-		xrandr --output eDP-1 --mode 1920x1200
-
 		sleep 2
+		# xrandr --output eDP-1 --mode 1920x1200
+
 		# turn off Display Power Management Service (DPMS)
 		xset -dpms
 		# turn off black Screensaver

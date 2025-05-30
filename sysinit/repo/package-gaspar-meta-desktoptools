@@ -1,6 +1,6 @@
 pkgname=gaspar-meta-desktoptools
 pkgver=1
-pkgrel=5
+pkgrel=6
 arch=('any')
 options=('!debug')
 groups=('gaspar')
@@ -9,6 +9,7 @@ depends=(
 	brightnessctl
 	clipmenu
 	dunst
+	libnotify
 	feh
 	flameshot
 	lynx
