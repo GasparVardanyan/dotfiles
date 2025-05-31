@@ -1,17 +1,20 @@
 pkgname=gaspar-meta-desktoptools
 pkgver=1
-pkgrel=6
+pkgrel=7
 arch=('any')
 options=('!debug')
 groups=('gaspar')
 depends=(
+	# TODO: separate suckless' deps
 	alacritty
 	brightnessctl
 	clipmenu
 	dunst
-	libnotify
 	feh
 	flameshot
+	grub
+	htop
+	libnotify
 	lynx
 	numlockx
 	pamixer
@@ -22,11 +25,15 @@ depends=(
 	qutebrowser
 	slock
 	stalonetray
+	syncthing
 	tldr
 	translate-shell
 	upower
 	xcompmgr
+	xorg-server-xephyr
+	xorg-xinit
 	xorg-xrandr
+	xorg-xsetroot
 )
 
 # vim:ft=sh

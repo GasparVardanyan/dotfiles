@@ -11,7 +11,7 @@ depends=(
 	qutebrowser
 	vivaldi
 	vivaldi-ffmpeg-codecs
-	xorg-xauth
+	xorg-xauth # TODO: make a separate metapackages for xorg client/server
 )
 
 # vim:ft=sh

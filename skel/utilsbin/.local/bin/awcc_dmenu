@@ -8,7 +8,8 @@ b                      Set Balanced Mode
 bs                     Set Battery Saver Mode
 gt                     Toggle G-Mode (useful for keybinds)" | \
 	dmenu -p "AWCC: " -l 20 | cut -f 1 -d ' ')
-cmd="${cmd:-qm}"
+# cmd="${cmd:-qm}"
+[ '' = "$cmd" ] && exit
 
 msg=$(sudo -A awcc "$cmd")
 dunstify -r 2222 AWCC "$msg"

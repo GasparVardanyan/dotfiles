@@ -7,7 +7,7 @@ groups=('gaspar')
 depends=(
 	gaspar-meta-arch
 	gaspar-meta-base
-	gaspar-meta-desktoptools
+	gaspar-meta-desktoptools # TODO: review
 	gaspar-meta-fonts
 	gaspar-meta-git
 	gaspar-meta-linux

@@ -5,6 +5,7 @@ arch=('any')
 options=('!debug')
 groups=('gaspar')
 depends=(
+	# TODO: categorize these packages
 	intel-media-driver
 	libva
 	libva-utils
