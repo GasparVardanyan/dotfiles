@@ -43,7 +43,7 @@ _li()
 
 _ld()
 {
-	iface=$(_choose "$(ifconfig -a | grep '^enp' | sed '/^enp2s0:/d;s/:.*//')")
+	iface=$(__get_lan_iface)
 
 	[ -z "$iface" ] && exit
 
@@ -52,7 +52,7 @@ _ld()
 
 _wu()
 {
-	iface=$(__get_lan_iface)
+	iface=$(__get_wlan_iface)
 
 	[ -z "$iface" ] && exit
 
@@ -64,7 +64,7 @@ _wu()
 
 _wi()
 {
-	iface=$(__get_lan_iface)
+	iface=$(__get_wlan_iface)
 
 	[ -z "$iface" ] && exit
 
@@ -73,7 +73,7 @@ _wi()
 
 _wc()
 {
-	iface=$(__get_lan_iface)
+	iface=$(__get_wlan_iface)
 
 	[ -z "$iface" ] && exit
 
@@ -82,7 +82,7 @@ _wc()
 
 _wsu()
 {
-	iface=$(__get_lan_iface)
+	iface=$(__get_wlan_iface)
 
 	[ -z "$iface" ] && exit
 
@@ -92,7 +92,7 @@ _wsu()
 
 _wsd()
 {
-	iface=$(__get_lan_iface)
+	iface=$(__get_wlan_iface)
 
 	[ -z "$iface" ] && exit
 
@@ -102,7 +102,7 @@ _wsd()
 
 _wd()
 {
-	iface=$(__get_lan_iface)
+	iface=$(__get_wlan_iface)
 
 	[ -z "$iface" ] && exit
 
