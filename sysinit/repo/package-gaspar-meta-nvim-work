@@ -1,15 +1,17 @@
 pkgname=gaspar-meta-nvim-work
 pkgver=1
-pkgrel=3
+pkgrel=5
 arch=('any')
 options=('!debug')
 groups=('gaspar')
 depends=(
+	clang
+	cmake
+	cppcheck
 	gaspar-meta-nvim
 	npm
+	perf
 	python
-	clang
-	cppcheck
 )
 
 # vim:ft=sh

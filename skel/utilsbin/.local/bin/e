@@ -10,9 +10,21 @@ _choose()
 	fi
 }
 
-_lu()
+__get_lan_iface()
 {
 	iface=$(_choose "$(ifconfig -a | grep '^enp' | sed '/^enp2s0:/d;s/:.*//')")
+	echo "$iface"
+}
+
+__get_wlan_iface()
+{
+	iface=$(_choose "$(ifconfig -a | grep '^wlp' | sed '/^enp2s0:/d;s/:.*//')")
+	echo "$iface"
+}
+
+_lu()
+{
+	iface=$(__get_lan_iface)
 
 	[ -z "$iface" ] && exit
 
@@ -22,7 +34,7 @@ _lu()
 
 _li()
 {
-	iface=$(_choose "$(ifconfig -a | grep '^enp' | sed '/^enp2s0:/d;s/:.*//')")
+	iface=$(__get_lan_iface)
 
 	[ -z "$iface" ] && exit
 
@@ -40,39 +52,63 @@ _ld()
 
 _wu()
 {
+	iface=$(__get_lan_iface)
+
+	[ -z "$iface" ] && exit
+
 	sudo rfkill unblock wlan
-	sudo ifconfig wlp3s0 up
-	sudo systemctl enable --now wpa_supplicant@wlp3s0.service
-	sudo systemctl enable --now dhclient@wlp3s0.service
+	sudo ifconfig "$iface" up
+	sudo systemctl enable --now wpa_supplicant@"$iface".service
+	sudo systemctl enable --now dhclient@"$iface".service
 }
 
 _wi()
 {
-	sudo dhclient wlp3s0
+	iface=$(__get_lan_iface)
+
+	[ -z "$iface" ] && exit
+
+	sudo dhclient "$iface"
 }
 
 _wc()
 {
-	sudo wpa_cli -i wlp3s0
+	iface=$(__get_lan_iface)
+
+	[ -z "$iface" ] && exit
+
+	sudo wpa_cli -i "$iface"
 }
 
 _wsu()
 {
-	sudo systemctl start wpa_supplicant@wlp3s0.service
-	sudo systemctl start dhclient@wlp3s0.service
+	iface=$(__get_lan_iface)
+
+	[ -z "$iface" ] && exit
+
+	sudo systemctl start wpa_supplicant@"$iface".service
+	sudo systemctl start dhclient@"$iface".service
 }
 
 _wsd()
 {
-	sudo systemctl stop wpa_supplicant@wlp3s0.service
-	sudo systemctl stop dhclient@wlp3s0.service
+	iface=$(__get_lan_iface)
+
+	[ -z "$iface" ] && exit
+
+	sudo systemctl stop wpa_supplicant@"$iface".service
+	sudo systemctl stop dhclient@"$iface".service
 }
 
 _wd()
 {
-	sudo ifconfig wlp3s0 down
-	sudo systemctl disable --now wpa_supplicant@wlp3s0.service
-	sudo systemctl disable --now dhclient@wlp3s0.service
+	iface=$(__get_lan_iface)
+
+	[ -z "$iface" ] && exit
+
+	sudo ifconfig "$iface" down
+	sudo systemctl disable --now wpa_supplicant@"$iface".service
+	sudo systemctl disable --now dhclient@"$iface".service
 	sudo rfkill block wlan
 }
 
@@ -106,10 +142,14 @@ _dd()
 	[ -z "$mon" ] && exit
 
 	xrandr --output $mon --off
+
+	~/.fehbg
 }
 
 _au()
 {
+	echo "DANGEROUS !!!"
+	exit 1
 	rm -rf ~/mnt
 	mkdir -p ~/mnt
 	_ad 2>/dev/null

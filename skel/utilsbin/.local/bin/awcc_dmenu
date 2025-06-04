@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 
-cmd=$(echo "qm                     Query current fan mode
-g                      Set G-Mode
-q                      Set Quiet Mode
-p                      Set Performance Mode
-b                      Set Balanced Mode
-bs                     Set Battery Saver Mode
-gt                     Toggle G-Mode (useful for keybinds)" | \
+cmd=$(echo "qm                     query current fan mode
+g                      set g-mode
+q                      set quiet mode
+p                      set performance mode
+b                      set balanced mode
+bs                     set battery saver mode
+gt                     toggle g-mode" | \
 	dmenu -p "AWCC: " -l 20 | cut -f 1 -d ' ')
 # cmd="${cmd:-qm}"
 [ '' = "$cmd" ] && exit
 
 msg=$(sudo -A awcc "$cmd")
-dunstify -r 2222 AWCC "$msg"
+dunstify -r 2222 -t 3000 AWCC "$msg"

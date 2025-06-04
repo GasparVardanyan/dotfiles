@@ -1,11 +1,12 @@
 pkgname=gaspar-device-g16_7630-gpu
 pkgver=1
-pkgrel=1
+pkgrel=2
 arch=('any')
 options=('!debug')
 groups=('gaspar')
 depends=(
 	# TODO: categorize these packages
+	intel-gpu-tools
 	intel-media-driver
 	libva
 	libva-utils

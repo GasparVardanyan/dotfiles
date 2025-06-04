@@ -100,7 +100,7 @@ c.url.searchengines	 = {
 	'/gr'				:		'https://greasyfork.org/en/scripts?q={}'						,
 	'/imdb'				:		'https://www.imdb.com/find?q={}'								,
 	'/ly'				:		'https://genius.com/search?q={}'								,
-	'/man'				:		'https://man.openbsd.org/?query={}'								,
+	'/man'				:		'https://man.archlinux.org/man/{}'								,
 	'/meet'				:		'https://meet.jit.si/{}'										,
 	'/mov'				:		'https://rezka.ag/search/?do=search&subaction=search&q={}'		,
 	'/pacman'			:		'https://archlinux.org/packages/?q={}'							,
