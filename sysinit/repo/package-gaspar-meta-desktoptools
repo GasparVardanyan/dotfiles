@@ -1,6 +1,6 @@
 pkgname=gaspar-meta-desktoptools
 pkgver=1
-pkgrel=7
+pkgrel=8
 arch=('any')
 options=('!debug')
 groups=('gaspar')
@@ -26,7 +26,7 @@ depends=(
 	slock
 	stalonetray
 	syncthing
-	tldr
+	tealdeer
 	translate-shell
 	upower
 	xcompmgr

@@ -1,9 +1,10 @@
 pkgname=gaspar-device-g16_7630-gpu
 pkgver=1
-pkgrel=2
+pkgrel=3
 arch=('any')
 options=('!debug')
 groups=('gaspar')
+provides=('gaspar-device-gpu')
 depends=(
 	# TODO: categorize these packages
 	intel-gpu-tools

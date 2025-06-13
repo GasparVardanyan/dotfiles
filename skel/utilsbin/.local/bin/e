@@ -148,9 +148,7 @@ _dd()
 
 _au()
 {
-	echo "DANGEROUS !!!"
-	exit 1
-	rm -rf ~/mnt
+	rmdir ~/mnt || exit
 	mkdir -p ~/mnt
 	_ad 2>/dev/null
 	simple-mtpfs --device 1 ~/mnt

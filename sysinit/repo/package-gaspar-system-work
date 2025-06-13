@@ -1,6 +1,6 @@
 pkgname=gaspar-system-work
 pkgver=1
-pkgrel=3
+pkgrel=4
 arch=('any')
 options=('!debug')
 groups=('gaspar')
@@ -9,7 +9,7 @@ depends=(
 	gaspar-meta-nvim-work
 	gaspar-meta-shell
 	gaspar-meta-work
-	gaspar-device-g16_7630-gpu
+	gaspar-device-gpu
 )
 
 # vim:ft=sh

@@ -29,6 +29,7 @@ pushd "$src" >/dev/null
 					||							\
 						cp -v "$f" "$dest/$f"
 				fi
+				cp --attributes-only --preserve "$f" "$dest/$f"
 			done
 		fi
 	done

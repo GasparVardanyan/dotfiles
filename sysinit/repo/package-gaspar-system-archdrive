@@ -1,6 +1,6 @@
 pkgname=gaspar-system-archdrive
 pkgver=1
-pkgrel=3
+pkgrel=4
 arch=('any')
 options=('!debug')
 groups=('gaspar')
@@ -10,6 +10,7 @@ depends=(
 	gaspar-meta-media
 	gaspar-meta-nvim
 	gaspar-meta-shell
+	gaspar-device-gpu
 )
 
 # vim:ft=sh

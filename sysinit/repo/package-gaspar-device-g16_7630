@@ -1,9 +1,10 @@
 pkgname=gaspar-device-g16_7630
 pkgver=1
-pkgrel=9
+pkgrel=10
 arch=('any')
 options=('!debug')
 groups=('gaspar')
+provides=('gaspar-device')
 depends=(
 	alsa-firmware
 	alsa-plugins
