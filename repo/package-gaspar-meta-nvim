@@ -1,11 +1,12 @@
 pkgname=gaspar-meta-nvim
 pkgver=1
-pkgrel=2
+pkgrel=3
 arch=('any')
 options=('!debug')
 groups=('gaspar')
 depends=(
 	gaspar-meta-git
+	ast-grep
 	base
 	ctags
 	fd

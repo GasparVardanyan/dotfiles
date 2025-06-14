@@ -1,4 +1,0 @@
-#!/bin/sh
-
-systemctl enable --now wpa_supplicant@wlp0s20f3.service
-systemctl enable --now dhclient@wlp0s20f3.service

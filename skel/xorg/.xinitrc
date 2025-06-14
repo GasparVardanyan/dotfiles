@@ -22,6 +22,7 @@ then
 	kbd &
 	syncthing serve --no-browser &
 	~/.fehbg 2>/dev/null &
+	conky &
 
 
 

@@ -113,10 +113,16 @@ cmus=$(cmus-remote --query 2>/dev/null | grep ^status -m 1 | cut -d ' ' -f 2)
 
 
 
+cpu_temp=$(sensors dell_ddv-virtual-0 | grep 'CPU:' | sed 's/\s\+/ /g' | cut -f 2 -d ' ')
+gpu_temp=$(sensors dell_ddv-virtual-0 | grep 'Video:' | sed 's/\s\+/ /g' | cut -f 2 -d ' ')
+
+
+
 s="|"
 [[ $cmus != '' ]] && s="$s $cmus |"
 # s="$s $vols $volp% |"
 s="$s $vols$volp |"
+s="$s $cpu_temp $gpu_temp |"
 # s="$s  $cpu% |"
 # s="$s  $(free -h | awk '/^Mem:/ {print $3}') |"
 s="$s $cpu%$(free -h | awk '/^Mem:/ {print $3}') |"

@@ -1,6 +1,6 @@
 pkgname=gaspar-meta-desktoptools
 pkgver=1
-pkgrel=8
+pkgrel=9
 arch=('any')
 options=('!debug')
 groups=('gaspar')
@@ -11,6 +11,7 @@ depends=(
 	clipmenu
 	dunst
 	feh
+	firewalld
 	flameshot
 	grub
 	htop

@@ -1,6 +1,6 @@
 pkgname=gaspar-device-g16_7630-gpu
 pkgver=1
-pkgrel=3
+pkgrel=4
 arch=('any')
 options=('!debug')
 groups=('gaspar')
@@ -15,6 +15,7 @@ depends=(
 	libvdpau-va-gl
 	mesa
 	mesa-utils
+	nvidia-prime
 	nvidia-utils
 	nvtop
 	opencl-nvidia

@@ -16,6 +16,8 @@ pushd /desktop/dotfiles/skel
 	ln -sfv $PWD/zsh/.zsh.d ~
 	mkdir -pv ~/.config/cmus
 	ln -sfv $PWD/cmus/.config/cmus/rc ~/.config/cmus
+	mkdir -pv ~/.config/conky
+	ln -sfv $PWD/conky/.config/conky/conky.conf ~/.config/conky/conky.conf
 	ln -sfv $PWD/sxiv/.config/sxiv ~/.config
 	rm -fv ~/.config/nsxiv
 	ln -sfv ~/.config/{,n}sxiv
@@ -65,7 +67,7 @@ pushd /desktop/dotfiles/skel
 	rm -fv /desktop/utilsbin
 	ln -sfv $PWD/utilsbin/.local/bin /desktop/utilsbin
 	rm -fv /desktop/repo
-	ln -sfv $PWD/../sysinit/repo /desktop/repo
+	ln -sfv $PWD/../repo /desktop/repo
 	rm -fv ~/.local/share/themes
 	ln -sfv /desktop/themes ~/.local/share
 	rm -fv ~/.local/share/wallpapers

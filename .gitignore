@@ -1,6 +1,6 @@
 **/__pycache__/
 skel/nvim/.config/nvim/cd-project.nvim.json
 **/.vim.session
-sysinit/repo/*.pkg.tar.zst
-sysinit/repo/gaspar.db*
-sysinit/repo/gaspar.files*
+repo/*.pkg.tar.zst
+repo/gaspar.db*
+repo/gaspar.files*
