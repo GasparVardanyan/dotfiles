@@ -1,6 +1,6 @@
 pkgname=gaspar-system-work
 pkgver=1
-pkgrel=4
+pkgrel=6
 arch=('any')
 options=('!debug')
 groups=('gaspar')

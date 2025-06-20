@@ -22,7 +22,7 @@ then
 	kbd &
 	syncthing serve --no-browser &
 	~/.fehbg 2>/dev/null &
-	conky &
+	# conky &
 
 
 
@@ -55,17 +55,18 @@ then
 
 
 
-	# ### battery ###
-	# (while :; do
-	# 	batp="$(upower -i /org/freedesktop/UPower/devices/battery_BAT1 | sed '/ignored/d' | grep percentage | sed 's/[[:space:]]\+.*[[:space:]]\+//;s/%//')"
-	# 	bat_status="$(upower -i /org/freedesktop/UPower/devices/battery_BAT1 | grep state | sed 's/[[:space:]]\+.*[[:space:]]\+//')"
-	#
-	# 	if [[ $batp -le 20 ]] ; then
-	# 		if [[ $bat_status != 'charging' ]] ; then
-	# 			dunstify Battery "Remaining $batp%"
-	# 		fi
-	# 	fi
-	# sleep $((5 * 60)); done) &
+	### battery ###
+	(while :; do
+		batinf=$(acpi | head -n 1 | cut -d : -f 2 | tr -d ' ' | tr '[:upper:]' '[:lower:]')
+		batp=$(echo "$batinf" | cut -d , -f 2 | cut -f 1 -d %)
+		bat_status=$(echo "$batinf" | cut -d , -f 1)
+
+		if [[ $batp -le 20 ]] ; then
+			if [[ $bat_status != 'charging' ]] ; then
+				dunstify Battery "Remaining $batp%"
+			fi
+		fi
+	sleep $((5 * 60)); done) &
 
 	(
 		# xrandr --output eDP-1 --mode 2560x1600 --rate 60
