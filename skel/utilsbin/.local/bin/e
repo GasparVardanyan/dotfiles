@@ -10,6 +10,16 @@ _choose()
 	fi
 }
 
+__get_primary_display()
+{
+	_choose "$(xrandr | grep '^\w' | sed '1d;/disconnected/d' | cut -d ' ' -f1 | rg eDP)"
+}
+
+__get_secondary_displays()
+{
+	_choose "$(xrandr | grep '^\w' | sed '1d;/disconnected/d' | cut -d ' ' -f1 | rg -v eDP)"
+}
+
 __get_lan_iface()
 {
 	iface=$(_choose "$(ifconfig -a | grep '^enp' | sed '/^enp2s0:/d;s/:.*//')")
@@ -123,21 +133,21 @@ _wr()
 
 _du()
 {
-	mon=$(_choose "$(xrandr | grep '^\w' | sed '1d;/eDP-1/d;/disconnected/d' | cut -d ' ' -f1)")
+	mon=$(_choose "$(__get_secondary_displays)")
 
 	[ -z "$mon" ] && exit
 
 	lr=$(_choose "$(echo -e 'left\nright')")
 
 	xrandr --output $mon --off
-	xrandr --output $mon --mode 1920x1080 "--$lr-of" eDP-1
+	xrandr --output $mon --mode 1920x1080 "--$lr-of" "$(__get_primary_display)"
 
 	~/.fehbg
 }
 
 _dd()
 {
-	mon=$(_choose "$(xrandr | grep '^\w' | sed '1d;/eDP-1/d;/disconnected/d' | cut -d ' ' -f1)")
+	mon=$(_choose "$(__get_secondary_displays)")
 
 	[ -z "$mon" ] && exit
 

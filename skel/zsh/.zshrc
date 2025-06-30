@@ -77,13 +77,19 @@ source <(fzf --zsh)
 # _gen_fzf_default_opts
 
 
+# export PROMPT_OSC="$(printf "\033]133;A\007")"
+# PROMPT_OSC="%{\033]133;A\007%}"
+
+PROMPT_OSC=$'%{\e]133;A\a%}'
+# PROMPT="${PROMPT_OSC}%n@%m:%~%# "
 
 # PROMPT="%{$fg[red]%}[%{$fg[blue]%}%n %{$fg[yellow]%}%1~%{$fg[red]%}]%}%{$fg[white]%}$ %{$reset_color%}"
 #PROMPT="%{$fg[magenta]%}%n%{$fg[yellow]%} -> %{$fg[red]%}[ %{$fg[blue]%}%1~%{$fg[red]%} ]%}%{$fg[yellow]%} :: %{$reset_color%}"
 # if [ "$TERM" = st-256color ]
 # then
+	PROMPT="${PROMPT_OSC}%{$fg[yellow]%}-> %{$fg[red]%}[ %{$fg[blue]%}%1~%{$fg[red]%} ]%}%{$fg[yellow]%} :: %{$reset_color%}"
 	# PROMPT="%{$fg[yellow]%}-> %{$fg[red]%}[ %{$fg[blue]%}%1~%{$fg[red]%} ]%}%{$fg[yellow]%} :: %{$reset_color%}"
-	PROMPT="%{$fg[red]%}[ %{$fg[blue]%}%1~%{$fg[red]%} ]%}%{$fg[yellow]%} %{$fg[blue]%}  %{$reset_color%}"
+	# PROMPT="${PROMPT_OSC}%{$fg[red]%}[ %{$fg[blue]%}%1~%{$fg[red]%} ]%}%{$fg[yellow]%} %{$fg[blue]%}  %{$reset_color%}"
 # else
 # 	PROMPT="%{$fg[red]%}[ %{$fg[blue]%}%1~%{$fg[red]%} ]%}%{$fg[yellow]%} %{$fg[blue]%}  %{$reset_color%}"
 # fi
@@ -197,7 +203,8 @@ alias rm="rm -i"
 alias mv="mv -i"
 alias dd="dd status=progress"
 alias df="df -Th -x tmpfs -x devtmpfs"
-alias diff="diff --color=auto"
+# alias diff="diff --color=auto"
+alias diff="delta"
 alias dir="dir --color=auto"
 # alias egrep="egrep --color=auto"
 alias feh="feh --no-fehbg --zoom fill"

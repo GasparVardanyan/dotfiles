@@ -1,6 +1,9 @@
 #!/bin/sh
 
-l=$(ls ~/.local/share/playlists/*.m3u | sed 's/^.*\.local\/share\/playlists\///;s/\.m3u$//' | dmenu -p 'play: ' -l 20)
+embed=""
+[ "$XEMBED" != '' ] && embed="-w $XEMBED"
+
+l=$(ls ~/.local/share/playlists/*.m3u | sed 's/^.*\.local\/share\/playlists\///;s/\.m3u$//' | dmenu -p 'play: ' -l 20 $embed)
 if [ "$l" != '' ]
 then
 	# c="$(echo -e "mpv --fullscreen --loop-playlist=inf\nvlc\nedit" | dmenu -p command: -l 5)"
