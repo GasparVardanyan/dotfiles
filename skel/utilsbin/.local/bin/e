@@ -182,4 +182,12 @@ _il()
 	ifconfig -a
 }
 
+_wall()
+{
+	embed=""
+	[ "$XEMBED" != '' ] && embed="-e $XEMBED"
+
+	nsxiv $embed -r -N pop-up -btr -g 1212x680 ~/.local/share/{themes,wallpapers}
+}
+
 _$1

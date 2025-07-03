@@ -1,6 +1,6 @@
 pkgname=gaspar-device-g16_7630
 pkgver=1
-pkgrel=10
+pkgrel=11
 arch=('any')
 options=('!debug')
 groups=('gaspar')
@@ -17,6 +17,7 @@ depends=(
 	libsmbios # maybe unnecessary
 	nvidia-open
 	sof-firmware
+	thermald
 	udisks2 # for fwupd
 )
 

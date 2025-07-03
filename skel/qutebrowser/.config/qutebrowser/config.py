@@ -10,17 +10,15 @@ c.content.pdfjs						=		False
 
 
 
-config.bind (			'wb'		,	'open -- http://web.archive.org/web/{url:pretty}'														)
-config.bind (			'xx'		,	'config-cycle statusbar.show always never;; config-cycle tabs.show always never'						)
-config.bind (			'yiu'		,	'open -t -- https://yandex.com/images/search?rpt=imageview&url={url:pretty}'							)
-config.bind (			';D'		,	'hint images download'																					)
-config.bind (	'<Ctrl+Shift+d>'	,	'scroll-page 0 -0.5'																					)
-config.bind (		'<Ctrl+o>'		,	'cmd-set-text :open /'																					)
-config.bind (	'<Ctrl+Shift+o>'	,	'cmd-set-text :open -t /'																				)
-config.bind (			',m'		,
-				'hint links spawn --detach mpv --fullscreen --ytdl-format="bestvideo[width<=1920][height<=1080]+bestaudio/best" {hint-url}'		)
-config.bind (			',p'		,
-				'spawn --detach mpv --fullscreen --ytdl-format="bestvideo[width<=1920][height<=1080]+bestaudio/best" {url:pretty}'				)
+config.bind (			'wb'		,	'open -- http://web.archive.org/web/{url:pretty}'										)
+config.bind (			'xx'		,	'config-cycle statusbar.show always never;; config-cycle tabs.show always never'		)
+config.bind (			'yiu'		,	'open -t -- https://yandex.com/images/search?rpt=imageview&url={url:pretty}'			)
+config.bind (			';D'		,	'hint images download'																	)
+config.bind (	'<Ctrl+Shift+d>'	,	'scroll-page 0 -0.5'																	)
+config.bind (		'<Ctrl+o>'		,	'cmd-set-text :open /'																	)
+config.bind (	'<Ctrl+Shift+o>'	,	'cmd-set-text :open -t /'																)
+config.bind (			',m'		,	'hint links spawn --detach mpv --fullscreen  {hint-url}'								)
+config.bind (			',p'		,	'spawn --detach mpv --fullscreen  {url:pretty}'											)
 
 
 
