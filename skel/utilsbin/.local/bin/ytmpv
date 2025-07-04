@@ -8,5 +8,8 @@ embed=""
 l=$(find /tmp/ytmpv -type f -name '*.m3u' | \sed 's#^/tmp/ytmpv/##;s#\.m3u$##' | dmenu -p 'play: ' -l 20 $embed)
 if [ "$l" != '' ]
 then
-	plman pl "/tmp/ytmpv/$l.m3u"
+	playlist="/tmp/ytmpv/$l.m3u"
+	socket="$playlist.socket"
+	mpv --fullscreen --loop-playlist=inf --ytdl-format="bestvideo+bestaudio/best" $embed "$playlist" --input-ipc-server="$socket"
+	rm "$socket"
 fi

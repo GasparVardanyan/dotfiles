@@ -1,0 +1,75 @@
+#!/bin/sh
+
+YTMPV_DIR=/tmp/ytmpv
+SOURCE=/tmp/plctrl
+
+cmd_list_sources()
+{
+	list=""
+	cmus=$(cmus-remote --query 2>/dev/null | grep ^status -m 1 | cut -d ' ' -f 2)
+	[[ "$cmus" != '' ]] && list="cmus\n"
+
+	ytmpv=$(find "$YTMPV_DIR" -type s -name '*.socket' | sed -E "s#^$YTMPV_DIR/?#YTMPV: #")
+	list="$list$ytmpv\n"
+
+	echo -e "$list"
+}
+
+cmd_select()
+{
+	list=$(cmd_list_sources)
+	echo "list: $list"
+	if [[ "$list" != '' ]]
+	then
+		echo "$list" | dmenu -p 'source: ' -l 20 > "$SOURCE"
+	else
+		rm "$SOURCE"
+	fi
+}
+
+cmd_validate()
+{
+	list=$(cmd_list_sources)
+	sel=$(cat "$SOURCE")
+
+	grep -Fxq "$list" <<< "$sel"
+}
+
+cmd_$1
+exit
+
+cmd_next()
+{
+
+}
+
+cmd_prev()
+{
+
+}
+
+cmd_toggle_play()
+{
+
+}
+
+cmd_stop()
+{
+
+}
+
+exit
+
+[ ! -d /tmp/ytmpv ] && exit
+
+embed=""
+[ "$XEMBED" != '' ] && embed="-w $XEMBED"
+
+l=$(find /tmp/ytmpv -type f -name '*.m3u' | \sed 's#^/tmp/ytmpv/##;s#\.m3u$##' | dmenu -p 'play: ' -l 20 $embed)
+if [ "$l" != '' ]
+then
+	playlist="/tmp/ytmpv/$l.m3u"
+	socket="$playlist.socket"
+	mpv --fullscreen --loop-playlist=inf --ytdl-format="bestvideo+bestaudio/best" $embed "$playlist" --input-ipc-server="$socket"
+	rm "$socket"
+fi
