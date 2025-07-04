@@ -1,0 +1,12 @@
+#!/bin/sh
+
+[ ! -d /tmp/ytmpv ] && exit
+
+embed=""
+[ "$XEMBED" != '' ] && embed="-w $XEMBED"
+
+l=$(find /tmp/ytmpv -type f -name '*.m3u' | \sed 's#^/tmp/ytmpv/##;s#\.m3u$##' | dmenu -p 'play: ' -l 20 $embed)
+if [ "$l" != '' ]
+then
+	plman pl "/tmp/ytmpv/$l.m3u"
+fi

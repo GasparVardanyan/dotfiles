@@ -1,0 +1,15 @@
+pkgname=gaspar-meta-website
+pkgver=1
+pkgrel=1
+arch=('any')
+options=('!debug')
+groups=('gaspar')
+depends=(
+	alacritty
+	dmenu
+	xorg-xauth
+	hugo
+	python-pygments
+)
+
+# vim:ft=sh

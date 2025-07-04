@@ -144,7 +144,8 @@ cmd_pl()
 
 	embed=""
 	[ "$XEMBED" != '' ] && embed="--wid=$XEMBED"
-	mpv --fullscreen --loop-playlist=inf --ytdl-format="bestvideo[width<=1920][height<=1080]+bestaudio/best" $embed "$file"
+	# mpv --fullscreen --loop-playlist=inf --ytdl-format="bestvideo[width<=1920][height<=1080]+bestaudio/best" $embed "$file"
+	mpv --fullscreen --loop-playlist=inf --ytdl-format="bestvideo+bestaudio/best" $embed "$file"
 }
 
 cmd_pls()
@@ -156,7 +157,8 @@ cmd_pls()
 
 	embed=""
 	[ "$XEMBED" != '' ] && embed="--wid=$XEMBED"
-	mpv --fullscreen --loop-playlist=inf --ytdl-format="bestvideo[width<=1920][height<=1080]+bestaudio/best" --shuffle $embed "$file"
+	# mpv --fullscreen --loop-playlist=inf --ytdl-format="bestvideo[width<=1920][height<=1080]+bestaudio/best" --shuffle $embed "$file"
+	mpv --fullscreen --loop-playlist=inf --ytdl-format="bestvideo+bestaudio/best" --shuffle $embed "$file"
 }
 
 fcheck()
