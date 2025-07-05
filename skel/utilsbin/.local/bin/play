@@ -1,12 +1,18 @@
 #!/bin/sh
 
-embed=""
-[ "$XEMBED" != '' ] && embed="-w $XEMBED"
+dmenu_embed=""
+mpv_embed=""
+if [ "$XEMBED" != '' ]
+then
+	dmenu_embed="-w $XEMBED"
+	mpv_embed="-wid=$XEMBED"
+fi
 
-l=$(ls ~/.local/share/playlists/*.m3u | sed 's/^.*\.local\/share\/playlists\///;s/\.m3u$//' | dmenu -p 'play: ' -l 20 $embed)
+l=$(ls ~/.local/share/playlists/*.m3u | sed 's/^.*\.local\/share\/playlists\///;s/\.m3u$//' | dmenu -p 'play: ' -l 20 $dmenu_embed)
 if [ "$l" != '' ]
 then
-	# c="$(echo -e "mpv --fullscreen --loop-playlist=inf\nvlc\nedit" | dmenu -p command: -l 5)"
-	# [ "$c" != "" ] && $c "$HOME/.local/share/playlists/$l.m3u"
-	plman pls "$HOME/.local/share/playlists/$l.m3u"
+	playlist="$HOME/.local/share/playlists/$l.m3u"
+	socket="$playlist.socket"
+	mpv --fullscreen --loop-playlist=inf --ytdl-format="bestvideo+bestaudio/best" $mpv_embed "$playlist" --input-ipc-server="$socket" --shuffle
+	rm "$socket"
 fi
