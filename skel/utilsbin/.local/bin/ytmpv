@@ -15,6 +15,6 @@ if [ "$l" != '' ]
 then
 	playlist="/tmp/ytmpv/$l.m3u"
 	socket="$playlist.socket"
-	mpv --fullscreen --loop-playlist=inf --ytdl-format="bestvideo+bestaudio/best" $mpv_embed "$playlist" --input-ipc-server="$socket"
+	mpv --fullscreen --loop-playlist=inf --ytdl-format="bestvideo+bestaudio/best" $mpv_embed "$playlist" --input-ipc-server="$socket" --title="${l%.m3u*}"
 	rm "$socket"
 fi

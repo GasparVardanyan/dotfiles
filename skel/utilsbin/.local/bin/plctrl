@@ -27,7 +27,7 @@ cmd_select_source()
 	echo "list: $list"
 	if [[ "$list" != '' ]]
 	then
-		s=$(echo "$list" | dmenu -p 'source: ' -l 20)
+		s=$(echo "$list" | dmenu -p 'plctrl source: ' -l 20)
 		[[ "$s" != '' ]] && echo "$s" > "$PLCTRL_SOURCE"
 	else
 		rm "$PLCTRL_SOURCE"

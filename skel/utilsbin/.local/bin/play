@@ -13,6 +13,6 @@ if [ "$l" != '' ]
 then
 	playlist="$HOME/.local/share/playlists/$l.m3u"
 	socket="$playlist.socket"
-	mpv --fullscreen --loop-playlist=inf --ytdl-format="bestvideo+bestaudio/best" $mpv_embed "$playlist" --input-ipc-server="$socket" --shuffle
+	mpv --fullscreen --loop-playlist=inf --ytdl-format="bestvideo+bestaudio/best" $mpv_embed "$playlist" --input-ipc-server="$socket" --shuffle --title="${l%.m3u*}"
 	rm "$socket"
 fi
