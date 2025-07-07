@@ -4,6 +4,8 @@ YTMPV_DIR="${YTMPV_DIR:-/tmp/ytmpv}"
 PLCTRL_SOURCE="${PLCTRL_SOURCE:-/tmp/plctrl}"
 PLMAN_DIR="$HOME/.local/share/playlists"
 
+mkdir -p "$YTMPV_DIR" "$PLMAN_DIR"
+
 cmd_list_sources()
 {
 	list=""
@@ -16,7 +18,7 @@ cmd_list_sources()
 	pl=$(find "$PLMAN_DIR" -type s -name '*.socket' | sed -E "s#^$PLMAN_DIR/?#PLMAN: #")
 	list="$list$pl\n"
 
-	echo -e "$list"
+	echo -e "$list" | sed '/^[[:space:]]*$/d'
 }
 
 cmd_select_source()
@@ -24,13 +26,20 @@ cmd_select_source()
 	# TODO: automatically select if only one available source
 
 	list=$(cmd_list_sources)
-	echo "list: $list"
 	if [[ "$list" != '' ]]
 	then
-		s=$(echo "$list" | dmenu -p 'plctrl source: ' -l 20)
+		c=$(echo "$list" | wc -l)
+		echo "C: $c"
+		s=''
+		if [ 1 -eq $c ]
+		then
+			s="$list"
+		else
+			s=$(echo "$list" | dmenu -p 'plctrl source: ' -l 20)
+		fi
 		[[ "$s" != '' ]] && echo "$s" > "$PLCTRL_SOURCE"
 	else
-		rm "$PLCTRL_SOURCE"
+		rm -f "$PLCTRL_SOURCE"
 	fi
 
 	test -f "$PLCTRL_SOURCE"
