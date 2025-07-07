@@ -190,6 +190,8 @@ cmd_optimize()
 			fi
 		fi
 	done >> "$1"
+
+	rm "$1".tmp
 }
 
 cmd_$1 "$2"

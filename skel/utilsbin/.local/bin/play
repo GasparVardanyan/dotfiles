@@ -12,7 +12,7 @@ l=$(ls ~/.local/share/playlists/*.m3u | sed 's/^.*\.local\/share\/playlists\///;
 if [ "$l" != '' ]
 then
 	playlist="$HOME/.local/share/playlists/$l.m3u"
-	socket="$playlist.socket"
+	socket=$(echo "$playlist" | sed 's/\.m3u$/.socket/')
 	mpv --fullscreen --loop-playlist=inf --ytdl-format="bestvideo+bestaudio/best" $mpv_embed "$playlist" --input-ipc-server="$socket" --shuffle --title="${l%.m3u*}"
 	rm "$socket"
 fi
