@@ -159,7 +159,8 @@ cmd_stop()
 		elif [[ "$s" == PLMAN:\ * ]]
 		then
 			s="${s#* }"
-			_cmd_mpv "$PLMAN_DIR/$s" 'cycle pause'
+			_cmd_mpv "$PLMAN_DIR/$s" '{ "command": ["set_property", "pause", true] }'
+			_cmd_mpv "$PLMAN_DIR/$s" 'seek 0 absolute'
 		else
 			echo "SS:$s"
 		fi
