@@ -1,6 +1,6 @@
 pkgname=gaspar-meta-desktoptools
 pkgver=1
-pkgrel=9
+pkgrel=10
 arch=('any')
 options=('!debug')
 groups=('gaspar')
@@ -30,7 +30,8 @@ depends=(
 	tealdeer
 	translate-shell
 	upower
-	xcompmgr
+	xcompmgr # TODO: decide which one to keep, picom or xcompmgr
+	picom # NOTE: picom seems to help with screen tearing on nvidia gpus
 	xorg-server-xephyr
 	xorg-xinit
 	xorg-xrandr

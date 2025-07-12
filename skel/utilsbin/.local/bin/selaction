@@ -43,15 +43,18 @@ elif [[ $1 = 'chtsh' ]]
 then
 	cmd="cht.sh \"$inp\""
 elif [[ $1 = 'tldr' ]]
-	inp=$(echo "$inp" | sed 's/ /-/g')
 then
+	inp=$(echo "$inp" | sed 's/ /-/g')
 	cmd="tldr \"$inp\""
 elif [[ $1 = 'wiki' ]]
 then
 	cmd="wiki-search-html \"$inp\""
 fi
 
-cmd="nvim +'term! $cmd'"
+if [[ $1 != 'wiki' ]]
+then
+	cmd="nvim +'term! $cmd'"
+fi
 
 [[ $cmd != '' && $inp != '' ]] &&
 	$TERMINAL -t "$1: $inp" -n pop-up -g 120x30 -e "$SHELL" -c "$cmd"

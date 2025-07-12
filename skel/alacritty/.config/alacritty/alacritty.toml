@@ -2,10 +2,35 @@ general.import = [
 	"~/.config/alacritty/themes/themes/solarized_dark.toml"
 ]
 
+# [colors.primary]
+# background = '0x080000'
+# foreground = '0xff0000'
+#
+# [colors.normal]
+# 	black     = '0x010008'
+# 	red       = '0xa71b1a'
+# 	green     = '0x3b8526'
+# 	yellow    = '0xe49202'
+# 	blue      = '0x1d576d'
+# 	magenta   = '0x97219c'
+# 	cyan      = '0x24866f'
+# 	white     = '0xb5ad64'
+#
+# [colors.bright]
+# 	black     = '0x1c1c1c'
+# 	red       = '0xbf3130'
+# 	green     = '0x58a642'
+# 	yellow    = '0xffb026'
+# 	blue      = '0x4169e1'
+# 	magenta   = '0xa7248c'
+# 	cyan      = '0x37a48d'
+# 	white     = '0xcec67d'
+
+
 [window]
 padding = { x = 0, y = 0 }
 dynamic_padding = true
-opacity = 0.95
+opacity = 0.8
 
 # [colors.primary]
 # background = '#000000'
