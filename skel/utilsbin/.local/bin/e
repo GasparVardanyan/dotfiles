@@ -6,7 +6,12 @@ _choose()
 	then
 		echo $@
 	else
-		echo "$@" | dmenu -p choose: -l 5
+		dmenu_embed=""
+		if [ "$XEMBED" != '' ]
+		then
+			dmenu_embed="-w $XEMBED"
+		fi
+		echo "$@" | dmenu -p choose: -l 5 $dmenu_embed
 	fi
 }
 

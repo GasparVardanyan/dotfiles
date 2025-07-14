@@ -1,6 +1,6 @@
 pkgname=gaspar-device-g16_7630
 pkgver=1
-pkgrel=11
+pkgrel=12
 arch=('any')
 options=('!debug')
 groups=('gaspar')
@@ -11,6 +11,9 @@ depends=(
 	alsa-utils
 	acpi # for AWCC
 	acpi_call # for AWCC
+	tlp
+	smartmontools # for tlp
+	ethtool # for tlp
 	fwupd
 	gaspar-device-g16_7630-gpu
 	intel-ucode

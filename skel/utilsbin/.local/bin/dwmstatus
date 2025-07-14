@@ -113,17 +113,25 @@ cmus=$(cmus-remote --query 2>/dev/null | grep ^status -m 1 | cut -d ' ' -f 2)
 
 
 
-# cpu_temp=$(sensors dell_ddv-virtual-0 | grep 'CPU:' | sed 's/\s\+/ /g' | cut -f 2 -d ' ')
-# gpu_temp=$(sensors dell_ddv-virtual-0 | grep 'Video:' | sed 's/\s\+/ /g' | cut -f 2 -d ' ')
-mode_info=$(cat /var/run/awcc/m)
-cpu_info="$(cat /var/run/awcc/ct)[$(cat /var/run/awcc/cb):$(cat /var/run/awcc/cr)]"
-gpu_info="$(cat /var/run/awcc/gt)[$(cat /var/run/awcc/gb):$(cat /var/run/awcc/gr)]"
+fan_info=""
+
+if systemctl is-active awcc_autoboost.service >/dev/null
+then
+	mode_info=$(cat /var/run/awcc/m)
+	cpu_info="$(cat /var/run/awcc/ct)[$(cat /var/run/awcc/cb):$(cat /var/run/awcc/cr)]"
+	gpu_info="$(cat /var/run/awcc/gt)[$(cat /var/run/awcc/gb):$(cat /var/run/awcc/gr)]"
+	fan_info="$mode_info: $cpu_info $gpu_info"
+else
+	cpu_info=$(sensors dell_ddv-virtual-0 | grep 'CPU:' | sed 's/\s\+/ /g' | cut -f 2 -d ' ')
+	gpu_info=$(sensors dell_ddv-virtual-0 | grep 'Video:' | sed 's/\s\+/ /g' | cut -f 2 -d ' ')
+	fan_info="$cpu_info $gpu_info"
+fi
 
 s="|"
 [[ $cmus != '' ]] && s="$s $cmus |"
 # s="$s $vols $volp% |"
 s="$s $vols$volp |"
-s="$s $mode_info: $cpu_info $gpu_info |"
+s="$s $fan_info |"
 # s="$s  $cpu% |"
 # s="$s  $(free -h | awk '/^Mem:/ {print $3}') |"
 s="$s $cpu%$(free -h | awk '/^Mem:/ {print $3}') |"
