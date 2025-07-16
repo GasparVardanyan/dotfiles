@@ -1,7 +1,7 @@
 # git lfs
 
 > Work with large files in Git repositories.
-> More information: <https://git-lfs.com>.
+> More information: <https://github.com/git-lfs/git-lfs/tree/main/docs>.
 
 - Initialize Git LFS:
 
@@ -31,6 +31,6 @@
 
 `git lfs fetch`
 
-- Checkout all Git LFS objects:
+- Replace pointer files with actual Git LFS objects:
 
 `git lfs checkout`

