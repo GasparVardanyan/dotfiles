@@ -1,6 +1,6 @@
 export WM=dwm
 # export WM=icewm-session
-export TERMINAL=st
+export TERMINAL=alacritty
 export SHELL=zsh
 export EDITOR=nvim
 export VISUAL=nvim
