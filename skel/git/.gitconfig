@@ -25,7 +25,7 @@
 	colorMoved = default
 
 [core]
-	pager = delta --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
+	pager = delta --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
 
 [alias]
 	cb = branch --show-current

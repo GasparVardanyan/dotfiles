@@ -57,4 +57,4 @@ then
 fi
 
 [[ $cmd != '' && $inp != '' ]] &&
-	$TERMINAL -t "$1: $inp" -n pop-up -g 120x30 -e "$SHELL" -c "$cmd"
+	st -t "$1: $inp" -n pop-up -g 120x30 -e "$SHELL" -c "$cmd"
