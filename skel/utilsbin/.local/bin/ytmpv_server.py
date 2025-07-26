@@ -40,8 +40,8 @@ class SimpleHandler(BaseHTTPRequestHandler):
 		print(f"Saved to {full_path}")
 
 		# List files in the directory
-		subprocess.check_output(["plctrl", "optimize", full_path], text=True)
-		os.system ("dunstify ytmpv " + "\"" + filename + "\"")
+		subprocess.check_output(["plctrl", "optimize", os.path.abspath(full_path)], text=True)
+		subprocess.run(["dunstify", "ytmpv", filename])
 
 		# Respond
 		self.send_response(200)
