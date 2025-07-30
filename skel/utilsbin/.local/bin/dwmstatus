@@ -45,7 +45,8 @@ comment
 
 
 
-batinf=$(acpi | head -n 1 | cut -d : -f 2 | tr -d ' ' | tr '[:upper:]' '[:lower:]')
+acpi_inf=$(acpi | head -n 1)
+batinf=$(echo "$acpi_inf" | cut -d : -f 2 | tr -d ' ' | tr '[:upper:]' '[:lower:]')
 # batp="$(upower -i /org/freedesktop/UPower/devices/battery_BAT1 | sed '/ignored/d' | grep percentage | sed 's/[[:space:]]\+.*[[:space:]]\+//;s/%//')"
 batp=$(echo "$batinf" | cut -d , -f 2)
 # bat_status="$(upower -i /org/freedesktop/UPower/devices/battery_BAT1 | grep state | sed 's/[[:space:]]\+.*[[:space:]]\+//')"
@@ -77,6 +78,14 @@ if [[ $batp != '' ]] ; then
 		# bat_status="$bat_status $batp%"
 		bat_status="$bat_status $batp"
 	fi
+fi
+
+acpi_inf=$(echo "$acpi_inf" | grep remaining)
+
+if ! [[ -z "$acpi_inf" ]]
+then
+	r=$(echo "$acpi_inf" | cut -d ' ' -f 5)
+	bat_info="$bat_info $r"
 fi
 
 
@@ -127,10 +136,15 @@ else
 	fan_info="$cpu_info $gpu_info"
 fi
 
+
+
+nspawn_info=$(machinectl list | grep container | cut -c 1 | sort | paste -s -d ',')
+
 s="|"
 [[ $cmus != '' ]] && s="$s $cmus |"
 # s="$s $vols $volp% |"
 s="$s $vols$volp |"
+[[ $nspawn_info != '' ]] && s="$s $nspawn_info |"
 s="$s $fan_info |"
 # s="$s  $cpu% |"
 # s="$s  $(free -h | awk '/^Mem:/ {print $3}') |"

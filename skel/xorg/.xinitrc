@@ -27,6 +27,7 @@ then
 	syncthing serve --no-browser &
 	~/.fehbg 2>/dev/null &
 	ytmpv_server.py &
+	fn.sh &
 	# conky &
 
 

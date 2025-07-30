@@ -31,7 +31,8 @@
 	cb = branch --show-current
 	fpush = push --force-with-lease
 	grog = log --graph --abbrev-commit --decorate --all --format=format:\"%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(dim white) - %an%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(reset)\"
-	addRefsToBare = "!f() { [ '' != \"$1\" ] && git config \"remote.$1.fetch\" \"+refs/heads/*:refs/remotes/$1/*\"; }; f"
+	; addRefsToBare = "!f() { [ '' != \"$1\" ] && git config \"remote.$1.fetch\" \"+refs/heads/*:refs/remotes/$1/*\"; }; f"
+	addRefsToBare = config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
 [filter "lfs"]
 	required = true
 	clean = git-lfs clean -- %f

@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+tabbed -p s+1 -c alacritty --embed
+exit
+
+
 WORK_MOUNTED=/tmp/WORK_MOUNTED
 BLACKARCH_MOUNTED=/tmp/BLACKARCH_MOUNTED
 ARCHDRIVE_MOUNTED=/tmp/ARCHDRIVE_MOUNTED

@@ -122,9 +122,11 @@ c.url.searchengines	 = {
 	'/wiki'				:		'https://en.wikipedia.org/w/index.php?search={}'				,
 	'/wp'				:		'https://wallhaven.cc/search?q={}'								,
 	'/x'				:		'https://1337x.to/search/{}/1/'									,
+	'/yc'				:		'https://youtube.com/channel/{}'								,
 	'/yi'				:		'https://yandex.com/images/search?text={}'						,
 	'/yiu'				:		'https://yandex.com/images/search?rpt=imageview&url={}'			,
-	'/yt'				:		'https://www.youtube.com/results?search_query={}'				,
+	'/yt'				:		'https://youtube.com/results?search_query={}'					,
+	'/yv'				:		'https://youtube.com/watch?v={}'								,
 }
 
 

@@ -195,4 +195,12 @@ _wall()
 	nsxiv $embed -r -N pop-up -btr -g 1212x680 ~/.local/share/{themes,wallpapers}
 }
 
+_fn()
+{
+	xrandr --output HDMI-1-0 --mode 1680x1050
+	xrandr --output HDMI-1-0 --mode 1920x1080
+
+	~/.fehbg
+}
+
 _$1
