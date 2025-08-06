@@ -35,7 +35,7 @@ cmd_select_source()
 		then
 			s="$list"
 		else
-			s=$(echo "$list" | dmenu -p 'plctrl source: ' -l 20)
+			s=$(echo "$list" | sed 's/\.socket$//' | dmenu -p 'plctrl source: ' -l 20).socket
 		fi
 		[[ "$s" != '' ]] && echo "$s" > "$PLCTRL_SOURCE"
 	else
@@ -163,6 +163,30 @@ cmd_stop()
 			_cmd_mpv "$PLMAN_DIR/$s" 'seek 0 absolute'
 		else
 			echo "SS:$s"
+		fi
+	fi
+}
+
+cmd_state()
+{
+	if cmd_validate
+	then
+		s=$(cat "$PLCTRL_SOURCE")
+
+		if [[ "$s" = 'cmus' ]]
+		then
+			cmus-remote --query 2>/dev/null | grep ^status -m 1 | cut -d ' ' -f 2
+		elif [[ "$s" == YTMPV:\ * ]]
+		then
+			s="${s#* }"
+			_cmd_mpv "$YTMPV_DIR/$s" '{ "command": ["get_property", "pause"] }' | grep -Fq false && echo playing || echo paused
+		elif [[ "$s" == PLMAN:\ * ]]
+		then
+			s="${s#* }"
+			_cmd_mpv "$PLMAN_DIR/$s" '{ "command": ["get_property", "pause"] }' | grep -Fq false && echo playing || echo paused
+		else
+			echo "SS:$s"
+			echo
 		fi
 	fi
 }

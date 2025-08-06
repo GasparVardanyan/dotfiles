@@ -115,7 +115,7 @@ END {
 	print (total - read);
 }' ~/.sfeed/urls ~/.sfeed/feeds/*)
 
-cmus=$(cmus-remote --query 2>/dev/null | grep ^status -m 1 | cut -d ' ' -f 2)
+cmus=$(plctrl state)
 [[ $cmus == 'stopped' ]] && cmus=""
 [[ $cmus == 'playing' ]] && cmus=""
 [[ $cmus == 'paused' ]] && cmus=""
@@ -124,12 +124,13 @@ cmus=$(cmus-remote --query 2>/dev/null | grep ^status -m 1 | cut -d ' ' -f 2)
 
 fan_info=""
 
-if systemctl is-active awcc_autoboost.service >/dev/null
+# if systemctl is-active awcc_autoboost.service >/dev/null
+if pgrep awcc_autoboost >/dev/null
 then
 	mode_info=$(cat /var/run/awcc/m)
-	cpu_info="$(cat /var/run/awcc/ct)[$(cat /var/run/awcc/cb):$(cat /var/run/awcc/cr)]"
-	gpu_info="$(cat /var/run/awcc/gt)[$(cat /var/run/awcc/gb):$(cat /var/run/awcc/gr)]"
-	fan_info="$mode_info: $cpu_info $gpu_info"
+	cpu_info="$(cat /var/run/awcc/ct)$(cat /var/run/awcc/cb):$(cat /var/run/awcc/cr)"
+	gpu_info="$(cat /var/run/awcc/gt)$(cat /var/run/awcc/gb):$(cat /var/run/awcc/gr)"
+	fan_info="$cpu_info$mode_info$gpu_info"
 else
 	cpu_info=$(sensors dell_ddv-virtual-0 | grep 'CPU:' | sed 's/\s\+/ /g' | cut -f 2 -d ' ')
 	gpu_info=$(sensors dell_ddv-virtual-0 | grep 'Video:' | sed 's/\s\+/ /g' | cut -f 2 -d ' ')
@@ -138,7 +139,7 @@ fi
 
 
 
-nspawn_info=$(machinectl list | grep container | cut -c 1 | sort | paste -s -d ',')
+nspawn_info=$(machinectl list | grep container | cut -f 1 -d ' ' | sort | paste -s -d ',')
 
 s="|"
 [[ $cmus != '' ]] && s="$s $cmus |"
@@ -148,7 +149,7 @@ s="$s $vols$volp |"
 s="$s $fan_info |"
 # s="$s  $cpu% |"
 # s="$s  $(free -h | awk '/^Mem:/ {print $3}') |"
-s="$s $cpu%$(free -h | awk '/^Mem:/ {print $3}') |"
+s="$s $cpu%$(free -h | awk '/^Mem:/ {print $3}')$(nvidia-smi --query-gpu=pstate --format=csv,noheader) |"
 [[ $wireless != '' ]] && s="$s W |"
 # [[ $batp != '' ]] && s="$s $bat_status |"
 [[ $batp != '' ]] && s="$s $bat_info |"

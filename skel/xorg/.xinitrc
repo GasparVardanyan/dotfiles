@@ -80,12 +80,12 @@ then
 		sleep 2
 		# xrandr --output eDP-1 --mode 1920x1200
 
+		# disable caps lock
+		setxkbmap -option caps:none
 		# turn off Display Power Management Service (DPMS)
 		xset -dpms
 		# turn off black Screensaver
 		xset s off
-		# disable caps lock
-		setxkbmap -option caps:none
 
 		# xrandr --output DP-1 --mode 1920x1080 --right-of eDP-1
 		xrandr --output HDMI-1-0 --mode 1920x1080 --right-of eDP-1
