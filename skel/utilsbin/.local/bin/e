@@ -33,7 +33,7 @@ __get_lan_iface()
 
 __get_wlan_iface()
 {
-	iface=$(_choose "$(ifconfig -a | grep '^wlp' | sed '/^enp2s0:/d;s/:.*//')")
+	iface=$(_choose "$(ifconfig -a | grep '^\(wlp\|wlan\)' | sed '/^enp2s0:/d;s/:.*//')")
 	echo "$iface"
 }
 

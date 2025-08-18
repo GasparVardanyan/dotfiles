@@ -37,6 +37,9 @@ class SimpleHandler(BaseHTTPRequestHandler):
 			f.write("#EXTM3U\n#PLAYLIST:" + filename + "\n")
 			f.write(content)
 
+		# with open(full_path + ".raw", "w") as f:
+		# 	f.write(post_data)
+
 		print(f"Saved to {full_path}")
 
 		# List files in the directory

@@ -197,7 +197,7 @@ cmd_optimize()
 
 	IFS=''
 
-	cat -- "$1".tmp | while read -r k
+	(cat -- "$1".tmp; echo '') | while read -r k
 	do
 		if [[ "$k" =~ ^#.*$ ]]
 		then

@@ -44,7 +44,7 @@ then
 	cmd="cht.sh \"$inp\""
 elif [[ $1 = 'tldr' ]]
 then
-	inp=$(echo "$inp" | sed 's/ /-/g')
+	inp=$(echo "$inp" | sed 's/\s\+\b/-/g;s/\s\+//g')
 	cmd="tldr \"$inp\""
 elif [[ $1 = 'wiki' ]]
 then

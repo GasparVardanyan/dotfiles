@@ -73,6 +73,7 @@ feeds() {
 	feed "The Linux Experiment - Odysee" "https://odysee.com/$/rss/@TheLinuxExperiment/e"
 	feed "Wolfgang's Channel - Invidious" "https://y.com.sb/feed/channel/UCsnGwSIHyoYN0kiINAGUKxg"
 	feed "Enrico Tartarotti - Invidious" "https://y.com.sb/feed/channel/UCuQT7Vc3OjjZuGkqehNxb6w"
+	feed "SavvyNik - Invidious" "https://y.com.sb/feed/channel/UC3yaWWA9FF9OBog5U9ml68A"
 
 	feed "TJ DeVries - Invidious" "https://y.com.sb/feed/channel/UCd3dNckv1Za2coSaHGHl5aA"
 	feed "typecraft - Invidious" "https://y.com.sb/feed/channel/UCo71RUe6DX4w-Vd47rFLXPg"
