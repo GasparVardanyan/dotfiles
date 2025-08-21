@@ -7,7 +7,7 @@
 
 `bzgrep "{{search_pattern}}" {{path/to/file}}`
 
-- Use extended regular expressions (supports `?`, `+`, `{}`, `()` and `|`), in case-insensitive mode:
+- Use extended `regex` (supports `?`, `+`, `{}`, `()` and `|`), in case-insensitive mode:
 
 `bzgrep {{[-E|--extended-regexp]}} {{[-i|--ignore-case]}} "{{search_pattern}}" {{path/to/file}}`
 
@@ -29,4 +29,4 @@
 
 - Search `stdin` for lines that do not match a pattern:
 
-`cat {{/path/to/bz/compressed/file}} | bzgrep {{[-v|--invert-match]}} "{{search_pattern}}"`
+`cat {{path/to/bz/compressed/file}} | bzgrep {{[-v|--invert-match]}} "{{search_pattern}}"`

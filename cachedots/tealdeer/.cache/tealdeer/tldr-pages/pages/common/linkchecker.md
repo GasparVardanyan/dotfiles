@@ -1,7 +1,7 @@
 # linkchecker
 
 > Client to check HTML documents and websites for broken links.
-> More information: <https://linkchecker.github.io/linkchecker/>.
+> More information: <https://linkchecker.github.io/linkchecker/man/linkchecker.html>.
 
 - Find broken links on <https://example.com/>:
 
@@ -11,9 +11,9 @@
 
 `linkchecker --check-extern {{https://example.com/}}`
 
-- Ignore URLs that match a specific regular expression:
+- Ignore URLs that match a specific `regex`:
 
-`linkchecker --ignore-url {{regular_expression}} {{https://example.com/}}`
+`linkchecker --ignore-url {{regex}} {{https://example.com/}}`
 
 - Output results to a CSV file:
 

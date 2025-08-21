@@ -6,7 +6,7 @@
 
 - Load a specific keyboard layout for the current console:
 
-`sudo loadkeys {{en|de|fi|dvorak|...}}`
+`sudo loadkeys {{en|de|fi|dvorak|defkeymap|...}}`
 
 - Load a default keymap:
 
@@ -34,4 +34,4 @@
 
 - Load a keymap from the specified file for the console:
 
-`loadkeys {{[-C|--console]}} {{/dev/ttyN}} {{/path/to/file}}`
+`loadkeys {{[-C|--console]}} {{/dev/ttyN}} /{{path/to/file}}`
