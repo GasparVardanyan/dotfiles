@@ -1,14 +1,16 @@
 pkgname=gaspar-meta-archdrive
 pkgver=1
-pkgrel=2
+pkgrel=3
 arch=('any')
 options=('!debug')
 groups=('gaspar')
 depends=(
 	alacritty
 	dmenu
+	python-pipx
 	python-praw
 	qutebrowser
+	reflector
 	vivaldi
 	vivaldi-ffmpeg-codecs
 	xorg-xauth # TODO: make a separate metapackages for xorg client/server

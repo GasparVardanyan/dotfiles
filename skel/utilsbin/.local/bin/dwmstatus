@@ -166,5 +166,6 @@ fi
 # s="$s  $(kbd get) |"
 s="$s $(kbd get) |"
 [[ $todos != 0 ]] && s="$s T $todos |"
+[ -f ~/.local/tmp/sfu ] && s="$s F |"
 
 xsetroot -name "$s"

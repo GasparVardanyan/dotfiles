@@ -36,6 +36,7 @@ cmd_select_source()
 			s="$list"
 		else
 			s=$(echo "$list" | sed 's/\.socket$//' | dmenu -p 'plctrl source: ' -l 20).socket
+			[[ "$s" == cmus.socket ]] && s=cmus
 		fi
 		[[ "$s" != '' ]] && echo "$s" > "$PLCTRL_SOURCE"
 	else

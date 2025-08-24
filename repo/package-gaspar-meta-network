@@ -1,11 +1,12 @@
 pkgname=gaspar-meta-network
 pkgver=1
-pkgrel=1
+pkgrel=2
 arch=('any')
 options=('!debug')
 groups=('gaspar')
 depends=(
 	dhclient
+	iwd
 	net-tools
 	wpa_supplicant
 )

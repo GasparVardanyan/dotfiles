@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+cp -rfv /usr/local/etc/nspawn/{configs,machines} /desktop/dotfiles/nspawn/
+
+exit 0

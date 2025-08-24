@@ -50,6 +50,7 @@ export SFEED_URL_FILE="$HOME/.sfeed/urls"
 export QT_QPA_PLATFORMTHEME="qt5ct"
 # export QT_LOGGING_RULES="*.debug=true;*.*=true;*=true"
 export QT_ASSUME_STDERR_HAS_CONSOLE=1
+export QT_MEDIA_BACKEND=ffmpeg
 
 [[ $SHELL = 'zsh' && -f ~/.zshp ]] && source ~/.zshp
 
