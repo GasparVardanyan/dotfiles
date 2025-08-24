@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+
+machine_exists() {
+	machinectl list-images | grep subvolume | cut -f 1 -d ' ' | grep -Fxq "$1"
+}
+
+machine_active() {
+	machinectl list | grep container | cut -f 1 -d ' ' | grep -Fxq "$1"
+}
+
+list_machines() {
+	machinectl list-images | grep subvolume | cut -f 1 -d ' '
+}
+
+if [[ "$1" == menu ]]
+then
+	picks="terminal\ntoggle"
+	pick=$(echo -e "$picks" | dmenu -l 20 -p pick:)
+	[ -z "$pick" ] && exit
+	echo -e "$picks" | grep -Fxq "$pick" || exit
+	terminalx "$pick"
+elif [[ "$1" == toggle ]]
+then
+	pick=$(list_machines | dmenu -l 20 -p "toggle:")
+	machine_exists "$pick" || exit
+	machine_active "$pick" && sudo machinectl poweroff "$pick" || sudo machinectl start "$pick"
+elif [[ "$1" == terminal ]]
+then
+	[ ! -f ~/.terminals ] && exit
+
+	terminals=$(cat ~/.terminals)
+
+	if [ ! -z "$terminals" ]
+	then
+		pick=$(echo "$terminals" | dmenu -l 20 -p "session:")
+
+		if [ ! -z "$pick" ]
+		then
+			machine=${pick#*@}
+
+			machine_exists "$machine" || exit
+			machine_active "$machine" || ( sudo machinectl start "$machine"; sleep 5 )
+
+			sudo machinectl shell "$pick" /desktop/utilsbin/terminalx
+		fi
+	fi
+else
+	export DISPLAY=:0
+	export XAUTHORITY=/tmp/nspawn/xauth
+
+	alacritty
+fi

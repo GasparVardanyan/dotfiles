@@ -104,6 +104,9 @@ fi
 	sleep 1
 done &
 
-
+mkdir /tmp/nspawn
+touch /tmp/nspawn/xauth
+xauth nextract - "$DISPLAY" | sed -e 's/^..../ffff/' | xauth -f /tmp/nspawn/xauth nmerge -
+chmod +r /tmp/nspawn/xauth
 
 exec $WM
