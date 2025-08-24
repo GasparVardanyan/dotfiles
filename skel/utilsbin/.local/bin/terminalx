@@ -54,18 +54,19 @@ then
 
 			while :;
 			do
-				sleep 1
 				c=$(( c + 1 ))
 
 				if machine_active "$machine"
 				then
-					sudo machinectl shell "$pick" /desktop/utilsbin/terminalx 2>/dev/null || continue
+					sudo machinectl shell "$pick" /desktop/utilsbin/terminalx 2>/dev/null || (sleep 1; continue)
 					break
 				elif [[ "$c" -ge 5 ]]
 				then
 					dunstify terminalx "Failed to run terminal on $machine"
 					break
 				fi
+
+				sleep 1
 			done
 		fi
 	fi
@@ -73,5 +74,5 @@ else
 	export DISPLAY=:0
 	export XAUTHORITY=/tmp/nspawn/xauth
 
-	alacritty
+	pacman -Qs gaspar-device-gpu && alacritty || uxterm
 fi
