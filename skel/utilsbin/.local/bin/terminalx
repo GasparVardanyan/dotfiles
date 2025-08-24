@@ -14,7 +14,7 @@ list_machines() {
 
 if [[ "$1" == menu ]]
 then
-	picks="terminal\ntoggle"
+	picks="terminal\ntoggle\nshell"
 	pick=$(echo -e "$picks" | dmenu -l 20 -p pick:)
 	[ -z "$pick" ] && exit
 	echo -e "$picks" | grep -Fxq "$pick" || exit
@@ -28,6 +28,47 @@ then
 		sudo machinectl poweroff "$pick" &&  dunstify terminalx "Powereing off $pick"
 	else
 		sudo machinectl start "$pick" && dunstify terminalx "Booting $pick"
+	fi
+elif [[ "$1" == shell ]]
+then
+	[ ! -f ~/.terminals ] && exit
+
+	terminals=$(cat ~/.terminals | sort -t @ -k 2n)
+
+	if [ ! -z "$terminals" ]
+	then
+		pick=$(echo "$terminals" | dmenu -l 20 -p "session:")
+
+		if [ ! -z "$pick" ]
+		then
+			machine=${pick#*@}
+
+			was_active=0
+
+			machine_exists "$machine" || exit
+			machine_active "$machine" || ( sudo machinectl start "$machine" && dunstify terminalx "Booting $machine" )
+
+			[[ 0 -eq "$was_active" ]]
+
+			c=0
+
+			while :;
+			do
+				c=$(( c + 1 ))
+
+				if machine_active "$machine"
+				then
+					alacritty -e sh -c "sudo machinectl shell $pick; read"
+					break
+				elif [[ "$c" -ge 5 ]]
+				then
+					dunstify terminalx "Failed to run terminal on $machine"
+					break
+				fi
+
+				sleep 1
+			done
+		fi
 	fi
 elif [[ "$1" == terminal ]]
 then
