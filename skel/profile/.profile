@@ -39,12 +39,7 @@ export MANPAGER="nvim +Man!"
 # export LESS_TERMCAP_us=$'\E[4;32m'     # begin underline
 # export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 
-rm -rf ~/.local/tmp
-mkdir ~/.local/tmp
-TMPDIR=$HOME/.local/tmp
-
 export SFEED_URL_FILE="$HOME/.sfeed/urls"
-[ -f "$SFEED_URL_FILE" ] || touch "$SFEED_URL_FILE"
 
 # export QT_MEDIA_BACKEND=gstreamer
 export QT_QPA_PLATFORMTHEME="qt5ct"
@@ -56,6 +51,12 @@ export QT_MEDIA_BACKEND=ffmpeg
 
 
 if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
+	rm -rf ~/.local/tmp
+	mkdir ~/.local/tmp
+	TMPDIR=$HOME/.local/tmp
+
+	[ -f "$SFEED_URL_FILE" ] || touch "$SFEED_URL_FILE"
+
 	# if [ $((($(date +%s) - $(date +%s -r .startx_log.old))/3600)) -ge 6 ]
 	# then
 		clear

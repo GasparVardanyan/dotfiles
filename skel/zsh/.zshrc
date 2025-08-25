@@ -1,5 +1,10 @@
 #!/usr/bin/env zsh
 
+if [ -f ~/.zprofile ]
+then
+	source ~/.zprofile
+fi
+
 bindkey -v
 
 autoload -Uz compinit && compinit
