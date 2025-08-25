@@ -26,10 +26,11 @@ then
 	while read m
 	do
 		s=''
-		machine_active "user@$m" && s="currently on" || s="currently off"
-		list="$list$m ($s)\n"
+		machine_active "$m" && s="currently on" || s="currently off"
+		list="$list$m+($s)\n"
 	done < <(list_machines)
 
+	list=$(echo -en "$list" | column -t -s +)
 	m=$(echo -en "$list" | dmenu -p toggle: -l 20)
 
 	pick=${m%% *}
