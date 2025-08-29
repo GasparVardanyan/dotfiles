@@ -4,6 +4,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 import os
 from datetime import datetime
 import subprocess
+import re
 
 SAVE_DIR = "/tmp/ytmpv"
 
@@ -22,7 +23,7 @@ class SimpleHandler(BaseHTTPRequestHandler):
 		if 1 == len (lines) :
 			return
 
-		filename = lines[0].strip()
+		filename = re.sub (r'[^a-zA-Z0-9 \[\]-]', '_', lines[0].strip())
 		content = "\n".join(lines[1:])
 
 		# Ensure target directory exists

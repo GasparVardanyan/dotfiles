@@ -10,6 +10,7 @@ pushd /desktop/dotfiles/skel
 	ln -sfv $PWD/feh/.fehbg ~
 	ln -sfv $PWD/git/.gitconfig ~
 	ln -sfv $PWD/mpv/.config/mpv ~/.config
+	ln -sfv $PWD/yt-dlp/.config/ytdlp/ ~/.config
 	ln -sfv $PWD/profile/.profile ~
 	ln -sfv $PWD/zsh/.zshrc ~
 	ln -sfv ~/.{,z}profile
