@@ -12,13 +12,22 @@ list_machines() {
 	machinectl list-images | grep subvolume | cut -f 1 -d ' ' | sort
 }
 
+have_label() {
+	cat /usr/local/etc/nspawn/labels | grep -Fq "${1#*@}"
+}
+
+print_label() {
+	m="${1#*@}"
+	have_label "$1" && ( cat /usr/local/etc/nspawn/labels | grep -F "$m" | cut -f 2 -d ' ' ) || echo "$m"
+}
+
 if [[ "$1" == menu ]]
 then
 	picks="terminal\ntoggle\nshell"
 	pick=$(echo -e "$picks" | dmenu -l 20 -p terminalx:)
 	[ -z "$pick" ] && exit
 	echo -e "$picks" | grep -Fxq "$pick" || exit
-	terminalx "$pick"
+	$0 "$pick"
 elif [[ "$1" == toggle ]]
 then
 	list=""
@@ -27,7 +36,8 @@ then
 	do
 		s=''
 		machine_active "$m" && s="currently on" || s="currently off"
-		list="$list$m+($s)\n"
+		l=$(print_label "$m")
+		list="$list$m+($s)+$l\n"
 	done < <(list_machines)
 
 	list=$(echo -en "$list" | column -t -s +)
@@ -43,9 +53,9 @@ then
 	fi
 elif [[ "$1" == shell ]]
 then
-	[ ! -f ~/.terminals ] && exit
+	[ ! -f /usr/local/etc/nspawn/terminals ] && exit
 
-	terminals=$(cat ~/.terminals | sort -t @ -k 2n)
+	terminals=$(cat /usr/local/etc/nspawn/terminals | sort -t @ -k 2n)
 
 	if [ ! -z "$terminals" ]
 	then
@@ -84,9 +94,9 @@ then
 	fi
 elif [[ "$1" == terminal ]]
 then
-	[ ! -f ~/.terminals ] && exit
+	[ ! -f /usr/local/etc/nspawn/terminals ] && exit
 
-	terminals=$(cat ~/.terminals | sort -t @ -k 2n)
+	terminals=$(cat /usr/local/etc/nspawn/terminals | sort -t @ -k 2n)
 
 	if [ ! -z "$terminals" ]
 	then
@@ -127,5 +137,5 @@ else
 	export DISPLAY=:0
 	export XAUTHORITY=/tmp/nspawn/xauth
 
-	pacman -Qs gaspar-device-gpu && alacritty || uxterm
+	pacman -Qs gaspar-device-gpu >/dev/null && alacritty || uxterm
 fi

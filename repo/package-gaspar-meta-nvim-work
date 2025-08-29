@@ -1,6 +1,6 @@
 pkgname=gaspar-meta-nvim-work
 pkgver=1
-pkgrel=6
+pkgrel=7
 arch=('any')
 options=('!debug')
 groups=('gaspar')
@@ -9,7 +9,10 @@ depends=(
 	clang
 	cmake
 	cppcheck
+	doxygen
 	gaspar-meta-nvim
+	graphviz
+	gtest
 	npm
 	perf
 	python

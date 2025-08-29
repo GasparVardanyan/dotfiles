@@ -139,7 +139,10 @@ fi
 
 
 
-nspawn_info=$(machinectl list | grep container | cut -f 1 -d ' ' | sort | paste -s -d ',')
+# nspawn_info=$(machinectl list | grep container | cut -f 1 -d ' ' | sort | paste -s -d ',')
+
+nspawn_info=$(machinectl list | grep container | cut -f 1 -d ' ' | sort | while read m; do cat /usr/local/etc/nspawn/labels | \grep -Fq "$m" && ( cat /usr/local/etc/nspawn/labels | \grep -F "$m" | cut -f 2 -d ' ' ) || echo "$m"; done | paste -s -d '+' | sed 's/+/  /g')
+nspawn_info="$nspawn_info "
 
 s="|"
 [[ $cmus != '' ]] && s="$s $cmus |"
