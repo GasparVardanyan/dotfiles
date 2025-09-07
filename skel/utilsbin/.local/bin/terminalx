@@ -21,6 +21,20 @@ print_label() {
 	have_label "$1" && ( cat /usr/local/etc/nspawn/labels | grep -F "$m" | cut -f 2 -d ' ' ) || echo "$m"
 }
 
+have_terminal() {
+	m="${1#*@}"
+	( sudo pacman -Qs --sysroot /var/lib/machines/"$m" gaspar-device-gpu >/dev/null && sudo test -f /var/lib/machines/"$m"/usr/bin/alacritty ) || sudo test -f /var/lib/machines/"$m"/usr/bin/uxterm
+}
+
+list_terminals() {
+	terminals=""
+	while read s
+	do
+		have_terminal "$s" && terminals="$terminals$s\n"
+	done < <(cat /usr/local/etc/nspawn/terminals | sort -t @ -k 2n)
+	echo -en "$terminals"
+}
+
 if [[ "$1" == menu ]]
 then
 	picks="terminal\ntoggle\nshell"
@@ -37,13 +51,13 @@ then
 		s=''
 		machine_active "$m" && s="currently on" || s="currently off"
 		l=$(print_label "$m")
-		list="$list$m+($s)+$l\n"
+		list="$list$l+$m+($s)\n"
 	done < <(list_machines)
 
 	list=$(echo -en "$list" | column -t -s +)
-	m=$(echo -en "$list" | dmenu -p toggle: -l 20)
+	m=$(echo -en "$list" | dmenu -p toggle: -l 20 | sed 's/\s\+/+/g')
 
-	pick=${m%% *}
+	pick=$(echo "$m" | cut -f 2 -d +)
 	machine_exists "$pick" || exit
 	if machine_active "$pick"
 	then
@@ -121,7 +135,11 @@ then
 
 				if machine_active "$machine"
 				then
-					sudo machinectl shell "$pick" /desktop/utilsbin/terminalx 2>/dev/null || (sleep 1; continue)
+					if ! sudo machinectl shell "$pick" $0 2>/dev/null
+					then
+						sleep 1;
+						continue
+					fi
 					break
 				elif [[ "$c" -ge 5 ]]
 				then
@@ -137,5 +155,5 @@ else
 	export DISPLAY=:0
 	export XAUTHORITY=/tmp/nspawn/xauth
 
-	pacman -Qs gaspar-device-gpu >/dev/null && alacritty || uxterm
+	pacman -Qs gaspar-device-gpu >/dev/null && test -f /usr/bin/alacritty && alacritty || uxterm
 fi

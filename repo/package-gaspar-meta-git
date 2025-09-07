@@ -1,6 +1,6 @@
 pkgname=gaspar-meta-git
 pkgver=1
-pkgrel=1
+pkgrel=2
 arch=('any')
 options=('!debug')
 groups=('gaspar')
@@ -8,6 +8,7 @@ depends=(
 	git
 	git-delta
 	lazygit
+	less
 	neovim
 	openssh
 )

@@ -44,3 +44,6 @@
 	directory = /media/music/music
 	directory = /media
 	directory = /media/solarized
+
+[url "gaspar@gitserver:"]
+	insteadOf = gs:
