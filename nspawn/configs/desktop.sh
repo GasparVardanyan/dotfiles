@@ -1,1 +1,1 @@
- machinectl bind --mkdir --read-only $MACHINE /desktop
+machinectl bind --mkdir --read-only $MACHINE /desktop

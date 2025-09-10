@@ -26,6 +26,56 @@ have_terminal() {
 	( sudo pacman -Qs --sysroot /var/lib/machines/"$m" gaspar-device-gpu >/dev/null && sudo test -f /var/lib/machines/"$m"/usr/bin/alacritty ) || sudo test -f /var/lib/machines/"$m"/usr/bin/uxterm
 }
 
+wait_machine() {
+	m="${1#*@}"
+
+	status=0
+
+	c=0
+	while :;
+	do
+		c=$(( c + 1 ))
+
+		if machine_active "$m"
+		then
+			break
+		elif [[ "$c" -ge 5 ]]
+		then
+			status=1
+			break
+		fi
+
+		sleep 1
+	done
+
+	return "$status"
+}
+
+upgrade() {
+	m="${1#*@}"
+
+	active=false
+	machine_active "$m" && active=true
+
+	if [ false = "$active" ]
+	then
+		sudo machinectl start "$m" && echo terminalx "Booting $m"
+	fi
+
+	if wait_machine "$machine"
+	then
+		sudo machinectl shell "$m" /usr/bin/pacman -Syyuu
+		sudo machinectl shell "$m" /usr/bin/pacman -Scc
+	else
+		dunstify terminalx "Failed to upgrade the machine $machine"
+	fi
+
+	if false = "$active"
+	then
+		sudo machinectl poweroff "$m" &&  dunstify terminalx "Powereing off $m"
+	fi
+}
+
 list_terminals() {
 	terminals=""
 	while read s
@@ -79,31 +129,15 @@ then
 		then
 			machine=${pick#*@}
 
-			was_active=0
-
 			machine_exists "$machine" || exit
 			machine_active "$machine" || ( sudo machinectl start "$machine" && dunstify terminalx "Booting $machine" )
 
-			[[ 0 -eq "$was_active" ]]
-
-			c=0
-
-			while :;
-			do
-				c=$(( c + 1 ))
-
-				if machine_active "$machine"
-				then
-					alacritty -e sh -c "sudo machinectl shell $pick; read"
-					break
-				elif [[ "$c" -ge 5 ]]
-				then
-					dunstify terminalx "Failed to run terminal on $machine"
-					break
-				fi
-
-				sleep 1
-			done
+			if wait_machine "$machine"
+			then
+				alacritty -e sh -c "sudo machinectl shell $pick; read"
+			else
+				dunstify terminalx "Failed to run terminal on $machine"
+			fi
 		fi
 	fi
 elif [[ "$1" == terminal ]]
@@ -120,40 +154,23 @@ then
 		then
 			machine=${pick#*@}
 
-			was_active=0
-
 			machine_exists "$machine" || exit
 			machine_active "$machine" || ( sudo machinectl start "$machine" && dunstify terminalx "Booting $machine" )
 
-			[[ 0 -eq "$was_active" ]]
-
-			c=0
-
-			while :;
-			do
-				c=$(( c + 1 ))
-
-				if machine_active "$machine"
-				then
-					if ! sudo machinectl shell "$pick" $0 2>/dev/null
-					then
-						sleep 1;
-						continue
-					fi
-					break
-				elif [[ "$c" -ge 5 ]]
-				then
-					dunstify terminalx "Failed to run terminal on $machine"
-					break
-				fi
-
-				sleep 1
-			done
+			if wait_machine "$machine"
+			then
+				sudo machinectl shell "$pick" $0 2>/dev/null
+			else
+				dunstify terminalx "Failed to run terminal on $machine"
+			fi
 		fi
 	fi
-else
+elif [[ "$1" == '' ]]
+then
 	export DISPLAY=:0
 	export XAUTHORITY=/tmp/nspawn/xauth
 
 	pacman -Qs gaspar-device-gpu >/dev/null && test -f /usr/bin/alacritty && alacritty || uxterm
+else
+	$1 ${@:2}
 fi

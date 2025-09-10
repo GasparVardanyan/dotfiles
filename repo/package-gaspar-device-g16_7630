@@ -1,6 +1,6 @@
 pkgname=gaspar-device-g16_7630
 pkgver=1
-pkgrel=17
+pkgrel=18
 arch=('any')
 options=('!debug')
 groups=('gaspar')
@@ -9,20 +9,18 @@ depends=(
 	alsa-firmware
 	alsa-plugins
 	alsa-utils
-	ananicy-cpp
 	acpi # for AWCC
 	acpi_call # for AWCC
 	tlp
+	scx-scheds
 	smartmontools # for tlp
 	ethtool # for tlp
-	fwupd
 	gaspar-device-g16_7630-gpu
 	intel-ucode
 	libsmbios # maybe unnecessary
 	nvidia-open
 	sof-firmware
 	thermald
-	udisks2 # for fwupd
 )
 
 # vim:ft=sh
