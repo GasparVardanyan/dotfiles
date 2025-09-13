@@ -27,36 +27,27 @@ have_terminal() {
 }
 
 wait_machine() {
-	m="${1#*@}"
-
-	echo "m: $m"
-
-	status=0
-
+	echo "terminalx: wait_machine doesn't work properly"
+	machine="${1#*@}"
 	c=0
 	while :;
 	do
-		echo "waiting: $c"
+		sleep 1
 
 		c=$(( c + 1 ))
 
-		if machine_active "$m"
+		if machine_active "$machine"
 		then
-			machinectl list
-			machinectl status work
 			echo "ACTIVE"
-			break
-		elif [[ "$c" -ge 15 ]]
+			return 0
+			# break
+		elif [[ "$c" -ge 5 ]]
 		then
-			echo "BREAK"
-			status=1
-			break
+			echo "NOT ACTIVE"
+			return 1
+			# break
 		fi
-
-		sleep 1
 	done
-
-	return "$status"
 }
 
 upgrade() {
@@ -93,6 +84,7 @@ list_terminals() {
 	echo -en "$terminals"
 }
 
+
 if [[ "$1" == menu ]]
 then
 	picks="terminal\ntoggle\nshell"
@@ -117,6 +109,7 @@ then
 
 	pick=$(echo "$m" | cut -f 2 -d +)
 	machine_exists "$pick" || exit
+
 	if machine_active "$pick"
 	then
 		sudo machinectl poweroff "$pick" &&  dunstify terminalx "Powereing off $pick"
@@ -137,6 +130,8 @@ then
 		then
 			machine=${pick#*@}
 
+			was_active=0
+
 			machine_exists "$machine" || exit
 			machine_active "$machine" || ( sudo machinectl start "$machine" && dunstify terminalx "Booting $machine" )
 
@@ -144,7 +139,7 @@ then
 			then
 				alacritty -e sh -c "sudo machinectl shell $pick; read"
 			else
-				dunstify terminalx "Failed to run terminal on $machine"
+				dunstify terminalx "Failed to run shell inside $machine"
 			fi
 		fi
 	fi
@@ -162,17 +157,15 @@ then
 		then
 			machine=${pick#*@}
 
+			was_active=0
+
 			machine_exists "$machine" || exit
 			machine_active "$machine" || ( sudo machinectl start "$machine" && dunstify terminalx "Booting $machine" )
 
-			echo "WWW"
 			if wait_machine "$machine"
 			then
-				echo "DONE"
-				echo sudo machinectl shell "$pick" $0
 				sudo machinectl shell "$pick" $0 2>/dev/null
 			else
-				echo "NOT DONE"
 				dunstify terminalx "Failed to run terminal on $machine"
 			fi
 		fi
