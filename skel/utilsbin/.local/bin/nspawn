@@ -58,7 +58,7 @@ upgrade() {
 
 	if [ false = "$active" ]
 	then
-		sudo machinectl start "$m" && echo terminalx "Booting $m"
+		sudo machinectl start "$m" && echo nspawn "Booting $m"
 	fi
 
 	if wait_machine "$m"
@@ -66,12 +66,12 @@ upgrade() {
 		sudo machinectl shell "root@$m" /usr/bin/pacman -Syyuu
 		sudo machinectl shell "root@$m" /usr/bin/pacman -Scc
 	else
-		dunstify terminalx "Failed to upgrade the machine $m"
+		notify "Failed to upgrade the machine $m"
 	fi
 
 	if [ false = "$active" ]
 	then
-		sudo machinectl poweroff "$m" &&  dunstify terminalx "Powereing off $m"
+		sudo machinectl poweroff "$m" &&  notify "Powereing off $m"
 	fi
 }
 
@@ -84,11 +84,28 @@ list_terminals() {
 	echo -en "$terminals"
 }
 
+CALLER_USER="${SUDO_USER:-$USER}"
+
+if [[ $EUID -ne 0 ]]
+then
+	if ! systemd-detect-virt --container >/dev/null 2>&1
+	then
+		echo ROOT
+		exec sudo -- "$0" "$@"
+	fi
+fi
+
+notify() {
+	local uid=$(id -u "$CALLER_USER")
+	local msg="$@"
+	sudo -u "$CALLER_USER" DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$uid/bus" \
+	dunstify nspawn "$msg"
+}
 
 if [[ "$1" == menu ]]
 then
 	picks="terminal\ntoggle\nshell"
-	pick=$(echo -e "$picks" | dmenu -l 20 -p terminalx:)
+	pick=$(echo -e "$picks" | dmenu -l 20 -p nspawn:)
 	[ -z "$pick" ] && exit
 	echo -e "$picks" | grep -Fxq "$pick" || exit
 	$0 "$pick"
@@ -112,9 +129,9 @@ then
 
 	if machine_active "$pick"
 	then
-		sudo machinectl poweroff "$pick" &&  dunstify terminalx "Powereing off $pick"
+		sudo machinectl poweroff "$pick" &&  notify "Powereing off $pick"
 	else
-		sudo machinectl start "$pick" && dunstify terminalx "Booting $pick"
+		sudo machinectl start "$pick" && notify "Booting $pick"
 	fi
 elif [[ "$1" == shell ]]
 then
@@ -133,13 +150,13 @@ then
 			was_active=0
 
 			machine_exists "$machine" || exit
-			machine_active "$machine" || ( sudo machinectl start "$machine" && dunstify terminalx "Booting $machine" )
+			machine_active "$machine" || ( sudo machinectl start "$machine" && notify "Booting $machine" )
 
 			if wait_machine "$machine"
 			then
 				alacritty -e sh -c "sudo machinectl shell $pick; read"
 			else
-				dunstify terminalx "Failed to run shell inside $machine"
+				notify "Failed to run shell inside $machine"
 			fi
 		fi
 	fi
@@ -160,13 +177,13 @@ then
 			was_active=0
 
 			machine_exists "$machine" || exit
-			machine_active "$machine" || ( sudo machinectl start "$machine" && dunstify terminalx "Booting $machine" )
+			machine_active "$machine" || ( sudo machinectl start "$machine" && notify "Booting $machine" )
 
 			if wait_machine "$machine"
 			then
 				sudo machinectl shell "$pick" $0 2>/dev/null
 			else
-				dunstify terminalx "Failed to run terminal on $machine"
+				notify "Failed to run terminal on $machine"
 			fi
 		fi
 	fi
