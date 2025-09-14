@@ -90,7 +90,6 @@ if [[ $EUID -ne 0 ]]
 then
 	if ! systemd-detect-virt --container >/dev/null 2>&1
 	then
-		echo ROOT
 		exec sudo -- "$0" "$@"
 	fi
 fi
@@ -99,7 +98,13 @@ notify() {
 	local uid=$(id -u "$CALLER_USER")
 	local msg="$@"
 	sudo -u "$CALLER_USER" DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$uid/bus" \
-	dunstify nspawn "$msg"
+	dunstify "  nspawn" "$msg"
+}
+
+upgrade_all() {
+	for m in $(list_machines); do
+		upgrade "$m"
+	done
 }
 
 if [[ "$1" == menu ]]
