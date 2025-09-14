@@ -154,7 +154,7 @@ then
 
 			if wait_machine "$machine"
 			then
-				alacritty -e sh -c "sudo machinectl shell $pick; read"
+				sudo -u "$CALLER_USER" alacritty -e sh -c "sudo machinectl shell $pick; read"
 			else
 				notify "Failed to run shell inside $machine"
 			fi
