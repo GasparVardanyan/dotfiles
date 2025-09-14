@@ -35,7 +35,7 @@ wait_machine() {
 
 		if machine_active "$machine"
 		then
-			if ! sudo machinectl shell "$machine" /usr/bin/echo >/dev/null
+			if ! sudo machinectl shell "$machine" /usr/bin/echo 2>&1 >/dev/null
 			then
 				sleep 1;
 				continue
@@ -48,6 +48,27 @@ wait_machine() {
 			# break
 		fi
 	done
+}
+
+device_mount() {
+	m="${1#*@}"
+	d="$2"
+	o=${@:3}
+
+	if ! machine_active "$m"
+	then
+		echo "Machine $m isn't active"
+		exit -1
+	fi
+
+	if [ ! -b "$2" ] && [ ! -c "$2" ]
+	then
+		echo "No such device $d"
+		exit -1
+	fi
+
+	machinectl bind --mkdir "$m" "$d" $o
+	systemctl set-property systemd-nspawn@"$m".service DeviceAllow="$d"
 }
 
 upgrade() {
