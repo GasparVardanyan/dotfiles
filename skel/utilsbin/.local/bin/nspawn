@@ -86,6 +86,25 @@ upgrade() {
 	then
 		sudo machinectl shell "root@$m" /usr/bin/pacman -Syyuu
 		sudo machinectl shell "root@$m" /usr/bin/pacman -Scc
+
+		if [ -d "/usr/local/etc/nspawn/upgrade/$m" ] ; then
+			for f in $(find "/usr/local/etc/nspawn/upgrade/$m" -type f -name "*.sh" \
+				| sort -n -t / -k 8n)
+			do
+				fname=$(basename "$f")
+				if echo "$fname" | grep -Fq @
+				then
+					uname=${fname#*@}
+					uname=${uname%%.*}
+					host="$uname@$m"
+				else
+					uname=''
+					host="$m"
+				fi
+
+				sudo machinectl shell "$host" "/tmp/upgrade/$fname"
+			done
+		fi
 	else
 		notify "Failed to upgrade the machine $m"
 	fi
@@ -124,6 +143,7 @@ notify() {
 
 upgrade_all() {
 	for m in $(list_machines); do
+		figlet "upgrading $m"
 		upgrade "$m"
 	done
 }
