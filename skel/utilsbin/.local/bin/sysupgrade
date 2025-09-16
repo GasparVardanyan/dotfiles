@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+figlet reflector
+sudo systemctl start reflector.service
+nspawn upgrade_all
+figlet "upgrading HOST"
+sudo pacman -Syyuu
+sudo pacman -Fyy
+sudo pacman -Scc
+sudo pkgfile -u
+tldr -u
+pipx runpip yt-dlp install --upgrade yt-dlp mutagen
+pipx upgrade cppman
+pipx upgrade compiledb
+cppman -c
