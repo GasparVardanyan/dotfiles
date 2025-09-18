@@ -1,14 +1,14 @@
 pkgname=gaspar-meta-media
 pkgver=1
-pkgrel=3
+pkgrel=5
 arch=('any')
 options=('!debug')
 groups=('gaspar')
 depends=(
 	atomicparsley
-	cmus
 	ffmpeg
 	ffmpegthumbnailer
+	ffnvcodec-headers
 	imagemagick
 	mediainfo
 	mpv

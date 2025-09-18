@@ -2,7 +2,7 @@
 
 alert(){
 	[ "$2" != 'wait' ] &&
-		while :; do mpv ~/.local/share/spt/notification.wav; done &
+		while :; do mpv --force-window=no ~/.local/share/spt/notification.wav; done &
 	dunstify -b spt "$1"
 	[ "$2" != 'wait' ] &&
 		kill $!

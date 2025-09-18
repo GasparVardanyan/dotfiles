@@ -210,7 +210,7 @@ elif [[ "$1" == terminal ]]
 then
 	[ ! -f /usr/local/etc/nspawn/terminals ] && exit
 
-	terminals=$(cat /usr/local/etc/nspawn/terminals | sort -t @ -k 2n)
+	terminals=$(list_terminals)
 
 	if [ ! -z "$terminals" ]
 	then
