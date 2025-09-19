@@ -25,6 +25,7 @@ git clone https://gist.github.com/agyild/7715b6b1f38427839d58f80884902cab.git ./
 git clone https://gist.github.com/igv/a015fc885d5c22e6891820ad89555637.git ./KrigBilateral
 git clone https://gist.github.com/igv/8a77e4eb8276753b54bb94c1c50c317e.git ./adaptive-sharpen
 
-# git clone https://github.com/GasparVardanyan/mpv-gallery-view.git
+git clone https://github.com/GasparVardanyan/mpv-gallery-view.git
+git clone https://github.com/jonniek/mpv-playlistmanager.git
 
 find . -maxdepth 2 -name '.git' -type d  | xargs rm -rf
