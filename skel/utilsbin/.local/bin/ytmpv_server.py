@@ -23,7 +23,7 @@ class SimpleHandler(BaseHTTPRequestHandler):
 		if 1 == len (lines) :
 			return
 
-		filename = re.sub (r'[^a-zA-Z0-9 \[\]-]', '_', lines[0].strip())
+		filename = re.sub (r'[^a-zA-Z0-9\[\]-]', '_', lines[0].strip())
 		content = "\n".join(lines[1:])
 
 		# Ensure target directory exists
@@ -31,7 +31,7 @@ class SimpleHandler(BaseHTTPRequestHandler):
 
 		# Create full path with date prefix
 		date_prefix = datetime.now().strftime("%m%d:%H%M%S")
-		full_path = os.path.join(SAVE_DIR, f"{date_prefix} - {filename}.m3u")
+		full_path = os.path.join(SAVE_DIR, f"{date_prefix}_{filename}.m3u")
 
 		# Write content to file
 		with open(full_path, "w") as f:

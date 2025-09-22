@@ -1,10 +1,137 @@
 #!/usr/bin/env bash
 
-YTMPV_DIR="${YTMPV_DIR:-/tmp/ytmpv}"
-PLCTRL_SOURCE="${PLCTRL_SOURCE:-/tmp/plctrl}"
-PLMAN_DIR="$HOME/.local/share/playlists"
 
-mkdir -p "$YTMPV_DIR" "$PLMAN_DIR"
+YTMPV_DIR="${YTMPV_DIR:-/tmp/ytmpv}"
+PLMAN_DIR="$HOME/.local/share/playlists"
+SOCKET_DIR=~/.local/tmp/plctrl/sockets/
+
+PLCTRL_SOURCE="${PLCTRL_SOURCE:-$HOME/.local/tmp/plctrl/source}"
+PLCTRL_SOURCE_DIR=$(dirname "$PLCTRL_SOURCE")
+
+mkdir -p "$YTMPV_DIR"
+mkdir -p "$PLMAN_DIR"
+mkdir -p "$SOCKET_DIR"
+mkdir -p "$PLCTRL_SOURCE_DIR"
+
+cmd_2select_playlist()
+{
+	dir="$1"
+
+	[ ! -d "$dir" ] && exit -1
+
+	dmenu_embed=""
+	if [ "$XEMBED" != '' ]
+	then
+		dmenu_embed="-w $XEMBED"
+	fi
+
+	l=$(find "$dir" -type f -name '*.m3u' -printf '%f\n' | sed 's/\.m3u$//' |  dmenu -p 'play: ' -l 20 $dmenu_embed)
+
+	echo "$l"
+}
+
+cmd_2get_playlist_name()
+{
+	exit
+}
+
+cmd_2run_mpv()
+{
+	if [ 2 -le $# ]
+	then
+		playlist="$1"
+		socket="$2"
+		moptions=${@:4}
+		title="${playlist##*/}"
+		title=$(echo "$title" | sed 's/\.m3u//')
+
+		if [ 'default' = "$3" ]
+		then
+			moptions="$moptions --x11-name=scratchcmus"
+			moptions="$moptions --vid=2"
+		else
+			moptions="$moptions --fullscreen"
+		fi
+
+		if [ "$XEMBED" != '' ]
+		then
+			moptions="$moptions -wid=$XEMBED"
+		fi
+
+		mpv $moptions                                 \
+			--loop-playlist=inf                       \
+			--ytdl-format="bestvideo+bestaudio/best"  \
+			"$playlist"                               \
+			--input-ipc-server="$socket"              \
+			--title="$title"
+
+		rm "$socket"
+	fi
+}
+
+cmd_2play()
+{
+	if [ 1 -eq $# ]
+	then
+		playlist=''
+		socket=''
+		sel=false
+		def=''
+
+		if [[ "$1" == default ]]
+		then
+			playlist="$HOME/.local/share/playlists/music.m3u"
+			socket="$SOCKET_DIR/DEFAULT.socket"
+			def='default'
+			sel=true
+		else
+			l=$(cmd_2select_playlist ~/.local/share/playlists)
+			if [ "$l" != '' ]
+			then
+				playlist="$HOME/.local/share/playlists/$l.m3u"
+				if [ -f "$playlist" ]
+				then
+					socket="$SOCKET_DIR/$l - $(date '+%m%d:%H%M%S').socket"
+					sel=true
+				fi
+			fi
+		fi
+
+		if [ true = "$sel" ]
+		then
+			cmd_2run_mpv "$playlist" "$socket" "$def" '--shuffle'
+		fi
+	fi
+}
+
+cmd_2ytmpv()
+{
+	playlist=''
+	socket=''
+	sel=false
+	def=''
+
+	l=$(cmd_2select_playlist /tmp/ytmpv/)
+	if [ "$l" != '' ]
+	then
+		playlist="/tmp/ytmpv/$l.m3u"
+		if [ -f "$playlist" ]
+		then
+			socket="$SOCKET_DIR/$l - $(date '+%m%d:%H%M%S').socket"
+			sel=true
+		fi
+	fi
+
+	if [ true = "$sel" ]
+	then
+		cmd_2run_mpv "$playlist" "$socket" "$def"
+	fi
+}
+
+cmd_2list_sources()
+{
+	find "$SOCKET_DIR" -type s -name '*.socket' -printf '%f\n' | sed 's/\.socket$//'
+}
 
 cmd_list_sources()
 {
@@ -170,6 +297,8 @@ cmd_stop()
 
 cmd_state()
 {
+	[ -f "$PLCTRL_SOURCE" ] || exit
+
 	if cmd_validate
 	then
 		s=$(cat "$PLCTRL_SOURCE")
@@ -219,4 +348,4 @@ cmd_optimize()
 	rm "$1".tmp
 }
 
-cmd_$1 "$2"
+cmd_$1 ${@:2}
