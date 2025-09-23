@@ -108,5 +108,6 @@ mkdir /tmp/nspawn
 touch /tmp/nspawn/xauth
 xauth nextract - "$DISPLAY" | sed -e 's/^..../ffff/' | xauth -f /tmp/nspawn/xauth nmerge -
 chmod +r /tmp/nspawn/xauth
+pactl load-module module-native-protocol-tcp port=4656 listen=0.0.0.0 auth-anonymous=true 2>&1 >/dev/null &
 
 exec $WM

@@ -50,7 +50,7 @@ dbrowse()
 fbrowse()
 {
 	target="$1"
-	[ -z "$target" ] && target="$HOME/media"
+	[ -z "$target" ] && target="/media"
 	prompt="$2"
 	[ -z "$prompt" ] && prompt="file:"
 
