@@ -2,19 +2,4 @@
 
 [ ! -d /tmp/ytmpv ] && exit
 
-dmenu_embed=""
-mpv_embed=""
-if [ "$XEMBED" != '' ]
-then
-	dmenu_embed="-w $XEMBED"
-	mpv_embed="-wid=$XEMBED"
-fi
-
-l=$(find /tmp/ytmpv -type f -name '*.m3u' | \sed 's#^/tmp/ytmpv/##;s#\.m3u$##' | dmenu -p 'play: ' -l 20 $dmenu_embed)
-if [ "$l" != '' ]
-then
-	playlist="/tmp/ytmpv/$l.m3u"
-	socket=$(echo "$playlist" | sed 's/\.m3u$/.socket/')
-	mpv --fullscreen --loop-playlist=inf --ytdl-format="bestvideo+bestaudio/best" $mpv_embed "$playlist" --input-ipc-server="$socket" --title="${l%.m3u*}"
-	rm "$socket"
-fi
+plctrl ytmpv

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 
+
 YTMPV_DIR="${YTMPV_DIR:-/tmp/ytmpv}"
 PLMAN_DIR="$HOME/.local/share/playlists"
 SOCKET_DIR=~/.local/tmp/plctrl/sockets/
@@ -13,21 +14,48 @@ mkdir -p "$PLMAN_DIR"
 mkdir -p "$SOCKET_DIR"
 mkdir -p "$PLCTRL_SOURCE_DIR"
 
+MPV_CMD_TOGGLE_PLAY='cycle pause'
+MPV_CMD_PAUSE='{ "command": ["set_property", "pause", true] }'
+MPV_CMD_SEEK_BEG='seek 0 absolute'
+MPV_CMD_NEXT='playlist-next'
+MPV_CMD_PREV='playlist-prev'
+# MPV_CMD_STOP='{ "command": ["set_property", "pause", true] }; seek 0 absolute'
+
+_cmd_2prompt()
+{
+	prompt="$1"
+	list="$2"
+
+	if [ '' != "$list" ]
+	then
+		c=$(echo "$list" | wc -l)
+
+		if [ 1 -eq $c ]
+		then
+			echo "$list"
+		else
+			dmenu_embed=""
+			if [ "$XEMBED" != '' ]
+			then
+				dmenu_embed="-w $XEMBED"
+			fi
+
+			echo "$list" | dmenu -p "$prompt" -l 20 $dmenu_embed
+		fi
+	fi
+}
+
 cmd_2select_playlist()
 {
 	dir="$1"
 
 	[ ! -d "$dir" ] && exit -1
 
-	dmenu_embed=""
-	if [ "$XEMBED" != '' ]
-	then
-		dmenu_embed="-w $XEMBED"
-	fi
+	playlists=$(find "$dir" -type f -name '*.m3u' -printf '%f\n' | sed 's/\.m3u$//')
 
-	l=$(find "$dir" -type f -name '*.m3u' -printf '%f\n' | sed 's/\.m3u$//' |  dmenu -p 'play: ' -l 20 $dmenu_embed)
+	selection=$(_cmd_2prompt 'play: ' "$playlists")
 
-	echo "$l"
+	echo "$selection"
 }
 
 cmd_2get_playlist_name()
@@ -57,6 +85,14 @@ cmd_2run_mpv()
 		then
 			moptions="$moptions -wid=$XEMBED"
 		fi
+
+		if _cmd_2validate_source
+		then
+			s=$(cat "$PLCTRL_SOURCE")
+			_cmd_2mpv_cmd "$s" "$MPV_CMD_PAUSE"
+		fi
+
+		echo "$socket" > "$PLCTRL_SOURCE"
 
 		mpv $moptions                                 \
 			--loop-playlist=inf                       \
@@ -117,7 +153,7 @@ cmd_2ytmpv()
 		playlist="/tmp/ytmpv/$l.m3u"
 		if [ -f "$playlist" ]
 		then
-			socket="$SOCKET_DIR/$l - $(date '+%m%d:%H%M%S').socket"
+			socket="$SOCKET_DIR/$l.socket"
 			sel=true
 		fi
 	fi
@@ -133,59 +169,42 @@ cmd_2list_sources()
 	find "$SOCKET_DIR" -type s -name '*.socket' -printf '%f\n' | sed 's/\.socket$//'
 }
 
-cmd_list_sources()
+cmd_2select_source()
 {
-	list=""
-	cmus=$(cmus-remote --query 2>/dev/null | grep ^status -m 1 | cut -d ' ' -f 2)
-	[[ "$cmus" != '' ]] && list="cmus\n"
+	sources=$(cmd_2list_sources)
+	s=$(_cmd_2prompt 'source: ' "$sources")
 
-	ytmpv=$(find "$YTMPV_DIR" -type s -name '*.socket' | sed -E "s#^$YTMPV_DIR/?#YTMPV: #")
-	list="$list$ytmpv\n"
-
-	pl=$(find "$PLMAN_DIR" -type s -name '*.socket' | sed -E "s#^$PLMAN_DIR/?#PLMAN: #")
-	list="$list$pl\n"
-
-	echo -e "$list" | sed '/^[[:space:]]*$/d'
-}
-
-cmd_select_source()
-{
-	# TODO: automatically select if only one available source
-
-	list=$(cmd_list_sources)
-	if [[ "$list" != '' ]]
+	if [ '' != "$s" ]
 	then
-		c=$(echo "$list" | wc -l)
-		echo "C: $c"
-		s=''
-		if [ 1 -eq $c ]
-		then
-			s="$list"
-		else
-			s=$(echo "$list" | sed 's/\.socket$//' | dmenu -p 'plctrl source: ' -l 20).socket
-			[[ "$s" == cmus.socket ]] && s=cmus
-		fi
-		[[ "$s" != '' ]] && echo "$s" > "$PLCTRL_SOURCE"
-	else
-		rm -f "$PLCTRL_SOURCE"
+		echo "$SOCKET_DIR/$s.socket" > "$PLCTRL_SOURCE"
+		return 0
 	fi
 
-	test -f "$PLCTRL_SOURCE"
+	return 1
 }
 
-cmd_validate_source()
+_cmd_2validate_source()
 {
-	list=$(cmd_list_sources)
-	f=$(cat "$PLCTRL_SOURCE")
-
-	[ -f "$PLCTRL_SOURCE" ] && grep -Fxq "$list" <<< "$f" || return 1
-}
-
-cmd_validate()
-{
-	if ! cmd_validate_source
+	if [ ! -f "$PLCTRL_SOURCE" ]
 	then
-		if ! cmd_select_source
+		return 1
+	fi
+
+	s=$(cat "$PLCTRL_SOURCE")
+
+	if [ ! -S "$s" ]
+	then
+		return 1
+	fi
+
+	return 0
+}
+
+_cmd_2validate()
+{
+	if ! _cmd_2validate_source
+	then
+		if ! cmd_2select_source
 		then
 			return 1
 		fi
@@ -193,7 +212,8 @@ cmd_validate()
 	return 0
 }
 
-_cmd_mpv()
+
+_cmd_2mpv_cmd()
 {
 	_s=$(echo "$1" | sed 's/:/\\:/g')
 	_c=$2
@@ -201,127 +221,50 @@ _cmd_mpv()
 	echo "$_c" | socat - "$_s"
 }
 
-cmd_next()
+_cmd_2mpv_cmd_source()
 {
-	if cmd_validate
+	cmd="$1"
+
+	if _cmd_2validate
 	then
 		s=$(cat "$PLCTRL_SOURCE")
 
-		if [[ "$s" = 'cmus' ]]
-		then
-			cmus-remote -n
-		elif [[ "$s" == YTMPV:\ * ]]
-		then
-			s="${s#* }"
-			_cmd_mpv "$YTMPV_DIR/$s" 'playlist-next'
-		elif [[ "$s" == PLMAN:\ * ]]
-		then
-			s="${s#* }"
-			_cmd_mpv "$PLMAN_DIR/$s" 'playlist-next'
-		else
-			echo "SS:$s"
-		fi
+		_cmd_2mpv_cmd "$s" "$cmd"
 	fi
 }
 
-cmd_prev()
+cmd_2toggle_play()
 {
-	if cmd_validate
-	then
-		s=$(cat "$PLCTRL_SOURCE")
-
-		if [[ "$s" = 'cmus' ]]
-		then
-			cmus-remote -r
-		elif [[ "$s" == YTMPV:\ * ]]
-		then
-			s="${s#* }"
-			_cmd_mpv "$YTMPV_DIR/$s" 'playlist-prev'
-		elif [[ "$s" == PLMAN:\ * ]]
-		then
-			s="${s#* }"
-			_cmd_mpv "$PLMAN_DIR/$s" 'playlist-prev'
-		else
-			echo "SS:$s"
-		fi
-	fi
+	_cmd_2mpv_cmd_source "$MPV_CMD_TOGGLE_PLAY"
 }
 
-cmd_toggle_play()
+cmd_2stop()
 {
-	if cmd_validate
-	then
-		s=$(cat "$PLCTRL_SOURCE")
-
-		if [[ "$s" = 'cmus' ]]
-		then
-			cmus-remote -u
-		elif [[ "$s" == YTMPV:\ * ]]
-		then
-			s="${s#* }"
-			_cmd_mpv "$YTMPV_DIR/$s" 'cycle pause'
-		elif [[ "$s" == PLMAN:\ * ]]
-		then
-			s="${s#* }"
-			_cmd_mpv "$PLMAN_DIR/$s" 'cycle pause'
-		else
-			echo "SS:$s"
-		fi
-	fi
+	_cmd_2mpv_cmd_source "$MPV_CMD_PAUSE"
+	_cmd_2mpv_cmd_source "$MPV_CMD_SEEK_BEG"
 }
 
-cmd_stop()
+cmd_2next()
 {
-	if cmd_validate
-	then
-		s=$(cat "$PLCTRL_SOURCE")
-
-		if [[ "$s" = 'cmus' ]]
-		then
-			cmus-remote -s
-		elif [[ "$s" == YTMPV:\ * ]]
-		then
-			s="${s#* }"
-			_cmd_mpv "$YTMPV_DIR/$s" '{ "command": ["set_property", "pause", true] }'
-			_cmd_mpv "$YTMPV_DIR/$s" 'seek 0 absolute'
-		elif [[ "$s" == PLMAN:\ * ]]
-		then
-			s="${s#* }"
-			_cmd_mpv "$PLMAN_DIR/$s" '{ "command": ["set_property", "pause", true] }'
-			_cmd_mpv "$PLMAN_DIR/$s" 'seek 0 absolute'
-		else
-			echo "SS:$s"
-		fi
-	fi
+	_cmd_2mpv_cmd_source "$MPV_CMD_NEXT"
 }
 
-cmd_state()
+cmd_2prev()
+{
+	_cmd_2mpv_cmd_source "$MPV_CMD_PREV"
+}
+
+cmd_2state()
 {
 	[ -f "$PLCTRL_SOURCE" ] || exit
 
-	if cmd_validate
+	if _cmd_2validate_source
 	then
-		s=$(cat "$PLCTRL_SOURCE")
-
-		if [[ "$s" = 'cmus' ]]
-		then
-			cmus-remote --query 2>/dev/null | grep ^status -m 1 | cut -d ' ' -f 2
-		elif [[ "$s" == YTMPV:\ * ]]
-		then
-			s="${s#* }"
-			_cmd_mpv "$YTMPV_DIR/$s" '{ "command": ["get_property", "pause"] }' | grep -Fq false && echo playing || echo paused
-		elif [[ "$s" == PLMAN:\ * ]]
-		then
-			s="${s#* }"
-			_cmd_mpv "$PLMAN_DIR/$s" '{ "command": ["get_property", "pause"] }' | grep -Fq false && echo playing || echo paused
-		else
-			echo "SS:$s"
-			echo
-		fi
+		_cmd_2mpv_cmd_source '{ "command": ["get_property", "pause"] }' | grep -Fq false && echo playing || echo paused
 	fi
 }
 
-cmd_optimize()
+cmd_2optimize()
 {
 	mv "$1"{,.tmp}
 
@@ -348,4 +291,4 @@ cmd_optimize()
 	rm "$1".tmp
 }
 
-cmd_$1 ${@:2}
+cmd_2$1 ${@:2}

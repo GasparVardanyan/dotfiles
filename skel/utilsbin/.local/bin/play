@@ -1,30 +1,8 @@
 #!/usr/bin/env bash
 
-selplaylist() {
-	dmenu_embed=""
-	mpv_embed=""
-	if [ "$XEMBED" != '' ]
-	then
-		dmenu_embed="-w $XEMBED"
-		mpv_embed="-wid=$XEMBED"
-	fi
-
-	l=$(ls ~/.local/share/playlists/*.m3u | sed 's/^.*\.local\/share\/playlists\///;s/\.m3u$//' | dmenu -p 'play: ' -l 20 $dmenu_embed)
-	if [ "$l" != '' ]
-	then
-		playlist="$HOME/.local/share/playlists/$l.m3u"
-		socket=$(echo "$playlist" | sed 's/\.m3u$/.socket/')
-		mpv --fullscreen --loop-playlist=inf --ytdl-format="bestvideo+bestaudio/best" $mpv_embed "$playlist" --input-ipc-server="$socket" --shuffle --title="${l%.m3u*}"
-		rm "$socket"
-	fi
-}
-
 if [ 1 -eq $# ] && [[ "$1" == default ]]
 then
-	playlist="$HOME/.local/share/playlists/music.m3u"
-	socket="$HOME/.local/share/playlists/PLAYER.socket"
-	mpv --x11-name=scratchcmus --vid=2 --loop-playlist=inf --ytdl-format="bestvideo+bestaudio/best" "$playlist" --input-ipc-server="$socket" --shuffle --title="PLAYER"
-	rm "$socket"
+	plctrl play default
 else
-	selplaylist
+	plctrl play ~/.local/share/playlists/
 fi
