@@ -116,9 +116,14 @@ END {
 }' ~/.sfeed/urls ~/.sfeed/feeds/*)
 
 cmus=$(plctrl state)
-[[ $cmus == 'stopped' ]] && cmus=""
-[[ $cmus == 'playing' ]] && cmus=""
-[[ $cmus == 'paused' ]] && cmus=""
+if [[ '' != "$cmus" ]]
+then
+	[[ $cmus == 'stopped' ]] && cmus=""
+	[[ $cmus == 'playing' ]] && cmus=""
+	[[ $cmus == 'paused' ]] && cmus=""
+
+	cmus="$cmus $(plctrl title_cut)"
+fi
 
 
 

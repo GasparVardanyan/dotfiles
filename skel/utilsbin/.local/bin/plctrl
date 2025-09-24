@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-
-
 YTMPV_DIR="${YTMPV_DIR:-/tmp/ytmpv}"
 PLMAN_DIR="$HOME/.local/share/playlists"
 SOCKET_DIR=~/.local/tmp/plctrl/sockets/
@@ -19,6 +17,7 @@ MPV_CMD_PAUSE='{ "command": ["set_property", "pause", true] }'
 MPV_CMD_SEEK_BEG='seek 0 absolute'
 MPV_CMD_NEXT='playlist-next'
 MPV_CMD_PREV='playlist-prev'
+MPV_CMD_GET_TITLE='{ "command": ["get_property", "media-title"] }'
 # MPV_CMD_STOP='{ "command": ["set_property", "pause", true] }; seek 0 absolute'
 
 _cmd_2prompt()
@@ -289,6 +288,30 @@ cmd_2optimize()
 	done >> "$1"
 
 	rm "$1".tmp
+}
+
+cmd_2title_cut()
+{
+	title=$(_cmd_2mpv_cmd_source "$MPV_CMD_GET_TITLE" | jq -r .data)
+
+	if [ -n "$title" ]; then
+		title="$title... "
+		len=${#title}
+		t=$(date +%s)
+		offset=$(( t % len ))
+
+		if (( offset + 35 <= len )); then
+			window="${title:offset:35}"
+		else
+			part1="${title:offset}"
+			part2="${title:0:$((35 - (len - offset)))}"
+			window="$part1$part2"
+		fi
+	else
+		window=""
+	fi
+
+	echo "$window"
 }
 
 cmd_2$1 ${@:2}
