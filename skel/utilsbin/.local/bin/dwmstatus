@@ -122,7 +122,7 @@ then
 	[[ $cmus == 'playing' ]] && cmus=""
 	[[ $cmus == 'paused' ]] && cmus=""
 
-	cmus="$cmus $(plctrl title_cut)"
+	cmus="$cmus $(plctrl title_marquee)"
 fi
 
 

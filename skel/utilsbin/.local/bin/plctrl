@@ -68,9 +68,16 @@ cmd_2run_mpv()
 	then
 		playlist="$1"
 		socket="$2"
-		moptions=${@:4}
 		title="${playlist##*/}"
 		title=$(echo "$title" | sed 's/\.m3u//')
+
+		if [ -S "$socket" ]
+		then
+			dunstify plctrl "Socket for this $title already exists"
+			exit 1
+		fi
+
+		moptions=${@:4}
 
 		if [ 'default' = "$3" ]
 		then
@@ -290,22 +297,31 @@ cmd_2optimize()
 	rm "$1".tmp
 }
 
-cmd_2title_cut()
+cmd_2title_marquee()
 {
 	title=$(_cmd_2mpv_cmd_source "$MPV_CMD_GET_TITLE" | jq -r .data)
 
 	if [ -n "$title" ]; then
-		title="$title... "
 		len=${#title}
-		t=$(date +%s)
-		offset=$(( t % len ))
 
-		if (( offset + 35 <= len )); then
-			window="${title:offset:35}"
+		if (( len <= 35 ))
+		then
+			window="$title"
 		else
-			part1="${title:offset}"
-			part2="${title:0:$((35 - (len - offset)))}"
-			window="$part1$part2"
+
+			title="$title... "
+			len=${#title}
+
+			t=$(date +%s)
+			offset=$(( t % len ))
+
+			if (( offset + 35 <= len )); then
+				window="${title:offset:35}"
+			else
+				part1="${title:offset}"
+				part2="${title:0:$((35 - (len - offset)))}"
+				window="$part1$part2"
+			fi
 		fi
 	else
 		window=""
