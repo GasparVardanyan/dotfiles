@@ -44,7 +44,7 @@ _cmd_2prompt()
 	fi
 }
 
-cmd_2select_playlist()
+_cmd_2select_playlist()
 {
 	dir="$1"
 
@@ -113,50 +113,45 @@ cmd_2run_mpv()
 
 cmd_2play()
 {
-	if [ 1 -eq $# ]
-	then
-		playlist=''
-		socket=''
-		sel=false
-		def=''
-
-		if [[ "$1" == default ]]
-		then
-			playlist="$HOME/.local/share/playlists/music.m3u"
-			socket="$SOCKET_DIR/DEFAULT.socket"
-			def='default'
-			sel=true
-		else
-			l=$(cmd_2select_playlist ~/.local/share/playlists)
-			if [ "$l" != '' ]
-			then
-				playlist="$HOME/.local/share/playlists/$l.m3u"
-				if [ -f "$playlist" ]
-				then
-					socket="$SOCKET_DIR/$l - $(date '+%m%d:%H%M%S').socket"
-					sel=true
-				fi
-			fi
-		fi
-
-		if [ true = "$sel" ]
-		then
-			cmd_2run_mpv "$playlist" "$socket" "$def" '--shuffle'
-		fi
-	fi
-}
-
-cmd_2ytmpv()
-{
 	playlist=''
 	socket=''
 	sel=false
 	def=''
+	opts=''
 
-	l=$(cmd_2select_playlist /tmp/ytmpv/)
+	pldir=''
+	l=''
+
+	if [[ "$1" == default ]]
+	then
+		playlist="$HOME/.local/share/playlists/music.m3u"
+		socket="$SOCKET_DIR/DEFAULT.socket"
+		def='default'
+		sel=true
+		opts='--shuffle'
+	elif [[ "$1" == ytmpv ]]
+	then
+		pldir=/tmp/ytmpv/
+	elif [[ "$1" == '' ]]
+	then
+		opts='--shuffle'
+		pldir=~/.local/share/playlists
+	elif [ -d "$1" ]
+	then
+		pldir="$1"
+	elif [ -f "$1" ]
+	then
+		l="$1"
+	fi
+
+	if [ '' != "$pldir" ] && [ -d "$pldir" ]
+	then
+		l=$(_cmd_2select_playlist "$pldir")
+	fi
+
 	if [ "$l" != '' ]
 	then
-		playlist="/tmp/ytmpv/$l.m3u"
+		playlist="$pldir/$l.m3u"
 		if [ -f "$playlist" ]
 		then
 			socket="$SOCKET_DIR/$l.socket"
@@ -166,7 +161,7 @@ cmd_2ytmpv()
 
 	if [ true = "$sel" ]
 	then
-		cmd_2run_mpv "$playlist" "$socket" "$def"
+		cmd_2run_mpv "$playlist" "$socket" "$def" "$opts"
 	fi
 }
 

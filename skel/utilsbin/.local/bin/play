@@ -4,5 +4,5 @@ if [ 1 -eq $# ] && [[ "$1" == default ]]
 then
 	plctrl play default
 else
-	plctrl play ~/.local/share/playlists/
+	plctrl play
 fi

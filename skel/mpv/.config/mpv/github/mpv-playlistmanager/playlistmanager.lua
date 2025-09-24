@@ -1326,6 +1326,12 @@ function select_playlist()
 end
 
 function get_playlist_save_path()
+		local playlist_path = mp.get_property("playlist-path")
+
+		if playlist_path and (playlist_path:match("%.m3u$") or playlist_path:match("%.m3u8$")) then
+				return utils.split_path(playlist_path)
+		end
+
   if settings.playlist_savepath == nil or settings.playlist_savepath == "" then
     return mp.command_native({"expand-path", "~~home/"}).."/playlists"
   else

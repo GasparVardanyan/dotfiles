@@ -2,4 +2,4 @@
 
 [ ! -d /tmp/ytmpv ] && exit
 
-plctrl ytmpv
+plctrl play ytmpv
