@@ -14,7 +14,9 @@ for url in $urls; do
 	wget -O "FSRCNN/$fname" "$url"
 done
 
-rm -rf nvidia-shaders SSimSuperRes SSimDownscaler CAS-scaled FSR SGSR KrigBilateral adaptive-sharpen
+rm -rf nvidia-shaders SSimSuperRes SSimDownscaler CAS-scaled FSR SGSR   \
+	KrigBilateral adaptive-sharpen glsl-chroma-from-luma-prediction     \
+	mpv-gallery-view mpv-playlistmanager
 
 git clone https://gist.github.com/agyild/7e8951915b2bf24526a9343d951db214.git ./nvidia-shaders
 git clone https://gist.github.com/igv/2364ffa6e81540f29cb7ab4c9bc05b6b.git ./SSimSuperRes
@@ -24,6 +26,7 @@ git clone https://gist.github.com/agyild/82219c545228d70c5604f865ce0b0ce5.git ./
 git clone https://gist.github.com/agyild/7715b6b1f38427839d58f80884902cab.git ./SGSR
 git clone https://gist.github.com/igv/a015fc885d5c22e6891820ad89555637.git ./KrigBilateral
 git clone https://gist.github.com/igv/8a77e4eb8276753b54bb94c1c50c317e.git ./adaptive-sharpen
+git clone https://github.com/Artoriuz/glsl-chroma-from-luma-prediction.git
 
 git clone https://github.com/GasparVardanyan/mpv-gallery-view.git
 git clone https://github.com/jonniek/mpv-playlistmanager.git

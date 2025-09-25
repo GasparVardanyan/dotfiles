@@ -17,10 +17,14 @@ MPV_CMD_PAUSE='{ "command": ["set_property", "pause", true] }'
 MPV_CMD_SEEK_BEG='seek 0 absolute'
 MPV_CMD_NEXT='playlist-next'
 MPV_CMD_PREV='playlist-prev'
+MPV_CMD_GET_PAUSE='{ "command": ["get_property", "pause"] }'
 MPV_CMD_GET_TITLE='{ "command": ["get_property", "media-title"] }'
+MPV_CMD_GET_LOOP='{ "command": ["get_property", "loop-file"] }'
+MPV_CMD_GET_SHUFFLE='{ "command": ["get_property", "shuffle"] }'
+MPV_CMD_GET_VID='{ "command": ["get_property", "vid"] }'
 # MPV_CMD_STOP='{ "command": ["set_property", "pause", true] }; seek 0 absolute'
 
-_cmd_2prompt()
+_cmd_prompt()
 {
 	prompt="$1"
 	list="$2"
@@ -44,7 +48,7 @@ _cmd_2prompt()
 	fi
 }
 
-_cmd_2select_playlist()
+_cmd_select_playlist()
 {
 	dir="$1"
 
@@ -52,17 +56,17 @@ _cmd_2select_playlist()
 
 	playlists=$(find "$dir" -type f -name '*.m3u' -printf '%f\n' | sed 's/\.m3u$//')
 
-	selection=$(_cmd_2prompt 'play: ' "$playlists")
+	selection=$(_cmd_prompt 'play: ' "$playlists")
 
 	echo "$selection"
 }
 
-cmd_2get_playlist_name()
+cmd_get_playlist_name()
 {
 	exit
 }
 
-cmd_2run_mpv()
+cmd_run_mpv()
 {
 	if [ 2 -le $# ]
 	then
@@ -92,10 +96,10 @@ cmd_2run_mpv()
 			moptions="$moptions -wid=$XEMBED"
 		fi
 
-		if _cmd_2validate_source
+		if _cmd_validate_source
 		then
 			s=$(cat "$PLCTRL_SOURCE")
-			_cmd_2mpv_cmd "$s" "$MPV_CMD_PAUSE"
+			_cmd_mpv_cmd "$s" "$MPV_CMD_PAUSE"
 		fi
 
 		echo "$socket" > "$PLCTRL_SOURCE"
@@ -111,7 +115,7 @@ cmd_2run_mpv()
 	fi
 }
 
-cmd_2play()
+cmd_play()
 {
 	playlist=''
 	socket=''
@@ -146,7 +150,7 @@ cmd_2play()
 
 	if [ '' != "$pldir" ] && [ -d "$pldir" ]
 	then
-		l=$(_cmd_2select_playlist "$pldir")
+		l=$(_cmd_select_playlist "$pldir")
 	fi
 
 	if [ "$l" != '' ]
@@ -161,19 +165,19 @@ cmd_2play()
 
 	if [ true = "$sel" ]
 	then
-		cmd_2run_mpv "$playlist" "$socket" "$def" "$opts"
+		cmd_run_mpv "$playlist" "$socket" "$def" "$opts"
 	fi
 }
 
-cmd_2list_sources()
+cmd_list_sources()
 {
 	find "$SOCKET_DIR" -type s -name '*.socket' -printf '%f\n' | sed 's/\.socket$//'
 }
 
-cmd_2select_source()
+cmd_select_source()
 {
-	sources=$(cmd_2list_sources)
-	s=$(_cmd_2prompt 'source: ' "$sources")
+	sources=$(cmd_list_sources)
+	s=$(_cmd_prompt 'source: ' "$sources")
 
 	if [ '' != "$s" ]
 	then
@@ -184,7 +188,7 @@ cmd_2select_source()
 	return 1
 }
 
-_cmd_2validate_source()
+_cmd_validate_source()
 {
 	if [ ! -f "$PLCTRL_SOURCE" ]
 	then
@@ -201,11 +205,11 @@ _cmd_2validate_source()
 	return 0
 }
 
-_cmd_2validate()
+_cmd_validate()
 {
-	if ! _cmd_2validate_source
+	if ! _cmd_validate_source
 	then
-		if ! cmd_2select_source
+		if ! cmd_select_source
 		then
 			return 1
 		fi
@@ -214,7 +218,7 @@ _cmd_2validate()
 }
 
 
-_cmd_2mpv_cmd()
+_cmd_mpv_cmd()
 {
 	_s=$(echo "$1" | sed 's/:/\\:/g')
 	_c=$2
@@ -222,50 +226,80 @@ _cmd_2mpv_cmd()
 	echo "$_c" | socat - "$_s"
 }
 
-_cmd_2mpv_cmd_source()
+_cmd_mpv_cmd_source()
 {
 	cmd="$1"
 
-	if _cmd_2validate
+	if _cmd_validate
 	then
 		s=$(cat "$PLCTRL_SOURCE")
 
-		_cmd_2mpv_cmd "$s" "$cmd"
+		_cmd_mpv_cmd "$s" "$cmd"
 	fi
 }
 
-cmd_2toggle_play()
+cmd_toggle_play()
 {
-	_cmd_2mpv_cmd_source "$MPV_CMD_TOGGLE_PLAY"
+	_cmd_mpv_cmd_source "$MPV_CMD_TOGGLE_PLAY"
 }
 
-cmd_2stop()
+cmd_stop()
 {
-	_cmd_2mpv_cmd_source "$MPV_CMD_PAUSE"
-	_cmd_2mpv_cmd_source "$MPV_CMD_SEEK_BEG"
+	_cmd_mpv_cmd_source "$MPV_CMD_PAUSE"
+	_cmd_mpv_cmd_source "$MPV_CMD_SEEK_BEG"
 }
 
-cmd_2next()
+cmd_next()
 {
-	_cmd_2mpv_cmd_source "$MPV_CMD_NEXT"
+	_cmd_mpv_cmd_source "$MPV_CMD_NEXT"
 }
 
-cmd_2prev()
+cmd_prev()
 {
-	_cmd_2mpv_cmd_source "$MPV_CMD_PREV"
+	_cmd_mpv_cmd_source "$MPV_CMD_PREV"
 }
 
-cmd_2state()
+cmd_state()
 {
 	[ -f "$PLCTRL_SOURCE" ] || exit
 
-	if _cmd_2validate_source
+	if _cmd_validate_source
 	then
-		_cmd_2mpv_cmd_source '{ "command": ["get_property", "pause"] }' | grep -Fq false && echo playing || echo paused
+		_cmd_mpv_cmd_source "$MPV_CMD_GET_PAUSE" | grep -Fq false && echo playing || echo paused
 	fi
 }
 
-cmd_2optimize()
+cmd_loop_state()
+{
+	[ -f "$PLCTRL_SOURCE" ] || exit
+
+	if _cmd_validate_source
+	then
+		_cmd_mpv_cmd_source "$MPV_CMD_GET_LOOP" | jq -r .data
+	fi
+}
+
+cmd_shuffle_state()
+{
+	[ -f "$PLCTRL_SOURCE" ] || exit
+
+	if _cmd_validate_source
+	then
+		_cmd_mpv_cmd_source "$MPV_CMD_GET_SHUFFLE" | jq -r .data
+	fi
+}
+
+cmd_vid_state()
+{
+	[ -f "$PLCTRL_SOURCE" ] || exit
+
+	if _cmd_validate_source
+	then
+		_cmd_mpv_cmd_source "$MPV_CMD_GET_VID" | jq -r .data
+	fi
+}
+
+cmd_optimize()
 {
 	mv "$1"{,.tmp}
 
@@ -292,9 +326,9 @@ cmd_2optimize()
 	rm "$1".tmp
 }
 
-cmd_2title_marquee()
+cmd_title_marquee()
 {
-	title=$(_cmd_2mpv_cmd_source "$MPV_CMD_GET_TITLE" | jq -r .data)
+	title=$(_cmd_mpv_cmd_source "$MPV_CMD_GET_TITLE" | jq -r .data)
 
 	if [ -n "$title" ]; then
 		len=${#title}
@@ -325,4 +359,36 @@ cmd_2title_marquee()
 	echo "$window"
 }
 
-cmd_2$1 ${@:2}
+cmd_statusbar()
+{
+	title=$(cmd_title_marquee)
+	state=$(cmd_state)
+	lstate=$(cmd_loop_state)
+	sstate=$(cmd_shuffle_state)
+	vstate=$(cmd_vid_state)
+
+	if [[ '' != "$state" ]]
+	then
+		# [[ $state == 'stopped' ]] && state=""
+		# [[ $state == 'playing' ]] && state=""
+		# [[ $state == 'paused' ]] && state=""
+
+		# state="$state $title "
+
+		[[ $state != 'playing' ]] && state="P" || state=''
+		# [[ $lstate == 'inf' ]] && state="$state  "
+		[[ $lstate == 'inf' ]] && state="${state}R"
+		# [[ $sstate == 'true' ]] && state="$state  "
+		[[ $sstate == 'true' ]] && state="${state}S"
+		# [[ $vstate == '1' ]] && state="$state "
+		[[ $vstate == '1' ]] && state="${state}V"
+
+		[[ '' != "$state" ]] && state="$state "
+
+		state="$state$title"
+	fi
+
+	echo "$state"
+}
+
+cmd_$1 ${@:2}
