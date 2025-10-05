@@ -1,7 +1,0 @@
-# fossil new
-
-> यो आदेश `fossil init`.को उपनाम हो |
-
-- मौलिक आदेशको लागि कागजात हेर्नुहोस्:
-
-`tldr fossil init`

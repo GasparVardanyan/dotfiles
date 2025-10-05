@@ -1,14 +1,14 @@
-# define EMOJI_FONTS DejaVu Sans Mono, monospace, JoyPixels:size=10:antialias=true:autohint=true, Symbols Nerd Font:style=2048-em:size=10:antialias=true:autohint=true, Noto Color Emoji:size=10:style=Regular
+# define EMOJI_FONTS Noto Color Emoji, Font Awesome 7 Free
 
 # define SYSTEM_FONT Iosevka Nerd Font
 # define SYSTEM_FONT_MONO SYSTEM_FONT Mono
 
 *font:				SYSTEM_FONT
-dmenu*fonts:		SYSTEM_FONT
-dwm*font:			SYSTEM_FONT
+dmenu*fonts:		SYSTEM_FONT, EMOJI_FONTS
+dwm*font:			SYSTEM_FONT, EMOJI_FONTS
 tabbed*font:		SYSTEM_FONT
-st*font:			SYSTEM_FONT_MONO:size=12
-st*font2:			SYSTEM_FONT_MONO:size=12, EMOJI_FONTS
+st*font:			SYSTEM_FONT:size=12
+st*font2:			SYSTEM_FONT:size=12, EMOJI_FONTS
 st*alpha:			0.95
 dwm*topbar:         1
 dmenu*topbar:       1

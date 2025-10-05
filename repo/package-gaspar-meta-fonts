@@ -1,6 +1,6 @@
 pkgname=gaspar-meta-fonts
 pkgver=1
-pkgrel=1
+pkgrel=2
 arch=('any')
 options=('!debug')
 groups=('gaspar')
@@ -8,6 +8,8 @@ depends=(
 	ttf-ibm-plex
 	ttf-ibmplex-mono-nerd
 	ttf-iosevka-nerd
+	noto-fonts-emoji
+	otf-font-awesome
 )
 
 # vim:ft=sh

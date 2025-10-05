@@ -68,7 +68,7 @@ device_mount() {
 	fi
 
 	machinectl bind --mkdir "$m" "$d" $o
-	systemctl set-property systemd-nspawn@"$m".service DeviceAllow="$d"
+	systemctl set-property --runtime systemd-nspawn@"$m".service DeviceAllow="$d"
 }
 
 upgrade() {
@@ -84,7 +84,22 @@ upgrade() {
 
 	if wait_machine "$m"
 	then
-		sudo machinectl shell "root@$m" /usr/bin/pacman -Syyuu
+		# FIXME: unmount all mounted packages (e.g. fonts)
+		# we unmount mirrorlist because pacman-mirrorlist fails to upgrade
+
+		mirrorlist_mounted=false
+		sudo machinectl shell "root@$m" /usr/bin/mount | grep -Fq /etc/pacman.d/mirrorlist && mirrorlist_mounted=true
+
+		sudo machinectl shell "root@$m" /usr/bin/pacman -Syyw
+		if [ true = "$mirrorlist_mounted" ]
+		then
+			sudo machinectl shell "root@$m" /usr/bin/umount /etc/pacman.d/mirrorlist
+		fi
+		sudo machinectl shell "root@$m" /usr/bin/pacman -Suu
+		if [ true = "$mirrorlist_mounted" ]
+		then
+			sudo machinectl bind --mkdir --read-only "$m" /etc/pacman.d/mirrorlist
+		fi
 		sudo machinectl shell "root@$m" /usr/bin/pacman -Scc
 
 		if [ -d "/usr/local/etc/nspawn/upgrade/$m" ] ; then

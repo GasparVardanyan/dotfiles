@@ -2,7 +2,7 @@ config.load_autoconfig (True)
 
 
 
-c.fonts.default_family				=		['Iosevka Nerd Font']
+c.fonts.default_family				=		['Iosevka Nerd Font', 'Noto Color Emoji', 'Font Awesome 7 Free']
 c.downloads.location.directory		=		'~'
 c.content.pdfjs						=		False
 # c.qt.environ = {'DRI_PRIME': '1', 'QT_XCB_GL_INTEGRATION': 'xcb_egl'}

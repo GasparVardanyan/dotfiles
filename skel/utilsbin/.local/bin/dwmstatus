@@ -138,7 +138,7 @@ fi
 # nspawn_info=$(machinectl list | grep container | cut -f 1 -d ' ' | sort | paste -s -d ',')
 
 nspawn_info=$(machinectl list | grep container | cut -f 1 -d ' ' | sort | while read m; do cat /usr/local/etc/nspawn/labels | \grep -Fq "$m" && ( cat /usr/local/etc/nspawn/labels | \grep -F "$m" | cut -f 2 -d ' ' ) || echo "$m"; done | paste -s -d '')
-nspawn_info="$nspawn_info "
+# nspawn_info="$nspawn_info "
 
 browser_procs=$(ps x --user gaspar | grep -F '/usr/bin/python3 /usr/bin/qutebrowser' | head -n -1)
 browsers=""
@@ -177,7 +177,7 @@ fi
 # [[ $feeds != '' && $feeds != 0 ]] && s="$s  $feeds |"
 [[ $feeds != '' && $feeds != 0 ]] && s="$s $feeds |"
 # s="$s  $(kbd get) |"
-s="$s $(kbd get | tr '[:lower:]' '[:upper:]') |"
+s="$s $(kbd get) |"
 [[ $todos != 0 ]] && s="$s T $todos |"
 [ -f ~/.local/tmp/sfu ] && s="$s F |"
 
