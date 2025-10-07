@@ -22,6 +22,7 @@ MPV_CMD_GET_TITLE='{ "command": ["get_property", "media-title"] }'
 MPV_CMD_GET_LOOP='{ "command": ["get_property", "loop-file"] }'
 MPV_CMD_GET_SHUFFLE='{ "command": ["get_property", "shuffle"] }'
 MPV_CMD_GET_VID='{ "command": ["get_property", "vid"] }'
+MPV_CMD_GET_PLTIME='{ "command": ["get_property", "time-pos"] }'
 # MPV_CMD_STOP='{ "command": ["set_property", "pause", true] }; seek 0 absolute'
 
 _cmd_prompt()
@@ -299,6 +300,18 @@ cmd_vid_state()
 	fi
 }
 
+cmd_pltime()
+{
+	[ -f "$PLCTRL_SOURCE" ] || exit
+
+	if _cmd_validate_source
+	then
+		t=$(_cmd_mpv_cmd_source "$MPV_CMD_GET_PLTIME" | jq -r '.data // 0')
+		t=${t%.*}
+		printf '%02d:%02d\n' "$((t/60))" "$((t%60))"
+	fi
+}
+
 cmd_optimize()
 {
 	mv "$1"{,.tmp}
@@ -366,6 +379,7 @@ cmd_statusbar()
 	lstate=$(cmd_loop_state)
 	sstate=$(cmd_shuffle_state)
 	vstate=$(cmd_vid_state)
+	pltime=$(cmd_pltime)
 
 	if [[ '' != "$state" ]]
 	then
@@ -383,7 +397,8 @@ cmd_statusbar()
 		# [[ $vstate == '1' ]] && state="$state "
 		[[ $vstate == '1' ]] && state="${state}V"
 
-		[[ '' != "$state" ]] && state="$state "
+		# [[ '' != "$state" ]] && state="$state "
+		state="$state[$pltime] "
 
 		state="$state$title"
 	fi

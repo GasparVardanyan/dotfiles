@@ -1,0 +1,21 @@
+pkgname=gaspar-meta-nvim-devenv
+pkgver=1
+pkgrel=1
+arch=('any')
+options=('!debug')
+groups=('gaspar')
+depends=(
+	ccache
+	clang
+	cmake
+	cppcheck
+	doxygen
+	gaspar-meta-nvim
+	graphviz
+	gtest
+	npm
+	perf
+	python
+)
+
+# vim:ft=sh

@@ -1,0 +1,14 @@
+pkgname=gaspar-meta-devenv
+pkgver=1
+pkgrel=1
+arch=('any')
+options=('!debug')
+groups=('gaspar')
+depends=(
+	alacritty
+	clang
+	dmenu
+	xorg-xauth
+)
+
+# vim:ft=sh

@@ -1,0 +1,15 @@
+pkgname=gaspar-system-devenv
+pkgver=1
+pkgrel=1
+arch=('any')
+options=('!debug')
+groups=('gaspar')
+depends=(
+	gaspar-meta-git
+	gaspar-meta-nvim-devenv
+	gaspar-meta-shell
+	gaspar-meta-devenv
+	gaspar-device-gpu
+)
+
+# vim:ft=sh

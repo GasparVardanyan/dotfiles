@@ -6,9 +6,7 @@ machinectl bind --mkdir $MACHINE /dev/nvidia-modeset
 machinectl bind --mkdir $MACHINE /dev/nvidia-uvm
 machinectl bind --mkdir $MACHINE /dev/nvidia-uvm-tools
 
-systemctl set-property systemd-nspawn@$MACHINE.service \
-	DeviceAllow="/dev/dri" \
-	DeviceAllow="/dev/shm" \
+systemctl set-property --runtime systemd-nspawn@$MACHINE.service \
 	DeviceAllow="/dev/dri/renderD128" \
 	DeviceAllow="/dev/dri/renderD129" \
 	DeviceAllow="/dev/nvidia0" \

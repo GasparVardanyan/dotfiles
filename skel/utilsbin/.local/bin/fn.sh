@@ -19,6 +19,7 @@ do
 			xrandr --output HDMI-1-0 --mode 1680x1050
 			xrandr --output HDMI-1-0 --mode 1920x1080
 			[ -x ~/.fehbg ] && ~/.fehbg
+			echo "fn" >> /tmp/fn.log
 		fi
 	fi
 done

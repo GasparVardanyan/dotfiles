@@ -12,4 +12,5 @@ tldr -u
 pipx runpip yt-dlp install --upgrade yt-dlp mutagen
 pipx upgrade cppman
 pipx upgrade compiledb
+pipx upgrade zdict
 cppman -c
