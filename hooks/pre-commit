@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cp -rfv /usr/local/etc/nspawn/{configs,machines,upgrade,labels,terminals,machine.sh} /desktop/dotfiles/nspawn/usr/local/etc/nspawn/
+cp -rfv /usr/local/etc/nspawn/{configs,configpacks,machines,upgrade,labels,terminals,machine.sh} /desktop/dotfiles/nspawn/usr/local/etc/nspawn/
 cp -fv /etc/systemd/system/systemd-nspawn@.service.d/override.conf /desktop/dotfiles/nspawn/etc/systemd/system/systemd-nspawn@.service.d/
 cp -fv /etc/systemd/nspawn/*.nspawn /desktop/dotfiles/nspawn/etc/systemd/nspawn/
 git add nspawn

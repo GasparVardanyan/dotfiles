@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
-CONF="/usr/local/etc/nspawn/machines/$1.sh"
+MACHINE="$1"
+CONF="/usr/local/etc/nspawn/machines/$MACHINE.sh"
 
 if [ -f "$CONF" ] ; then
 	source "$CONF"
 fi
+
+source /usr/local/etc/nspawn/configpacks/essentials.sh
