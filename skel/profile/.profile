@@ -1,3 +1,5 @@
+source /etc/zsh/zprofile
+
 export WM=dwm
 # export WM=icewm-session
 export TERMINAL=st

@@ -158,7 +158,7 @@ then
 	browsers=$(echo -en "$browsers" | paste -s -d '')
 	s="$s $browsers |"
 fi
-[[ $nspawn_info != '' ]] && s="$s $nspawn_info |"
+[[ $nspawn_info != '' ]] && s="$s .$nspawn_info |"
 s="$s $fan_info |"
 # s="$s  $cpu% |"
 # s="$s  $(free -h | awk '/^Mem:/ {print $3}') |"
