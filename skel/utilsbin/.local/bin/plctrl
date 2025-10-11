@@ -17,6 +17,11 @@ MPV_CMD_PAUSE='{ "command": ["set_property", "pause", true] }'
 MPV_CMD_SEEK_BEG='seek 0 absolute'
 MPV_CMD_NEXT='playlist-next'
 MPV_CMD_PREV='playlist-prev'
+MPV_CMD_SHUFFLE='playlist-shuffle; set options/shuffle yes'
+MPV_CMD_UNSHUFFLE='playlist-unshuffle; set options/shuffle no'
+MPV_CMD_TOGGLE_REPEAT='cycle_values loop-file yes no'
+MPV_CMD_SEEK_FORWARD='seek 1'
+MPV_CMD_SEEK_BACKWARD='seek -1'
 MPV_CMD_GET_PAUSE='{ "command": ["get_property", "pause"] }'
 MPV_CMD_GET_TITLE='{ "command": ["get_property", "media-title"] }'
 MPV_CMD_GET_LOOP='{ "command": ["get_property", "loop-file"] }'
@@ -242,6 +247,32 @@ _cmd_mpv_cmd_source()
 cmd_toggle_play()
 {
 	_cmd_mpv_cmd_source "$MPV_CMD_TOGGLE_PLAY"
+}
+
+cmd_toggle_shuffle()
+{
+	sstate=$(cmd_shuffle_state)
+	_cmd_mpv_cmd_source "$MPV_CMD_UNSHUFFLE"
+	echo "$sstate"
+	if [[ 'false' = "$sstate" ]]
+	then
+		_cmd_mpv_cmd_source "$MPV_CMD_SHUFFLE"
+	fi
+}
+
+cmd_toggle_repeat()
+{
+	_cmd_mpv_cmd_source "$MPV_CMD_TOGGLE_REPEAT"
+}
+
+cmd_seekf()
+{
+	_cmd_mpv_cmd_source "$MPV_CMD_SEEK_FORWARD"
+}
+
+cmd_seekb()
+{
+	_cmd_mpv_cmd_source "$MPV_CMD_SEEK_BACKWARD"
 }
 
 cmd_stop()
