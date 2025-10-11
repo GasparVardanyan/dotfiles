@@ -91,7 +91,7 @@ cmd_run_mpv()
 
 		if [ 'default' = "$3" ]
 		then
-			moptions="$moptions --x11-name=scratchcmus"
+			moptions="$moptions --x11-name=scratchmus"
 			moptions="$moptions --vid=2"
 		else
 			moptions="$moptions --fullscreen"

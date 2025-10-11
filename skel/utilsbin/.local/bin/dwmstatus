@@ -167,7 +167,7 @@ s="$s $cpu%$(free -h | awk '/^Mem:/ {print $3}')$(nvidia-smi --query-gpu=pstate 
 # [[ $batp != '' ]] && s="$s $bat_status |"
 [[ $batp != '' ]] && s="$s $bat_info |"
 # s="$s $(date +' %m%d%u:%H%M') |"
-s="$s $(date +'%d')$(( 1 + $(date +'%w') ))$(date +'%m:%H%M') |"
+s="$s $(date +'%d')$(( 1 + $(date +'%w') ))$(date +':%H%M') |"
 
 if compgen -G "/tmp/*_MOUNTED" > /dev/null
 then
