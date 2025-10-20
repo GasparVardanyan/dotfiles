@@ -13,7 +13,7 @@ export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 export SUDO_ASKPASS="/desktop/utilsbin/dmenupass"
 export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 
-# export QTWEBENGINE_CHROMIUM_FLAGS=--widevine-path="/media/libwidevinecdm.so"
+export QTWEBENGINE_CHROMIUM_FLAGS=--widevine-path="/usr/local/lib/chromium/libwidevinecdm.so"
 
 export GIT=127.0.0.1:/srv/git
 

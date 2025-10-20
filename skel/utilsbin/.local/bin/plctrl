@@ -177,7 +177,7 @@ cmd_play()
 
 cmd_list_sources()
 {
-	find "$SOCKET_DIR" -type s -name '*.socket' -printf '%f\n' | sed 's/\.socket$//'
+	find "$SOCKET_DIR" -not -type d -name '*.socket' -printf '%f\n' | sed 's/\.socket$//'
 }
 
 cmd_select_source()

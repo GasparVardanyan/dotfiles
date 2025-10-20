@@ -124,8 +124,10 @@ fan_info=""
 if pgrep awcc_autoboost >/dev/null
 then
 	mode_info=$(cat /var/run/awcc/m)
-	cpu_info="$(cat /var/run/awcc/ct)$(cat /var/run/awcc/cb):$(cat /var/run/awcc/cr)"
-	gpu_info="$(cat /var/run/awcc/gt)$(cat /var/run/awcc/gb):$(cat /var/run/awcc/gr)"
+	# cpu_info="$(cat /var/run/awcc/ct)$(cat /var/run/awcc/cb):$(cat /var/run/awcc/cr)"
+	# gpu_info="$(cat /var/run/awcc/gt)$(cat /var/run/awcc/gb):$(cat /var/run/awcc/gr)"
+	cpu_info="$(cat /var/run/awcc/ct)$(cat /var/run/awcc/cb)"
+	gpu_info="$(cat /var/run/awcc/gt)$(cat /var/run/awcc/gb)"
 	fan_info="$cpu_info$mode_info$gpu_info"
 else
 	cpu_info=$(sensors dell_ddv-virtual-0 | grep 'CPU:' | sed 's/\s\+/ /g' | cut -f 2 -d ' ')

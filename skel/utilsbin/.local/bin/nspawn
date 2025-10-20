@@ -72,6 +72,9 @@ device_mount() {
 }
 
 upgrade() {
+	# TODO:
+	# collect the package list of the container(s), download to a directory on
+	# host with pacman -Sw, then mount it to the containers and then upgrade
 	m="${1#*@}"
 
 	active=false
@@ -154,6 +157,27 @@ notify() {
 	local msg="$@"
 	sudo -u "$CALLER_USER" DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$uid/bus" \
 	dunstify "  nspawn" "$msg"
+}
+
+upgrade2() {
+	DB_DIR=/var/cache/nspawn/pacman/db
+	mkdir -p "$DB_DIR"
+	pacman -Sy --dbpath "$DB_DIR"
+	pkgs=""
+	for m in $(list_machines); do
+		MACHINE_DIR=/var/lib/machines/"$m"
+		mount --mkdir --bind "$DB_DIR" "$MACHINE_DIR$DB_DIR"
+		mount | rg pacman
+		pacman -Qu --sysroot "$MACHINE_DIR" --dbpath "$DB_DIR"
+		pkgs=$pkgs$(pacman -Qu --sysroot "$MACHINE_DIR" --dbpath "$DB_DIR")
+		echo "$MACHINE_DIR$DB_DIR"
+		ls "$MACHINE_DIR$DB_DIR/sync"
+		umount "$MACHINE_DIR$DB_DIR"
+		figlet "upgrading $m"
+		break
+	done
+	echo XX
+	echo "$pkgs"
 }
 
 upgrade_all() {
