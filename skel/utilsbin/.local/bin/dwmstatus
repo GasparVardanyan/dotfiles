@@ -121,19 +121,31 @@ cmus=$(plctrl statusbar)
 fan_info=""
 
 # if systemctl is-active awcc_autoboost.service >/dev/null
-if pgrep awcc_autoboost >/dev/null
-then
-	mode_info=$(cat /var/run/awcc/m)
-	# cpu_info="$(cat /var/run/awcc/ct)$(cat /var/run/awcc/cb):$(cat /var/run/awcc/cr)"
-	# gpu_info="$(cat /var/run/awcc/gt)$(cat /var/run/awcc/gb):$(cat /var/run/awcc/gr)"
-	cpu_info="$(cat /var/run/awcc/ct)$(cat /var/run/awcc/cb)"
-	gpu_info="$(cat /var/run/awcc/gt)$(cat /var/run/awcc/gb)"
-	fan_info="$cpu_info$mode_info$gpu_info"
-else
-	cpu_info=$(sensors dell_ddv-virtual-0 | grep 'CPU:' | sed 's/\s\+/ /g' | cut -f 2 -d ' ')
-	gpu_info=$(sensors dell_ddv-virtual-0 | grep 'Video:' | sed 's/\s\+/ /g' | cut -f 2 -d ' ')
-	fan_info="$cpu_info $gpu_info"
-fi
+# if pgrep awcc_autoboost >/dev/null
+# then
+# 	mode_info=$(cat /var/run/awcc/m)
+# 	# cpu_info="$(cat /var/run/awcc/ct)$(cat /var/run/awcc/cb):$(cat /var/run/awcc/cr)"
+# 	# gpu_info="$(cat /var/run/awcc/gt)$(cat /var/run/awcc/gb):$(cat /var/run/awcc/gr)"
+# 	cpu_info="$(cat /var/run/awcc/ct)$(cat /var/run/awcc/cb)"
+# 	gpu_info="$(cat /var/run/awcc/gt)$(cat /var/run/awcc/gb)"
+# 	fan_info="$cpu_info$mode_info$gpu_info"
+# else
+# 	cpu_info=$(sensors dell_ddv-virtual-0 | grep 'CPU:' | sed 's/\s\+/ /g' | cut -f 2 -d ' ')
+# 	gpu_info=$(sensors dell_ddv-virtual-0 | grep 'Video:' | sed 's/\s\+/ /g' | cut -f 2 -d ' ')
+# 	fan_info="$cpu_info $gpu_info"
+# fi
+
+fan_info="$(cat /sys/class/hwmon/hwmon5/temp1_input | sed 's/000$//')$(cat /sys/class/hwmon/hwmon5/fan1_boost)$(cat /sys/class/platform-profile/platform-profile-0/profile | tr '-' '\n' | cut -c1 | paste -s -d '')$(cat /sys/class/hwmon/hwmon5/temp2_input | sed 's/000$//')$(cat /sys/class/hwmon/hwmon5/fan2_boost)"
+
+power_services=''
+systemctl is-active awcc_autoboost.service >/dev/null && power_services="${power_services}A"
+systemctl is-active thermald.service >/dev/null && power_services="${power_services}I"
+systemctl is-active scx_loader.service >/dev/null && power_services="${power_services}S"
+systemctl is-active tlp.service >/dev/null && power_services="${power_services}T"
+systemctl is-active nvidia-persistenced.service >/dev/null && power_services="${power_services}N"
+systemctl is-active nvidia-powerd.service >/dev/null && power_services="${power_services}P"
+
+[ "$power_services" != '' ] && fan_info="$fan_info[$power_services]"
 
 
 
@@ -164,7 +176,8 @@ fi
 s="$s $fan_info |"
 # s="$s  $cpu% |"
 # s="$s  $(free -h | awk '/^Mem:/ {print $3}') |"
-s="$s $cpu%$(free -h | awk '/^Mem:/ {print $3}')$(nvidia-smi --query-gpu=pstate --format=csv,noheader) |"
+# s="$s $cpu%$(free -h | awk '/^Mem:/ {print $3}')$(nvidia-smi --query-gpu=pstate --format=csv,noheader) |"
+s="$s $cpu%$(free -h | awk '/^Mem:/ {print $3}') |"
 [[ $wireless != '' ]] && s="$s W |"
 # [[ $batp != '' ]] && s="$s $bat_status |"
 [[ $batp != '' ]] && s="$s $bat_info |"

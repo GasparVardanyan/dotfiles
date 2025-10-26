@@ -103,11 +103,11 @@ sub print_p_state_info {
 			$energy_performance_available_preferences =~ s/\s+$//;
 
 			my $energy_performance_preference_output =
-				$energy_performance_available_preferences =~ s/\b$energy_performance_preference\b/$&*/r
+				$energy_performance_available_preferences =~ s/(?<!\S)$energy_performance_preference(?!\S)/$&*/r
 			;
 
 			my $scaling_governor_output =
-				$scaling_available_governors =~ s/\b$scaling_governor\b/$&*/r
+				$scaling_available_governors =~ s/(?<!\S)$scaling_governor(?!\S)/$&*/r
 			;
 
 			my $scaling_min_freq = read_sys_file
@@ -198,7 +198,7 @@ sub print_g16_info {
 		my $profile_choices_file   =   $profile_path . '/choices';
 		my $profile                =   read_sys_file $profile_file;
 		my $profile_choices        =   read_sys_file $profile_choices_file;
-		my $profile_output         =   $profile_choices =~ s/$profile/$&*/r;
+		my $profile_output         =   $profile_choices =~ s/(?<!\S)$profile(?!\S)/$&*/r;
 
 		print "Current Platform Profile: [$profile_output]\n";
 	}
@@ -439,7 +439,7 @@ sub check_services {
 	my $thermald_status              =   get_command_output "systemctl is-active thermald";
 	my $nvidia_persistenced_status   =   get_command_output "systemctl is-active nvidia-persistenced";
 	my $nvidia_powerd_status         =   get_command_output "systemctl is-active nvidia-powerd";
-	my $scx_status                   =   get_command_output "systemctl is-active scx";
+	my $scx_status                   =   get_command_output "systemctl is-active scx_loader";
 
 	print "thermald status: $thermald_status\n";
 	print "nvidia_persistenced status: $nvidia_persistenced_status\n";
