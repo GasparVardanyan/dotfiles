@@ -14,3 +14,4 @@ pipx upgrade cppman
 pipx upgrade compiledb
 pipx upgrade zdict
 cppman -c
+qutebrowser :adblock-update

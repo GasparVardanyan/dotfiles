@@ -414,9 +414,13 @@ sub print_gpu_infos {
 			}
 			elsif ("nvidia" eq $card_driver_name) {
 				for my $card_pci_dir (glob $nvidia_card_pci_path_glob) {
+					my $card_power_state_path = "$card_dir/device/power_state";
+					my $card_power_state = read_sys_file "$card_power_state_path";
+
 					my ($card_pci) = $card_pci_dir =~ $nvidia_card_pci_regex;
 					my $card_power_info_path = $card_pci_dir . '/' . $nvidia_card_pci_power_postfix;
 					print "\tpci: $card_pci\n";
+					print "\tpower state: $card_power_state\n";
 					print "\tpower info:\n";
 
 					open (my $fh, '<', $card_power_info_path) or return "Error opening file.";

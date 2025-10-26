@@ -137,15 +137,16 @@ fan_info=""
 
 fan_info="$(cat /sys/class/hwmon/hwmon5/temp1_input | sed 's/000$//')$(cat /sys/class/hwmon/hwmon5/fan1_boost)$(cat /sys/class/platform-profile/platform-profile-0/profile | tr '-' '\n' | cut -c1 | paste -s -d '')$(cat /sys/class/hwmon/hwmon5/temp2_input | sed 's/000$//')$(cat /sys/class/hwmon/hwmon5/fan2_boost)"
 
-power_services=''
-systemctl is-active awcc_autoboost.service >/dev/null && power_services="${power_services}A"
-systemctl is-active thermald.service >/dev/null && power_services="${power_services}I"
-systemctl is-active scx_loader.service >/dev/null && power_services="${power_services}S"
-systemctl is-active tlp.service >/dev/null && power_services="${power_services}T"
-systemctl is-active nvidia-persistenced.service >/dev/null && power_services="${power_services}N"
-systemctl is-active nvidia-powerd.service >/dev/null && power_services="${power_services}P"
+services=''
+systemctl is-active awcc_autoboost.service >/dev/null && services="${services}A"
+systemctl is-active thermald.service >/dev/null && services="${services}I"
+systemctl is-active scx_loader.service >/dev/null && services="${services}S"
+systemctl is-active tlp.service >/dev/null && services="${services}T"
+systemctl is-active nvidia-persistenced.service >/dev/null && services="${services}N"
+systemctl is-active nvidia-powerd.service >/dev/null && services="${services}P"
+systemctl is-active firewalld.service >/dev/null && services="${services}F"
 
-[ "$power_services" != '' ] && fan_info="$fan_info[$power_services]"
+# [ "$services" != '' ] && fan_info="$fan_info[$services]"
 
 
 
@@ -163,6 +164,14 @@ echo "$browser_procs" | grep -Fq "/usr/bin/python3 /usr/bin/qutebrowser --qt-arg
 echo "$browser_procs" | grep -Fq "/usr/bin/python3 /usr/bin/qutebrowser --qt-arg name scratchqbw " && browsers="${browsers}W\n"
 echo "$browser_procs" | grep -Fq "/usr/bin/python3 /usr/bin/qutebrowser --qt-arg name scratchtmpqb " && browsers="${browsers}T\n"
 
+nvinfo=''
+bat_charging=$(cat /sys/class/power_supply/BAT0/status)
+if [ "Discharging" != "$bat_charging" ]
+then
+	nvinfo=$(nvidia-smi --query-gpu=pstate --format=csv,noheader)
+fi
+nvinfo="$nvinfo$(cat /sys/class/drm/card0/device/power_state)"
+
 s="|"
 [[ $cmus != '' ]] && s="$s $cmus |"
 # s="$s $vols $volp% |"
@@ -177,7 +186,8 @@ s="$s $fan_info |"
 # s="$s  $cpu% |"
 # s="$s  $(free -h | awk '/^Mem:/ {print $3}') |"
 # s="$s $cpu%$(free -h | awk '/^Mem:/ {print $3}')$(nvidia-smi --query-gpu=pstate --format=csv,noheader) |"
-s="$s $cpu%$(free -h | awk '/^Mem:/ {print $3}') |"
+s="$s $cpu%$(free -h | awk '/^Mem:/ {print $3}')$nvinfo |"
+[[ $services != '' ]] && s="$s $services |"
 [[ $wireless != '' ]] && s="$s W |"
 # [[ $batp != '' ]] && s="$s $bat_status |"
 [[ $batp != '' ]] && s="$s $bat_info |"

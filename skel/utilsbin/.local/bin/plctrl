@@ -27,6 +27,8 @@ MPV_CMD_GET_TITLE='{ "command": ["get_property", "media-title"] }'
 MPV_CMD_GET_LOOP='{ "command": ["get_property", "loop-file"] }'
 MPV_CMD_GET_SHUFFLE='{ "command": ["get_property", "shuffle"] }'
 MPV_CMD_GET_VID='{ "command": ["get_property", "vid"] }'
+MPV_CMD_SET_VID_ON='{ "command": ["set_property", "vid", 1] }'
+MPV_CMD_SET_VID_OFF='{ "command": ["set_property", "vid", 2] }'
 MPV_CMD_GET_PLTIME='{ "command": ["get_property", "time-pos"] }'
 # MPV_CMD_STOP='{ "command": ["set_property", "pause", true] }; seek 0 absolute'
 
@@ -253,10 +255,20 @@ cmd_toggle_shuffle()
 {
 	sstate=$(cmd_shuffle_state)
 	_cmd_mpv_cmd_source "$MPV_CMD_UNSHUFFLE"
-	echo "$sstate"
 	if [[ 'false' = "$sstate" ]]
 	then
 		_cmd_mpv_cmd_source "$MPV_CMD_SHUFFLE"
+	fi
+}
+
+cmd_toggle_vid()
+{
+	vstate=$(cmd_vid_state)
+	if [[ 1 -eq "$vstate" ]]
+	then
+		_cmd_mpv_cmd_source "$MPV_CMD_SET_VID_OFF"
+	else
+		_cmd_mpv_cmd_source "$MPV_CMD_SET_VID_ON"
 	fi
 }
 
