@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+rm -rf /desktop/dotfiles/nspawn/
+mkdir -p /desktop/dotfiles/nspawn/usr/local/etc/nspawn/
+mkdir -p /desktop/dotfiles/nspawn/etc/systemd/system/systemd-nspawn@.service.d/
+mkdir -p /desktop/dotfiles/nspawn/etc/systemd/nspawn/
+
 cp -rfv /usr/local/etc/nspawn/{configs,configpacks,profile.d,machines,upgrade,labels,terminals,machine.sh} /desktop/dotfiles/nspawn/usr/local/etc/nspawn/
 cp -fv /etc/systemd/system/systemd-nspawn@.service.d/override.conf /desktop/dotfiles/nspawn/etc/systemd/system/systemd-nspawn@.service.d/
 cp -fv /etc/systemd/nspawn/*.nspawn /desktop/dotfiles/nspawn/etc/systemd/nspawn/
