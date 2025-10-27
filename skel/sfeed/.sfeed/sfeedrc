@@ -81,6 +81,7 @@ feeds() {
 	feed "ThePrimeTime - Invidious" "https://y.com.sb/feed/channel/UCUyeluBRhGPCW4rPe_UvBZQ"
 	feed "Dreams of Code - Invidious" "https://y.com.sb/feed/channel/UCWQaM7SpSECp9FELz-cHzuQ"
 	feed "DevOps Toolbox - Invidious" "https://y.com.sb/feed/channel/UCYeiozh-4QwuC1sjgCmB92w"
+	feed "Wes Higbee - Invidious" "https://y.com.sb/feed/channel/UCWkyIm1vy0Vx7BpMuIKhw7g"
 
 	feed "C04tl3 - Invidious" "https://y.com.sb/feed/channel/UCZ073r7qPBpFZlslLtmt70w"
 	feed "Planet 9" "http://planet9.cat-v.org/atom.xml"

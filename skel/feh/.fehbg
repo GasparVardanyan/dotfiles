@@ -1,2 +1,2 @@
 #!/bin/sh
-feh --no-fehbg --bg-fill '/home/gaspar/.local/share/wallpapers/blackarch/biohazard.jpg' 
+feh --no-fehbg --bg-fill '/home/gaspar/.local/share/wallpapers/blackarch/ba-cyberpunk.png' '/home/gaspar/.local/share/wallpapers/blackarch/biohazard-ba-se.jpg'
