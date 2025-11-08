@@ -2,6 +2,10 @@ general.import = [
 	"~/.config/alacritty/themes/themes/solarized_osaka.toml"
 ]
 
+[colors.primary]
+background = '#080000'
+foreground = '#ff0000'
+
 # [colors.primary]
 # background = '0x080000'
 # foreground = '0xff0000'

@@ -1,6 +1,6 @@
 pkgname=gaspar-meta-desktoptools
 pkgver=1
-pkgrel=11
+pkgrel=12
 arch=('any')
 options=('!debug')
 groups=('gaspar')
@@ -31,7 +31,6 @@ depends=(
 	translate-shell
 	upower
 	picom
-	xorg-server-xephyr
 	xorg-xinit
 	xorg-xrandr
 	xorg-xsetroot
