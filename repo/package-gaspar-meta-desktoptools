@@ -1,6 +1,6 @@
 pkgname=gaspar-meta-desktoptools
 pkgver=1
-pkgrel=12
+pkgrel=13
 arch=('any')
 options=('!debug')
 groups=('gaspar')
@@ -8,8 +8,10 @@ depends=(
 	# TODO: separate suckless' deps
 	alacritty
 	brightnessctl
+	btrfs-progs
 	clipmenu
 	dunst
+	efibootmgr
 	feh
 	firewalld
 	flameshot
@@ -20,6 +22,7 @@ depends=(
 	numlockx
 	pamixer
 	pavucontrol-qt
+	picom
 	qalculate-qt
 	qt5ct
 	qt6ct
@@ -30,7 +33,7 @@ depends=(
 	tealdeer
 	translate-shell
 	upower
-	picom
+	xorg-server
 	xorg-xinit
 	xorg-xrandr
 	xorg-xsetroot

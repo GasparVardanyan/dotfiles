@@ -1,0 +1,24 @@
+pkgname=gaspar-device-vostro15_3530
+pkgver=1
+pkgrel=1
+arch=('any')
+options=('!debug')
+groups=('gaspar')
+provides=('gaspar-device')
+depends=(
+	alsa-firmware
+	alsa-plugins
+	alsa-utils
+	acpi
+	acpi_call
+	tlp
+	scx-scheds
+	smartmontools # for tlp
+	ethtool # for tlp
+	intel-ucode
+	libsmbios # maybe unnecessary
+	sof-firmware
+	thermald
+)
+
+# vim:ft=sh

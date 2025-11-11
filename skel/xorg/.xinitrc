@@ -24,7 +24,6 @@ then
 	clipmenud &
 	flameshot &
 	kbd &
-	syncthing serve --no-browser &
 	~/.fehbg 2>/dev/null &
 	ytmpv_server.py &
 	fn.sh &
@@ -77,6 +76,11 @@ then
 	(
 		# xrandr --output eDP-1 --mode 2560x1600 --rate 60
 		xrandr --output eDP-1 --mode 1920x1200 --rate 60
+		# xrandr --fb 5760x1200
+		# xrandr --setmonitor VIRT1 1920/520x1080/290+3840+0 none
+		# xrandr --fb 5760x1200
+		# xrandr --output VIRT1 --right-of HDMI-1-0
+
 		sleep 2
 		# xrandr --output eDP-1 --mode 1920x1200
 
