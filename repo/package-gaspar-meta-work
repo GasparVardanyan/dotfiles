@@ -1,12 +1,11 @@
 pkgname=gaspar-meta-work
 pkgver=1
-pkgrel=3
+pkgrel=4
 arch=('any')
 options=('!debug')
 groups=('gaspar')
 depends=(
 	alacritty
-	blender
 	cifs-utils
 	clang
 	dmenu
@@ -16,7 +15,6 @@ depends=(
 	ipython
 	jq
 	nsxiv
-	python-opencv-cuda
 	sshfs
 	tigervnc
 	xorg-xauth

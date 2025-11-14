@@ -82,6 +82,8 @@ feeds() {
 	feed "Dreams of Code - Invidious" "https://y.com.sb/feed/channel/UCWQaM7SpSECp9FELz-cHzuQ"
 	feed "DevOps Toolbox - Invidious" "https://y.com.sb/feed/channel/UCYeiozh-4QwuC1sjgCmB92w"
 	feed "Wes Higbee - Invidious" "https://y.com.sb/feed/channel/UCWkyIm1vy0Vx7BpMuIKhw7g"
+	feed "Switch and Click - Invidious" "https://y.com.sb/feed/channel/UCT6AJiTYspOILBK3hMWEq2g"
+	feed "bashbunni - Invidious" "https://y.com.sb/feed/channel/UC9H0HzpKf5JlazkADWnW1Jw"
 
 	feed "C04tl3 - Invidious" "https://y.com.sb/feed/channel/UCZ073r7qPBpFZlslLtmt70w"
 	feed "Planet 9" "http://planet9.cat-v.org/atom.xml"

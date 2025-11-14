@@ -130,6 +130,8 @@ upgrade() {
 	if [ false = "$active" ]
 	then
 		sudo machinectl poweroff "$m" &&  notify "Powereing off $m"
+	else
+		sudo machinectl reboot "$m" &&  notify "Rebooting $m"
 	fi
 }
 
