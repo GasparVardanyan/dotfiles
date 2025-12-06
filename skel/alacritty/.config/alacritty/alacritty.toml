@@ -26,17 +26,19 @@ general.import = [
 # 	cyan      = '0x37a48d'
 # 	white     = '0xcec67d'
 
+[colors.primary]
+background = '0x000000'
 
 [window]
 padding = { x = 0, y = 0 }
 dynamic_padding = true
-opacity = 0.85
+opacity = 0.75
 
 # [colors.primary]
 # background = '#000000'
 
 [font]
-size = 11.0
+size = 8.0
 
 [font.bold]
 family = "Iosevka Nerd Font"

@@ -13,14 +13,14 @@ do
 	seq 4 | while read -r n
 	do
 		alert "Time to start working!\n     ... $n / 4 ..."
-		sleep $(( 45 * 60 ))
+		sleep $(( 55 * 60 ))
 
 		alert "Time to start resting!\n     ... $n / 4 ..."
-		sleep $(( 15 * 60 ))
+		sleep $(( 5 * 60 ))
 	done
 
 	alert "Time to take some nap!"
-	sleep $(( 45 * 60 ))
+	sleep $(( 30 * 60 ))
 
 	alert "Wake up!"
 

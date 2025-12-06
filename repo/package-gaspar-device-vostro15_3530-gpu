@@ -1,0 +1,23 @@
+pkgname=gaspar-device-vostro15_3530-gpu
+pkgver=1
+pkgrel=1
+arch=('any')
+options=('!debug')
+groups=('gaspar')
+provides=('gaspar-device-gpu')
+depends=(
+	intel-gpu-tools
+	intel-media-driver
+	libva
+	libva-utils
+	mesa
+	mesa-utils
+	vpl-gpu-rt
+	vulkan-headers
+	vulkan-icd-loader
+	vulkan-intel
+	vulkan-mesa-layers
+	vulkan-tools
+)
+
+# vim:ft=sh

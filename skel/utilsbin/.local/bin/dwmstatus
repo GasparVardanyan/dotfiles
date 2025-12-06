@@ -45,48 +45,48 @@ comment
 
 
 
-acpi_inf=$(acpi | head -n 1)
-batinf=$(echo "$acpi_inf" | cut -d : -f 2 | tr -d ' ' | tr '[:upper:]' '[:lower:]')
-# batp="$(upower -i /org/freedesktop/UPower/devices/battery_BAT1 | sed '/ignored/d' | grep percentage | sed 's/[[:space:]]\+.*[[:space:]]\+//;s/%//')"
-batp=$(echo "$batinf" | cut -d , -f 2)
-# bat_status="$(upower -i /org/freedesktop/UPower/devices/battery_BAT1 | grep state | sed 's/[[:space:]]\+.*[[:space:]]\+//')"
-bat_status=$(echo "$batinf" | cut -d , -f 1)
-bat_info=''
-
-if [[ $batp != '' ]] ; then
-	if [[ $bat_status == 'notcharging' ]] ; then
-		# bat_status=''
-		bat_info='F'
-	else
-		if [[ $bat_status == 'charging' ]] ; then
-		   # bat_status=''
-		   bat_info="C $batp"
-		else
-#			if [[ $batp -le 20 ]] ; then
-#				bat_status=''
-#			elif [[ $batp -le 40 ]] ; then
-#				bat_status=''
-#			elif [[ $batp -le 60 ]] ; then
-#				bat_status=''
-#			elif [[ $batp -le 80 ]] ; then
-#				bat_status=''
-#			else
-#				bat_status=''
-#			fi
-			bat_info=$batp
-		fi
-		# bat_status="$bat_status $batp%"
-		bat_status="$bat_status $batp"
-	fi
-fi
-
-acpi_inf=$(echo "$acpi_inf" | grep remaining)
-
-if ! [[ -z "$acpi_inf" ]]
-then
-	r=$(echo "$acpi_inf" | cut -d ' ' -f 5)
-	bat_info="$bat_info $r"
-fi
+# acpi_inf=$(acpi | head -n 1)
+# batinf=$(echo "$acpi_inf" | cut -d : -f 2 | tr -d ' ' | tr '[:upper:]' '[:lower:]')
+# # batp="$(upower -i /org/freedesktop/UPower/devices/battery_BAT1 | sed '/ignored/d' | grep percentage | sed 's/[[:space:]]\+.*[[:space:]]\+//;s/%//')"
+# batp=$(echo "$batinf" | cut -d , -f 2)
+# # bat_status="$(upower -i /org/freedesktop/UPower/devices/battery_BAT1 | grep state | sed 's/[[:space:]]\+.*[[:space:]]\+//')"
+# bat_status=$(echo "$batinf" | cut -d , -f 1)
+# bat_info=''
+#
+# if [[ $batp != '' ]] ; then
+# 	if [[ $bat_status == 'notcharging' ]] ; then
+# 		# bat_status=''
+# 		bat_info='F'
+# 	else
+# 		if [[ $bat_status == 'charging' ]] ; then
+# 		   # bat_status=''
+# 		   bat_info="C $batp"
+# 		else
+# #			if [[ $batp -le 20 ]] ; then
+# #				bat_status=''
+# #			elif [[ $batp -le 40 ]] ; then
+# #				bat_status=''
+# #			elif [[ $batp -le 60 ]] ; then
+# #				bat_status=''
+# #			elif [[ $batp -le 80 ]] ; then
+# #				bat_status=''
+# #			else
+# #				bat_status=''
+# #			fi
+# 			bat_info=$batp
+# 		fi
+# 		# bat_status="$bat_status $batp%"
+# 		bat_status="$bat_status $batp"
+# 	fi
+# fi
+#
+# acpi_inf=$(echo "$acpi_inf" | grep remaining)
+#
+# if ! [[ -z "$acpi_inf" ]]
+# then
+# 	r=$(echo "$acpi_inf" | cut -d ' ' -f 5)
+# 	bat_info="$bat_info $r"
+# fi
 
 
 
@@ -94,26 +94,26 @@ todos="$(cat ~/.todo 2>/dev/null | wc -l)"
 
 
 
-feeds=$(LC_ALL=C awk -F '\t' '
-# URL file: amount of fields is 1.
-NF == 1 {
-	u[$0] = 1; # lookup table of URLs.
-	next;
-}
-# feed file: check by URL or id.
-{
-	total++;
-	if (length($3)) {
-		if (u[$3])
-			read++;
-	} else if (length($6)) {
-		if (u[$6])
-			read++;
-	}
-}
-END {
-	print (total - read);
-}' ~/.sfeed/urls ~/.sfeed/feeds/*)
+# feeds=$(LC_ALL=C awk -F '\t' '
+# # URL file: amount of fields is 1.
+# NF == 1 {
+# 	u[$0] = 1; # lookup table of URLs.
+# 	next;
+# }
+# # feed file: check by URL or id.
+# {
+# 	total++;
+# 	if (length($3)) {
+# 		if (u[$3])
+# 			read++;
+# 	} else if (length($6)) {
+# 		if (u[$6])
+# 			read++;
+# 	}
+# }
+# END {
+# 	print (total - read);
+# }' ~/.sfeed/urls ~/.sfeed/feeds/*)
 
 cmus=$(plctrl statusbar)
 
@@ -135,15 +135,12 @@ fan_info=""
 # 	fan_info="$cpu_info $gpu_info"
 # fi
 
-fan_info="$(cat /sys/class/hwmon/hwmon5/temp1_input | sed 's/000$//')$(cat /sys/class/hwmon/hwmon5/fan1_boost)$(cat /sys/class/platform-profile/platform-profile-0/profile | tr '-' '\n' | cut -c1 | paste -s -d '')$(cat /sys/class/hwmon/hwmon5/temp2_input | sed 's/000$//')$(cat /sys/class/hwmon/hwmon5/fan2_boost)"
+# fan_info="$(cat /sys/class/hwmon/hwmon5/temp1_input | sed 's/000$//')$(cat /sys/class/hwmon/hwmon5/fan1_boost)$(cat /sys/class/platform-profile/platform-profile-0/profile | tr '-' '\n' | cut -c1 | paste -s -d '')$(cat /sys/class/hwmon/hwmon5/temp2_input | sed 's/000$//')$(cat /sys/class/hwmon/hwmon5/fan2_boost)"
 
 services=''
-systemctl is-active awcc_autoboost.service >/dev/null && services="${services}A"
 systemctl is-active thermald.service >/dev/null && services="${services}I"
 systemctl is-active scx_loader.service >/dev/null && services="${services}S"
 systemctl is-active tlp.service >/dev/null && services="${services}T"
-systemctl is-active nvidia-persistenced.service >/dev/null && services="${services}N"
-systemctl is-active nvidia-powerd.service >/dev/null && services="${services}P"
 systemctl is-active firewalld.service >/dev/null && services="${services}F"
 
 # [ "$services" != '' ] && fan_info="$fan_info[$services]"
@@ -165,12 +162,14 @@ echo "$browser_procs" | grep -Fq "/usr/bin/python3 /usr/bin/qutebrowser --qt-arg
 echo "$browser_procs" | grep -Fq "/usr/bin/python3 /usr/bin/qutebrowser --qt-arg name scratchtmpqb " && browsers="${browsers}T\n"
 
 nvinfo=''
-bat_charging=$(cat /sys/class/power_supply/BAT0/status)
-if [ "Discharging" != "$bat_charging" ]
-then
-	nvinfo=$(nvidia-smi --query-gpu=pstate --format=csv,noheader)
-fi
-nvinfo="$nvinfo$(cat /sys/class/drm/card0/device/power_state)"
+# bat_charging=$(cat /sys/class/power_supply/BAT0/status)
+# if [ "Discharging" != "$bat_charging" ]
+# then
+# 	nvinfo=$(nvidia-smi --query-gpu=pstate --format=csv,noheader)
+# fi
+# nvinfo="$nvinfo$(cat /sys/class/drm/card0/device/power_state)"
+
+bat_info="$(cat /sys/class/power_supply/BAT0/capacity)$(cat /sys/class/power_supply/BAT0/status | tr ' ' '\n' | cut -c1 | paste -s -d '' | tr '[:upper:]' '[:lower:]')"
 
 s="|"
 [[ $cmus != '' ]] && s="$s $cmus |"
@@ -182,7 +181,7 @@ then
 	s="$s $browsers |"
 fi
 [[ $nspawn_info != '' ]] && s="$s .$nspawn_info |"
-s="$s $fan_info |"
+# s="$s $fan_info |"
 # s="$s  $cpu% |"
 # s="$s  $(free -h | awk '/^Mem:/ {print $3}') |"
 # s="$s $cpu%$(free -h | awk '/^Mem:/ {print $3}')$(nvidia-smi --query-gpu=pstate --format=csv,noheader) |"
@@ -190,17 +189,17 @@ s="$s $cpu%$(free -h | awk '/^Mem:/ {print $3}')$nvinfo |"
 [[ $services != '' ]] && s="$s $services |"
 [[ $wireless != '' ]] && s="$s W |"
 # [[ $batp != '' ]] && s="$s $bat_status |"
-[[ $batp != '' ]] && s="$s $bat_info |"
+s="$s $bat_info |"
 # s="$s $(date +' %m%d%u:%H%M') |"
 s="$s $(date +'%d')$(( 1 + $(date +'%w') ))$(date +':%H%M') |"
 
-if compgen -G "/tmp/*_MOUNTED" > /dev/null
-then
-	s="$s $(ls -1 /tmp/*_MOUNTED | \sed 's#^.*/##' | cut -c-1 | paste -s -d ',') |"
-fi
+# if compgen -G "/tmp/*_MOUNTED" > /dev/null
+# then
+# 	s="$s $(ls -1 /tmp/*_MOUNTED | \sed 's#^.*/##' | cut -c-1 | paste -s -d ',') |"
+# fi
 
 # [[ $feeds != '' && $feeds != 0 ]] && s="$s  $feeds |"
-[[ $feeds != '' && $feeds != 0 ]] && s="$s $feeds |"
+# [[ $feeds != '' && $feeds != 0 ]] && s="$s $feeds |"
 # s="$s  $(kbd get) |"
 s="$s $(kbd get) |"
 [[ $todos != 0 ]] && s="$s T $todos |"

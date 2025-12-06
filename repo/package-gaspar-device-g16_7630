@@ -1,6 +1,6 @@
 pkgname=gaspar-device-g16_7630
 pkgver=1
-pkgrel=18
+pkgrel=19
 arch=('any')
 options=('!debug')
 groups=('gaspar')
@@ -13,6 +13,7 @@ depends=(
 	acpi_call # for AWCC
 	tlp
 	scx-scheds
+	scx-tools
 	smartmontools # for tlp
 	ethtool # for tlp
 	gaspar-device-g16_7630-gpu

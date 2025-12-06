@@ -1,22 +1,21 @@
 #!/usr/bin/env bash
 
 rm -rf FSRCNN
-mkdir -p FSRCNN
+rm -rf nvidia-shaders SSimSuperRes SSimDownscaler CAS-scaled FSR SGSR   \
+	KrigBilateral adaptive-sharpen glsl-chroma-from-luma-prediction     \
+	mpv-gallery-view mpv-playlistmanager
 
 urls=$( \
 	curl -s https://api.github.com/repos/igv/FSRCNN-TensorFlow/releases/latest \
 	| jq -r '.assets[] | select(.name | test("glsl")) | .browser_download_url' \
 )
 
+mkdir -p FSRCNN
 for url in $urls; do
 	fname=$(basename "$url")
 	echo "Downloading $fname"
 	wget -O "FSRCNN/$fname" "$url"
 done
-
-rm -rf nvidia-shaders SSimSuperRes SSimDownscaler CAS-scaled FSR SGSR   \
-	KrigBilateral adaptive-sharpen glsl-chroma-from-luma-prediction     \
-	mpv-gallery-view mpv-playlistmanager
 
 git clone https://gist.github.com/agyild/7e8951915b2bf24526a9343d951db214.git ./nvidia-shaders
 git clone https://gist.github.com/igv/2364ffa6e81540f29cb7ab4c9bc05b6b.git ./SSimSuperRes

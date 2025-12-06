@@ -2,7 +2,7 @@
 
 > SVG Optimizer: optimizing Scalable Vector Graphics files. Based in Node.js.
 > It applies a series of transformation rules (plugins), which can be toggled individually.
-> More information: <https://github.com/svg/svgo>.
+> More information: <https://manned.org/svgo>.
 
 - Optimize a file using the default plugins (overwrites the original file):
 
@@ -14,11 +14,11 @@
 
 - Optimize all SVG files within a directory (overwrites the original files):
 
-`svgo {{[-f|--folder]}} {{path/to/directory/with/svg/files}}`
+`svgo {{[-f|--folder]}} {{path/to/directory_with_svg_files}}`
 
 - Optimize all SVG files within a directory and save the resulting files to another directory:
 
-`svgo {{[-f|--folder]}} {{path/to/input/directory}} {{[-o|--output]}} {{path/to/output/directory}}`
+`svgo {{[-f|--folder]}} {{path/to/input_directory}} {{[-o|--output]}} {{path/to/output_directory}}`
 
 - Optimize SVG content passed from another command, and save the result to a file:
 
