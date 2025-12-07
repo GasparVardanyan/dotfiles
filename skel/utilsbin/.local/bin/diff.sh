@@ -9,7 +9,7 @@ pushd "$src" >/dev/null
 
 	echo "$dirs" | while read d
 	do
-		mkdir -p -v "$dest/$d"
+		echo mkdir -p -v "$dest/$d"
 	done
 
 	files=$(find . -type f)
@@ -20,14 +20,14 @@ pushd "$src" >/dev/null
 		do
 			if [ ! -f "$dest/$f" ]
 			then
-				cp -v "$f" "$dest/$f"
+				echo new cp -v "$f" "$dest/$f"
 			elif [ "$f" -nt "$dest/$f" ]
 			then
 				cmp -s "$f" "$dest/$f"		\
 				||							\
-					cp -v "$f" "$dest/$f"
+					echo diff cp -v "$f" "$dest/$f"
 			fi
-			cp --attributes-only --preserve "$f" "$dest/$f"
+			# cp --attributes-only --preserve "$f" "$dest/$f"
 		done
 	fi
 
@@ -39,7 +39,7 @@ pushd "$dest" >/dev/null
 	do
 		if [ ! -f "$src/$f" ]
 		then
-			rm -v "$dest/$f"
+			echo rm -v "$dest/$f"
 		fi
 	done
 
@@ -47,7 +47,7 @@ pushd "$dest" >/dev/null
 	do
 		if [ ! -d "$src/$d" ]
 		then
-			rmdir -v "$dest/$d"
+			echo rmdir -v "$dest/$d"
 		fi
 	done
 
