@@ -152,14 +152,14 @@ systemctl is-active firewalld.service >/dev/null && services="${services}F"
 nspawn_info=$(machinectl list | grep container | cut -f 1 -d ' ' | sort | while read m; do cat /usr/local/etc/nspawn/labels | \grep -Fq "$m" && ( cat /usr/local/etc/nspawn/labels | \grep -F "$m" | cut -f 2 -d ' ' ) || echo "$m"; done | paste -s -d '')
 # nspawn_info="$nspawn_info "
 
-browser_procs=$(ps x --user gaspar | grep -F '/usr/bin/python3 /usr/bin/qutebrowser' | head -n -1)
-browsers=""
-
-echo "$browser_procs" | grep -q "/usr/bin/python3 /usr/bin/qutebrowser$" && browsers="${browsers}b\n"
-echo "$browser_procs" | grep -Fq "/usr/bin/python3 /usr/bin/qutebrowser --qt-arg name scratchqb " && browsers="${browsers}B\n"
-echo "$browser_procs" | grep -Fq "/usr/bin/python3 /usr/bin/qutebrowser --qt-arg name scratchqbg " && browsers="${browsers}G\n"
-echo "$browser_procs" | grep -Fq "/usr/bin/python3 /usr/bin/qutebrowser --qt-arg name scratchqbw " && browsers="${browsers}W\n"
-echo "$browser_procs" | grep -Fq "/usr/bin/python3 /usr/bin/qutebrowser --qt-arg name scratchtmpqb " && browsers="${browsers}T\n"
+# browser_procs=$(ps x --user gaspar | grep -F '/usr/bin/python3 /usr/bin/qutebrowser' | head -n -1)
+# browsers=""
+#
+# echo "$browser_procs" | grep -q "/usr/bin/python3 /usr/bin/qutebrowser$" && browsers="${browsers}b\n"
+# echo "$browser_procs" | grep -Fq "/usr/bin/python3 /usr/bin/qutebrowser --qt-arg name scratchqb " && browsers="${browsers}B\n"
+# echo "$browser_procs" | grep -Fq "/usr/bin/python3 /usr/bin/qutebrowser --qt-arg name scratchqbg " && browsers="${browsers}G\n"
+# echo "$browser_procs" | grep -Fq "/usr/bin/python3 /usr/bin/qutebrowser --qt-arg name scratchqbw " && browsers="${browsers}W\n"
+# echo "$browser_procs" | grep -Fq "/usr/bin/python3 /usr/bin/qutebrowser --qt-arg name scratchtmpqb " && browsers="${browsers}T\n"
 
 nvinfo=''
 # bat_charging=$(cat /sys/class/power_supply/BAT0/status)
@@ -175,11 +175,11 @@ s="|"
 [[ $cmus != '' ]] && s="$s $cmus |"
 # s="$s $vols $volp% |"
 s="$s $vols$volp |"
-if [[ "$browsers" != '' ]]
-then
-	browsers=$(echo -en "$browsers" | paste -s -d '')
-	s="$s $browsers |"
-fi
+# if [[ "$browsers" != '' ]]
+# then
+# 	browsers=$(echo -en "$browsers" | paste -s -d '')
+# 	s="$s $browsers |"
+# fi
 [[ $nspawn_info != '' ]] && s="$s .$nspawn_info |"
 # s="$s $fan_info |"
 # s="$s  $cpu% |"

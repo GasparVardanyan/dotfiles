@@ -1,7 +1,7 @@
 {
 	"PERSISTENT": [
-		{ "type": "Set", "path": "/batteries/BAT0/FI/charge_control_start_threshold", "value": 90 },
-		{ "type": "Set", "path": "/batteries/BAT0/FI/charge_control_end_threshold", "value": 98 }
+		{ "type": "Set", "path": "/batteries/BAT0/FIV/charge_control_start_threshold_pct", "value": 90 },
+		{ "type": "Set", "path": "/batteries/BAT0/FIV/charge_control_end_threshold_pct", "value": 98 }
 	],
 	"PERFORMANCE" : [
 		{ "type": "Set", "path": "/platform_profiles/platform-profile-0/FIV/profile", "value": "performance" },
@@ -9,14 +9,14 @@
 			{ "type": "Set", "path": "/cpu/intel_pstate/FIV/status", "value": "active" },
 			{ "type": "Set", "path": "/cpu/intel_pstate/FIV/hwp_dynamic_boost", "value": 1 },
 			{ "type": "Set", "path": "/cpu/intel_pstate/FIV/no_turbo", "value": 0 },
-			{ "type": "Set", "path": "/cpu/intel_pstate/FI/min_perf_pct", "value": 10 },
-			{ "type": "Set", "path": "/cpu/intel_pstate/FI/max_perf_pct", "value": 100 }
+			{ "type": "Set", "path": "/cpu/intel_pstate/FIV/min_perf_pct", "value": 10 },
+			{ "type": "Set", "path": "/cpu/intel_pstate/FIV/max_perf_pct", "value": 100 }
 		],
 		[
-			{ "type": "Set", "path": "/cpu/intel_pstate/FIV/scaling_governor", "value": "powersave" },
-			{ "type": "Set", "path": "/cpu/intel_pstate/FIV/energy_performance_preference", "value": "performance" },
-			{ "type": "Set", "path": "/cpu/intel_pstate/FIV/scaling_min_freq_pct", "value": 0 },
-			{ "type": "Set", "path": "/cpu/intel_pstate/FIV/scaling_max_freq_pct", "value": 100 }
+			{ "type": "Set", "path": "/cpu/cpufreq/FIV/scaling_governor", "value": "powersave" },
+			{ "type": "Set", "path": "/cpu/cpufreq/FIV/energy_performance_preference", "value": "performance" },
+			{ "type": "Set", "path": "/cpu/cpufreq/FIV/scaling_min_freq_pct", "value": 0 },
+			{ "type": "Set", "path": "/cpu/cpufreq/FIV/scaling_max_freq_pct", "value": 100 }
 		],
 		[
 			{ "type": "Set", "path": "/gpu/card1/FIV/gt_min_freq_mhz_pct", "value": 0 },
@@ -31,14 +31,14 @@
 			{ "type": "Set", "path": "/cpu/intel_pstate/FIV/status", "value": "active" },
 			{ "type": "Set", "path": "/cpu/intel_pstate/FIV/hwp_dynamic_boost", "value": 1 },
 			{ "type": "Set", "path": "/cpu/intel_pstate/FIV/no_turbo", "value": 0 },
-			{ "type": "Set", "path": "/cpu/intel_pstate/FI/min_perf_pct", "value": 10 },
-			{ "type": "Set", "path": "/cpu/intel_pstate/FI/max_perf_pct", "value": 100 }
+			{ "type": "Set", "path": "/cpu/intel_pstate/FIV/min_perf_pct", "value": 10 },
+			{ "type": "Set", "path": "/cpu/intel_pstate/FIV/max_perf_pct", "value": 100 }
 		],
 		[
-			{ "type": "Set", "path": "/cpu/intel_pstate/FIV/scaling_governor", "value": "powersave" },
-			{ "type": "Set", "path": "/cpu/intel_pstate/FIV/energy_performance_preference", "value": "balance_performance" },
-			{ "type": "Set", "path": "/cpu/intel_pstate/FIV/scaling_min_freq_pct", "value": 0 },
-			{ "type": "Set", "path": "/cpu/intel_pstate/FIV/scaling_max_freq_pct", "value": 100 }
+			{ "type": "Set", "path": "/cpu/cpufreq/FIV/scaling_governor", "value": "powersave" },
+			{ "type": "Set", "path": "/cpu/cpufreq/FIV/energy_performance_preference", "value": "balance_performance" },
+			{ "type": "Set", "path": "/cpu/cpufreq/FIV/scaling_min_freq_pct", "value": 0 },
+			{ "type": "Set", "path": "/cpu/cpufreq/FIV/scaling_max_freq_pct", "value": 100 }
 		],
 		[
 			{ "type": "Set", "path": "/gpu/card1/FIV/gt_min_freq_mhz_pct", "value": 0 },
@@ -53,14 +53,14 @@
 			{ "type": "Set", "path": "/cpu/intel_pstate/FIV/status", "value": "active" },
 			{ "type": "Set", "path": "/cpu/intel_pstate/FIV/hwp_dynamic_boost", "value": 0 },
 			{ "type": "Set", "path": "/cpu/intel_pstate/FIV/no_turbo", "value": 1 },
-			{ "type": "Set", "path": "/cpu/intel_pstate/FI/min_perf_pct", "value": 10 },
-			{ "type": "Set", "path": "/cpu/intel_pstate/FI/max_perf_pct", "value": 30 }
+			{ "type": "Set", "path": "/cpu/intel_pstate/FIV/min_perf_pct", "value": 10 },
+			{ "type": "Set", "path": "/cpu/intel_pstate/FIV/max_perf_pct", "value": 30 }
 		],
 		[
-			{ "type": "Set", "path": "/cpu/intel_pstate/FIV/scaling_governor", "value": "powersave" },
-			{ "type": "Set", "path": "/cpu/intel_pstate/FIV/energy_performance_preference", "value": "power" },
-			{ "type": "Set", "path": "/cpu/intel_pstate/FIV/scaling_min_freq_pct", "value": 0 },
-			{ "type": "Set", "path": "/cpu/intel_pstate/FIV/scaling_max_freq_pct", "value": 0 }
+			{ "type": "Set", "path": "/cpu/cpufreq/FIV/scaling_governor", "value": "powersave" },
+			{ "type": "Set", "path": "/cpu/cpufreq/FIV/energy_performance_preference", "value": "power" },
+			{ "type": "Set", "path": "/cpu/cpufreq/FIV/scaling_min_freq_pct", "value": 0 },
+			{ "type": "Set", "path": "/cpu/cpufreq/FIV/scaling_max_freq_pct", "value": 0 }
 		],
 		[
 			{ "type": "Set", "path": "/gpu/card1/FIV/gt_min_freq_mhz_pct", "value": 0 },
