@@ -28,7 +28,7 @@ while (<stdin>)
 {
 	$last_line++;
 
-	s/[^[:print:]\t]/?/g;
+	# s/[^[:print:]\t]/?/g;
 
 	if ($last_line < $cursor_row)
 	{

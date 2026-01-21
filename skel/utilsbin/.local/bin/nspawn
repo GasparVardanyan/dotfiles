@@ -90,15 +90,20 @@ upgrade() {
 		# FIXME: unmount all mounted packages (e.g. fonts)
 		# we unmount mirrorlist because pacman-mirrorlist fails to upgrade
 
-		mirrorlist_mounted=false
-		sudo machinectl shell "root@$m" /usr/bin/mount | grep -Fq /etc/pacman.d/mirrorlist && mirrorlist_mounted=true
+		# sudo machinectl bind --mkdir "$m" /var/cache/pacman/pkg
 
-		sudo machinectl shell "root@$m" /usr/bin/pacman -Syyw
+		mirrorlist_mounted=false
+		pacrun=""
+		sudo machinectl shell "root@$m" /usr/bin/mount | grep -Fq /etc/pacman.d/mirrorlist && mirrorlist_mounted=true
+		sudo machinectl shell "root@$m" /usr/bin/mount | grep -Fq /usr/bin/pacrun.sh && pacrun=/usr/bin/pacrun.sh
+
 		if [ true = "$mirrorlist_mounted" ]
 		then
 			sudo machinectl shell "root@$m" /usr/bin/umount /etc/pacman.d/mirrorlist
+			sudo machinectl copy-to "$m" /etc/pacman.d/mirrorlist --force
 		fi
-		sudo machinectl shell "root@$m" /usr/bin/pacman -Suu
+		sudo machinectl shell "root@$m" $pacrun /usr/bin/pacman -Syyuu
+		# sudo machinectl shell "root@$m" /usr/bin/umount /var/cache/pacman/pkg
 		if [ true = "$mirrorlist_mounted" ]
 		then
 			sudo machinectl bind --mkdir --read-only "$m" /etc/pacman.d/mirrorlist
@@ -120,7 +125,7 @@ upgrade() {
 					host="$m"
 				fi
 
-				sudo machinectl shell "$host" "/tmp/upgrade/$fname"
+				sudo machinectl shell "$host" $pacrun "/tmp/upgrade/$fname"
 			done
 		fi
 	else

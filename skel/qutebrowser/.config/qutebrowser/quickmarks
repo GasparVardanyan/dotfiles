@@ -1,4 +1,5 @@
 /G https://gasparvardanyan.github.io/
+/J http://127.0.0.1:8096/web/#/dashboard
 /S http://127.0.0.1:8384/
 /aa https://annas-archive.org/
 /ai https://www.appimagehub.com/
@@ -29,10 +30,11 @@
 /gpt https://chat.openai.com/
 /gr https://greasyfork.org/en/scripts
 /ic https://mail.google.com/chat/u/0/#chat/welcome
-/in https://www.linkedin.com/
+/in https://www.linkedin.com/in/gasparvardanyan/
 /irc https://web.libera.chat/
 /jb https://mov.im/?chat
 /kh https://սարեան.ցանցառներ.հայ/
+/lc https://leetcode.com/
 /luke https://lukesmith.xyz/
 /ma https://mail.protonmail.com/u/0/inbox
 /mc https://app.multcloud.com/mc_project/task_list
@@ -71,4 +73,3 @@
 /yl https://e-learning.ysu.am/my/
 /yt https://www.youtube.com/
 /yth https://www.youtube.com/feed/history
-/J http://127.0.0.1:8096/web/#/dashboard

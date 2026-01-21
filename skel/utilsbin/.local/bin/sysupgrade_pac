@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+source /usr/local/etc/nspawn/profile.d/pac.sh
+
+sudo -u gaspar figlet reflector
+# systemctl start reflector.service
+reflector --verbose --latest 10 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
+sudo -u gaspar /desktop/utilsbin/nspawn upgrade_all
+sudo -u gaspar figlet "upgrading HOST"
+pacman -Syyuu
+pacman -Fyy
+pacman -Scc
+pkgfile -u
+# sudo -u gaspar tldr -u
+# sudo -u gaspar pipx runpip yt-dlp install --upgrade yt-dlp mutagen
+# sudo -u gaspar pipx upgrade cppman
+# sudo -u gaspar pipx upgrade compiledb
+# sudo -u gaspar pipx upgrade zdict
+# sudo -u gaspar cppman -c
+# sudo -u gaspar qutebrowser :adblock-update

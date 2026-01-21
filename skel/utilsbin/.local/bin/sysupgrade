@@ -1,13 +1,16 @@
 #!/usr/bin/env bash
 
-figlet reflector
-sudo systemctl start reflector.service
-nspawn upgrade_all
-figlet "upgrading HOST"
-sudo pacman -Syyuu
-sudo pacman -Fyy
-sudo pacman -Scc
-sudo pkgfile -u
+sudo /desktop/utilsbin/sysupgrade_pac
+
+# figlet reflector
+# sudo systemctl start reflector.service
+# nspawn upgrade_all
+# figlet "upgrading HOST"
+# sudo pacman -Syyuu
+# sudo pacman -Fyy
+# sudo pacman -Scc
+# sudo pkgfile -u
+source /usr/local/etc/nspawn/profile.d/pac.sh
 tldr -u
 pipx runpip yt-dlp install --upgrade yt-dlp mutagen
 pipx upgrade cppman
