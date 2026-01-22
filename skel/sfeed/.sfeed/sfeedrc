@@ -99,6 +99,7 @@ feeds() {
 	feed "XMPP" "https://xmpp.org/blog/index.xml"
 	feed "CppCast" "https://cppcast.com/feed.rss"
 	# feed "XDA Forums" "https://xdaforums.com/f/-/index.rss"
+	feed "Andrzej's C++ blog" "https://akrzemi1.wordpress.com/feed/"
 
 	feed "frame.work" "https://frame.work/blog.rss"
 	feed "pine64" "https://pine64.com/feed/"

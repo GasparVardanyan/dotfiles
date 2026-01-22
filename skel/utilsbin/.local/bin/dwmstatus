@@ -94,26 +94,26 @@ todos="$(cat ~/.todo 2>/dev/null | wc -l)"
 
 
 
-# feeds=$(LC_ALL=C awk -F '\t' '
-# # URL file: amount of fields is 1.
-# NF == 1 {
-# 	u[$0] = 1; # lookup table of URLs.
-# 	next;
-# }
-# # feed file: check by URL or id.
-# {
-# 	total++;
-# 	if (length($3)) {
-# 		if (u[$3])
-# 			read++;
-# 	} else if (length($6)) {
-# 		if (u[$6])
-# 			read++;
-# 	}
-# }
-# END {
-# 	print (total - read);
-# }' ~/.sfeed/urls ~/.sfeed/feeds/*)
+feeds=$(LC_ALL=C awk -F '\t' '
+# URL file: amount of fields is 1.
+NF == 1 {
+	u[$0] = 1; # lookup table of URLs.
+	next;
+}
+# feed file: check by URL or id.
+{
+	total++;
+	if (length($3)) {
+		if (u[$3])
+			read++;
+	} else if (length($6)) {
+		if (u[$6])
+			read++;
+	}
+}
+END {
+	print (total - read);
+}' ~/.sfeed/urls ~/.sfeed/feeds/*)
 
 cmus=$(plctrl statusbar)
 
@@ -199,7 +199,7 @@ s="$s $(date +'%d')$(( 1 + $(date +'%w') ))$(date +':%H%M') |"
 # fi
 
 # [[ $feeds != '' && $feeds != 0 ]] && s="$s  $feeds |"
-# [[ $feeds != '' && $feeds != 0 ]] && s="$s $feeds |"
+[[ $feeds != '' && $feeds != 0 ]] && s="$s $feeds |"
 # s="$s  $(kbd get) |"
 s="$s $(kbd get) |"
 [[ $todos != 0 ]] && s="$s T $todos |"
