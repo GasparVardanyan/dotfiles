@@ -1,7 +1,7 @@
 # include "theme.h"
 
 [global]
-	frame_color = DUNST_FOREGROUND
+	frame_color = DUNST_FRAME
 	font = DUNST_FONT
 
 [urgency_normal]

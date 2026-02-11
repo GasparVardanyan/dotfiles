@@ -1,11 +1,12 @@
 pkgname=gaspar-device-vostro15_3530-gpu
 pkgver=1
-pkgrel=1
+pkgrel=2
 arch=('any')
 options=('!debug')
 groups=('gaspar')
 provides=('gaspar-device-gpu')
 depends=(
+	intel-compute-runtime
 	intel-gpu-tools
 	intel-media-driver
 	libva

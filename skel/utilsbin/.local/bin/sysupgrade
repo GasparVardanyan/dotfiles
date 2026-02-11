@@ -12,9 +12,13 @@ sudo /desktop/utilsbin/sysupgrade_pac
 # sudo pkgfile -u
 source /usr/local/etc/nspawn/profile.d/pac.sh
 tldr -u
+pipx install yt-dlp
 pipx runpip yt-dlp install --upgrade yt-dlp mutagen
+pipx install cppman
 pipx upgrade cppman
+pipx install compiledb
 pipx upgrade compiledb
+pipx install zdict
 pipx upgrade zdict
 cppman -c
 qutebrowser :adblock-update

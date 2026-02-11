@@ -1,14 +1,14 @@
-# 0 "<stdin>"
+# 0 "dunstrc.template"
 # 0 "<built-in>"
 # 0 "<command-line>"
 # 1 "/usr/include/stdc-predef.h" 1 3 4
 # 0 "<command-line>" 2
-# 1 "<stdin>"
-
-
+# 1 "dunstrc.template"
+# 1 "theme.h" 1
+# 2 "dunstrc.template" 2
 
 [global]
- frame_color = "#839496"
+ frame_color = "#073642"
  font = "Iosevka Nerd Font"
 
 [urgency_normal]
