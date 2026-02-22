@@ -192,7 +192,7 @@ _wall()
 	embed=""
 	[ "$XEMBED" != '' ] && embed="-e $XEMBED"
 
-	nsxiv $embed -r -N pop-up -btr -g 1212x680 ~/.local/share/{themes,wallpapers}
+	nsxiv $embed -r -N pop-up -btr -g 1212x680 ~/.local/share/themes/*-wallpapers ~/.local/share/wallpapers
 }
 
 _fn()

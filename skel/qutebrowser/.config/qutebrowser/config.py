@@ -153,30 +153,29 @@ c.url.searchengines	 = {
 
 
 import os
-# themefile = 'DISABLE' + os.getenv ('HOME') + '/.local/share/themes/theme-qutebrowser.py'
+themefile = os.getenv ('HOME') + '/.local/share/themes/theme-qutebrowser.py'
 
-# if os.path.exists (themefile) :
-#     config.source (themefile)
-# else :
+if os.path.exists (themefile) :
+	config.source (themefile)
+else :
+	if __file__ in [os.getenv ('HOME') + '/.local/share/scratchqb/config/config.py', os.getenv ('HOME') + '/.config/qutebrowser/config.py'] :
+		import themes.dracula as dracula
 
-if __file__ in [os.getenv ('HOME') + '/.local/share/scratchqb/config/config.py', os.getenv ('HOME') + '/.config/qutebrowser/config.py'] :
-	import themes.dracula as dracula
+		dracula.blood (c, {
+			'spacing' : {
+				'vertical'			:		6		,
+				'horizontal'		:		8		,
+			}
+		})
+	elif __file__ in [os.getenv ('HOME') + '/.local/share/scratchqbg/config/config.py'] :
+		import themes.catppuccin as catppuccin
+	elif __file__ in [os.getenv ('HOME') + '/.local/share/scratchqbt/config/config.py'] :
+		import themes.catppuccin as catppuccin
 
-	dracula.blood (c, {
-		'spacing' : {
-			'vertical'			:		6		,
-			'horizontal'		:		8		,
-		}
-	})
-elif __file__ in [os.getenv ('HOME') + '/.local/share/scratchqbg/config/config.py'] :
-	import themes.catppuccin as catppuccin
-elif __file__ in [os.getenv ('HOME') + '/.local/share/scratchqbt/config/config.py'] :
-	import themes.catppuccin as catppuccin
-
-	# set the flavor you'd like to use
-	# valid options are 'mocha', 'macchiato', 'frappe', and 'latte'
-	# last argument (optional, default is False): enable the plain look for the menu rows
-	catppuccin.setup(c, 'lette', False)
+		# set the flavor you'd like to use
+		# valid options are 'mocha', 'macchiato', 'frappe', and 'latte'
+		# last argument (optional, default is False): enable the plain look for the menu rows
+		catppuccin.setup(c, 'lette', False)
 
 padding = {
 	'top'			:		6		,
