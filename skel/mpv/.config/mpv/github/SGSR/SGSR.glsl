@@ -14,9 +14,14 @@
 // - Now operates on the luma channel (instead of green) for improved accuracy.
 // - Removed the redundant "Operation mode" variable.
 // - Optimized code for readability and a minor performance gain.
+//
+// 2025-12-23 - Hotfix
+// - Fixed the std calculation for non-Edge Direction branch of the code;
+//   the previous one was using the Edge Direction variant, causing it
+//   to produce blurry output.
 
 //!PARAM UseEdgeDirection
-//!DESC Enables the direction-aware upscaling algorithm. This is critical for quality, as it preserves sharp edges by avoiding blurring across them. Disabling it falls back to a simpler, faster, but much blurrier filter, a trade-off intended for low-power mobile devices. Otherwise, this should be kept enabled for the best result.
+//!DESC Enables the direction-aware upscaling algorithm. This is critical for quality, as it preserves sharp edges by avoiding blurring across them. Disabling it falls back to a simpler and faster filter.
 //!TYPE DEFINE
 //!MINIMUM 0
 //!MAXIMUM 1
@@ -111,12 +116,12 @@ vec4 hook()
 
 		float sum = dot(abs(left) + abs(right) + abs(upDown), vec4(1.0));
 
+#if (UseEdgeDirection == 1)
 		float sumMean = 1.014185e+01 / sum;
 		float std = sumMean * sumMean;
-
-#if (UseEdgeDirection == 1)
 		vec3 data = vec3(std, edgeDirection(left, right));
 #else
+		float std = 2.181818 / sum;
 		float data = std;
 #endif
 		vec2 aWY  = weightY(pl.x,       pl.y + 1.0, upDown.x, data);

@@ -91,6 +91,8 @@ feeds() {
 	# feed "werc" "https://code.9front.org/hg/werc/rss-log"
 
 	feed "Hugo" "https://gohugo.io/index.xml"
+	feed "XLibre PKGBUILDs" "https://github.com/X11Libre/pkgbuilds-arch-based/commits.atom"
+	feed "lektra" "https://github.com/dheerajshenoy/lektra/releases.atom"
 	feed "THC-Archive" "https://github.com/hackerschoice/THC-Archive/commits.atom"
 	# feed "VTK" "https://vtk.org/feed/"
 	feed "nullsecurity" "https://github.com/nullsecuritynet/site/commits.atom"

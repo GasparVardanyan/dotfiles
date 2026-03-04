@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-volp="$(pamixer --get-volume)"
-cores="$(grep -c "^processor" /proc/cpuinfo)"
+volp=$(pamixer --get-volume)
+cores=$(grep -c "^processor" /proc/cpuinfo)
 #cores="$(sysctl -n hw.ncpu)" # BSD
-cpu="$(ps aux | awk 'BEGIN {sum=0} {sum+=$3}; END {print sum}')"
-cpu="$((${cpu/\.*} / ${cores:-1}))"
+cpu=$(ps aux | awk 'BEGIN {sum=0} {sum+=$3}; END {print sum}')
+cpu=$((${cpu/\.*} / ${cores:-1}))
 [[ $(pamixer --get-mute) == true ]] && vols='M ' || vols=''
-wireless="$(grep '^\s*w' /proc/net/wireless)"
+wireless=$(grep '^\s*w' /proc/net/wireless)
 
 
 
@@ -90,7 +90,7 @@ comment
 
 
 
-todos="$(cat ~/.todo 2>/dev/null | wc -l)"
+todos=$(cat ~/.todo 2>/dev/null | wc -l)
 
 
 
@@ -169,7 +169,9 @@ nvinfo=''
 # fi
 # nvinfo="$nvinfo$(cat /sys/class/drm/card0/device/power_state)"
 
-bat_info="$(cat /sys/class/power_supply/BAT0/capacity)$(cat /sys/class/power_supply/BAT0/status | tr ' ' '\n' | cut -c1 | paste -s -d '' | tr '[:upper:]' '[:lower:]')"
+bat_info=$(cat /sys/class/power_supply/BAT0/capacity)$(cat /sys/class/power_supply/BAT0/status | tr ' ' '\n' | cut -c1 | paste -s -d '' | tr '[:upper:]' '[:lower:]')
+
+pacdiffs=$(pacdiff -o | wc -l)
 
 s="|"
 [[ $cmus != '' ]] && s="$s $cmus |"
@@ -181,6 +183,37 @@ s="$s $vols$volp |"
 # 	s="$s $browsers |"
 # fi
 [[ $nspawn_info != '' ]] && s="$s .$nspawn_info |"
+
+
+
+HWMON_CMD_PATH=$HOME/.local/tmp/hwmon
+
+if [ ! -f "$HWMON_CMD_PATH" ]
+then
+	echo "FINDING HWMON"
+	hwmons=$(echo '{"type":"Get", "path":"/"}' | socat - /tmp/devicemaster.socket | jq .response.hwmons | jq -r 'keys[]')
+	index=$(
+		(
+			echo "["
+			echo "$hwmons" | while read hw; do printf '{"type":"Get", "path":"/hwmons/%s/FI/name"}\n' $hw; done | paste -s -d ','
+			echo "]"
+		) | jq -c | socat - /tmp/devicemaster.socket | jq 'map (.response == "dell_smm") | index (true)'
+	)
+	hwmon=$(echo "$hwmons" | awk "NR==$(( $index + 1 ))")
+	printf '{"type":"Get", "path":"/hwmons/%s/FI/temp1_input"}\n' $hwmon > "$HWMON_CMD_PATH"
+fi
+
+if [ -f "$HWMON_CMD_PATH" ]
+then
+	hwmon_cmd=$(cat "$HWMON_CMD_PATH")
+
+	temp=$(echo "$hwmon_cmd" | socat - /tmp/devicemaster.socket | jq -r .response | sed 's/000$//')
+	s="$s $temp |"
+fi
+
+
+
+
 # s="$s $fan_info |"
 # s="$s  $cpu% |"
 # s="$s  $(free -h | awk '/^Mem:/ {print $3}') |"
@@ -202,7 +235,9 @@ s="$s $(date +'%d')$(( 1 + $(date +'%w') ))$(date +':%H%M') |"
 [[ $feeds != '' && $feeds != 0 ]] && s="$s $feeds |"
 # s="$s  $(kbd get) |"
 s="$s $(kbd get) |"
-[[ $todos != 0 ]] && s="$s T $todos |"
+[[ $todos != 0 ]] && s="$s T$todos |"
+[[ $pacdiffs != 0 ]] && s="$s P$pacdiffs |"
+
 [ -f ~/.local/tmp/sfu ] && s="$s F |"
 
 xsetroot -name "$s"
