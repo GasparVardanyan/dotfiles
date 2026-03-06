@@ -186,12 +186,11 @@ s="$s $vols$volp |"
 
 
 
-HWMON_CMD_PATH=$HOME/.local/tmp/hwmon
+CPU_TEMP_SENSOR_PATH=$HOME/.local/tmp/cpu_temp_sensor
 
-if [ ! -f "$HWMON_CMD_PATH" ]
+if [ ! -f "$CPU_TEMP_SENSOR_PATH" ]
 then
-	echo "FINDING HWMON"
-	hwmons=$(echo '{"type":"Get", "path":"/"}' | socat - /tmp/devicemaster.socket | jq .response.hwmons | jq -r 'keys[]')
+	hwmons=$(dm get /hwmons | jq .response | jq -r 'keys[]')
 	index=$(
 		(
 			echo "["
@@ -200,14 +199,14 @@ then
 		) | jq -c | socat - /tmp/devicemaster.socket | jq 'map (.response == "dell_smm") | index (true)'
 	)
 	hwmon=$(echo "$hwmons" | awk "NR==$(( $index + 1 ))")
-	printf '{"type":"Get", "path":"/hwmons/%s/FI/temp1_input"}\n' $hwmon > "$HWMON_CMD_PATH"
+	printf '/hwmons/%s/FI/temp1_input' $hwmon > "$CPU_TEMP_SENSOR_PATH"
 fi
 
-if [ -f "$HWMON_CMD_PATH" ]
+if [ -f "$CPU_TEMP_SENSOR_PATH" ]
 then
-	hwmon_cmd=$(cat "$HWMON_CMD_PATH")
+	hwmon_cmd=$(cat "$CPU_TEMP_SENSOR_PATH")
 
-	temp=$(echo "$hwmon_cmd" | socat - /tmp/devicemaster.socket | jq -r .response | sed 's/000$//')
+	temp=$(dm get "$hwmon_cmd" | jq -r .response | sed 's/000$//')
 	s="$s $temp |"
 fi
 

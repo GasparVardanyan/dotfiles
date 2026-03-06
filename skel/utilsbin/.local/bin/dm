@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+_get() {
+	printf '{"type":"Get", "path":"%s"}\n' "$1" | socat - /tmp/devicemaster.socket | jq
+}
+
+_set() {
+	printf '{"type":"Set", "path":"%s", "value":"%s"}\n' "$1" "$2" | socat - /tmp/devicemaster.socket | jq
+}
+
+
+_$1 ${@:2}
