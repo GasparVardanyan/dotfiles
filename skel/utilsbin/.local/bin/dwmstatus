@@ -186,30 +186,96 @@ s="$s $vols$volp |"
 
 
 
-CPU_TEMP_SENSOR_PATH=$HOME/.local/tmp/cpu_temp_sensor
+# CPU_TEMP_SENSOR_PATH=$HOME/.local/tmp/cpu_temp_sensor
+#
+# if [ ! -f "$CPU_TEMP_SENSOR_PATH" ]
+# then
+# 	hwmons=$(dm get /hwmons | jq .response | jq -r 'keys[]')
+# 	index=$(
+# 		(
+# 			echo "["
+# 			echo "$hwmons" | while read hw; do printf '{"type":"Get", "path":"/hwmons/%s/FI/name"}\n' $hw; done | paste -s -d ','
+# 			echo "]"
+# 		) | jq -c | socat - /tmp/devicemaster.socket | jq 'map (.response == "dell_smm") | index (true)'
+# 	)
+# 	hwmon=$(echo "$hwmons" | awk "NR==$(( $index + 1 ))")
+# 	printf '/hwmons/%s/FI/temp1_input' $hwmon > "$CPU_TEMP_SENSOR_PATH"
+# fi
+#
+# if [ -f "$CPU_TEMP_SENSOR_PATH" ]
+# then
+# 	hwmon_cmd=$(cat "$CPU_TEMP_SENSOR_PATH")
+#
+# 	temp=$(dm get "$hwmon_cmd" | jq -r .response | sed 's/000$//')
+# 	s="$s $temp |"
+# fi
 
-if [ ! -f "$CPU_TEMP_SENSOR_PATH" ]
-then
-	hwmons=$(dm get /hwmons | jq .response | jq -r 'keys[]')
-	index=$(
-		(
-			echo "["
-			echo "$hwmons" | while read hw; do printf '{"type":"Get", "path":"/hwmons/%s/FI/name"}\n' $hw; done | paste -s -d ','
-			echo "]"
-		) | jq -c | socat - /tmp/devicemaster.socket | jq 'map (.response == "dell_smm") | index (true)'
-	)
-	hwmon=$(echo "$hwmons" | awk "NR==$(( $index + 1 ))")
-	printf '/hwmons/%s/FI/temp1_input' $hwmon > "$CPU_TEMP_SENSOR_PATH"
-fi
 
-if [ -f "$CPU_TEMP_SENSOR_PATH" ]
-then
-	hwmon_cmd=$(cat "$CPU_TEMP_SENSOR_PATH")
 
-	temp=$(dm get "$hwmon_cmd" | jq -r .response | sed 's/000$//')
-	s="$s $temp |"
-fi
+cpu_temp=$(perl -e "$(cat <<'EOF'
+use strict;
+use warnings;
 
+use JSON::XS ();
+use IO::Socket::UNIX ();
+
+my $HOME = $ENV {HOME};
+
+my $CPU_TEMP_SENSOR_PATH="$HOME/.local/tmp/cpu_temp_sensor";
+my $json = JSON::XS->new->utf8->canonical;
+my $socket = IO::Socket::UNIX->new (
+	Type => IO::Socket::UNIX::SOCK_STREAM,
+	Peer => '/tmp/devicemaster.socket'
+);
+
+sub dm_get {
+	my $path = shift;
+
+	my $request = "{\"type\": \"Get\", \"path\": \"$path\"}\n";
+
+	print $socket "$request";
+	my $r = <$socket>;
+
+	return $r;
+}
+
+if (! -f $CPU_TEMP_SENSOR_PATH) {
+
+	my $j = $json->decode (dm_get ('/hwmons'));
+
+	my @hwmons = sort keys %{ $j->{response} };
+
+	my ($hwmon) = map {
+		keys %{ $_ };
+	} grep {
+		my ($h, $n) = %{ $_ };
+		$n eq 'dell_smm'
+	} map {
+		{ $_ => $json->decode (dm_get ("/hwmons/$_/FI/name"))->{response} };
+	} @hwmons;
+
+	open my $fh, '>', $CPU_TEMP_SENSOR_PATH or die $!;
+	printf $fh '/hwmons/%s/FI/temp1_input', $hwmon;
+	close $fh;
+}
+
+if (-f $CPU_TEMP_SENSOR_PATH) {
+
+	open my $fh, '<', $CPU_TEMP_SENSOR_PATH or die $!;
+	chomp (my $hwmon_cmd = <$fh>);
+	close $fh;
+
+	my $temp = $json->decode(dm_get($hwmon_cmd))->{response};
+	$temp =~ s/000$//;
+
+	print $temp . "\n";
+}
+
+close $socket;
+EOF
+)")
+
+[[ $cpu_temp != '' ]] && s="$s $cpu_temp |"
 
 
 
