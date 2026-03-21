@@ -265,7 +265,7 @@ if (-f $CPU_TEMP_SENSOR_PATH) {
 	chomp (my $hwmon_cmd = <$fh>);
 	close $fh;
 
-	my $temp = $json->decode(dm_get($hwmon_cmd))->{response};
+	my $temp = $json->decode (dm_get ($hwmon_cmd))->{response};
 	$temp =~ s/000$//;
 
 	print $temp . "\n";

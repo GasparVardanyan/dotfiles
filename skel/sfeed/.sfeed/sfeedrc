@@ -74,6 +74,7 @@ feeds() {
 	feed "Wolfgang's Channel - Invidious" "https://y.com.sb/feed/channel/UCsnGwSIHyoYN0kiINAGUKxg"
 	feed "Enrico Tartarotti - Invidious" "https://y.com.sb/feed/channel/UCuQT7Vc3OjjZuGkqehNxb6w"
 	feed "SavvyNik - Invidious" "https://y.com.sb/feed/channel/UC3yaWWA9FF9OBog5U9ml68A"
+	feed "Kai Lentit - Invidious" "https://y.com.sb/feed/channel/UCi8C7TNs2ohrc6hnRQ5Sn2w"
 
 	feed "TJ DeVries - Invidious" "https://y.com.sb/feed/channel/UCd3dNckv1Za2coSaHGHl5aA"
 	feed "typecraft - Invidious" "https://y.com.sb/feed/channel/UCo71RUe6DX4w-Vd47rFLXPg"
@@ -133,6 +134,15 @@ filter() {
 				{
 					print $0
 				}'
+		;;
+		"GitHub")
+			awk -F '\t' 'BEGIN { OFS = "\t"; }
+				$2 ~ /^metux contributed to/ {
+					next;
+				}
+				{
+					print $0
+				}' # he contributes a lot ))
 		;;
 		*)
 			cat
