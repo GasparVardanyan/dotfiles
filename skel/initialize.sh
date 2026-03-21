@@ -37,6 +37,7 @@ pushd /desktop/dotfiles/skel
 	ln -sfv $PWD/issue/.local/etc/issue ~/.local/etc
 	ln -sfv $PWD/issue/.local/etc/banner ~/.local/etc
 	ln -sfv $PWD/qt5ct/.config/qt5ct ~/.config
+	ln -sfv $PWD/qt6ct/.config/qt6ct ~/.config
 	mkdir -pv ~/.sfeed
 	ln -sfv $PWD/sfeed/.sfeed/sfeedrc ~/.sfeed
 	ln -sfv $PWD/banners/.local/etc/banner* ~/.local/etc
