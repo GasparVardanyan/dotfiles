@@ -47,8 +47,9 @@ bold_italic = { family = "Iosevka Nerd Font", style = "Bold Italic" }
 
 [keyboard]
 bindings = [
-   { key = "Return", mods = "Control|Shift", action = "SpawnNewInstance" }
+	{ key = "Return",   mods = "Control|Shift",   action = "SpawnNewInstance" },
+	{ key = "M",        mods = "Control",         chars = "\u000d" },              # send enter
+	{ key = "H",        mods = "Control",         chars = "\u0008" },              # send backspace
+	{ key = "I",        mods = "Control",         chars = "\u0009" },              # send tab
+	{ key = "I",        mods = "Control|Shift",   chars = "\u001b[Z" },            # send shift+tab
 ]
-
-[env]
-TERM = "xterm-256color"

@@ -1,1 +1,2 @@
 --engine=pcre2
+--no-ignore-vcs
