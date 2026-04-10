@@ -18,6 +18,7 @@ export QTWEBENGINE_CHROMIUM_FLAGS=--widevine-path="/usr/lib/chromium/libwidevine
 
 export GIT=127.0.0.1:/srv/git
 
+export PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
 export PATH="/desktop/utilsbin:$PATH"
 export PATH="$HOME/.local/share/themes/bin:$HOME/.local/bin:$PATH"
 export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
