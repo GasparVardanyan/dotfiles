@@ -74,7 +74,7 @@ Plugin 'plasticboy/vim-markdown'
 " Plugin 'jeaye/color_coded'
 
 " Plugin 'altercation/vim-colors-solarized'
-" Plugin 'lifepillar/vim-solarized8'
+Plugin 'lifepillar/vim-solarized8'
 Plugin 'overcache/NeoSolarized'
 " Plugin 'Tsuzat/NeoSolarized.nvim', { 'branch': 'master' }
 " Plugin 'Tsuzat/NeoSolarized.nvim'

@@ -15,6 +15,8 @@ pushd /desktop/dotfiles/skel
 	ln -sfv $PWD/zsh/.zshrc ~
 	ln -sfv ~/.{,z}profile
 	ln -sfv $PWD/zsh/.zsh.d ~
+	mkdir -pv ~/.config/clangd
+	ln -sfv $PWD/clangd/.config/clangd/config.yaml ~/.config/clangd
 	mkdir -pv ~/.config/cmus
 	ln -sfv $PWD/cmus/.config/cmus/rc ~/.config/cmus
 	mkdir -pv ~/.config/conky
@@ -46,6 +48,7 @@ pushd /desktop/dotfiles/skel
 	ln -sfv $PWD/ripgrep/.ripgreprc ~
 	ln -sfv $PWD/flameshot/.config/flameshot ~/.config
 	ln -sfv $PWD/profanity/.config/profanity ~/.config
+	ln -sfv $PWD/pipewire/.config/pipewire ~/.config
 
 	mkdir -pv ~/.config/qutebrowser
 	ln -sfv $PWD/qutebrowser/.config/qutebrowser/config.py ~/.config/qutebrowser
