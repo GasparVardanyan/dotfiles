@@ -14,7 +14,7 @@ export SUDO_ASKPASS="/desktop/utilsbin/dmenupass"
 export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 export LIBVA_DRIVER_NAME=iHD
 
-export QTWEBENGINE_CHROMIUM_FLAGS=--widevine-path="/usr/lib/chromium/libwidevinecdm.so"
+# export QTWEBENGINE_CHROMIUM_FLAGS=--widevine-path="/usr/lib/chromium/libwidevinecdm.so"
 
 export GIT=127.0.0.1:/srv/git
 

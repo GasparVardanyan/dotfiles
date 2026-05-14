@@ -85,7 +85,7 @@ cmd_run_mpv()
 
 		if [ -S "$socket" ]
 		then
-			dunstify plctrl "Socket for this $title already exists"
+			# dunstify plctrl "Socket for this $title already exists"
 			exit 1
 		fi
 
@@ -449,4 +449,9 @@ cmd_statusbar()
 	echo "$state"
 }
 
-cmd_$1 ${@:2}
+if [ -S /tmp/media.sock ] && [ 'optimize' != "$1" ]
+then
+	(echo plctrl ${@} ; cat) | socat - UNIX-CONNECT:/tmp/media.sock
+else
+	cmd_$1 ${@:2}
+fi
