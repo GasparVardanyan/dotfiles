@@ -5,6 +5,7 @@ mkdir -p ~/.config ~/.local ~/.local/share ~/.local/etc ~/.cache
 pushd /desktop/dotfiles/skel
 
 	ln -sfv $PWD/alacritty/.config/alacritty ~/.config
+	ln -sfv $PWD/contour/.config/contour ~/.config
 	ln -sfv $PWD/alsa/.asoundrc ~
 	ln -sfv $PWD/bat/.config/bat ~/.config
 	ln -sfv $PWD/feh/.fehbg ~

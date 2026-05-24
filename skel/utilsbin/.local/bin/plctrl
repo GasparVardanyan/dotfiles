@@ -363,7 +363,7 @@ cmd_optimize()
 
 	(cat -- "$1".tmp; echo '') | while read -r k
 	do
-		if [[ "$k" =~ ^#.*$ ]]
+		if [[ "$k" =~ ^#.*$ ]] || [[ "$k" =~ ^/media/.*$ ]]
 		then
 			echo -E "$k"
 		elif grep -q "^https://\(www\.\)\?youtube.com/watch?v=" <<< "$k"
@@ -449,9 +449,9 @@ cmd_statusbar()
 	echo "$state"
 }
 
-if [ -S /tmp/media.sock ] && [ 'optimize' != "$1" ]
-then
-	(echo plctrl ${@} ; cat) | socat - UNIX-CONNECT:/tmp/media.sock
-else
+# if [ -S /tmp/media.sock ] && [ 'optimize' != "$1" ]
+# then
+# 	(echo plctrl ${@} ; cat) | socat - UNIX-CONNECT:/tmp/media.sock
+# else
 	cmd_$1 ${@:2}
-fi
+# fi
