@@ -1,6 +1,6 @@
 pkgname=gaspar-meta-work
 pkgver=1
-pkgrel=4
+pkgrel=5
 arch=('any')
 options=('!debug')
 groups=('gaspar')
@@ -8,6 +8,7 @@ depends=(
 	alacritty
 	cifs-utils
 	clang
+	contour
 	dmenu
 	freerdp
 	gcc14

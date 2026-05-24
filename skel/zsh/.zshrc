@@ -243,7 +243,7 @@ alias ytp="yt --download-archive archive.txt"
 alias ytpu="ytp -a urls.txt"
 
 alias ytv="mpv --fullscreen --ytdl-format='bestvideo+bestaudio/best'"
-chpwd () { chtitle "$TERMINAL -> $PWD" }
+chpwd () { chtitle "$PWD" }
 chtitle () { printf '\33]2;%s\007' $1 }
 dotdiff () {
 	alias grep="grep --color=auto"

@@ -1,6 +1,6 @@
 pkgname=gaspar-meta-desktoptools
 pkgver=1
-pkgrel=13
+pkgrel=14
 arch=('any')
 options=('!debug')
 groups=('gaspar')
@@ -9,6 +9,7 @@ depends=(
 	alacritty
 	brightnessctl
 	clipmenu
+	contour
 	dunst
 	feh
 	firewalld
@@ -20,6 +21,7 @@ depends=(
 	numlockx
 	pamixer
 	pavucontrol-qt
+	picom
 	qalculate-qt
 	qt5ct
 	qt6ct
@@ -30,7 +32,6 @@ depends=(
 	tealdeer
 	translate-shell
 	upower
-	picom
 	xlibre-xserver
 	xlibre-xserver-xephyr
 	xorg-xinit

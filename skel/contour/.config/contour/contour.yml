@@ -431,7 +431,7 @@ profiles:
                 # Please see your font's documentation to find out what it
                 # supports.
                 #
-                features: []
+                features: ["-liga", "-dlig", "-calt", "-clig"]
 
                 # Customize fallback to use when rendering with the font
                 # to disable any font fallback specify
@@ -1196,8 +1196,10 @@ input_mapping:
     - { mods: [Shift,Control]     , key: '+'                     , action: IncreaseFontSize }
     - { mods: [Shift,Control]     , key: ')'                     , action: ResetFontSize }
     - { mods: [Shift,Control]     , key: 'N'                     , action: NewTerminal }
-    - { mods: [Alt,Control]       , key: 'V'                     , action: PasteClipboard }
+    # - { mods: [Alt,Control]       , key: 'V'                     , action: PasteClipboard }
     - { mods: [Shift,Control]     , key: 'V'                     , action: PasteClipboard }
+    - { mods: [Shift,Control]     , key: 'Y'                     , action: PasteSelection }
+    - { mods: [Shift]             , key: 'Insert'                , action: PasteSelection }
     - { mods: [Alt,Control]       , key: 'S'                     , action: ScreenshotVT }
     - { mods: [Shift,Control]     , key: 'T'                     , action: CreateNewTab }
     - { mods: [Alt]               , key: '1'                     , action: SwitchToTab, position: 1 }
