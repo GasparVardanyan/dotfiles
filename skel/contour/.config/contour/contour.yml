@@ -1191,7 +1191,7 @@ input_mapping:
     - { mods: [Shift]             , key: 'F3'                    , action: FocusPreviousSearchMatch, mode: 'Search' }
     - { mods: [Shift]             , key: 'LeftArrow'             , action: SwitchToTabLeft }
     - { mods: [Shift]             , key: 'RightArrow'            , action: SwitchToTabRight }
-    - { mods: [Alt,Control]       , key: ','                     , action: ToggleInputMethodHandling }
+    # - { mods: [Alt,Control]       , key: ','                     , action: ToggleInputMethodHandling }
     - { mods: [Shift,Control]     , key: '_'                     , action: DecreaseFontSize }
     - { mods: [Shift,Control]     , key: '+'                     , action: IncreaseFontSize }
     - { mods: [Shift,Control]     , key: ')'                     , action: ResetFontSize }
@@ -1223,9 +1223,9 @@ input_mapping:
     - { mods: [Alt,Control]       , key: 'K'                     , action: ScrollMarkUp, mode: '~AltScreen' }
     - { mods: [Alt,Control]       , key: 'J'                     , action: ScrollMarkDown, mode: '~AltScreen' }
     - { mods: [Alt,Control]       , key: 'O'                     , action: OpenFileManager }
-    - { mods: [Alt,Control]       , key: '.'                     , action: ToggleStatusLine }
+    # - { mods: [Alt,Control]       , key: '.'                     , action: ToggleStatusLine }
     - { mods: [Shift,Control]     , key: 'F'                     , action: SearchReverse }
-    - { mods: [Shift,Control]     , key: 'H'                     , action: NoSearchHighlight }
+    # - { mods: [Shift,Control]     , key: 'H'                     , action: NoSearchHighlight }
     - { mods: [Shift,Control]     , key: 'U'                     , action: HintMode }
     - { mods: [Control]           , mouse: Left                  , action: FollowHyperlink }
     - { mods: []                  , mouse: Middle                , action: PasteSelection }

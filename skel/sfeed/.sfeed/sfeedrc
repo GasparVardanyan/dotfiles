@@ -43,6 +43,7 @@ feeds() {
 	# feed "SkullSecurity" "https://blog.skullsecurity.org/feed"
 	feed "Solarized" "https://github.com/altercation/solarized/commits.atom"
 	feed "Suckless" "https://suckless.org/atom.xml"
+	feed "CppCon" "https://cppcon.org/feed/"
 
 	feed "Luke Smith - Blog" "https://lukesmith.xyz/rss.xml"
 	feed "Luke Smith - Invidious" "https://y.com.sb/feed/channel/UC2eYFnH61tmytImy1mTYvhA"

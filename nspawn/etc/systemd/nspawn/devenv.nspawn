@@ -1,6 +1,8 @@
 [Exec]
 Boot=yes
 PrivateUsers=no
+Capability=CAP_PERFMON
+SystemCallFilter=perf_event_open
 
 [Network]
 VirtualEthernet=no
