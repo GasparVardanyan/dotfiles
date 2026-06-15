@@ -33,6 +33,7 @@ feeds() {
 	# feed "օրագիր" "https://օրագիր.հայ/read/feed/"
 	feed "David Rousset" "https://www.davrous.com/feed/"
 	feed "Gaspar Vardanyan" "https://gasparvardanyan.github.io/index.xml"
+	feed "tr1x_em" "https://trix.is-a.dev/rss.xml"
 
 	# feed "Bruce Lee - Podcast" 'https://brucelee.com/podcast-blog?format=rss'
 

@@ -240,7 +240,6 @@ sub dm_get {
 }
 
 if (! -f $CPU_TEMP_SENSOR_PATH) {
-
 	my $j = $json->decode (dm_get ('/hwmons'));
 
 	my @hwmons = sort keys %{ $j->{response} };
@@ -260,7 +259,6 @@ if (! -f $CPU_TEMP_SENSOR_PATH) {
 }
 
 if (-f $CPU_TEMP_SENSOR_PATH) {
-
 	open my $fh, '<', $CPU_TEMP_SENSOR_PATH or die $!;
 	chomp (my $hwmon_cmd = <$fh>);
 	close $fh;

@@ -12,6 +12,8 @@ fi
 
 [ -f ~/.Xresources ] && xrdb ~/.Xresources &
 
+export XDG_SESSION_TYPE=x11
+
 mkdir -p ~/.cache/thumbnails/mpv-gallery
 find ~/.cache/thumbnails/mpv-gallery/ -maxdepth 1 -type f -amin +$((7 * 60 * 24)) -delete
 
