@@ -139,12 +139,12 @@ filter() {
 		;;
 		"GitHub")
 			awk -F '\t' 'BEGIN { OFS = "\t"; }
-				$2 ~ /^metux contributed to/ {
+				$2 ~ /^(metux|josephcrowell) contributed to/ {
 					next;
 				}
 				{
 					print $0
-				}' # he contributes a lot ))
+				}' # they contribute a lot ))
 		;;
 		*)
 			cat
