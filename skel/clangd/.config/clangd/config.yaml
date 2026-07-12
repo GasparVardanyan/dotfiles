@@ -1,6 +1,1 @@
-CompileFlags:
-  Add: [-pedantic-errors, -Werror=pedantic, -Wall, -Wextra]
-
-Diagnostics:
-  UnusedIncludes: Strict
-  MissingIncludes: Strict
+/desktop/nvim/cmake/clangd.yaml

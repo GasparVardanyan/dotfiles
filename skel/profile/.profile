@@ -51,6 +51,8 @@ export QT_QPA_PLATFORMTHEME="qt5ct"
 export QT_ASSUME_STDERR_HAS_CONSOLE=1
 export QT_MEDIA_BACKEND=ffmpeg
 
+export CMAKE_BUILD_PARALLEL_LEVEL=$(( $(nproc) - 1 ))
+
 [[ $SHELL = 'zsh' && -f ~/.zshp ]] && source ~/.zshp
 
 
