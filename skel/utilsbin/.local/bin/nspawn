@@ -23,8 +23,8 @@ print_label() {
 
 have_terminal() {
 	m="${1#*@}"
-	# ( sudo pacman -Qs --sysroot /var/lib/machines/"$m" gaspar-device-gpu >/dev/null && sudo test -f /var/lib/machines/"$m"/usr/bin/alacritty ) || sudo test -f /var/lib/machines/"$m"/usr/bin/uxterm
-	( sudo pacman -Qs --sysroot /var/lib/machines/"$m" gaspar-device-gpu >/dev/null && sudo test -f /var/lib/machines/"$m"/usr/bin/contour ) || sudo test -f /var/lib/machines/"$m"/usr/bin/uxterm
+	( sudo pacman -Qs --sysroot /var/lib/machines/"$m" gaspar-device-gpu >/dev/null && sudo test -f /var/lib/machines/"$m"/usr/bin/alacritty ) || sudo test -f /var/lib/machines/"$m"/usr/bin/uxterm
+	# ( sudo pacman -Qs --sysroot /var/lib/machines/"$m" gaspar-device-gpu >/dev/null && sudo test -f /var/lib/machines/"$m"/usr/bin/contour ) || sudo test -f /var/lib/machines/"$m"/usr/bin/uxterm
 }
 
 wait_machine() {
@@ -283,8 +283,8 @@ then
 	export DISPLAY=:0
 	export XAUTHORITY=/tmp/nspawn/xauth
 
-	# pacman -Qs gaspar-device-gpu >/dev/null && test -f /usr/bin/alacritty && alacritty || uxterm
-	pacman -Qs gaspar-device-gpu >/dev/null && test -f /usr/bin/contour && contour || uxterm
+	pacman -Qs gaspar-device-gpu >/dev/null && test -f /usr/bin/alacritty && alacritty || uxterm
+	# pacman -Qs gaspar-device-gpu >/dev/null && test -f /usr/bin/contour && contour || uxterm
 else
 	$1 ${@:2}
 fi

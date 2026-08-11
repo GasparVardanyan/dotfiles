@@ -26,6 +26,7 @@
 
 [core]
 	pager = delta --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
+	quotepath = false
 
 [alias]
 	cb = branch --show-current

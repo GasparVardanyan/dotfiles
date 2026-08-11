@@ -1,5 +1,4 @@
 [Exec]
-Boot=yes
 PrivateUsers=no
 
 [Network]
