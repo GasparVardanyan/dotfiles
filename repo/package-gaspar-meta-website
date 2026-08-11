@@ -1,12 +1,11 @@
 pkgname=gaspar-meta-website
 pkgver=1
-pkgrel=2
+pkgrel=3
 arch=('any')
 options=('!debug')
 groups=('gaspar')
 depends=(
 	alacritty
-	contour
 	dmenu
 	xorg-xauth
 	hugo
