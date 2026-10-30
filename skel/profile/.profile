@@ -70,6 +70,7 @@ if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]
 		# sleep 3
 	# fi
 
+	# sleep 5
 	cp .startx_log .startx_log.old > /dev/null
 	startx > ~/.startx_log 2>&1
 	logout

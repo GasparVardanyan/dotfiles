@@ -1,12 +1,13 @@
 pkgname=gaspar-meta-fonts
 pkgver=1
-pkgrel=2
+pkgrel=3
 arch=('any')
 options=('!debug')
 groups=('gaspar')
 depends=(
 	ttf-ibm-plex
 	ttf-ibmplex-mono-nerd
+	ttf-victor-mono-nerd
 	ttf-iosevka-nerd
 	noto-fonts-emoji
 	otf-font-awesome

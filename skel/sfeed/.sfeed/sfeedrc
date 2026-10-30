@@ -17,8 +17,6 @@ feeds() {
 	feed "SWL Armenia - Invidious" "https://y.com.sb/feed/channel/UCRuW04PI8gIw1Wi7ryH3MWg"
 	# feed "SWL Armenia" "https://swl.am/index.xml"
 	# feed "Sippin' && 'Hackin'" "https://en.syuneci.am/rss.xml"
-	# feed "ambug telegram" "https://rsshub.app/telegram/channel/BSD_Armenia_News"
-	feed "ambug" "https://github.com/ambug/website/commits.atom"
 	feed "antranigv #en" "https://weblog.antranigv.am/feed/"
 	feed "antranigv #hy" "https://անդրանիկ.հայ/feed/"
 	# feed "Ռուբենի Բլոգը" "https://rbn.am/index.xml"
@@ -106,7 +104,6 @@ feeds() {
 	# feed "XDA Forums" "https://xdaforums.com/f/-/index.rss"
 	feed "Andrzej's C++ blog" "https://akrzemi1.wordpress.com/feed/"
 
-	feed "frame.work" "https://frame.work/blog.rss"
 	feed "pine64" "https://pine64.com/feed/"
 	feed "Joshua Stein" "https://jcs.org/rss"
 	# feed "OpenBSD - Reddit" "https://old.reddit.com/r/openbsd/.rss"
@@ -122,7 +119,7 @@ feeds() {
 	# feed "slashdot" "http://rss.slashdot.org/Slashdot/slashdot" "http://slashdot.org"
 	# feed "tweakers" "http://feeds.feedburner.com/tweakers/mixed" "http://tweakers.net" "iso-8859-1"
 	# get youtube Atom feed: curl -s -L 'https://www.youtube.com/user/gocoding/videos' | sfeed_web | cut -f 1
-	# feed "youtube golang" "https://www.youtube.com/feeds/videos.xml?channel_id=UCO3LEtymiLrgvpb59cNsb8A"
+	# feed "youtube golang" "https://y.com.sb/feed/channel/UCO3LEtymiLrgvpb59cNsb8A"
 	# feed "xkcd" "https://xkcd.com/atom.xml" "https://xkcd.com"
 }
 
