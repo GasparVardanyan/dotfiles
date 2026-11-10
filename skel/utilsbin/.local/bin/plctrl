@@ -449,9 +449,9 @@ cmd_statusbar()
 	echo "$state"
 }
 
-# if [ -S /tmp/media.sock ] && [ 'optimize' != "$1" ]
-# then
-# 	(echo plctrl ${@} ; cat) | socat - UNIX-CONNECT:/tmp/media.sock
-# else
+if [ -S /tmp/media.sock ] && [ 'optimize' != "$1" ]
+then
+	(echo plctrl ${@} ; cat) | socat - UNIX-CONNECT:/tmp/media.sock
+else
 	cmd_$1 ${@:2}
-# fi
+fi

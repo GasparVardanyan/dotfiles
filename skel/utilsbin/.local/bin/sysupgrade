@@ -10,7 +10,7 @@ sudo /desktop/utilsbin/sysupgrade_pac
 # sudo pacman -Fyy
 # sudo pacman -Scc
 # sudo pkgfile -u
-source /usr/local/etc/nspawn/profile.d/pac.sh
+source /etc/profile.d/proxy.sh
 tldr -u
 pipx install yt-dlp
 pipx runpip yt-dlp install --upgrade yt-dlp mutagen

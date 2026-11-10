@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source /usr/local/etc/nspawn/profile.d/pac.sh
+source /etc/profile.d/proxy.sh
 
 sudo -u gaspar figlet reflector
 # systemctl start reflector.service

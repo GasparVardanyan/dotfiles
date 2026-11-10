@@ -9,12 +9,12 @@
 
 - Update repositories in 5 concurrent jobs:
 
-`mr {{[-j|--jobs]}} {{5}} update`
+`mr {{[-j|--jobs]}} 5 update`
 
 - Print the status of all repositories:
 
 `mr status`
 
-- Checkout all repositories to the latest version:
+- Check out all repositories to the latest version:
 
 `mr checkout`

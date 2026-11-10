@@ -15,7 +15,7 @@
 
 `forfiles /c "{{command}}"`
 
-- Search for files using a specific glob mask:
+- Search for files using a specific `glob` mask:
 
 `forfiles /m {{glob_pattern}}`
 
@@ -25,4 +25,4 @@
 
 - Search for files older than 5 days:
 
-`forfiles /d +{{5}}`
+`forfiles /d +5`

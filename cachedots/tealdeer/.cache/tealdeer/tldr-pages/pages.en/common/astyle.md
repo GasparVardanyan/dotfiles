@@ -1,7 +1,7 @@
 # astyle
 
 > Source code indenter, formatter, and beautifier for the C, C++, C#, and Java programming languages.
-> Upon running, a copy of the original file is created with an ".orig" appended to the original file name.
+> Upon running, a copy of the original file is created with an `.orig` appended to the original file name.
 > More information: <https://manned.org/astyle>.
 
 - Apply the default style of 4 spaces per indent and no formatting changes:
@@ -18,8 +18,8 @@
 
 - Apply a custom indent using spaces. Choose between 2 and 20 spaces:
 
-`astyle {{[-s|--indent=spaces=]}}{{number_of_spaces}} {{path/to/file}}`
+`astyle {{[-s|--indent=spaces=]}}{{2..20}} {{path/to/file}}`
 
 - Apply a custom indent using tabs. Choose between 2 and 20 tabs:
 
-`astyle {{[-t|--indent=tab=]}}{{number_of_tabs}} {{path/to/file}}`
+`astyle {{[-t|--indent=tab=]}}{{2..20}} {{path/to/file}}`

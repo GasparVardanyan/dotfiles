@@ -21,13 +21,13 @@
 
 - Fuzzy search files with up to 3 extra, missing, or mismatching characters in the pattern:
 
-`ugrep {{[-Z|--fuzzy=]}}{{3}} "{{search_pattern}}"`
+`ugrep {{[-Z|--fuzzy=]}}3 "{{search_pattern}}"`
 
-- Also search compressed files, Zip and `.tar` archives recursively:
+- Also search compressed files, Zip, and `.tar` archives recursively:
 
 `ugrep {{[-z|--decompress]}} "{{search_pattern}}"`
 
-- Search only files whose filenames match a specific glob pattern:
+- Search only files whose filenames match a specific `glob` pattern:
 
 `ugrep {{[-g |--glob=]}}"{{glob_pattern}}" "{{search_pattern}}"`
 

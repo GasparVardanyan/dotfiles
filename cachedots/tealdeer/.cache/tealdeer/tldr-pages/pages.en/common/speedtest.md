@@ -1,8 +1,8 @@
 # speedtest
 
 > Official command-line interface for testing internet bandwidth using <https://speedtest.net>.
-> Note: Some platforms link `speedtest` to `speedtest-cli` or other tools like `librespeed`, which can also be installed as `speedtest` on certain Linux distributions.
 > These command examples apply only to the official client.
+> Note: Some platforms link `speedtest` to `speedtest-cli` or other tools like `librespeed`, which can also be installed as `speedtest` on certain Linux distributions.
 > More information: <https://www.speedtest.net/apps/cli>.
 
 - Run a speed test:
@@ -19,7 +19,7 @@
 
 - Run a speed test and specify the number of decimal points to use (0 to 8, defaults to 2):
 
-`speedtest {{[-P|--precision]}} {{precision}}`
+`speedtest {{[-P|--precision]}} {{0..8}}`
 
 - Run a speed test and print its progress (only available for output format `human-readable` and `json`):
 
