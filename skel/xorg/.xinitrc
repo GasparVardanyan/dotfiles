@@ -22,7 +22,7 @@ then
 	### autostart ###
 	numlockx &
 	# xcompmgr &
-	picom -b --backend glx --vsync -c &
+	# picom -b --backend glx --vsync -c &
 	clipmenud &
 	flameshot &
 	kbd &

@@ -33,11 +33,11 @@ general.import = [
 [window]
 padding = { x = 0, y = 0 }
 dynamic_padding = true
-opacity = 1
-# opacity = 0.8
+# opacity = 1
+opacity = 0.8
 
-# [colors.primary]
-# background = '#000000'
+[colors.primary]
+background = '#000000'
 
 [font]
 size = 8.0

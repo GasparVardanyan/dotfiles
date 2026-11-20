@@ -15,149 +15,91 @@
 // COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// FidelityFX CAS v1.0.2 by AMD
+// FidelityFX Contrast Adaptive Sharpening 1.2 by AMD
 // ported to mpv by agyild
 
 // Changelog
-// Optimized texture lookups for OpenGL 4.0+, DirectX 10+, and OpenGL ES 3.1+
-// Changed rcp + mul operations to div for better clarity when CAS_GO_SLOWER is set to 1, since the compiler should automatically
+// 2022
+// - Optimized texture lookups for OpenGL 4.0+, DirectX 10+, and OpenGL ES 3.1+
+// - Changed rcp + mul operations to div for better clarity when CAS_GO_SLOWER is set to 1, since the compiler should automatically
 // optimize those instructions anyway.
-// Made it directly operate on LUMA plane, since the original shader was operating on LUMA by deriving it from RGB. This should
+// - Made it directly operate on LUMA plane, since the original shader was operating on LUMA by deriving it from RGB. This should
 // cause a major increase in performance, especially on OpenGL 4.0+ renderers (4 texture lookups vs. 16)
-// Removed transparency preservation mechanism since the alpha channel is a separate source plan than LUMA
-// Added custom gamma curve support for relinearization
-// Removed final blending between the original and the sharpened pixels since it was redundant
-//
+// - Removed transparency preservation mechanism since the alpha channel is a separate source plan than LUMA
+// - Removed final blending between the original and the sharpened pixels since it was redundant
+// 
+// 2026-11-17
+// - Replaced the hardcoded TRC functions with libplacebo's builtin linearize/delinearize functions
+// - Added tunable parameter support
+// - SHARPENING is renamed as Sharpness to follow the same convention as the other shaders (i.e., NIS, FSR, SGSR)
+// - CAS_GO_SLOWER parameter is renamed as UsePreciseMath as per FidelityFX SDK v1.1.4
+// - Replaced per-pixel peak divisions with a precomputed reciprocal multiply and collapsed the 12-tap filter weighting and normalization into dot() products
+// - Deduplicated shared center-texel min/max bounds across overlapping neighborhoods and balanced reduction trees for ILP
+// - Vectorized the four sub-quadrant calculations (including APrxLoSqrtF4 and APrxLoRcpF4) into vec4 SIMD operations
+// - Added //!COMPONENTS 1 to enforce single-channel intermediate FBOs, simplified //!WHEN RPN expressions, and eliminated dead channel writes
+// - Simplified bilinear interpolation weights and factored out shared texture coordinate offsets in HOOKED_gather
+// - Changed UsePreciseMath default from 0 to 1 for better precision and SFU utilization on modern GPUs
+
 // Notes
-// Per AMD's guidelines only upscales content up to 4x (e.g., 1080p -> 2160p, 720p -> 1440p etc.) and everything else in between,
+// - Per AMD's guidelines only upscales content up to 4x (e.g., 1080p -> 2160p, 720p -> 1440p etc.) and everything else in between,
 // that means CAS will scale up to 4x at maximum, and any further scaling will be processed by mpv's scalers
-//
-// The filter is designed to run in linear light, and does have an optional relinerization and delinearization pass which
-// assumes BT.1886 content by default. Do not forget to change SOURCE_TRC and TARGET_TRC variables depending
-// on what kind of content the filter is running on. You might want to create seperate versions of the file with different
-// colorspace values, and apply them via autoprofiles. Note that running in non-linear light will result in oversharpening.
+
+// User variables
+
+//!PARAM Sharpness
+//!DESC Adjusts the range the shader adapts to high contrast (0 is not all the way off).  Higher values = more high contrast sharpening.
+//!TYPE CONSTANT float
+//!MINIMUM 0.0
+//!MAXIMUM 1.0
+0.0
+
+//!PARAM BetterDiagonals
+//!DESC If set to 0, drops certain math and texture lookup operations for better performance. This is only useful on pre-OpenGL 4.0 renderers and there is no need to disable it otherwise.
+//!TYPE DEFINE
+//!MINIMUM 0
+//!MAXIMUM 1
+1
+
+//!PARAM UsePreciseMath
+//!DESC If set to 1, disables the use of optimized approximate transcendental functions which might slightly increase accuracy in exchange of performance.
+//!TYPE DEFINE
+//!MINIMUM 0
+//!MAXIMUM 1
+1
 
 //!HOOK LUMA
 //!BIND HOOKED
-//!DESC FidelityFX Upsampling and Sharpening v1.0.2 (Relinearization)
-//!WHEN OUTPUT.w OUTPUT.h * LUMA.w LUMA.h * / 1.0 >
-
-// User variables - Relinearization
-// Compatibility
-#define SOURCE_TRC 4 // Is needed to convert from source colorspace to linear light. 0 = None (Skip conversion), 1 = Rec709, 2 = PQ, 3 = sRGB, 4 = BT.1886, 5 = HLG, 6 = Custom
-#define CUSTOM_GAMMA 2.2 // Custom power gamma curve to use if and when SOURCE_TRC is 6.
-
-// Shader code
-
-float From709(float rec709) {
-	return max(min(rec709 / float(4.5), float(0.081)), pow((rec709 + float(0.099)) / float(1.099), float(1.0 / 0.45)));
-}
-
-float FromPq(float pq) {
-	float p = pow(pq, float(0.0126833));
-	return (pow(clamp(p - float(0.835938), 0.0, 1.0) / (float(18.8516) - float(18.6875) * p), float(6.27739)));
-}
-
-float FromSrgb(float srgb) {
-	return max(min(srgb / 12.92, float(0.04045)), pow((srgb + float(0.055)) / float(1.055), float(2.4)));
-}
-
-float FromHlg(float hlg) {
-	const float a = 0.17883277;
-	const float b = 0.28466892;
-	const float c = 0.55991073;
-
-	float linear;
-	if (hlg >= 0.0 && hlg <= 0.5) {
-		linear = pow(hlg, 2.0) / 3.0;
-	} else {
-		linear = (exp((hlg - c) / a) + b) / 12.0;
-	}
-
-	return linear;
-}
+//!DESC FidelityFX Contrast Adaptive Upsampling and Sharpening (CAS) v1.2 (Linearization pass)
+//!WHEN OUTPUT.w OUTPUT.h * LUMA.w LUMA.h * >
+//!COMPONENTS 1
 
 vec4 hook() {
-	vec4 col = HOOKED_tex(HOOKED_pos);
-	col.r = clamp(col.r, 0.0, 1.0);
-#if (SOURCE_TRC == 1)
-	col.r = From709(col.r);
-#elif (SOURCE_TRC == 2)
-	col.r = FromPq(col.r);
-#elif (SOURCE_TRC == 3)
-	col.r = FromSrgb(col.r);
-#elif (SOURCE_TRC == 4)
-	col.r = pow(col.r, float(2.4));
-#elif (SOURCE_TRC == 5)
-	col.r = FromHlg(col.r);
-#elif (SOURCE_TRC == 6)
-	col.r = pow(col.r, float(CUSTOM_GAMMA));
-#endif
-	return col;
+	return vec4(linearize(HOOKED_tex(HOOKED_pos)).r, 0.0, 0.0, 1.0);
 }
 
 //!HOOK LUMA
 //!BIND HOOKED
-//!DESC FidelityFX Upsampling and Sharpening v1.0.2
-//!WHEN OUTPUT.w OUTPUT.h * LUMA.w LUMA.h * / 1.0 >
+//!DESC FidelityFX Contrast Adaptive Upsampling and Sharpening (CAS) v1.2 (Upsampling and sharpening pass)
+//!WHEN OUTPUT.w OUTPUT.h * LUMA.w LUMA.h * >
 //!WIDTH OUTPUT.w OUTPUT.w LUMA.w 2 * < * LUMA.w 2 * OUTPUT.w LUMA.w 2 * > * + OUTPUT.w OUTPUT.w LUMA.w 2 * = * +
 //!HEIGHT OUTPUT.h OUTPUT.h LUMA.h 2 * < * LUMA.h 2 * OUTPUT.h LUMA.h 2 * > * + OUTPUT.h OUTPUT.h LUMA.h 2 * = * +
-
-// User variables - Upsampling and Sharpening
-// Intensity
-#define SHARPENING 0.0 // Adjusts the range the shader adapts to high contrast (0 is not all the way off).  Higher values = more high contrast sharpening. 0.0 to 1.0.
-
-// Performance
-#define CAS_BETTER_DIAGONALS 1 // If set to 0, drops certain math and texture lookup operations for better performance. This is only useful on pre-OpenGL 4.0 renderers and there is no need to disable it otherwise. 0 or 1.
-#define CAS_GO_SLOWER 0 // If set to 1, disables the use of optimized approximate transcendental functions which might slightly increase accuracy in exchange of performance. 0 or 1.
-
-// Compatibility
-#define TARGET_TRC 4 // Is needed to convert from source colorspace to target colorspace. 0 = None (Skip conversion), 1 = Rec709, 2 = PQ, 3 = sRGB, 4 = BT.1886, 5 = HLG, 6 = Custom
-#define CUSTOM_GAMMA 2.2 // Custom power gamma curve to use if and when TARGET_TRC is 6.
+//!COMPONENTS 1
 
 // Shader code
 
-float To709(float linear) {
-	return max(min(linear * float(4.5), float(0.018)), float(1.099) * pow(linear, float(0.45)) - float(0.099));
+#if (UsePreciseMath == 0)
+
+vec4 APrxLoSqrtF4(vec4 a) {
+	return uintBitsToFloat((floatBitsToUint(a) >> 1u) + 0x1fbc4639u);
 }
 
-float ToPq(float linear) {
-	float p = pow(linear, float(0.159302));
-	return pow((float(0.835938) + float(18.8516) * p) / (float(1.0) + float(18.6875) * p), float(78.8438));
-}
-
-float ToSrgb(float linear) {
-	return max(min(linear * float(12.92), float(0.0031308)), float(1.055) * pow(linear, float(0.41666)) - float(0.055));
-}
-
-float ToHlg(float linear) {
-	const float a = 0.17883277;
-	const float b = 0.28466892;
-	const float c = 0.55991073;
-
-	float hlg;
-	if (linear <= 1.0 / 12.0) {
-		hlg = sqrt(3.0 * linear);
-	} else {
-		hlg = a * log(12.0 * linear - b) + c;
-	}
-
-	return hlg;
-}
-
-#if (CAS_GO_SLOWER == 0)
-
-float APrxLoSqrtF1(float a) {
-	return uintBitsToFloat((floatBitsToUint(a) >> uint(1)) + uint(0x1fbc4639));
-}
-
-float APrxLoRcpF1(float a) {
-	return uintBitsToFloat(uint(0x7ef07ebb) - floatBitsToUint(a));
+vec4 APrxLoRcpF4(vec4 a) {
+	return uintBitsToFloat(0x7ef07ebbu - floatBitsToUint(a));
 }
 
 float APrxMedRcpF1(float a) {
-	float b = uintBitsToFloat(uint(0x7ef19fff) - floatBitsToUint(a));
-	return b * (-b * a + float(2.0));
+	float b = uintBitsToFloat(0x7ef19fffu - floatBitsToUint(a));
+	return b * (-b * a + 2.0);
 }
 
 #endif
@@ -185,31 +127,34 @@ vec4 hook()
 	pp -= fp;
 
 #if (defined(HOOKED_gather) && (__VERSION__ >= 400 || (GL_ES && __VERSION__ >= 310)))
-	vec4 abef = HOOKED_gather(vec2((fp - vec2(0.5)) * HOOKED_pt), 0);
+	vec2 base = (fp - 0.5) * HOOKED_pt;
+	vec2 step2 = 2.0 * HOOKED_pt;
+
+	vec4 abef = HOOKED_gather(base, 0);
 
 	float b = abef.z;
 	float e = abef.x;
 	float f = abef.y;
 
-	vec4 cdgh = HOOKED_gather(vec2((fp + vec2(1.5, -0.5)) * HOOKED_pt), 0);
+	vec4 cdgh = HOOKED_gather(base + vec2(step2.x, 0.0), 0);
 
 	float c = cdgh.w;
 	float g = cdgh.x;
 	float h = cdgh.y;
 
-	vec4 ijmn = HOOKED_gather(vec2((fp + vec2(-0.5, 1.5)) * HOOKED_pt), 0);
+	vec4 ijmn = HOOKED_gather(base + vec2(0.0, step2.y), 0);
 
 	float i = ijmn.w;
 	float j = ijmn.z;
 	float n = ijmn.y;
 
-	vec4 klop = HOOKED_gather(vec2((fp + vec2(1.5)) * HOOKED_pt), 0);
+	vec4 klop = HOOKED_gather(base + step2, 0);
 
 	float k = klop.w;
 	float l = klop.z;
 	float o = klop.x;
 
-	#if (CAS_BETTER_DIAGONALS == 1)
+	#if (BetterDiagonals == 1)
 		float a = abef.w;
 		float d = cdgh.z;
 		float m = ijmn.x;
@@ -218,7 +163,7 @@ vec4 hook()
 #else
 	ivec2 sp = ivec2(fp);
 
-	#if (CAS_BETTER_DIAGONALS == 1)
+	#if (BetterDiagonals == 1)
 		float a = texelFetch(HOOKED_raw, sp + ivec2(-1, -1), 0).r * HOOKED_mul;
 		float d = texelFetch(HOOKED_raw, sp + ivec2( 2, -1), 0).r * HOOKED_mul;
 		float m = texelFetch(HOOKED_raw, sp + ivec2(-1,  2), 0).r * HOOKED_mul;
@@ -242,87 +187,35 @@ vec4 hook()
 	float o = texelFetch(HOOKED_raw, sp + ivec2( 1,  2), 0).r * HOOKED_mul;
 #endif
 
-	// Soft min and max.
-	// These are 2.0x bigger (factored out the extra multiply).
-	//  a b c             b
-	//  e f g * 0.5  +  e f g * 0.5  [F]
-	//  i j k             j
+	// Soft min and max across [F, G, J, K] (2.0x bigger when BetterDiagonals == 1).
+	// Deduplicate shared horizontal center pairs (f, g) and (j, k) across adjacent neighborhoods.
+	vec2 mn_fg_jk = min(vec2(f, j), vec2(g, k));
+	vec2 mx_fg_jk = max(vec2(f, j), vec2(g, k));
 
-	float mnfL = min(min(b, min(e, f)), min(g, j));
-	float mxfL = max(max(b, max(e, f)), max(g, j));
-
-#if (CAS_BETTER_DIAGONALS == 1)
-	float mnfL2 = min(min(mnfL, min(a, c)), min(i, k));
-	mnfL += mnfL2;
-
-	float mxfL2 = max(max(mxfL, max(a, c)), max(i, k));
-	mxfL += mxfL2;
+	vec4 mn = min(min(mn_fg_jk.xxyy, vec4(b, c, f, g)), min(vec4(e, h, i, l), vec4(j, k, n, o)));
+	vec4 mx = max(max(mx_fg_jk.xxyy, vec4(b, c, f, g)), max(vec4(e, h, i, l), vec4(j, k, n, o)));
+#if (BetterDiagonals == 1)
+	mn += min(mn, min(min(vec4(a, b, e, f), vec4(c, d, g, h)), min(vec4(i, j, m, n), vec4(k, l, o, p))));
+	mx += max(mx, max(max(vec4(a, b, e, f), vec4(c, d, g, h)), max(vec4(i, j, m, n), vec4(k, l, o, p))));
 #endif
 
-	//  b c d             c
-	//  f g h * 0.5  +  f g h * 0.5  [G]
-	//  j k l             k
-	float mngL = min(min(c, min(f, g)), min(h, k));
-	float mxgL = max(max(c, max(f, g)), max(h, k));
-#if (CAS_BETTER_DIAGONALS == 1)
-	float mngL2 = min(min(mngL, min(b, d)), min(j, l));
-	mngL += mngL2;
+	// Smooth minimum distance to signal limit divided by smooth max, shaped with sqrt.
+	const float bdval = bool(BetterDiagonals) ? 2.0 : 1.0;
+	const float thinB = 0.03125; // 1.0 / 32.0
 
-	float mxgL2 = max(max(mxgL, max(b, d)), max(j, l));
-	mxgL += mxgL2;
-#endif
+	// Bilinear weights: one multiply + three subtracts instead of four multiplies.
+	float v = pp.x * pp.y;
+	float t = pp.x - v;
+	float u = pp.y - v;
+	float s = 1.0 - pp.x - u;
+	vec4 stuv = vec4(s, t, u, v);
 
-	//  e f g             f
-	//  i j k * 0.5  +  i j k * 0.5  [J]
-	//  m n o             n
-	float mnjL  = min(min(f, min(i, j)), min(k, n));
-	float mxjL  = max(max(f, max(i, j)), max(k, n));
-#if (CAS_BETTER_DIAGONALS == 1)
-	float mnjL2 = min(min(mnjL, min(e, g)), min(m, o));
-	mnjL += mnjL2;
-
-	float mxjL2 = max(max(mxjL, max(e, g)), max(m, o));
-	mxjL += mxjL2;
-#endif
-
-	//  f g h             g
-	//  j k l * 0.5  +  j k l * 0.5  [K]
-	//  n o p             o
-	float mnkL = min(min(g, min(j, k)), min(l, o));
-	float mxkL = max(max(g, max(j, k)), max(l, o));
-#if (CAS_BETTER_DIAGONALS == 1)
-	float mnkL2 = min(min(mnkL, min(f, h)), min(n, p));
-	mnkL += mnkL2;
-
-	float mxkL2 = max(max(mxkL, max(f, h)), max(n, p));
-	mxkL += mxkL2;
-#endif
-
-	// Smooth minimum distance to signal limit divided by smooth max.
-	const float bdval = bool(CAS_BETTER_DIAGONALS) ? 2.0 : 1.0;
-#if (CAS_GO_SLOWER == 1)
-	float ampfL = clamp(min(mnfL, bdval - mxfL) / mxfL, 0.0, 1.0);
-	float ampgL = clamp(min(mngL, bdval - mxgL) / mxgL, 0.0, 1.0);
-	float ampjL = clamp(min(mnjL, bdval - mxjL) / mxjL, 0.0, 1.0);
-	float ampkL = clamp(min(mnkL, bdval - mxkL) / mxkL, 0.0, 1.0);
+#if (UsePreciseMath == 1)
+	vec4 amp = sqrt(clamp(min(mn, bdval - mx) / mx, 0.0, 1.0));
+	stuv /= thinB + mx - mn;
 #else
-	float ampfL = clamp(min(mnfL, bdval - mxfL) * APrxLoRcpF1(mxfL), 0.0, 1.0);
-	float ampgL = clamp(min(mngL, bdval - mxgL) * APrxLoRcpF1(mxgL), 0.0, 1.0);
-	float ampjL = clamp(min(mnjL, bdval - mxjL) * APrxLoRcpF1(mxjL), 0.0, 1.0);
-	float ampkL = clamp(min(mnkL, bdval - mxkL) * APrxLoRcpF1(mxkL), 0.0, 1.0);
-#endif
-
-	// Shaping amount of sharpening.
-#if (CAS_GO_SLOWER == 1)
-	ampfL = sqrt(ampfL);
-	ampgL = sqrt(ampgL);
-	ampjL = sqrt(ampjL);
-	ampkL = sqrt(ampkL);
-#else
-	ampfL = APrxLoSqrtF1(ampfL);
-	ampgL = APrxLoSqrtF1(ampgL);
-	ampjL = APrxLoSqrtF1(ampjL);
-	ampkL = APrxLoSqrtF1(ampkL);
+	vec4 amp = APrxLoSqrtF4(clamp(min(mn, bdval - mx) * APrxLoRcpF4(mx), 0.0, 1.0));
+	stuv *= APrxLoRcpF4(thinB + mx - mn);
 #endif
 
 	// Filter shape.
@@ -330,34 +223,8 @@ vec4 hook()
 	//  w 1 w
 	//  0 w 0
 
-	const float peak = -(mix(8.0, 5.0, clamp(SHARPENING, 0.0, 1.0)));
-	float wfL = ampfL / peak;
-	float wgL = ampgL / peak;
-	float wjL = ampjL / peak;
-	float wkL = ampkL / peak;
-
-	// Blend between 4 results.
-	//  s t
-	//  u v
-	float s = (1.0 - pp.x) * (1.0 - pp.y);
-	float t = pp.x * (1.0 - pp.y);
-	float u = (1.0 - pp.x) * pp.y;
-	float v = pp.x * pp.y;
-
-	// Thin edges to hide bilinear interpolation (helps diagonals).
-	const float thinB = 0.03125; // 1.0 / 32.0
-
-#if (CAS_GO_SLOWER == 1)
-	s /= thinB + mxfL - mnfL;
-	t /= thinB + mxgL - mngL;
-	u /= thinB + mxjL - mnjL;
-	v /= thinB + mxkL - mnkL;
-#else
-	s *= APrxLoRcpF1(thinB + mxfL - mnfL);
-	t *= APrxLoRcpF1(thinB + mxgL - mngL);
-	u *= APrxLoRcpF1(thinB + mxjL - mnjL);
-	v *= APrxLoRcpF1(thinB + mxkL - mnkL);
-#endif
+	const float invPeak = -1.0 / mix(8.0, 5.0, clamp(Sharpness, 0.0, 1.0));
+	vec4 w = amp * invPeak;
 
 	// Final weighting.
 	//    b c
@@ -376,40 +243,19 @@ vec4 hook()
 	//  _____  _____  _____  _____
 	//
 	//         ju        kv
-	float qbeL = wfL * s;
-	float qchL = wgL * t;
-	float qfL  = wgL * t + wjL * u + s;
-	float qgL  = wfL * s + wkL * v + t;
-	float qjL  = wfL * s + wkL * v + u;
-	float qkL  = wgL * t + wjL * u + v;
-	float qinL = wjL * u;
-	float qloL = wkL * v;
+	vec4 q = w * stuv;
+
+	vec2 gj_fk = vec2(g + j, f + k);
+	vec4 outer = vec4(b + e, c + h, i + n, l + o) + gj_fk.xyyx;
 
 	// Filter.
-	vec4 pix = vec4(0.0, 0.0, 0.0, 1.0);
-	float W = 2.0 * qbeL + 2.0 * qchL + 2.0 * qinL + 2.0 * qloL + qfL + qgL + qjL + qkL;
-	pix.r = b * qbeL + e * qbeL + c * qchL + h * qchL + i * qinL + n * qinL + l * qloL + o * qloL + f * qfL + g * qgL + j * qjL + k * qkL;
-#if (CAS_GO_SLOWER == 1)
-	pix.r /= W;
+	float W = dot(4.0 * q + stuv, vec4(1.0));
+	float res = dot(outer, q) + dot(vec4(f, g, j, k), stuv);
+#if (UsePreciseMath == 1)
+	res /= W;
 #else
-	pix.r *= APrxMedRcpF1(W);
+	res *= APrxMedRcpF1(W);
 #endif
 
-	pix.r = clamp(pix.r, 0.0, 1.0);
-
-#if (TARGET_TRC == 1)
-	pix.r = To709(pix.r);
-#elif (TARGET_TRC == 2)
-	pix.r = ToPq(pix.r);
-#elif (TARGET_TRC == 3)
-	pix.r = ToSrgb(pix.r);
-#elif (TARGET_TRC == 4)
-	pix.r = pow(pix.r, float(1.0 / 2.4));
-#elif (TARGET_TRC == 5)
-	pix.r = ToHlg(pix.r);
-#elif (TARGET_TRC == 6)
-	pix.r = pow(pix.r, float(1.0 / CUSTOM_GAMMA));
-#endif
-
-	return pix;
+	return vec4(delinearize(vec4(res, 0.0, 0.0, 1.0)).r, 0.0, 0.0, 1.0);
 }

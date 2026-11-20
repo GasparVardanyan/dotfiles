@@ -3,7 +3,7 @@ source /etc/zsh/zprofile
 export WM=dwm
 # export WM=icewm-session
 export TERMINAL=st
-export SHELL=zsh
+export SHELL=/usr/bin/zsh
 export EDITOR=nvim
 export VISUAL=nvim
 # export DRI_PRIME=1

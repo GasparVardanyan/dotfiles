@@ -19,48 +19,64 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// NVIDIA Image Scaling v1.0.2 by NVIDIA
+// NVIDIA Image Scaling v1.0.3 by NVIDIA
 // ported to mpv by agyild
 
 // Changelog
-// Made it directly operate on LUMA plane, since the original shader was operating
-// on LUMA by deriving it from RGB.
+// 2022-02-23 - Initial release
+// - Now operates on the luma channel (instead of green) for improved accuracy.
+// - Removed the redundant "Operation mode" variable.
+// - Optimized code for readability and a minor performance gain.
+//
+// 2026-11-12 - v1.0.3
+// - Fixed the anti-ringing threshold (kEps): it was set to 1.0, which is far
+//   too large, so the anti-ringing never actually kicked in. Lowering it to
+//   1.0/255.0 (as in upstream v1.0.2) makes it work as intended.
+// - Updated to NVIDIA Image Scaling v1.0.3:
+//   - Added `#pragma unroll` on the inner loops, matching the reference NIS_Scaler.h.
+//     The grid-stride fill and outer output loops are left as-is, like the reference.
+// - Removed the HDR (PQ) mode (NIS_HDR_MODE toggle and its constant
+//   variants): it was redundant and not really useful here; the plain SDR
+//   values are tested to work correctly.
+// - The sharpening now applies whenever not upscaling, so it can be used after
+//   downscaling as well.
+//
+// 2026-11-17 - Libplacebo tunable parameter Vulkan compatibility hotfix
+// - Fixed compilation on the Vulkan API (libplacebo): the "Sharpness" param is
+//   exposed as a GLSL specialization constant there, so global `const float`
+//   variables initialized from it (via clamp()/ternaries) fail shaderc with
+//   "global const initializers must be constant" -> VK_ERROR_INITIALIZATION_FAILED.
+//   The slider-dependent constants are now computed as local consts inside
+//   hook() and passed to GetDirUSM().
+
+//!PARAM Sharpness
+//!DESC Amount of sharpening
+//!TYPE CONSTANT float
+//!MINIMUM 0.0
+//!MAXIMUM 1.0
+0.25
 
 //!HOOK LUMA
 //!BIND HOOKED
-//!DESC NVIDIA Image Sharpening v1.0.2
+//!DESC NVIDIA Image Sharpening v1.0.3
 //!COMPUTE 32 32 256 1
-//!WHEN OUTPUT.w OUTPUT.h * LUMA.w LUMA.h * / 1.0 > ! OUTPUT.w OUTPUT.h * LUMA.w LUMA.h * / 1.0 < ! *
-
-// User variables
-#define SHARPNESS 0.25 // Amount of sharpening. 0.0 to 1.0.
-#define NIS_THREAD_GROUP_SIZE 256 // May be set to 128 for better performance on NVIDIA hardware, otherwise set to 256. Don't forget to modify the COMPUTE directive accordingly as well (e.g., COMPUTE 32 32 128 1).
-#define NIS_HDR_MODE 0 // Must be set to 1 for content with PQ colorspace. 0 or 1.
+//!WHEN OUTPUT.w OUTPUT.h * LUMA.w LUMA.h * / 1.0 > !
 
 // Constant variables
 #define NIS_BLOCK_WIDTH 32
 #define NIS_BLOCK_HEIGHT 32
+#define NIS_THREAD_GROUP_SIZE 256 // Threads per work group (128 for NVIDIA, 256 otherwise). Must match the work group size in the COMPUTE directive above.
 #define kSupportSize 5
 #define kNumPixelsX (NIS_BLOCK_WIDTH + kSupportSize + 1)
 #define kNumPixelsY (NIS_BLOCK_HEIGHT + kSupportSize + 1)
-const float sharpen_slider = clamp(SHARPNESS, 0.0f, 1.0f) - 0.5f;
-const float MaxScale = (sharpen_slider >= 0.0f) ? 1.25f : 1.75f;
-const float MinScale = (sharpen_slider >= 0.0f) ? 1.25f : 1.0f;
-const float LimitScale = (sharpen_slider >= 0.0f) ? 1.25f : 1.0f;
 const float kDetectRatio = 2 * 1127.f / 1024.f;
-const float kDetectThres = (bool(NIS_HDR_MODE) ? 32.0f : 64.0f) / 1024.0f;
-const float kMinContrastRatio = bool(NIS_HDR_MODE) ? 1.5f : 2.0f;
-const float kMaxContrastRatio = bool(NIS_HDR_MODE) ? 5.0f : 10.0f;
-const float kSharpStartY = bool(NIS_HDR_MODE) ? 0.35f : 0.45f;
-const float kSharpEndY = bool(NIS_HDR_MODE) ? 0.55f : 0.9f;
-const float kSharpStrengthMin = max(0.0f, 0.4f + sharpen_slider * MinScale * (bool(NIS_HDR_MODE) ? 1.1f : 1.2));
-const float kSharpStrengthMax = ((bool(NIS_HDR_MODE) ? 2.2f : 1.6f) + sharpen_slider * MaxScale * 1.8f);
-const float kSharpLimitMin = max((bool(NIS_HDR_MODE) ? 0.06f :0.1f), (bool(NIS_HDR_MODE) ? 0.1f : 0.14f) + sharpen_slider * LimitScale * (bool(NIS_HDR_MODE) ? 0.28f : 0.32f)); //
-const float kSharpLimitMax = ((bool(NIS_HDR_MODE) ? 0.6f : 0.5f) + sharpen_slider * LimitScale * 0.6f);
+const float kDetectThres = 64.0f / 1024.0f;
+const float kMinContrastRatio = 2.0f;
+const float kMaxContrastRatio = 10.0f;
+const float kSharpStartY = 0.45f;
+const float kSharpEndY = 0.9f;
 const float kRatioNorm = 1.0f / (kMaxContrastRatio - kMinContrastRatio);
 const float kSharpScaleY = 1.0f / (kSharpEndY - kSharpStartY);
-const float kSharpStrengthScale = kSharpStrengthMax - kSharpStrengthMin;
-const float kSharpLimitScale = kSharpLimitMax - kSharpLimitMin;
 const float kContrastBoost = 1.0f;
 const float kEps = 1.0f / 255.0f;
 #define kSrcNormX HOOKED_pt.x
@@ -142,18 +158,22 @@ float EvalUSM(const float pxl[5], const float sharpnessStrength, const float sha
 	return y_usm;
 }
 
-vec4 GetDirUSM(const float p[5][5]) {
+vec4 GetDirUSM(const float p[5][5], const float sharp_strength_min,
+		const float sharp_strength_scale, const float sharp_limit_min,
+		const float sharp_limit_scale)
+{
 	// sharpness boost & limit are the same for all directions
 	const float scaleY = 1.0f - saturate((p[2][2] - kSharpStartY) * kSharpScaleY);
 	// scale the ramp to sharpen as a function of luma
-	const float sharpnessStrength = scaleY * kSharpStrengthScale + kSharpStrengthMin;
+	const float sharpnessStrength = scaleY * sharp_strength_scale + sharp_strength_min;
 	// scale the ramp to limit USM as a function of luma
-	const float sharpnessLimit = (scaleY * kSharpLimitScale + kSharpLimitMin) * p[2][2];
+	const float sharpnessLimit = (scaleY * sharp_limit_scale + sharp_limit_min) * p[2][2];
 
 	vec4 rval;
 	// 0 deg filter
 	float interp0Deg[5];
 	{
+		#pragma unroll
 		for (int i = 0; i < 5; ++i)
 		{
 			interp0Deg[i] = p[i][2];
@@ -165,6 +185,7 @@ vec4 GetDirUSM(const float p[5][5]) {
 	// 90 deg filter
 	float interp90Deg[5];
 	{
+		#pragma unroll
 		for (int i = 0; i < 5; ++i)
 		{
 			interp90Deg[i] = p[2][i];
@@ -199,6 +220,20 @@ void hook() {
 	uvec2 blockIdx = gl_WorkGroupID.xy;
 	uint threadIdx = gl_LocalInvocationID.x;
 
+	// Vulkan compatibility
+	// Sharpness-dependent constants (computed here because the Sharpness param
+	// is a specialization constant and cannot be used in global const initializers)
+	const float sharpen_slider = clamp(Sharpness, 0.0f, 1.0f) - 0.5f;
+	const float MaxScale = (sharpen_slider >= 0.0f) ? 1.25f : 1.75f;
+	const float MinScale = (sharpen_slider >= 0.0f) ? 1.25f : 1.0f;
+	const float LimitScale = (sharpen_slider >= 0.0f) ? 1.25f : 1.0f;
+	const float kSharpStrengthMin = max(0.0f, 0.4f + sharpen_slider * MinScale * 1.2);
+	const float kSharpStrengthMax = (1.6f + sharpen_slider * MaxScale * 1.8f);
+	const float kSharpLimitMin = max(0.1f, 0.14f + sharpen_slider * LimitScale * 0.32f);
+	const float kSharpLimitMax = (0.5f + sharpen_slider * LimitScale * 0.6f);
+	const float kSharpStrengthScale = kSharpStrengthMax - kSharpStrengthMin;
+	const float kSharpLimitScale = kSharpLimitMax - kSharpLimitMin;
+
 	const int dstBlockX = int(NIS_BLOCK_WIDTH * blockIdx.x);
 	const int dstBlockY = int(NIS_BLOCK_HEIGHT * blockIdx.y);
 
@@ -210,7 +245,9 @@ void hook() {
 	for (int i = int(threadIdx) * 2; i < kNumPixelsX * kNumPixelsY / 2; i += NIS_THREAD_GROUP_SIZE * 2) {
 		uvec2 pos = uvec2(uint(i) % uint(kNumPixelsX), uint(i) / uint(kNumPixelsX) * 2);
 
+		#pragma unroll
 		for (int dy = 0; dy < 2; dy++) {
+			#pragma unroll
 			for (int dx = 0; dx < 2; dx++) {
 				const float tx = (dstBlockX + pos.x + dx + kShift) * kSrcNormX;
 				const float ty = (dstBlockY + pos.y + dy + kShift) * kSrcNormY;
@@ -230,8 +267,10 @@ void hook() {
 		// load 5x5 support to regs
 		float p[5][5];
 
+		#pragma unroll
 		for (int i = 0; i < 5; ++i)
 		{
+			#pragma unroll
 			for (int j = 0; j < 5; ++j)
 			{
 				p[i][j] = shPixelsY[pos.y + i][pos.x + j];
@@ -239,7 +278,7 @@ void hook() {
 		}
 
 		// get directional filter bank output
-		vec4 dirUSM = GetDirUSM(p);
+		vec4 dirUSM = GetDirUSM(p, kSharpStrengthMin, kSharpStrengthScale, kSharpLimitMin, kSharpLimitScale);
 
 		// generate weights for directional filters
 		vec4 w = GetEdgeMap(p, kSupportSize / 2 - 1, kSupportSize / 2 - 1);

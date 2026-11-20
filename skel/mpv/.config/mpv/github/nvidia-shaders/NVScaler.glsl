@@ -19,32 +19,57 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// NVIDIA Image Scaling v1.0.2 by NVIDIA
+// NVIDIA Image Scaling v1.0.3 by NVIDIA
 // ported to mpv by agyild
 
 // Changelog
-// Made it directly operate on LUMA plane, since the original shader was operating
-// on LUMA by deriving it from RGB. This should cause a major increase in performance,
-// especially on OpenGL 4.0+ renderers
+// 2022-02-23 - Initial release
+// - Now operates on the luma channel (instead of green) for improved accuracy.
+//   This should cause a major increase in performance, especially on OpenGL 4.0+
+//   renderers.
+// - Removed the redundant "Operation mode" variable.
+// - Optimized code for readability and a minor performance gain.
+//
+// 2026-11-12 - v1.0.3
+// - Fixed the anti-ringing threshold (kEps): it was set to 1.0, which is far
+//   too large, so the anti-ringing never actually kicked in. Lowering it to
+//   1.0/255.0 (as in upstream v1.0.2) makes it work as intended.
+// - Updated to NVIDIA Image Scaling v1.0.3:
+//   - Added `#pragma unroll` on the inner loops, matching the reference NIS_Scaler.h.
+//     The grid-stride fill and outer output loops are left as-is, like the reference.
+// - Removed the HDR (PQ) mode (NIS_HDR_MODE toggle and its constant
+//   variants): it was redundant and not really useful here; the plain SDR
+//   values are tested to work correctly.
+//
+// 2026-11-17 - Libplacebo tunable parameter Vulkan compatibility hotfix
+// - Fixed compilation on the Vulkan API (libplacebo): the "Sharpness" param is
+//   exposed as a GLSL specialization constant there, so global `const float`
+//   variables initialized from it (via clamp()/ternaries) fail shaderc with
+//   "global const initializers must be constant" -> VK_ERROR_INITIALIZATION_FAILED.
+//   The slider-dependent constants are now computed as local consts inside
+//   hook() and passed to AddDirFilters()/EvalPoly6().
+
+//!PARAM Sharpness
+//!DESC Amount of sharpening
+//!TYPE CONSTANT float
+//!MINIMUM 0.0
+//!MAXIMUM 1.0
+0.25
 
 //!HOOK LUMA
 //!BIND HOOKED
 //!BIND coef_scaler
 //!BIND coef_usm
-//!DESC NVIDIA Image Scaling and Sharpening v1.0.2
+//!DESC NVIDIA Image Scaling and Sharpening v1.0.3
 //!COMPUTE 32 24 256 1
 //!WHEN OUTPUT.w OUTPUT.h * LUMA.w LUMA.h * / 1.0 >
 //!WIDTH OUTPUT.w
 //!HEIGHT OUTPUT.h
 
-// User variables
-#define SHARPNESS 0.25 // Amount of sharpening. 0.0 to 1.0.
-#define NIS_THREAD_GROUP_SIZE 256 // May be set to 128 for better performance on NVIDIA hardware, otherwise set to 256. Don't forget to modify the COMPUTE directive accordingly as well (e.g., COMPUTE 32 24 128 1).
-#define NIS_HDR_MODE 0 // Must be set to 1 for content with PQ colorspace. 0 or 1.
-
 // Constant variables
 #define NIS_BLOCK_WIDTH 32
 #define NIS_BLOCK_HEIGHT 24
+#define NIS_THREAD_GROUP_SIZE 256 // Threads per work group (128 for NVIDIA, 256 otherwise). Must match the work group size in the COMPUTE directive above.
 #define kPhaseCount  64
 #define kFilterSize  6
 #define kSupportSize 6
@@ -55,26 +80,16 @@
 #define kTileSize (kTilePitch * (NIS_BLOCK_HEIGHT + kPadSize))
 #define kEdgeMapPitch (NIS_BLOCK_WIDTH + 2)
 #define kEdgeMapSize (kEdgeMapPitch * (NIS_BLOCK_HEIGHT + 2))
-const float sharpen_slider = clamp(SHARPNESS, 0.0f, 1.0f) - 0.5f;
-const float MaxScale = (sharpen_slider >= 0.0f) ? 1.25f : 1.75f;
-const float MinScale = (sharpen_slider >= 0.0f) ? 1.25f : 1.0f;
-const float LimitScale = (sharpen_slider >= 0.0f) ? 1.25f : 1.0f;
 const float kDetectRatio = 2 * 1127.f / 1024.f;
-const float kDetectThres = (bool(NIS_HDR_MODE) ? 32.0f : 64.0f) / 1024.0f;
-const float kMinContrastRatio = bool(NIS_HDR_MODE) ? 1.5f : 2.0f;
-const float kMaxContrastRatio = bool(NIS_HDR_MODE) ? 5.0f : 10.0f;
-const float kSharpStartY = bool(NIS_HDR_MODE) ? 0.35f : 0.45f;
-const float kSharpEndY = bool(NIS_HDR_MODE) ? 0.55f : 0.9f;
-const float kSharpStrengthMin = max(0.0f, 0.4f + sharpen_slider * MinScale * (bool(NIS_HDR_MODE) ? 1.1f : 1.2));
-const float kSharpStrengthMax = ((bool(NIS_HDR_MODE) ? 2.2f : 1.6f) + sharpen_slider * MaxScale * 1.8f);
-const float kSharpLimitMin = max((bool(NIS_HDR_MODE) ? 0.06f :0.1f), (bool(NIS_HDR_MODE) ? 0.1f : 0.14f) + sharpen_slider * LimitScale * (bool(NIS_HDR_MODE) ? 0.28f : 0.32f));
-const float kSharpLimitMax = ((bool(NIS_HDR_MODE) ? 0.6f : 0.5f) + sharpen_slider * LimitScale * 0.6f);
+const float kDetectThres = 64.0f / 1024.0f;
+const float kMinContrastRatio = 2.0f;
+const float kMaxContrastRatio = 10.0f;
+const float kSharpStartY = 0.45f;
+const float kSharpEndY = 0.9f;
 const float kRatioNorm = 1.0f / (kMaxContrastRatio - kMinContrastRatio);
 const float kSharpScaleY = 1.0f / (kSharpEndY - kSharpStartY);
-const float kSharpStrengthScale = kSharpStrengthMax - kSharpStrengthMin;
-const float kSharpLimitScale = kSharpLimitMax - kSharpLimitMin;
 const float kContrastBoost = 1.0f;
-const float kEps = 1.0f;
+const float kEps = 1.0f / 255.0f;
 #define kScaleX (HOOKED_size.x / target_size.x)
 #define kScaleY (HOOKED_size.y / target_size.y)
 #define kSrcNormX HOOKED_pt.x
@@ -130,10 +145,17 @@ vec4 GetEdgeMap(float p[4][4], int i, int j) {
 	return vec4(weight_0, weight_90, weight_45, weight_135);
 }
 
-void LoadFilterBanksSh(int i0, int di) {
+void LoadFilterBanksSh(int i0) {
 	// Load up filter banks to shared memory
 	// The work is spread over (kPhaseCount * 2) threads
-	for (int i = i0; i < kPhaseCount * 2; i += di)
+	// Per 1.0.3: only loop when the thread group is smaller than the number of
+	// (phase, half-texel) work items; otherwise each thread does at most one.
+	int i = i0;
+#if( kPhaseCount * 2 > NIS_THREAD_GROUP_SIZE )
+	for (; i < kPhaseCount * 2; i += NIS_THREAD_GROUP_SIZE)
+#else
+	if (i < kPhaseCount * 2)
+#endif
 	{
 		int phase = i >> 1;
 		int vIdx = i & 1;
@@ -183,10 +205,13 @@ vec4 GetInterpEdgeMap(const vec4 edge[2][2], float phase_frac_x, float phase_fra
 	return lerp(h0, h1, phase_frac_y);
 }
 
-float EvalPoly6(const float pxl[6], int phase_int)
+float EvalPoly6(const float pxl[6], int phase_int, const float sharp_strength_min,
+		const float sharp_strength_scale, const float sharp_limit_min,
+		const float sharp_limit_scale)
 {
 	float y = 0.f;
 	{
+		#pragma unroll
 		for (int i = 0; i < 6; ++i)
 		{
 			y += shCoefScaler[phase_int][i] * pxl[i];
@@ -194,6 +219,7 @@ float EvalPoly6(const float pxl[6], int phase_int)
 	}
 	float y_usm = 0.f;
 	{
+		#pragma unroll
 		for (int i = 0; i < 6; ++i)
 		{
 			y_usm += shCoefUSM[phase_int][i] * pxl[i];
@@ -204,12 +230,12 @@ float EvalPoly6(const float pxl[6], int phase_int)
 	const float y_scale = 1.0f - saturate((y * (1.0f / NIS_SCALE_FLOAT) - kSharpStartY) * kSharpScaleY);
 
 	// scale the ramp to sharpen as a function of luma
-	const float y_sharpness = y_scale * kSharpStrengthScale + kSharpStrengthMin;
+	const float y_sharpness = y_scale * sharp_strength_scale + sharp_strength_min;
 
 	y_usm *= y_sharpness;
 
 	// scale the ramp to limit USM as a function of luma
-	const float y_sharpness_limit = (y_scale * kSharpLimitScale + kSharpLimitMin) * y;
+	const float y_sharpness_limit = (y_scale * sharp_limit_scale + sharp_limit_min) * y;
 
 	y_usm = min(y_sharpness_limit, max(-y_sharpness_limit, y_usm));
 	// reduce ringing
@@ -221,9 +247,11 @@ float EvalPoly6(const float pxl[6], int phase_int)
 float FilterNormal(const float p[6][6], int phase_x_frac_int, int phase_y_frac_int)
 {
 	float h_acc = 0.0f;
+	#pragma unroll
 	for (int j = 0; j < 6; ++j)
 	{
 		float v_acc = 0.0f;
+		#pragma unroll
 		for (int i = 0; i < 6; ++i)
 		{
 			v_acc += p[i][j] * shCoefScaler[phase_y_frac_int][i];
@@ -235,7 +263,9 @@ float FilterNormal(const float p[6][6], int phase_x_frac_int, int phase_y_frac_i
 	return h_acc;
 }
 
-float AddDirFilters(float p[6][6], float phase_x_frac, float phase_y_frac, int phase_x_frac_int, int phase_y_frac_int, vec4 w)
+float AddDirFilters(float p[6][6], float phase_x_frac, float phase_y_frac, int phase_x_frac_int, int phase_y_frac_int, vec4 w,
+		const float sharp_strength_min, const float sharp_strength_scale,
+		const float sharp_limit_min, const float sharp_limit_scale)
 {
 	float f = 0.f;
 	if (w.x > 0.0f)
@@ -243,12 +273,13 @@ float AddDirFilters(float p[6][6], float phase_x_frac, float phase_y_frac, int p
 		// 0 deg filter
 		float interp0Deg[6];
 		{
+			#pragma unroll
 			for (int i = 0; i < 6; ++i)
 			{
 				interp0Deg[i] = lerp(p[i][2], p[i][3], phase_x_frac);
 			}
 		}
-		f += EvalPoly6(interp0Deg, phase_y_frac_int) * w.x;
+		f += EvalPoly6(interp0Deg, phase_y_frac_int, sharp_strength_min, sharp_strength_scale, sharp_limit_min, sharp_limit_scale) * w.x;
 	}
 
 	if (w.y > 0.0f)
@@ -256,12 +287,13 @@ float AddDirFilters(float p[6][6], float phase_x_frac, float phase_y_frac, int p
 		// 90 deg filter
 		float interp90Deg[6];
 		{
+			#pragma unroll
 			for (int i = 0; i < 6; ++i)
 			{
 				interp90Deg[i] = lerp(p[2][i], p[3][i], phase_y_frac);
 			}
 		}
-		f += EvalPoly6(interp90Deg, phase_x_frac_int) * w.y;
+		f += EvalPoly6(interp90Deg, phase_x_frac_int, sharp_strength_min, sharp_strength_scale, sharp_limit_min, sharp_limit_scale) * w.y;
 	}
 	if (w.z > 0.0f)
 	{
@@ -289,6 +321,7 @@ float AddDirFilters(float p[6][6], float phase_x_frac, float phase_y_frac, int p
 		float pphase_p45 = phase_x_frac + phase_y_frac;
 		if (pphase_p45 >= 1)
 		{
+			#pragma unroll
 			for (int i = 0; i < 6; i++)
 			{
 				interp45Deg[i] = temp_interp45Deg[i + 1];
@@ -297,12 +330,13 @@ float AddDirFilters(float p[6][6], float phase_x_frac, float phase_y_frac, int p
 		}
 		else
 		{
+			#pragma unroll
 			for (int i = 0; i < 6; i++)
 			{
 				interp45Deg[i] = temp_interp45Deg[i];
 			}
 		}
-		f += EvalPoly6(interp45Deg, int(pphase_p45 * 64)) * w.z;
+		f += EvalPoly6(interp45Deg, int(pphase_p45 * 64), sharp_strength_min, sharp_strength_scale, sharp_limit_min, sharp_limit_scale) * w.z;
 	}
 	
 	if (w.w > 0.0f)
@@ -333,6 +367,7 @@ float AddDirFilters(float p[6][6], float phase_x_frac, float phase_y_frac, int p
 		float pphase_p135 = 1 + (phase_x_frac - phase_y_frac);
 		if (pphase_p135 >= 1)
 		{
+			#pragma unroll
 			for (int i = 0; i < 6; ++i)
 			{
 				interp135Deg[i] = temp_interp135Deg[i + 1];
@@ -341,12 +376,13 @@ float AddDirFilters(float p[6][6], float phase_x_frac, float phase_y_frac, int p
 		}
 		else
 		{
+			#pragma unroll
 			for (int i = 0; i < 6; ++i)
 			{
 				interp135Deg[i] = temp_interp135Deg[i];
 			}
 		}
-		f += EvalPoly6(interp135Deg, int(pphase_p135 * 64)) * w.w;
+		f += EvalPoly6(interp135Deg, int(pphase_p135 * 64), sharp_strength_min, sharp_strength_scale, sharp_limit_min, sharp_limit_scale) * w.w;
 	}
 	return f;
 }
@@ -355,6 +391,20 @@ void hook()
 {
 	uvec2 blockIdx = gl_WorkGroupID.xy;
 	uint threadIdx = gl_LocalInvocationID.x;
+
+	// Vulkan compatibility
+	// Sharpness-dependent constants (computed here because the Sharpness param
+	// is a specialization constant and cannot be used in global const initializers)
+	const float sharpen_slider = clamp(Sharpness, 0.0f, 1.0f) - 0.5f;
+	const float MaxScale = (sharpen_slider >= 0.0f) ? 1.25f : 1.75f;
+	const float MinScale = (sharpen_slider >= 0.0f) ? 1.25f : 1.0f;
+	const float LimitScale = (sharpen_slider >= 0.0f) ? 1.25f : 1.0f;
+	const float kSharpStrengthMin = max(0.0f, 0.4f + sharpen_slider * MinScale * 1.2);
+	const float kSharpStrengthMax = (1.6f + sharpen_slider * MaxScale * 1.8f);
+	const float kSharpLimitMin = max(0.1f, 0.14f + sharpen_slider * LimitScale * 0.32f);
+	const float kSharpLimitMax = (0.5f + sharpen_slider * LimitScale * 0.6f);
+	const float kSharpStrengthScale = kSharpStrengthMax - kSharpStrengthMin;
+	const float kSharpLimitScale = kSharpLimitMax - kSharpLimitMin;
 
 	// Figure out the range of pixels from input image that would be needed to be loaded for this thread-block
 	int dstBlockX = int(NIS_BLOCK_WIDTH * blockIdx.x);
@@ -405,8 +455,10 @@ void hook()
 				p[1][1] = sY.y;
 			}
 #else
+			#pragma unroll
 			for (int j = 0; j < 2; j++)
 			{
+				#pragma unroll
 				for (int k = 0; k < 2; k++)
 				{
 					const float px = HOOKED_tex(vec2(tx + k * kSrcNormX, ty + j * kSrcNormY)).r;
@@ -436,8 +488,10 @@ void hook()
 
 			uint tileCornerIdx = (py+1) * kTilePitch + px + 1;
 			float p[4][4];
+			#pragma unroll
 			for (int j = 0; j < 4; j++)
 			{
+				#pragma unroll
 				for (int k = 0; k < 4; k++)
 				{
 					p[j][k] = shPixelsY[tileCornerIdx + j * kTilePitch + k];
@@ -451,7 +505,7 @@ void hook()
 		}
 	}
 
-	LoadFilterBanksSh(int(threadIdx), NIS_THREAD_GROUP_SIZE);
+	LoadFilterBanksSh(int(threadIdx));
 
 	groupMemoryBarrier();
 	barrier();
@@ -486,8 +540,10 @@ void hook()
 		// generate weights for directional filters
 		const int startEdgeMapIdx = py * kEdgeMapPitch + px;
 		vec4 edge[2][2];
+		#pragma unroll
 		for (int i = 0; i < 2; i++)
 		{
+			#pragma unroll
 			for (int j = 0; j < 2; j++)
 			{
 				// need to shift edge map sampling since it's a 2x2 centered inside 6x6 grid
@@ -500,8 +556,10 @@ void hook()
 		const int startTileIdx = py * kTilePitch + px;
 		float p[6][6];
 		{
+			#pragma unroll
 			for (int i = 0; i < 6; ++i)
 			{
+				#pragma unroll
 				for (int j = 0; j < 6; ++j)
 				{
 					p[i][j] = shPixelsY[startTileIdx + i * kTilePitch + j];
@@ -519,7 +577,8 @@ void hook()
 		opY += FilterNormal(p, fx_int, fy_int) * baseWeight;
 
 		// get directional filter bank output
-		opY += AddDirFilters(p, fx, fy, fx_int, fy_int, w);
+		opY += AddDirFilters(p, fx, fy, fx_int, fy_int, w,
+			kSharpStrengthMin, kSharpStrengthScale, kSharpLimitMin, kSharpLimitScale);
 
 		// do bilinear tap for luma upscaling
 		vec4 op = HOOKED_tex(vec2((srcX + 0.5f) * kSrcNormX, (srcY + 0.5f) * kSrcNormY));
